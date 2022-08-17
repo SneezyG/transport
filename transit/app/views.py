@@ -6,6 +6,11 @@ from django.db import connection
 
 # return the index page
 def index(request):
+  
+   """
+   Query the recent company logo and return an HTML page with animated company logo and a link to the admin interface
+   """
+   
    try:
       # select company recently uploaded logo.
       with connection.cursor() as cursor:
@@ -17,10 +22,16 @@ def index(request):
    except:
       path = 0
   
-  
    return render(request, 'index.html', {"logo": path})
+
+
 
 # return the panel page
 def panel(request):
+  
+  """
+  Check if user is logged in, then check the user permissions and return a panel page build according to the amount of authority the user have.
+  """
+  
   return render(request, 'panel.html')
 

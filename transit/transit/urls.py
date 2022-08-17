@@ -19,8 +19,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 
+
 urlpatterns = [
-    path('transit/', admin.site.urls),
+    path('transit/admin', admin.site.urls),
     path('', include(('app.urls', 'app'), namespace='app')),
     path('^admin/', admin.site.urls),
     path('doc/', include('django.contrib.admindocs.urls')),

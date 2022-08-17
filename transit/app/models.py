@@ -28,15 +28,15 @@ class User(AbstractUser):
   
   sn = models.UUIDField(primary_key=True, default=uuid.uuid4, verbose_name='id')
   photo = models.ImageField(upload_to=location, null=True, blank=True)
-  birthday = models.DateField()
-  phone = models.CharField(max_length=15)
-  sex = models.CharField(max_length=1, choices=sexType)
-  aptNo = models.IntegerField(verbose_name='apartment number')
-  laneNo = models.IntegerField(verbose_name='lane number')
-  street = models.CharField(max_length=30)
-  city = models.CharField(max_length=30)
-  state = models.CharField(max_length=30,)
-  zipcode = models.IntegerField()
+  birthday = models.DateField(null=True)
+  phone = models.CharField(max_length=15, null=True)
+  sex = models.CharField(max_length=1, choices=sexType, null=True)
+  aptNo = models.IntegerField(verbose_name='apartment number', null=True)
+  laneNo = models.IntegerField(verbose_name='lane number', null=True)
+  street = models.CharField(max_length=30, null=True)
+  city = models.CharField(max_length=30, null=True)
+  state = models.CharField(max_length=30, null=True)
+  zipcode = models.IntegerField(null=True)
   
   
   def fullName(self):
@@ -96,6 +96,7 @@ class Driver(models.Model):
   city = models.CharField(max_length=30)
   state = models.CharField(max_length=30,)
   zipcode = models.IntegerField()
+  date = models.DateTimeField(auto_now_add=True)
   
  
 
@@ -107,7 +108,7 @@ class Driver(models.Model):
     
     
   def __str__(self):
-    fullname = '%s %s(%s)' % (self.firstName, self.lastName, self.category)
+    fullname = '%s %s(%s)' % (self.firstName, self.lastName, self.get_category_display())
     return fullname.title()
     
  
@@ -133,8 +134,8 @@ class Trip(models.Model):
   """
   
   catgType = (
-     ("inter", "Interstate"),
-     ("intra", "Intrastate"),
+     ("inter", "Inter-state"),
+     ("intra", "Intra-state"),
      ("cross", "Cross-country")
   )
   
@@ -150,13 +151,13 @@ class Trip(models.Model):
   category = models.CharField(max_length=7, choices=catgType)
   driver = models.ForeignKey(Driver, on_delete=models.SET_NULL, null=True, related_name='trips')
   management = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='trips')
-  report_cnt = models.IntegerField(verbose_name='Expected report')
+  report = models.IntegerField(verbose_name='report(no)')
   status = models.CharField(max_length=5, choices=statusType)
-  date = models.DateField(auto_now_add=True)
+  date = models.DateTimeField(auto_now_add=True)
   
   
   def __str__(self):
-    fullname = '%s (%s-%s)' % (self.ssn, self.origin, self.destination)
+    fullname = '%s to %s' % (self.origin, self.destination)
     return fullname.title()
     
     
@@ -182,7 +183,7 @@ class Report(models.Model):
   statusType = (
      ('G', 'Green'),
      ('R', 'Red'),
-     ('Y', 'Yellow')
+     ('Y', 'Gray')
   )
   
   trip = models.ForeignKey(Trip, on_delete=models.CASCADE, related_name='reports')
@@ -193,23 +194,8 @@ class Report(models.Model):
   date = models.DateTimeField(auto_now_add=True)
   
   def __str__(self):
-    rep = '%s (%s)' % (self.comment, self.status)
-    return rep.title()
-  
- 
-
-  
-class Chat(models.Model):
-  
-  """
-  Stores a single chat history.
-  A chat is related to the trip table through a OneToOneField relationship
-  """
-  
-  trip = models.OneToOneField(Trip, on_delete=models.CASCADE, related_name='chat')
-  date = models.DateField(auto_now_add=True)
-  
-  
+    text = '%s (%s)' % (self.status, self.date)
+    return text.title()
   
  
  
@@ -233,12 +219,12 @@ class Message(models.Model):
   )
  
   message = models.TextField()
-  chat = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name='messages')
+  trip = models.ForeignKey(Trip, on_delete=models.CASCADE, related_name='messages')
   label = models.CharField(max_length=5, choices=labelType)
   status = models.CharField(max_length=5, choices=statusType)
   date = models.DateTimeField(auto_now_add=True)
   
   def __str__(self):
-    rep = '%s (%s)' % (self.message, self.status)
-    return rep.title()
+    text = '%s... (%s)' % (self.message[:10], self.status)
+    return text.title()
     
