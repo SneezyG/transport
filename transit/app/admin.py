@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.contrib.admin.models import LogEntry
 from .models import User, Driver, Trip, Report, Message
 from .form import TripAdminForm
+from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
 
@@ -17,7 +18,7 @@ admin.site.site_title = "Data Admin"
 
 
 @admin.register(User)
-class UserAdmin(admin.ModelAdmin):
+class UserAdmin(UserAdmin):
   
     """
     Register the django Auth User model into the admin.
