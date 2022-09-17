@@ -1,231 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
+    <link rel="stylesheet" type="text/css" href="panel.css">
     
-    
-    body {
-        margin: 0;
-        padding: 0 0 50px 0;
-        background-color: #D3D3D3;
-        overflow-y: scroll;
-        overflow-x: hidden;
-      }
-      
-    header {
-        width: 100px;
-        border: 1px solid red;
-        margin: auto;
-        margin-top: 20px;
-        display: flex;
-        border-radius: 10px;
-        padding: 3px 5px 3px 30px;
-      }
-      
-    header h4 { 
-        margin: 5px;
-        font-weight: normal;
-      }
-      
-      #pin {
-        width: 15px;
-        height: 20px;
-        margin: 3px 0 0 0;
-      }
-      
-      body > img {
-        width: 50px;
-        margin: 30px 30px 0 30px;
-        border-radius: 10px;
-      }
-      
-      body > h2 {
-        text-align: center;
-        margin-bottom: 50px;
-      }
-      
-     sup {
-       background-color: white;
-       font-weight: normal;
-       font-size: 13px;
-       padding: 3px;
-       border-radius: 10px;
-       pointer-events: none;
-     }
-     
-     details {
-        border: 1px solid red;
-        border-radius: 10px;
-        width: 70%;
-        overflow: fixed;
-        margin: auto;
-        margin-bottom: 50px;
-      }
-      
-      summary {
-        border-bottom: 1px solid red;
-        padding: 10px;
-        padding-left: 20px;
-        overflow: auto;
-        cursor: pointer;
-        border-radius: 10px;
-      }
-      
-      summary > ul {
-        display: inline-block;
-        margin: 0;
-        padding: 0;
-        float: right;
-        pointer-events: none;
-      }
-      
-      summary li {
-        display: inline-block;
-        margin-right: 10px;
-        pointer-events: none;
-      }
-      
-      sub {
-        color: green;
-        font-size: 10px;
-        font-weight: normal;
-        position: relative;
-        left: 3px;
-        bottom: 3px;
-        pointer-events: none;
-      }
-     
-     .created{
-       font-size: 12px;
-       padding-left: 10px;
-       margin-bottom: 0;
-     }
-     
-     .created > span {
-       font-size: 14px;
-     }
-     
-     .created sub {
-       color: black;
-       font-size: 11px;
-     }
-     
-     #more {
-       position: relative;
-       height: 350px;
-       overflow: scroll;
-     }
-     
-     #chat {
-       margin: 0;
-       padding: 0;
-       position: absolute;
-       right: 10px;
-       top: 5px;
-     }
-     
-     #chat > img {
-       width: 30px;
-     }
-     
-     #origin {
-       margin: 20px 0 0 80px;
-       padding: 0;
-     }
-     
-     #origin > li {
-       display: inline-block;
-       font-size: 12px;
-     }
-     
-     #origin span {
-       font-size: 16px;
-     }
-     
-     .first {
-       margin-right: 50px;
-     }
-     
-     .para {
-       margin: 20px 0 0 20px;
-       font-size: 12px;
-     }
-     
-     .para > span {
-       font-size: 15px;
-       display: inline-block;
-       width: 70%;
-     }
-     
-    .status {
-       margin: 20px 0 0 20px;
-       padding: 0;
-     }
-     
-     .status > li {
-       display: inline-block;
-       font-size: 12px;
-     }
-     
-     .status span {
-       font-size: 16px;
-     }
-     
-     .status button {
-       background-color: orange;
-     }
-     
-     #more > h4 {
-       margin: 0 0 30px 0;
-       padding-left: 5px;
-     }
-     
-     #expect span {
-       float: right;
-       margin-right: 10px;
-       font-weight: normal;
-     }
-     
-     article {
-       width: 60%;
-       margin: auto;
-       background-color: #F5F5F5;
-       border-radius: 10px;
-       padding: 1px 0 5px 10px;
-      margin-bottom: 30px;
-     }
-     
-     #report {
-       margin-top: 10px;
-       margin-bottom: 15px;
-     }
-     
-     #remark {
-       margin: 0 0 8px 10px;
-     }
-     
-     
-     
-     
-     
-
-     
-     
-      
-      
-@media only screen and (max-width: 800px) { 
-    body > img {
-        width: 40px;
-        margin: 20px 30px 0 30px;
-   }
-   
-   details {
-     width: 90%;
-   }
-  
-}
-    </style>
   </head>
   
 <body>
@@ -253,7 +32,7 @@
     
     <div id="chat">
       <img src="chat.png"/>
-      <span>chat</span>
+      <sup>2</sup>
     </div>
     
     <ul id="origin"> 
@@ -261,14 +40,17 @@
     <li>destination: <span>Akure</span></li>
     </ul>
     
-    <p class="para"> 
-    destination address: 
-    <span>No 12 agbamu sanyo area ibadan oyo state.</span>
-    </p>
+    <div class="para"> 
+    Trip ID: 
+    <span> jdkkdkdkekskdjdjdjjejekdjdjjdjdjdkekekdkjdieieiejdjjwijsjdueiiekdjdjejueuejbdudhueuejdhhxuehbehhde
+    </span>
+    <img src="copy.png"/>
+    <h6 class="copy">coppied</h6>
+    </div>
     
     <ul class="status"> 
     <li class="first">status: <span>open<span></li>
-    <li><button>mark as closed</button></li>
+    <li><button class="remove">mark as closed</button></li>
     </ul>
     
     <br>
@@ -281,7 +63,7 @@
     <li class="first">status: <span>Good</span></li>
     <li><a href="#"> location </a></li>
     </ul>
-    <p id="remark" class="para">
+    <p id="remark">
       remark: 
       <span> trip is going as planned </span></p>
     </article>
@@ -292,7 +74,7 @@
     <li class="first">status: <span>Good</span></li>
     <li><a href="#"> location </a></li>
     </ul>
-    <p id="remark" class="para">
+    <p id="remark">
       remark: 
       <span> trip is going as planned </span></p>
     </article>
@@ -303,7 +85,7 @@
     <li class="first">status: <span>Good</span></li>
     <li><a href="#"> location </a></li>
     </ul>
-    <p id="remark" class="para">
+    <p id="remark">
       remark: 
       <span> trip is going as planned </span></p>
     </article>
@@ -314,7 +96,7 @@
     <li class="first">status: <span>Good</span></li>
     <li><a href="#"> location </a></li>
     </ul>
-    <p id="remark" class="para">
+    <p id="remark">
       remark: 
       <span> trip is going as planned </span></p>
     </article>
@@ -338,7 +120,7 @@
     
     <div id="chat">
       <img src="chat.png"/>
-      <span>chat</span>
+      <sup>2</sup>
     </div>
     
     <ul id="origin"> 
@@ -346,14 +128,18 @@
     <li>destination: <span>Akure</span></li>
     </ul>
     
-    <p class="para"> 
-    destination address: 
-    <span>No 12 agbamu sanyo area ibadan oyo state.</span>
-    </p>
+    <div class="para"> 
+    Trip ID: 
+    <span>
+      jdkkdkdkekskdjdjdjjejekdjdjjdjdjdkekekdkjdieieiejdjjwijsjdueiiekdjdjejueuejbdudhueuejdhhxuehbehhde
+    </span>
+    <img src="copy.png"/>
+    <h6 class="copy">coppied</h6>
+    </div>
     
     <ul class="status"> 
     <li class="first">status: <span>open<span></li>
-    <li><button>mark as closed</button></li>
+    <li><button class="remove">mark as closed</button></li>
     </ul>
     
     <br>
@@ -366,7 +152,7 @@
     <li class="first">status: <span>Good</span></li>
     <li><a href="#"> location </a></li>
     </ul>
-    <p id="remark" class="para">
+    <p id="remark">
       remark: 
       <span> trip is going as planned </span></p>
     </article>
@@ -377,7 +163,7 @@
     <li class="first">status: <span>Good</span></li>
     <li><a href="#"> location </a></li>
     </ul>
-    <p id="remark" class="para">
+    <p id="remark">
       remark: 
       <span> trip is going as planned </span></p>
     </article>
@@ -388,7 +174,7 @@
     <li class="first">status: <span>Good</span></li>
     <li><a href="#"> location </a></li>
     </ul>
-    <p id="remark" class="para">
+    <p id="remark">
       remark: 
       <span> trip is going as planned </span></p>
     </article>
@@ -399,7 +185,7 @@
     <li class="first">status: <span>Good</span></li>
     <li><a href="#"> location </a></li>
     </ul>
-    <p id="remark" class="para">
+    <p id="remark">
       remark: 
       <span> trip is going as planned </span></p>
     </article>
@@ -423,7 +209,7 @@
     
     <div id="chat">
       <img src="chat.png"/>
-      <span>chat</span>
+      <sup>2</sup>
     </div>
     
     <ul id="origin"> 
@@ -431,14 +217,18 @@
     <li>destination: <span>Akure</span></li>
     </ul>
     
-    <p class="para"> 
-    destination address: 
-    <span>No 12 agbamu sanyo area ibadan oyo state.</span>
-    </p>
+    <div class="para">
+      Trip ID: 
+    <span>
+     jdkkdkdkekskdjdjdjjejekdjdjjdjdjdkekekdkjdieieiejdjjwijsjdueiiekdjdjejueuejbdudhueuejdhhxuehbehhde
+    </span>
+    <img src="copy.png"/>
+    <h6 class="copy">coppied</h6>
+    </div>
     
     <ul class="status"> 
     <li class="first">status: <span>open<span></li>
-    <li><button>mark as closed</button></li>
+    <li><button class="remove">mark as closed</button></li>
     </ul>
     
     <br>
@@ -451,7 +241,7 @@
     <li class="first">status: <span>Good</span></li>
     <li><a href="#"> location </a></li>
     </ul>
-    <p id="remark" class="para">
+    <p id="remark">
       remark: 
       <span> trip is going as planned </span></p>
     </article>
@@ -462,7 +252,7 @@
     <li class="first">status: <span>Good</span></li>
     <li><a href="#"> location </a></li>
     </ul>
-    <p id="remark" class="para">
+    <p id="remark">
       remark: 
       <span> trip is going as planned </span></p>
     </article>
@@ -473,7 +263,7 @@
     <li class="first">status: <span>Good</span></li>
     <li><a href="#"> location </a></li>
     </ul>
-    <p id="remark" class="para">
+    <p id="remark">
       remark: 
       <span> trip is going as planned </span></p>
     </article>
@@ -484,7 +274,7 @@
     <li class="first">status: <span>Good</span></li>
     <li><a href="#"> location </a></li>
     </ul>
-    <p id="remark" class="para">
+    <p id="remark">
       remark: 
       <span> trip is going as planned </span></p>
     </article>
@@ -494,34 +284,7 @@
   </details>
   
     
- <script>
- 
- const summary = document.querySelectorAll('summary');
- 
- for (let elem of summary) {
-    elem.addEventListener('click', open, {once:true});
- }
- 
- 
- function open(e) {
-    let elem = e.target;
-    for (let child of elem.children) {
-      child.style.visibility = "hidden";
-    }
-    elem.addEventListener('click', close, {once:true});
- }
- 
- 
- function close(e) {
-    let elem = e.target;
-    for (let child of elem.children) {
-      child.style.visibility = "visible";
-    }
-    elem.addEventListener('click', open, {once:true});
- }
- 
- </script>
- 
+ <script src="panel.js"></script>
 
 </body>
 </html>
