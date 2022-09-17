@@ -51,6 +51,7 @@
        font-size: 13px;
        padding: 3px;
        border-radius: 10px;
+       pointer-events: none;
      }
      
      details {
@@ -76,11 +77,13 @@
         margin: 0;
         padding: 0;
         float: right;
+        pointer-events: none;
       }
       
       summary li {
         display: inline-block;
         margin-right: 10px;
+        pointer-events: none;
       }
       
       sub {
@@ -90,6 +93,7 @@
         position: relative;
         left: 3px;
         bottom: 3px;
+        pointer-events: none;
       }
      
      .created{
@@ -118,7 +122,7 @@
        padding: 0;
        position: absolute;
        right: 10px;
-       top: 3px;
+       top: 5px;
      }
      
      #chat > img {
@@ -236,7 +240,8 @@
   
   <details>
     <summary>
-      IBADAN TO AKURE<sub id="info">status</sub>
+      IBADAN TO AKURE
+      <sub id="info">status</sub>
       <ul>
         <li>reports <sup>1</sup> </li>
         <li>chats <sup>2</sup> </li>
@@ -320,7 +325,8 @@
   
    <details>
     <summary>
-      IBADAN TO AKURE<sub id="info">status</sub>
+      IBADAN TO AKURE
+      <sub id="info">status</sub>
       <ul>
         <li>reports <sup>1</sup> </li>
         <li>chats <sup>2</sup> </li>
@@ -404,7 +410,8 @@
   
   <details>
     <summary>
-      IBADAN TO AKURE<sub id="info">status</sub>
+      IBADAN TO AKURE 
+      <sub id="info">status</sub>
       <ul>
         <li>reports <sup>1</sup> </li>
         <li>chats <sup>2</sup> </li>
@@ -487,7 +494,33 @@
   </details>
   
     
+ <script>
  
+ const summary = document.querySelectorAll('summary');
+ 
+ for (let elem of summary) {
+    elem.addEventListener('click', open, {once:true});
+ }
+ 
+ 
+ function open(e) {
+    let elem = e.target;
+    for (let child of elem.children) {
+      child.style.visibility = "hidden";
+    }
+    elem.addEventListener('click', close, {once:true});
+ }
+ 
+ 
+ function close(e) {
+    let elem = e.target;
+    for (let child of elem.children) {
+      child.style.visibility = "visible";
+    }
+    elem.addEventListener('click', open, {once:true});
+ }
+ 
+ </script>
  
 
 </body>
