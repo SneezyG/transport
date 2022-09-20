@@ -3,8 +3,11 @@
 const summary = document.querySelectorAll('summary');
 const copyButtons = document.querySelectorAll('.para > img');
 const removeButtons = document.querySelectorAll('.remove');
- 
 const copied = document.querySelectorAll('.copy')
+
+
+
+
 
 
  for (let elem of summary) {
@@ -22,6 +25,10 @@ const copied = document.querySelectorAll('.copy')
  for (let elem of copied) {
    elem.addEventListener('animationend', resetAnime);
  }
+ 
+ 
+ 
+ 
  
  
  
