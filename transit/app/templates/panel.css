@@ -23,23 +23,24 @@
    
     body {
         margin: 0;
-        padding: 0 0 50px 0;
+        padding: 0 0 300px 0;
         background-color: #D3D3D3;
-        overflow-y: scroll;
+        overflow-y: auto;
         overflow-x: hidden;
       }
       
-    header {
-        width: 100px;
+    #header {
+        width: 150px;
         border: 1px solid red;
         margin: auto;
-        margin-top: 20px;
+        margin-top: 10px;
         display: flex;
         border-radius: 10px;
-        padding: 3px 5px 3px 30px;
+        padding: 3px;
+        justify-content: center;
       }
       
-    header h4 { 
+    #header h4 { 
         margin: 5px;
         font-weight: normal;
       }
@@ -49,23 +50,35 @@
         height: 20px;
         margin: 3px 0 0 0;
       }
-      
-      body > img {
-        width: 50px;
-        margin: 30px 30px 0 30px;
-        border-radius: 10px;
+
+      header {
+        position: fixed;
+        background-color: #D3D3D3;
+        width: 100%;
+        z-index: 1;
+        padding-bottom: 30px;
       }
       
-      body > h2 {
+      header > img {
+        width: 50px;
+        border-radius: 10px;
+        position: relative;
+        bottom: 10px;
+        left: 20px;
+      }
+      
+      header > h3 {
         text-align: center;
-        margin-bottom: 50px;
+        position: relative;
+        bottom: 15px;
+        margin: 0;
       }
       
      sup {
        background-color: white;
        font-weight: normal;
        font-size: 13px;
-       padding: 3px;
+       padding: 1px 2px 1px 2px;
        border-radius: 10px;
        pointer-events: none;
      }
@@ -74,8 +87,10 @@
      details {
         border: 1px solid red;
         border-radius: 10px;
-        width: 70%;
+        width: 50%;
         overflow: hidden;
+        position: relative;
+        top: 180px;
         margin: auto;
         margin-bottom: 50px;
         animation: removeAnime;
@@ -87,29 +102,32 @@
       summary {
         border-bottom: 1px solid red;
         padding: 10px;
-        padding-left: 20px;
+        padding-left: 40px;
+        margin-bottom: 1px;
         overflow: auto;
         cursor: pointer;
         border-radius: 10px;
+        font-size: 15px;
       }
       
       summary > ul {
         display: inline-block;
         margin: 0;
         padding: 0;
+        padding-right: 20px;
         float: right;
         pointer-events: none;
       }
       
       summary li {
         display: inline-block;
-        margin-right: 10px;
+        margin-right: 15px;
         pointer-events: none;
       }
       
       sub {
         color: green;
-        font-size: 10px;
+        font-size: 11px;
         font-weight: normal;
         position: relative;
         left: 3px;
@@ -146,6 +164,7 @@
        position: absolute;
        right: 15px;
        top: 8px;
+       cursor: pointer;
      }
      
      #chat > img {
@@ -153,7 +172,7 @@
      }
      
      #origin {
-       margin: 20px 0 0 80px;
+       margin: 20px 0 0 120px;
        padding: 0;
      }
      
@@ -167,12 +186,12 @@
      }
      
      .first {
-       margin-right: 50px;
+       margin-right: 80px;
      }
      
      .para {
        margin: 10px 0 0 20px;
-       font-size: 15px;
+       font-size: 13px;
        font-weight: bold;
      }
      
@@ -200,11 +219,13 @@
       position: relative;
       top: 10px;
       left: 5px;
+      cursor: pointer;
     }
      
     .copy {
       margin: 0;
       padding: 2px 0 0 80px;
+      font-size: 11px;
       position: absolute;
       width: 100%;
       text-align: center;
@@ -214,28 +235,13 @@
       animation-play-state: paused;
     }
     
-    .status {
-       margin: 30px 0 0 20px;
-       padding: 0;
-     }
-     
-     .status > li {
-       display: inline-block;
-       font-size: 12px;
-     }
-     
-     .status span {
-       font-size: 16px;
-     }
-     
-     .status button {
-       background-color: orange;
-     }
      
      #more > h4 {
-       margin: 0 0 30px 0;
+       margin: 0 0 20px 0;
        padding-left: 5px;
+       font-size: 15px;
      }
+
      
      #expect span {
        float: right;
@@ -244,14 +250,36 @@
      }
      
      article {
-       width: 60%;
+       width: 50%;
        margin: auto;
        background-color: #F5F5F5;
        border-radius: 10px;
-       padding: 1px 0 5px 10px;
+       padding: 1px;
+       padding-left: 20px;
        margin-bottom: 30px;
      }
-     
+
+     .status {
+      margin: 30px 0 0 20px;
+      padding: 0;
+    }
+    
+    .status > li {
+      display: inline-block;
+      font-size: 12px;
+    }
+    
+    .status span {
+      font-size: 15px;
+      font-weight: bold;
+    }
+    
+    .status button {
+      background-color: orange;
+      cursor: pointer;
+    }
+
+
      #report {
        margin-top: 10px;
        margin-bottom: 15px;
@@ -263,26 +291,98 @@
      }
      
      #remark > span {
-       font-size: 16px;
+       font-size: 15px;
      }
      
      
      
-     
+@media only screen and (max-width: 1000px) { 
+  
+  details {
+    width: 70%;
+  }
+
+  #origin {
+    margin: 20px 0 0 80px;
+  }
+
+  .first {
+    margin-right: 50px;
+  }
+
+  #chat {
+    cursor: auto;
+  }
+
+  summary {
+    cursor: auto;
+  }
+
+  .para > img {
+    cursor: auto;
+  }
+
+  .status button {
+    cursor: auto;
+  }
+  
+
+
+
+}
      
 
      
      
       
       
-@media only screen and (max-width: 800px) { 
-    body > img {
-        width: 40px;
-        margin: 20px 30px 0 30px;
+@media only screen and (max-width: 650px) { 
+    header > img {
+        width: 37px;
+        
    }
    
    details {
      width: 90%;
    }
+
+   header {
+     padding: 2px;
+   }
+
+   header h4 { 
+     font-size: 15px;
+  }
   
+  #pin {
+    height: 18px;
+    margin: 4px 0 0 0;
+  }
+
+  summary {
+    padding-left: 20px;
+    font-size: 14px;
+  }
+
+  summary > ul {
+    padding-right: 10px;
+  }
+  
+  summary li {
+    margin-right: 10px;
+  }
+
+  .first {
+    margin-right: 50px;
+  }
+
+  #origin {
+    margin: 20px 0 0 80px;
+  }
+
+  article {
+    width: 60%;
+  }
 }
+
+
