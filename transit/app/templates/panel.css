@@ -277,6 +277,7 @@
     .status button {
       background-color: orange;
       cursor: pointer;
+      padding: 3px;
     }
 
 
@@ -355,8 +356,9 @@
   }
   
   #pin {
-    height: 18px;
-    margin: 4px 0 0 0;
+        width: 23px;
+        margin: 3px 0 0 0;
+        opacity: 0.7;
   }
 
   summary {
