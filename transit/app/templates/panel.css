@@ -30,25 +30,26 @@
       }
       
     #header {
-        width: 150px;
-        border: 1px solid red;
+        width: 180px;
+        border: 2px solid rgb(2, 39, 53);
         margin: auto;
         margin-top: 10px;
         display: flex;
         border-radius: 10px;
-        padding: 3px;
+        padding: 4px;
         justify-content: center;
       }
       
     #header h4 { 
         margin: 5px;
         font-weight: normal;
+        color: rgb(2, 39, 53);
       }
       
       #pin {
-        width: 15px;
-        height: 20px;
-        margin: 3px 0 0 0;
+        width: 23px;
+        margin: 2px 0 0 0;
+        opacity: 0.7;
       }
 
       header {
@@ -72,6 +73,7 @@
         position: relative;
         bottom: 15px;
         margin: 0;
+        color: rgb(2, 39, 53);
       }
       
      sup {
@@ -85,7 +87,7 @@
  
      
      details {
-        border: 1px solid red;
+        border: 1px solid rgb(2, 39, 53);
         border-radius: 10px;
         width: 50%;
         overflow: hidden;
@@ -100,7 +102,7 @@
       }
       
       summary {
-        border-bottom: 1px solid red;
+        border-bottom: 1px solid rgb(2, 39, 53);
         padding: 10px;
         padding-left: 40px;
         margin-bottom: 1px;
@@ -108,6 +110,7 @@
         cursor: pointer;
         border-radius: 10px;
         font-size: 15px;
+        color: rgb(2, 39, 53);
       }
       
       summary > ul {
@@ -172,17 +175,22 @@
      }
      
      #origin {
-       margin: 20px 0 0 120px;
+       margin: 20px 0 0 90px;
        padding: 0;
      }
-     
+
+   
      #origin > li {
-       display: inline-block;
        font-size: 12px;
+       padding-bottom: 10px;
      }
      
      #origin span {
-       font-size: 16px;
+       font-size: 14px;
+       color: rgb(2, 39, 53);
+       font-weight: 600;
+       opacity: 0.7;
+       margin-left: 10px;
      }
      
      .first {
@@ -193,6 +201,7 @@
        margin: 10px 0 0 20px;
        font-size: 13px;
        font-weight: bold;
+       color: rgb(2, 39, 53);
      }
      
      .para > span {
@@ -202,6 +211,7 @@
        width: 65%;
        white-space: nowrap;
        padding: 5px 5px 5px 10px;
+       color: black;
        background-color: #E5E4E2;
        border-radius: 2px;
        overflow: scroll;
@@ -242,6 +252,9 @@
        font-size: 15px;
      }
 
+      #expect {
+        color: rgb(2, 39, 53);
+      }
      
      #expect span {
        float: right;
@@ -272,6 +285,7 @@
     .status span {
       font-size: 15px;
       font-weight: bold;
+      color: rgb(2, 39, 53);
     }
     
     .status button {
@@ -304,7 +318,7 @@
   }
 
   #origin {
-    margin: 20px 0 0 80px;
+    margin: 20px 0 0 90px;
   }
 
   .first {
@@ -351,15 +365,14 @@
      padding: 2px;
    }
 
+   #header {
+    width: 150px;
+   }
+
    header h4 { 
      font-size: 15px;
   }
-  
-  #pin {
-        width: 23px;
-        margin: 3px 0 0 0;
-        opacity: 0.7;
-  }
+
 
   summary {
     padding-left: 20px;
@@ -378,9 +391,6 @@
     margin-right: 50px;
   }
 
-  #origin {
-    margin: 20px 0 0 80px;
-  }
 
   article {
     width: 60%;
