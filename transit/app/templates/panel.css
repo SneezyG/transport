@@ -27,6 +27,7 @@
         background-color: #D3D3D3;
         overflow-y: auto;
         overflow-x: hidden;
+        user-select: none;
       }
       
     #header {
