@@ -21,7 +21,8 @@ from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
-    path('transit/admin', admin.site.urls),
+    path('admin/transit', admin.site.urls),
+    path('accounts/login/', auth_views.LoginView.as_view(redirect_authenticated_user=True, template_name="admin/login.html"), name="login"),
     path('', include(('app.urls', 'app'), namespace='app')),
     path('^admin/', admin.site.urls),
     path('doc/', include('django.contrib.admindocs.urls')),

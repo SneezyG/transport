@@ -8,7 +8,7 @@ from django.db import connection
 def index(request):
   
    """
-   Query the recent company logo and return an HTML page with animated company logo and a link to the admin interface
+   Query the recent company logo and return an HTML page with animated company logo and with a link to the login interface
    """
    
    try:
