@@ -1,9 +1,7 @@
 
 from django.contrib import admin
 from django.contrib.admin.models import LogEntry
-from .models import User, Driver, Trip, Report, Message
-from .form import TripAdminForm
-from django.contrib.auth.admin import UserAdmin
+from .models import Driver, Mechanic, Loader, Trip, Report, Message, Booking, Payroll
 
 # Register your models here.
 
@@ -17,43 +15,6 @@ admin.site.site_title = "Data Admin"
 
 
 
-@admin.register(User)
-class UserAdmin(UserAdmin):
-  
-    """
-    Register the django Auth User model into the admin.
-    Add some customization.
-    """
-    
-    date_hierarchy = 'date_joined'
-    
-    fieldsets = (
-    (None, {
-      'classes': ('extrapretty'),
-      'fields': ('username', 'first_name', 'last_name', 'phone', 'email', 'password', 'photo', 'birthday', 'sex', 'groups', 'user_permissions', 'is_active', 'is_staff', 'is_superuser')
-    }),
-    
-    ('Address', {
-      'classes': ('extrapretty'),
-      'fields': (('aptNo', 'laneNo'), 'street', ('city', 'state'), 'zipcode')
-    }),
-    )
-    
-    list_display = [
-      'sn',
-      'fullName',
-      'username',
-      'email',
-      'address',
-      'date_joined',
-    ]
-    
-    list_filter = ('is_staff', 'is_active', 'is_superuser', 'date_joined')
-    
-    preserve_filters = False
-    
-    search_fields = ('username', 'first_name', 'last_name')
-    
 
 
 @admin.register(LogEntry)
@@ -93,7 +54,7 @@ class LogEntryAdmin(admin.ModelAdmin):
         return False
 
     def has_delete_permission(self, request, obj=None):
-        return request.user.is_superuser
+        return False
 
     def has_view_permission(self, request, obj=None):
         return request.user.is_superuser
@@ -102,12 +63,13 @@ class LogEntryAdmin(admin.ModelAdmin):
  
  
    
-@admin.register(Driver)
-class DriverAdmin(admin.ModelAdmin):
+class TranspoterAdmin(admin.ModelAdmin):
   
   """
-    Register the driver model into the admin.
+    Register the Transpoter model into the admin.
     Add some customization.
+    This does not appear in the admin, it just provide an interface inherited by driverAdmin,
+    mechanicAdmin and loaderAdmin.
   """
   
   date_hierarchy = 'date'
@@ -115,7 +77,7 @@ class DriverAdmin(admin.ModelAdmin):
   fieldsets = (
     (None, {
       'classes': ('extrapretty'),
-      'fields': (('firstName', 'lastName'), 'birthday', 'phone', 'category', 'sex', 'photo')
+      'fields': (('sn', 'firstName', 'lastName'), 'birthday', 'active', 'phone', 'sex', 'photo')
     }),
     
     ('Address', {
@@ -124,16 +86,77 @@ class DriverAdmin(admin.ModelAdmin):
     }),
     )
     
-  list_display = ('sn', 'fullName', 'category', 'address', 'date',)
+  list_display = ('sn', 'fullName', 'address', 'date',)
 
-  list_filter = ('category', 'sex', 'date',)
+  list_filter = ('sex', 'date', 'active')
   
   preserve_filters = False
 
-  search_fields = ['firstName', 'lastName']
+  search_fields = ('sn', 'firstName', 'lastName')
+  
+
+@admin.register(Driver)
+class DriverAdmin(TranspoterAdmin)
+   """
+   This is subclass of TranspoterAdmin
+   """
+   pass
+   
+@admin.register(Mechanic)
+class MechanicAdmin(TranspoterAdmin)
+   """
+   This is subclass of TranspoterAdmin
+   """
+   pass
+  
+@admin.register(Loader)
+class MechanicAdmin(TranspoterAdmin)
+   """
+   This is subclass of TranspoterAdmin
+   """  
+   pass
   
 
 
+@admin.register(Payroll)
+class PayrollAdmin(admin.ModelAdmin):
+  
+  """
+  Register the Payroll model into the admin.
+    Add some customization.
+  """
+  
+  date_hierarchy = 'date'
+
+  list_display = ("freelancer", "short_range", "mid_range", "long_range", "date")
+  
+  list_filter = ("freelancer",)
+  
+  preserve_filters = False
+  
+  
+
+@admin.register(Booking)
+class BookingAdmin(admin.ModelAdmin):
+  
+  """
+  Register the Booking model into the admin.
+    Add some customization.
+  """
+  
+  date_hierarchy = 'date'
+
+  exclude = ('sn',)
+  
+  list_display = ('sn', 'booker', 'contact', 'charges', 'paid', 'goods', 'pickup', 'delivery', 'date')
+  
+  list_filter = ("paid", "date",)
+  
+  preserve_filters = False
+
+  search_fields = ('sn', 'booker')
+   
+   
     
 @admin.register(Trip)
 class TripAdmin(admin.ModelAdmin):
@@ -144,20 +167,18 @@ class TripAdmin(admin.ModelAdmin):
   """ 
   
   date_hierarchy = 'date'
-
-  form = TripAdminForm
   
   exclude = ('sn',)
   
-  list_display = ('sn', 'origin', 'destination', 'address', 'category', 'driver', 'management', 'report', 'status', 'date')
+  list_display = ('sn', 'booking', 'category', 'management', 'report', 'status', 'progress', 'date')
   
-  list_filter = ('category', 'status', 'date',)
+  list_filter = ('category', 'status', 'progress', 'date',)
   
   preserve_filters = False
 
-  search_fields = ('origin', 'destination', 'address',)
+  search_fields = ('sn',)
   
-  autocomplete_fields = ('driver', 'management',)
+  autocomplete_fields = ('driver', 'mechanic', 'loader', 'management')
 
 
 
@@ -167,20 +188,32 @@ class ReportAdmin(admin.ModelAdmin):
   
   """
     Register the Report model into the admin.
-    Add some customization.
+    Add some customization and also define user access permission.
   """ 
   
   date_hierarchy = 'date'
 
-  list_display = ('trip', 'status', 'comment', 'location', 'coord', 'date')
+  list_display = ('trip', 'status', 'remark', 'coord', 'date')
 
   list_filter = ('status', 'date',)
   
   preserve_filters = False
 
   search_fields = ('trip__sn',)
+  
+  
+  def has_add_permission(self, request):
+        return False
 
-  autocomplete_fields = ('trip',)
+  def has_change_permission(self, request, obj=None):
+        return False
+
+  def has_delete_permission(self, request, obj=None):
+        return False
+
+  def has_view_permission(self, request, obj=None):
+        return request.user.is_superuser
+  
 
   
 
@@ -190,7 +223,7 @@ class MessageAdmin(admin.ModelAdmin):
   
   """
     Register the Message model into the admin.
-    Add some customization.
+    Add some customization and also define user access permission.
   """ 
   
   date_hierarchy = 'date'
@@ -203,4 +236,16 @@ class MessageAdmin(admin.ModelAdmin):
 
   search_fields = ('trip__sn',)
   
-  autocomplete_fields = ('trip',)
+  
+  def has_add_permission(self, request):
+        return False
+
+  def has_change_permission(self, request, obj=None):
+        return False
+
+  def has_delete_permission(self, request, obj=None):
+        return False
+
+  def has_view_permission(self, request, obj=None):
+        return request.user.is_superuser
+  
