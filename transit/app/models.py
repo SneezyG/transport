@@ -8,30 +8,24 @@ import uuid
 
 def driv(instance, filename):
   #create a unique path for drivers photo.
-  return 'driver_{0}/{1}'.format(instance.id, filename)
+  return 'driver/driv_{0}/{1}'.format(instance.sn, filename)
 
 def mech(instance, filename):
   #create a unique path for mechanics photo.
-  return 'mechanic_{0}/{1}'.format(instance.id, filename)
+  return 'mechanic/mech_{0}/{1}'.format(instance.sn, filename)
   
 def load(instance, filename):
   #create a unique path for loaders photo.
-  return 'loader_{0}/{1}'.format(instance.id, filename)
+  return 'loader/load_{0}/{1}'.format(instance.sn, filename)
 
 def doc1(instance, filename):
   #create a unique path for doc1.
-  return 'doc1_{0}/{1}'.format(instance.id, filename)
+  return 'doc1/doc_{0}/{1}'.format(instance.sn, filename)
   
 def doc2(instance, filename):
   #create a unique path for doc2.
-  return 'doc2_{0}/{1}'.format(instance.id, filename)
+  return 'doc2/doc_{0}/{1}'.format(instance.sn, filename)
   
-def flip(obj, active):
-  # flip transporters active status.
-  if obj:
-    for x in obj:
-       x.active = active
-       x.save()
     
 def castValidator(value):
    #try to cast CharField to float and throw error on failure.
@@ -74,7 +68,6 @@ class Transporter(models.Model):
   state = models.CharField(max_length=30,)
   nationality = models.CharField(max_length=30)
   zipcode = models.IntegerField()
-  active = models.BooleanField(default=False)
   date = models.DateTimeField(auto_now_add=True)
   
   class Meta:
@@ -88,7 +81,7 @@ class Transporter(models.Model):
     
     
   def __str__(self):
-    text = '%s %s(active: %s)' % (self.firstName, self.lastName, self.active)
+    text = '%s %s' % (self.firstName, self.lastName)
     return text.title()
     
  
@@ -103,7 +96,7 @@ class Driver(Transporter):
   Stores a single driver data.
   This is specialization of abstract Transporter model.
   """
-  photo = models.ImageField(upload_to=driv)
+  photo = models.ImageField(upload_to=driv, null=True, blank=True)
   class Meta(Transporter.Meta):
     db_table = "driver"
   
@@ -113,7 +106,7 @@ class Mechanic(Transporter):
   Stores a single Mechanic data.
   This is specialization of abstract Transporter model.
   """
-  photo = models.ImageField(upload_to=mech)
+  photo = models.ImageField(upload_to=mech, null=True, blank=True)
   class Meta(Transporter.Meta):
     db_table = "mechanic"
   
@@ -122,7 +115,7 @@ class Loader(Transporter):
   Stores a single Loader data.
   This is specialization of abstract Transporter model.
   """
-  photo = models.ImageField(upload_to=load)
+  photo = models.ImageField(upload_to=load, null=True, blank=True)
   class Meta(Transporter.Meta):
     db_table = "loader"
   
@@ -151,7 +144,7 @@ class Payroll(models.Model):
  
  
  def __str__(self):
-    return self.freelancer
+    return self.get_freelancer_display()
     
  
 
@@ -221,13 +214,13 @@ class Trip(models.Model):
   sn = models.UUIDField(primary_key=True, default=uuid.uuid4, verbose_name="id")
   booking = models.OneToOneField(Booking, on_delete=models.CASCADE, related_name="trip")
   category = models.CharField(max_length=3, choices=catgType)
-  drivers = models.ManyToManyField(Driver, related_name='trips', limit_choices_to={'active': False})
-  mechanics = models.ManyToManyField(Mechanic, related_name='trips', limit_choices_to={'active': False})
-  loaders = models.ManyToManyField(Loader, related_name='trips', limit_choices_to={'active': False})
+  drivers = models.ManyToManyField(Driver, related_name='trips')
+  mechanics = models.ManyToManyField(Mechanic, related_name='trips')
+  loaders = models.ManyToManyField(Loader, related_name='trips')
   management = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name='trips',
   limit_choices_to={'is_superuser': False})
   report = models.IntegerField(verbose_name='Expected report')
-  status = models.CharField(max_length=3, choices=statusType)
+  status = models.CharField(max_length=3, choices=statusType, default="one")
   progress = models.CharField(max_length=2, choices=progressType, default="0")
   date = models.DateTimeField()
   
@@ -238,17 +231,8 @@ class Trip(models.Model):
   
   # overide the save method.
   def save(self, *args, **kwargs):
-    if self.status == "one":
-      flip(self.driver, True)
-      flip(self.mechanic, True)
-      flip(self.loader, True)
-    else:
-      flip(self.driver, False)
-      flip(self.mechanic, False)
-      flip(self.loader, False)
-      
     if not self.management.is_superuser:
-      super().save(*args, **kwargs) 
+      super().save(*args, **kwargs)
     else:
       text = "Admin can't be assign to a trip"
       raise ValidationError(text)
@@ -272,7 +256,7 @@ class Report(models.Model):
   )
   
   trip = models.ForeignKey(Trip, on_delete=models.CASCADE, related_name='reports')
-  status = models.CharField(max_length=5, choices=statusType)
+  status = models.CharField(max_length=2, choices=statusType)
   remark = models.CharField(max_length=30)
   coord = models.CharField(max_length=200)
   date = models.DateTimeField(auto_now_add=True)

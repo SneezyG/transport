@@ -5,7 +5,6 @@ from .models import Driver, Mechanic, Loader, Trip, Report, Message, Booking, Pa
 
 # Register your models here.
 
-
 # customized the admin interface
 admin.site.empty_value_display = '(None)'
 admin.site.list_per_page = 50
@@ -84,9 +83,9 @@ class TranspoterAdmin(admin.ModelAdmin):
     }),
     )
     
-  list_display = ('sn', 'active', 'fullName', 'address', 'date',)
+  list_display = ('sn', 'fullName', 'address', 'date',)
 
-  list_filter = ('sex', 'active', 'date')
+  list_filter = ('sex', 'date')
   
   preserve_filters = False
 
@@ -176,7 +175,7 @@ class TripAdmin(admin.ModelAdmin):
 
   search_fields = ('sn',)
   
-  autocomplete_fields = ('drivers', 'mechanics', 'loaders', 'management')
+  autocomplete_fields = ('drivers', 'booking', 'mechanics', 'loaders', 'management')
 
 
 

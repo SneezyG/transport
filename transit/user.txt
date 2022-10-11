@@ -1,0 +1,11 @@
+User and their password for this database application
+
+
+supervisor: che153980
+First name= Ahmad
+Last name= Gbolahan
+This user is a superuser
+Email = ahmadgbolly97@gmail.com
+
+
+managementA: wyeha272#£
