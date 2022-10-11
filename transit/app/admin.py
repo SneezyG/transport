@@ -66,8 +66,6 @@ class LogEntryAdmin(admin.ModelAdmin):
 class TranspoterAdmin(admin.ModelAdmin):
   
   """
-    Register the Transpoter model into the admin.
-    Add some customization.
     This does not appear in the admin, it just provide an interface inherited by driverAdmin,
     mechanicAdmin and loaderAdmin.
   """
@@ -77,18 +75,18 @@ class TranspoterAdmin(admin.ModelAdmin):
   fieldsets = (
     (None, {
       'classes': ('extrapretty'),
-      'fields': (('sn', 'firstName', 'lastName'), 'birthday', 'active', 'phone', 'sex', 'photo')
+      'fields': (('sn', 'firstName', 'lastName'), 'birthday', 'phone', 'sex', 'photo')
     }),
     
     ('Address', {
       'classes': ('extrapretty'),
-      'fields': (('aptNo', 'laneNo'), 'street', ('city', 'state'), 'zipcode')
+      'fields': (('aptNo', 'laneNo'), 'street', ('city', 'state', 'nationality'), 'zipcode')
     }),
     )
     
-  list_display = ('sn', 'fullName', 'address', 'date',)
+  list_display = ('sn', 'active', 'fullName', 'address', 'date',)
 
-  list_filter = ('sex', 'date', 'active')
+  list_filter = ('sex', 'active', 'date')
   
   preserve_filters = False
 
@@ -96,21 +94,21 @@ class TranspoterAdmin(admin.ModelAdmin):
   
 
 @admin.register(Driver)
-class DriverAdmin(TranspoterAdmin)
+class DriverAdmin(TranspoterAdmin):
    """
    This is subclass of TranspoterAdmin
    """
    pass
    
 @admin.register(Mechanic)
-class MechanicAdmin(TranspoterAdmin)
+class MechanicAdmin(TranspoterAdmin):
    """
    This is subclass of TranspoterAdmin
    """
    pass
   
 @admin.register(Loader)
-class MechanicAdmin(TranspoterAdmin)
+class MechanicAdmin(TranspoterAdmin):
    """
    This is subclass of TranspoterAdmin
    """  
@@ -150,7 +148,7 @@ class BookingAdmin(admin.ModelAdmin):
   
   list_display = ('sn', 'booker', 'contact', 'charges', 'paid', 'goods', 'pickup', 'delivery', 'date')
   
-  list_filter = ("paid", "date",)
+  list_filter = ("paid", "date")
   
   preserve_filters = False
 
@@ -178,7 +176,7 @@ class TripAdmin(admin.ModelAdmin):
 
   search_fields = ('sn',)
   
-  autocomplete_fields = ('driver', 'mechanic', 'loader', 'management')
+  autocomplete_fields = ('drivers', 'mechanics', 'loaders', 'management')
 
 
 
@@ -248,4 +246,3 @@ class MessageAdmin(admin.ModelAdmin):
 
   def has_view_permission(self, request, obj=None):
         return request.user.is_superuser
-  

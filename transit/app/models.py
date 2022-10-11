@@ -28,15 +28,17 @@ def doc2(instance, filename):
   
 def flip(obj, active):
   # flip transporters active status.
-  for x in obj:
-    x.active = active
-    x.save()
+  if obj:
+    for x in obj:
+       x.active = active
+       x.save()
     
 def castValidator(value):
+   #try to cast CharField to float and throw error on failure.
    try:
      float(value)
    except:
-     error = "only decimal and integer is valid for this field"
+     error = "Only decimal and integer is valid for this field"
      raise ValidationError(error)
       
  
@@ -46,7 +48,8 @@ def castValidator(value):
 class Transporter(models.Model):
   
   """
-  This model is a generalisation of Driver, Mechanic and Loader model.
+  This model is a generalisation model of Driver, Mechanic and Loader model.
+  
   Transporters are freelancers which are paid based on the type and amount of trip they go.
   """
   
@@ -62,18 +65,20 @@ class Transporter(models.Model):
   lastName = models.CharField(max_length=30, verbose_name='last name')
   birthday = models.DateField()
   sex = models.CharField(max_length=1, choices=sexType)
-  phone = models.CharField(max_length=15)
+  phone = models.CharField(max_length=15, verbose_name="phone number")
   photo = models.ImageField()
   aptNo = models.IntegerField(verbose_name='apartment number')
   laneNo = models.IntegerField(verbose_name='lane number')
   street = models.CharField(max_length=30)
   city = models.CharField(max_length=30)
   state = models.CharField(max_length=30,)
+  nationality = models.CharField(max_length=30)
   zipcode = models.IntegerField()
   active = models.BooleanField(default=False)
   date = models.DateTimeField(auto_now_add=True)
   
- 
+  class Meta:
+    abstract = True
 
   def fullName(self):
     "Returns the person's full name."
@@ -96,39 +101,49 @@ class Transporter(models.Model):
 class Driver(Transporter):
   """
   Stores a single driver data.
-  This is specialization of Transporter model.
+  This is specialization of abstract Transporter model.
   """
   photo = models.ImageField(upload_to=driv)
+  class Meta(Transporter.Meta):
+    db_table = "driver"
+  
 
 class Mechanic(Transporter):
   """
   Stores a single Mechanic data.
-  This is specialization of Transporter model.
+  This is specialization of abstract Transporter model.
   """
   photo = models.ImageField(upload_to=mech)
+  class Meta(Transporter.Meta):
+    db_table = "mechanic"
   
 class Loader(Transporter):
   """
   Stores a single Loader data.
-  This is specialization of Transporter model.
+  This is specialization of abstract Transporter model.
   """
   photo = models.ImageField(upload_to=load)
+  class Meta(Transporter.Meta):
+    db_table = "loader"
   
   
 
 
 class Payroll(models.Model):
-  """
+  
+ """
   This is rather a simple model to persist the amount paid per trip to freelancer transporters.
-  The amount pay per trip depend on the category of transporter and type of trip
-  """
+  
+  The amount pay per trip depend on the category of transporter and type of trip.
+ """
+  
  freeType = (
    ("driv", "Driver"),
    ("mech", "Mechanic"),
    ("load", "Loader")
- )
+  )
  
- freelancer = models.CharField(max_length=5, choices=freeType)
+ freelancer = models.CharField(max_length=5, choices=freeType, unique=True)
  short_range = models.CharField(max_length=30, verbose_name="pay/short-range trip in $", validators=[castValidator])
  mid_range = models.CharField(max_length=30, verbose_name="pay/mid-range trip in $", validators=[castValidator])
  long_range = models.CharField(max_length=30, verbose_name="pay/long-range trip in $", validators=[castValidator])
@@ -136,22 +151,24 @@ class Payroll(models.Model):
  
  
  def __str__(self):
-    text = '%s(goods: %s)' % (self.booker, self.goods)
-    return text.title()
+    return self.freelancer
     
  
 
 
 
-class Booking(models.model):
+class Booking(models.Model):
+  
   """
   Stores a single trip-booking data.
-  This model also includes two file field to store important bookings documents.
+  
+  This model also includes two file fields to store important bookings documents.
   """
+  
   sn = models.UUIDField(primary_key=True, default=uuid.uuid4, verbose_name="id")
   booker = models.CharField(max_length=30, verbose_name="Booker's name")
   contact = models.CharField(max_length=15, verbose_name="Booker's contact")
-  charges = models.CharField(max_length=30, verbose_name="Amount due", validators=[castValidator])
+  charges = models.CharField(max_length=20, verbose_name="Amount due($)", validators=[castValidator])
   paid = models.BooleanField(default=False)
   goods = models.CharField(max_length=30)
   pickup = models.CharField(max_length=100, verbose_name="pickup address")
@@ -174,11 +191,11 @@ class Trip(models.Model):
   
   There are three category of trip(short, mid and long range trip).
   
-  It is related to the bookings and management through a ForeignKey relationship.
+  It is related to the Booking and Management through a ForeignKey relationship.
   
-  It is related to transporters(drivers, mechanics and loaders through a many to many relationship.
+  It is related to transporters(drivers, mechanics and loaders) through a many to many relationship.
 
-  Admin also known as superuser can't be assign to a trip as management.
+  Supervisor also known as superuser can't be assign to a trip as management.
   """
   
   catgType = (
@@ -193,6 +210,7 @@ class Trip(models.Model):
   )
   
   progressType = (
+     ("0", "pending"),
      ("1", "Departed"),
      ("2", "Pickup"),
      ("3", "Onroad"),
@@ -201,16 +219,16 @@ class Trip(models.Model):
   )
   
   sn = models.UUIDField(primary_key=True, default=uuid.uuid4, verbose_name="id")
-  booking = models.OnetoOneField(Booking, on_delete=models.CASCADE, related_name="trip")
+  booking = models.OneToOneField(Booking, on_delete=models.CASCADE, related_name="trip")
   category = models.CharField(max_length=3, choices=catgType)
-  driver = models.ManytoManyField(Driver, related_name='trips', limit_choices_to={'active': False})
-  mechanic = models.ManytoManyField(Mechanic, related_name='trips', limit_choices_to={'active': False})
-  loader = models.ManytoManyField(Loader, related_name='trips', limit_choices_to={'active': False})
+  drivers = models.ManyToManyField(Driver, related_name='trips', limit_choices_to={'active': False})
+  mechanics = models.ManyToManyField(Mechanic, related_name='trips', limit_choices_to={'active': False})
+  loaders = models.ManyToManyField(Loader, related_name='trips', limit_choices_to={'active': False})
   management = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name='trips',
   limit_choices_to={'is_superuser': False})
   report = models.IntegerField(verbose_name='Expected report')
   status = models.CharField(max_length=3, choices=statusType)
-  progress = models.CharField(max_length=2, choices=progressType)
+  progress = models.CharField(max_length=2, choices=progressType, default="0")
   date = models.DateTimeField()
   
   
@@ -244,8 +262,7 @@ class Report(models.Model):
   """
   Stores a single report data.
   
-  A report is related to the trip table through a foreign key relationship
-  
+  A report is related to the trip table through a foreign key relationship.
   """
   
   statusType = (
@@ -271,7 +288,7 @@ class Message(models.Model):
   """
   store a single message data.
   
-  A message is related to the chat table through a foreign key relationship.
+  A message is related to the trip table through a foreign key relationship.
   """
   
   labelType = (
