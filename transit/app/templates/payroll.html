@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+   <style>
+   body {
+        margin: 0;
+        padding: 0 0 300px 0;
+        background-color: #D3D3D3;
+        overflow-y: auto;
+        overflow-x: hidden;
+        user-select: none;
+      }
+      
+    #header {
+        width: 180px;
+        border: 2px solid rgb(2, 39, 53);
+        margin: auto;
+        margin-top: 10px;
+        display: flex;
+        border-radius: 10px;
+        padding: 4px;
+        justify-content: center;
+      }
+      
+    #header h4 { 
+        margin: 5px;
+        font-weight: normal;
+        color: rgb(2, 39, 53);
+      }
+      
+      #pin {
+        width: 23px;
+        margin: 2px 0 0 0;
+        opacity: 0.7;
+      }
+
+      header {
+        position: fixed;
+        background-color: #D3D3D3;
+        width: 100%;
+        z-index: 1; 
+      }
+      
+      header > hr {
+        margin-top: 20px;
+      }
+      
+      #logo {
+        width: 50px;
+        border-radius: 10px;
+        position: relative;
+        bottom: 10px;
+        left: 20px;
+      }
+      
+      #nav {
+        text-align: center;
+        margin: auto;
+        margin-top: 10px;
+        width: 80%
+      }
+      
+      #nav > span {
+        display: inline-block;
+        width: 40%;
+        padding: 7px;
+        border: 1px solid rgb(2, 39, 53);
+        border-radius: 5px;
+      }
+      
+      #pay {
+        color: rgb(2, 39, 53);
+        background-color: #D3D3D3;
+      }
+      
+      #trip {
+        color: white;
+        background-color: rgb(2, 39, 53);
+      }
+      
+      
+      
+      
+@media only screen and (max-width: 1000px) { 
+  
+  
+}
+
+
+@media only screen and (max-width: 650px) { 
+  
+  header > img {
+     width: 37px;
+  }
+
+   #header {
+    width: 150px;
+   }
+
+   header h4 { 
+     font-size: 15px;
+  }
+  
+  #logo {
+    width: 35px;
+  }
+  
+  #nav {
+    width: 100%;
+  }
+ 
+  
+}
+     
+   </style>
+    
+  </head>
+  
+<body>
+  <header>
+    <div id="header">
+      <img id='pin' src="pin.png"/>
+       <h4> Admin </h4>
+    </div>
+     
+   <a href="/admin/transit">
+     <img id="logo" src="logo.jpeg"/>
+   </a>
+   
+   <h3 id="nav">
+     <span id="trip">Trips</span>
+     <span id="pay">Payroll</span>
+   </h3>
+   <hr/>
+  </header> 
+  
+</body>
+  
+</html>

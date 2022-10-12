@@ -58,10 +58,13 @@
         background-color: #D3D3D3;
         width: 100%;
         z-index: 1;
-        padding-bottom: 30px;
       }
       
-      header > img {
+      header > hr {
+        margin-top: 20px;
+      }
+      
+      #logo {
         width: 50px;
         border-radius: 10px;
         position: relative;
@@ -93,7 +96,7 @@
         width: 50%;
         overflow: hidden;
         position: relative;
-        top: 180px;
+        top: 220px;
         margin: auto;
         margin-bottom: 50px;
         animation: removeAnime;
@@ -104,8 +107,7 @@
       
       summary {
         border-bottom: 1px solid rgb(2, 39, 53);
-        padding: 10px;
-        padding-left: 40px;
+        padding: 10px 10px 2px 40px;
         margin-bottom: 1px;
         overflow: auto;
         cursor: pointer;
@@ -128,6 +130,30 @@
         margin-right: 15px;
         pointer-events: none;
       }
+      
+      summary span {
+        pointer-events: none;
+        display: inline-block;
+        width: 50%;
+        white-space: nowrap;
+        overflow: scroll;
+        position: relative;
+        top: 3px;
+      }
+      
+      summary > p {
+        margin: 0;
+        padding: 0;
+        padding-top: 5px;
+        text-align: center;
+        font-size: 12px;
+        pointer-events: none;
+      }
+      
+      summary span::-webkit-scrollbar {
+        display: none;
+      }
+      
       
       sub {
         color: green;
@@ -176,8 +202,9 @@
      }
      
      #origin {
-       margin: 20px 0 0 90px;
-       padding: 0;
+       margin: 20px 0 0 0;
+       padding: 0 0 0 75px;
+       width: 100%;
      }
 
    
@@ -192,6 +219,16 @@
        font-weight: 600;
        opacity: 0.7;
        margin-left: 10px;
+       display: inline-block;
+       width: 60%;
+       white-space: nowrap;
+       overflow: scroll;
+       position: relative;
+       top: 4px;
+     }
+     
+     #origin span::-webkit-scrollbar {
+        display: none;
      }
      
      .first {
@@ -302,7 +339,7 @@
      }
      
      #remark {
-       margin: 0 0 8px 10px;
+       margin: 0 0 8px 2px;
        font-size: 13px;
      }
      
@@ -319,7 +356,7 @@
   }
 
   #origin {
-    margin: 20px 0 0 90px;
+    margin: 20px 0 0 0;
   }
 
   .first {
@@ -353,15 +390,10 @@
       
       
 @media only screen and (max-width: 650px) { 
-    header > img {
-        width: 37px;
-        
+  header > img {
+     width: 37px;
    }
    
-   details {
-     width: 90%;
-   }
-
    header {
      padding: 2px;
    }
@@ -373,7 +405,10 @@
    header h4 { 
      font-size: 15px;
   }
-
+ 
+  details {
+     width: 90%;
+   }
 
   summary {
     padding-left: 20px;

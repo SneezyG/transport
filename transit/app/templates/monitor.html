@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+   <style>
+      @keyframes copyAnime {
+    0%   {opacity: 0;}
+    50%  {opacity: 1;}
+    100% {opacity: 0;}
+   }
+   
+   
+   @keyframes removeAnime {
+      0%   {
+        opacity: 1;
+      }
+      50%  {
+        opacity: 0.5;
+      }
+      100% {
+        opacity: 0;
+      }
+   }
+   
+   body {
+        margin: 0;
+        padding: 0 0 300px 0;
+        background-color: #D3D3D3;
+        overflow-y: auto;
+        overflow-x: hidden;
+        user-select: none;
+      }
+      
+    #header {
+        width: 180px;
+        border: 2px solid rgb(2, 39, 53);
+        margin: auto;
+        margin-top: 10px;
+        display: flex;
+        border-radius: 10px;
+        padding: 4px;
+        justify-content: center;
+      }
+      
+    #header h4 { 
+        margin: 5px;
+        font-weight: normal;
+        color: rgb(2, 39, 53);
+      }
+      
+      #pin {
+        width: 23px;
+        margin: 2px 0 0 0;
+        opacity: 0.7;
+      }
+
+      header {
+        position: fixed;
+        background-color: #D3D3D3;
+        width: 100%;
+        z-index: 1;
+      }
+      
+      header > hr {
+        margin-top: 20px;
+      }
+      
+      #logo {
+        width: 50px;
+        border-radius: 10px;
+        position: relative;
+        bottom: 10px;
+        left: 20px;
+      }
+      
+      #nav {
+        text-align: center;
+        margin: auto;
+        margin-top: 10px;
+        width: 80%
+      }
+      
+      #nav > span {
+        display: inline-block;
+        width: 40%;
+        padding: 7px;
+        border: 1px solid rgb(2, 39, 53);
+        border-radius: 5px;
+      }
+      
+      #trip {
+        color: rgb(2, 39, 53);
+        background-color: #D3D3D3;
+      }
+      
+      #pay {
+        color: white;
+        background-color: rgb(2, 39, 53);
+      }
+      
+      
+      details {
+        border: 1px solid rgb(2, 39, 53);
+        border-radius: 10px;
+        width: 50%;
+        overflow: hidden;
+        position: relative;
+        top: 220px;
+        margin: auto;
+        margin-bottom: 50px;
+        animation: removeAnime;
+        animation-play-state: paused;
+        animation-duration: 0.2s;
+        animation-fill-mode: forwards;
+      }
+      
+      summary {
+        border-bottom: 1px solid rgb(2, 39, 53);
+        padding: 10px 10px 2px 40px;
+        margin-bottom: 1px;
+        overflow: auto;
+        cursor: pointer;
+        border-radius: 10px;
+        font-size: 15px;
+        color: rgb(2, 39, 53);
+      }
+      
+      summary > ul {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        padding-right: 20px;
+        float: right;
+        pointer-events: none;
+      }
+      
+      summary li {
+        display: inline-block;
+        margin-right: 15px;
+        pointer-events: none;
+      }
+      
+      summary span {
+        pointer-events: none;
+        display: inline-block;
+        width: 70%;
+        white-space: nowrap;
+        overflow: scroll;
+        position: relative;
+        top: 3px;
+      }
+      
+      summary > p {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        font-size: 12px;
+      }
+      
+      #info {
+        position: relative;
+        left: 30px;
+      }
+      
+      #info > span {
+        display: inline-block;
+        width: 5px;
+        height: 5px;
+        padding: 3px;
+        margin-right: 5px;
+        border-radius: 10px;
+        background-color: green;
+      }
+      
+      summary span::-webkit-scrollbar {
+        display: none;
+      }
+      
+      
+      sub {
+        font-size: 11px;
+        font-weight: normal;
+        position: relative;
+        left: 3px;
+        bottom: 3px;
+        pointer-events: none;
+      }
+     
+     .created{
+       font-size: 12px;
+       padding-left: 10px;
+       margin-bottom: 0;
+     }
+     
+     .created > span {
+       font-size: 14px;
+     }
+     
+     .created sub {
+       color: black;
+       font-size: 11px;
+     }
+     
+     #more {
+       position: relative;
+       height: 260px;
+       overflow-y: scroll;
+       overflow-x: hidden;
+       transition: 0.2s;
+     }
+     
+     #origin {
+       margin: 20px 0 0 0;
+       padding: 0 0 0 75px;
+       width: 100%;
+     }
+
+   
+     #origin > li {
+       font-size: 12px;
+       padding-bottom: 10px;
+     }
+     
+     #origin span {
+       font-size: 14px;
+       color: rgb(2, 39, 53);
+       font-weight: 600;
+       opacity: 0.7;
+       margin-left: 10px;
+       display: inline-block;
+       width: 60%;
+       white-space: nowrap;
+       overflow: scroll;
+       position: relative;
+       top: 4px;
+     }
+     
+     #origin span::-webkit-scrollbar {
+        display: none;
+     }
+     
+     .first {
+       margin-right: 80px;
+     }
+     
+     .para {
+       margin: 2px 0 0 20px;
+       font-size: 13px;
+       font-weight: bold;
+       color: rgb(2, 39, 53);
+     }
+     
+     .para > span {
+       font-size: 13px;
+       font-weight: normal;
+       display: inline-block;
+       width: 65%;
+       white-space: nowrap;
+       padding: 5px 5px 5px 10px;
+       color: black;
+       background-color: #E5E4E2;
+       border-radius: 2px;
+       overflow: scroll;
+       position: relative;
+       left: 5px;
+       top: 5px;
+     }
+     
+   .para > span::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .para > img {
+      width: 30px;
+      position: relative;
+      top: 10px;
+      left: 5px;
+      cursor: pointer;
+    }
+     
+    .copy {
+      margin: 0;
+      padding: 2px 0 0 80px;
+      font-size: 11px;
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      opacity: 0;
+      animation: copyAnime;
+      animation-duration: 1.5s;
+      animation-play-state: paused;
+    }
+    
+    .status {
+      margin: 30px 0 0 20px;
+      padding: 0;
+    }
+    
+    .status > li {
+      display: inline-block;
+      font-size: 12px;
+    }
+    
+    .status span {
+      font-size: 15px;
+      font-weight: bold;
+      color: rgb(2, 39, 53);
+    }
+    
+    .status button {
+      background-color: orange;
+      cursor: pointer;
+      padding: 3px;
+    }
+    
+    #progress {
+      position: absolute;
+      right: 30px;
+      font-size: 12px;
+    }
+    
+    #progress > b {
+      font-size: 15px;
+    }
+      
+      
+      
+      
+@media only screen and (max-width: 1000px) { 
+  details {
+    width: 70%;
+  }
+
+  #origin {
+    margin: 20px 0 0 0;
+  }
+
+  .first {
+    margin-right: 50px;
+  }
+
+  summary {
+    cursor: auto;
+  }
+
+  .para > img {
+    cursor: auto;
+  }
+
+  .status button {
+    cursor: auto;
+  }
+  
+}
+
+
+@media only screen and (max-width: 650px) { 
+  
+   header {
+     padding: 2px;
+   }
+
+   #header {
+    width: 150px;
+   }
+
+  details {
+     width: 90%;
+   }
+
+  summary {
+    padding-left: 20px;
+    font-size: 14px;
+  }
+
+  summary > ul {
+    padding-right: 10px;
+  }
+  
+  summary li {
+    margin-right: 10px;
+  }
+
+  .first {
+    margin-right: 50px;
+  }
+  
+  #logo {
+    width: 35px;
+  }
+  
+  #nav {
+    width: 100%;
+  }
+ 
+  
+}
+     
+   </style>
+    
+  </head>
+  
+<body>
+  <header>
+    <div id="header">
+      <img id='pin' src="pin.png"/>
+       <h4> Admin </h4>
+    </div>
+     
+   <a href="/admin/transit">
+     <img id="logo" src="logo.jpeg"/>
+   </a>
+   
+   <h3 id="nav">
+     <span id="trip">Trips</span>
+     <span id="pay">Payroll</span>
+   </h3>
+   <hr/>
+  </header> 
+  
+  <details>
+    <summary>
+      <span>PINNACLE STUDIO</span>
+      <sub id="info"><span></span>report</sub>
+      <p>delivered</p>
+    </summary>
+    
+   <div id="more">
+    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
+    
+    <ul id="origin"> 
+    <li>pickup: <span> Ikire stationnnnnnnsjsjjsjskskskskkskshshjdjdjdsjsjsjs</span></li>
+    <li>delivery: <span>Akureddddddxxxxxxxxxxxxhshhshshshgdhshshjshsjshshsh</span></li>
+    </ul>
+    
+    <div class="para"> 
+    Trip ID: 
+    <span> jdkkdkdkekskdjdjdjjejekdjdjjdjdjdkekekdkjdieieiejdjjwijsjdueiiekdjdjejueuejbdudhueuejdhhxuehbehhde
+    </span>
+    <img src="copy.png"/>
+    <h6 class="copy">coppied</h6>
+    </div>
+    
+    <ul class="status"> 
+    <li class="first">status: <span>open<span></li>
+    <li><button class="remove">mark as closed</button></li>
+    </ul>
+    <br>
+    
+   <p id="progress">progress: <b>Delivered</b></p>
+    
+  </div>
+  </details>
+  
+  
+  <details>
+    <summary>
+      <span>PINNACLE STUDIO</span>
+      <sub id="info"><span></span>report</sub>
+      <p>delivered</p>
+    </summary>
+    
+   <div id="more">
+    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
+    
+    <ul id="origin"> 
+    <li>pickup: <span> Ikire stationnnnnnnsjsjjsjskskskskkskshshjdjdjdsjsjsjs</span></li>
+    <li>delivery: <span>Akureddddddxxxxxxxxxxxxhshhshshshgdhshshjshsjshshsh</span></li>
+    </ul>
+    
+    <div class="para"> 
+    Trip ID: 
+    <span> jdkkdkdkekskdjdjdjjejekdjdjjdjdjdkekekdkjdieieiejdjjwijsjdueiiekdjdjejueuejbdudhueuejdhhxuehbehhde
+    </span>
+    <img src="copy.png"/>
+    <h6 class="copy">coppied</h6>
+    </div>
+    
+    <ul class="status"> 
+    <li class="first">status: <span>open<span></li>
+    <li><button class="remove">mark as closed</button></li>
+    </ul>
+    <br>
+    
+   <p id="progress">progress: <b>Delivered</b></p>
+    
+  </div>
+  </details>
+  
+  
+ <details>
+    <summary>
+      <span>PINNACLE STUDIO</span>
+      <sub id="info"><span></span>report</sub>
+      <p>delivered</p>
+    </summary>
+    
+   <div id="more">
+    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
+    
+    <ul id="origin"> 
+    <li>pickup: <span> Ikire stationnnnnnnsjsjjsjskskskskkskshshjdjdjdsjsjsjs</span></li>
+    <li>delivery: <span>Akureddddddxxxxxxxxxxxxhshhshshshgdhshshjshsjshshsh</span></li>
+    </ul>
+    
+    <div class="para"> 
+    Trip ID: 
+    <span> jdkkdkdkekskdjdjdjjejekdjdjjdjdjdkekekdkjdieieiejdjjwijsjdueiiekdjdjejueuejbdudhueuejdhhxuehbehhde
+    </span>
+    <img src="copy.png"/>
+    <h6 class="copy">coppied</h6>
+    </div>
+    
+    <ul class="status"> 
+    <li class="first">status: <span>open<span></li>
+    <li><button class="remove">mark as closed</button></li>
+    </ul>
+    <br>
+    
+   <p id="progress">progress: <b>Delivered</b></p>
+    
+  </div>
+  </details>
+
+
+
+<script> 
+
+const copyButtons = document.querySelectorAll('.para > img');
+const removeButtons = document.querySelectorAll('.remove');
+const copied = document.querySelectorAll('.copy')
+
+
+
+for (let elem of copyButtons) {
+    elem.addEventListener('click', copy);
+ }
+ 
+for (let elem of removeButtons) {
+   elem.addEventListener('click', remove, {once:true});
+ }
+ 
+for (let elem of copied) {
+   elem.addEventListener('animationend', resetAnime);
+ }
+ 
+ 
+function copy(e) {
+   let elem = e.target;
+   let parent = elem.parentElement;
+   let parentNodes = parent.children;
+   let id = parentNodes[0].innerHTML.trim();
+   let copied = parentNodes[2];
+  // console.log(id);
+   
+   navigator.clipboard.writeText(id).then(() => {
+     copied.style.animationPlayState = "running";
+  }, () => {
+      return null;
+  });
+   
+ }
+
+
+
+ function resetAnime(e) {
+     let elem = e.target;
+     elem.style.animation = "none";
+     elem.offsetWidth;
+     elem.style.animation = null;
+ }
+ 
+ 
+ function remove(e) {
+   let elem = e.target;
+   let ancestor1 = elem.parentElement.parentElement.parentElement;
+   let ancestor2 = ancestor1.parentElement;
+   console.log(ancestor1);
+   console.log(ancestor2);
+   ancestor2.style.animationPlayState= "running";
+   ancestor1.style.height = "200px";
+   ancestor2.addEventListener('animationend', (e) => {
+     let elem = e.target;
+     elem.remove();
+   }, 
+   {once:true})
+  
+ }
+ 
+ 
+</script>
+  
+</body>
+  
+</html>

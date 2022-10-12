@@ -142,7 +142,6 @@ class Payroll(models.Model):
  long_range = models.CharField(max_length=30, verbose_name="pay/long-range trip in $", validators=[castValidator])
  date = models.DateTimeField(auto_now=True)
  
- 
  def __str__(self):
     return self.get_freelancer_display()
     
@@ -257,7 +256,7 @@ class Report(models.Model):
   
   trip = models.ForeignKey(Trip, on_delete=models.CASCADE, related_name='reports')
   status = models.CharField(max_length=2, choices=statusType)
-  remark = models.CharField(max_length=30)
+  remark = models.CharField(max_length=25)
   coord = models.CharField(max_length=200)
   date = models.DateTimeField(auto_now_add=True)
   

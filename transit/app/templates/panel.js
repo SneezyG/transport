@@ -18,9 +18,6 @@ const copied = document.querySelectorAll('.copy')
     elem.addEventListener('click', copy);
  }
  
- for (let elem of removeButtons) {
-   elem.addEventListener('click', remove, {once:true});
- }
  
  for (let elem of copied) {
    elem.addEventListener('animationend', resetAnime);
@@ -35,7 +32,11 @@ const copied = document.querySelectorAll('.copy')
  function open(e) {
     let elem = e.target;
     for (let child of elem.children) {
-      child.style.visibility = "hidden";
+      let tag = child.tagName;
+      console.log(tag);
+      if (tag != "SPAN" && tag != "P") {
+        child.style.visibility = "hidden";
+      }
     }
     elem.addEventListener('click', close, {once:true});
  }
@@ -78,20 +79,4 @@ const copied = document.querySelectorAll('.copy')
      elem.style.animation = null;
  }
  
- 
- function remove(e) {
-   let elem = e.target;
-   let ancestor1 = elem.parentElement.parentElement.parentElement;
-   let ancestor2 = ancestor1.parentElement;
-   console.log(ancestor1);
-   console.log(ancestor2);
-   ancestor2.style.animationPlayState= "running";
-   ancestor1.style.height = "200px";
-   ancestor2.addEventListener('animationend', (e) => {
-     let elem = e.target;
-     elem.remove();
-   }, 
-   {once:true})
-  
- }
  
