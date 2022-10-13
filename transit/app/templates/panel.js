@@ -1,16 +1,20 @@
 
-
+const body = document.querySelector('body');
+const cancel = document.querySelectorAll('.button');
 const summary = document.querySelectorAll('summary');
 const copyButtons = document.querySelectorAll('.para > img');
 const removeButtons = document.querySelectorAll('.remove');
 const copied = document.querySelectorAll('.copy');
 const scan = document.querySelectorAll('.para > span');
 const not_found = document.querySelector('#not_found');
+const barcontainer = document.querySelector('#barcode');
 
 
 
 
-
+for (let elem of cancel) {
+  elem.addEventListener('click', bodyreset);
+ }
 
  for (let elem of summary) {
     elem.addEventListener('click', open, {once:true});
@@ -36,7 +40,9 @@ const not_found = document.querySelector('#not_found');
  
  
  function lookup() {
-   not_found.showModal()
+   //not_found.showModal();
+   barcontainer.showModal();
+   body.style.overflow = "hidden";
  }
  
  
@@ -92,5 +98,11 @@ const not_found = document.querySelector('#not_found');
      elem.offsetWidth;
      elem.style.animation = null;
  }
+ 
+ 
+function bodyreset() {
+   body.style.overflow = "scroll";
+ }
+ 
  
  

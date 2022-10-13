@@ -348,7 +348,7 @@
      }
      
      dialog {
-        position: absolute;
+        position: fixed;
         bottom: 50px;
         z-index: 2;
         background-color: #F5F5F5;
@@ -359,28 +359,46 @@
         background: lightblue;
         opacity: 0.7;
       }
-      
-  #not_found {
-     width: 400px;
-     height: 200px;
-     overflow: hidden;
-     padding-top: 50px;
-   }
    
-   #not_found  p {
+   dialog  p {
      text-align: center;
+     margin: 0;
    }
    
-   #not_found > form {
+   dialog > form {
      margin-top: 50px;
    }
    
-   #not_found button {
+   dialog button {
      font-size: 15px;
      padding: 5px;
      background-color: #D3D3D3;
+     width: 80px;
    }
-
+   
+  #not_found {
+     width: 400px;
+     padding-top: 50px;
+     padding-bottom: 50px;
+   }
+   
+   #barcode {
+     width: 60%
+   }
+   
+   #barcode > form {
+     margin-top: 20px;
+   }
+   
+   #barcode > div {
+     text-align: center;
+     margin-top: 10px;
+   }
+   
+   #code {
+     height: 270px;
+     width: 350px;
+   }
      
      
      
@@ -389,6 +407,10 @@
   details {
     width: 70%;
   }
+  
+  #barcode {
+     width: 80%
+   }
 
   #origin {
     margin: 20px 0 0 0;
@@ -468,8 +490,6 @@
   
   #not_found {
     width: 270px;
-    height: 150px;
-    padding-top: 20px;
   } 
   
 }

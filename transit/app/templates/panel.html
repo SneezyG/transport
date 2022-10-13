@@ -290,13 +290,24 @@
   </details>
 
 
-  <!-- construct the dialog that displays error on look up-->
+  <!-- construct the dialog that displays error during barcode generation-->
   <dialog id="not_found">
-  <p> Item not found ! </p>
+  <p> Error, please try again</p>
   <form method="dialog">
-  <p> <button value="cancel">cancel</button> </p>
+  <p> <button class="button" value="cancel">cancel</button> </p>
   </form>
   </dialog>
+  
+  <!-- construct the dialog that displays barcode generated from trip id-->
+  <dialog id="barcode">
+  <div>
+    <img id="code" src="logo.jpeg"/>
+  </div>
+  <form method="dialog">
+  <p><button class="button" value="cancel">close</button> </p>
+  </form>
+  </dialog>
+  
     
  <script src="panel.js"></script>
 

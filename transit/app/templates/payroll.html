@@ -84,7 +84,7 @@
       
       section {
          position: relative;
-         top: 230px;
+         top: 220px;
       }
       
       #search {
@@ -97,6 +97,7 @@
       #search > input {
         width: 70%;
         padding: 7px;
+        padding-left: 30px;
         font-size: 15px;
         border: 1px solid #91A3B0;
       }
@@ -148,7 +149,7 @@
     }
     
     dialog {
-        position: absolute;
+        position: fixed;
         bottom: 50px;
         z-index: 2;
         background-color: #F5F5F5;
@@ -175,19 +176,127 @@
      margin-top: 50px;
    }
    
-   #not_found button {
+   dialog button {
      font-size: 15px;
      padding: 5px;
+     width: 80px;
      background-color: #D3D3D3;
    }
+   
+   #payroll {
+     width: 50%;
+   }
+   
+  #payroll > form {
+    margin-top: 30px;
+  }
+  
+  #profile {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  #profile img {
+    height: 120px;
+    width: 140px;
+    margin: 0;
+    padding: 0;
+    border-radius: 5px;
+  }
+  
+  #profile > p {
+     padding: 0;
+     margin: 0;
+     margin-bottom: 10px;
+   }
+   
+
+   #tripsummary {
+     margin-bottom: 40px;
+   }
+   
+   #tripsummary > ul {
+     list-style: none;
+     text-align: center;
+     padding: 0;
+     margin-bottom: 30px;
+   }
+   
+   #tripsummary li {
+     display: inline;
+     margin-right: 15px;
+   }
+   
+   #tripsummary > p {
+     text-align: center;
+   }
+   
+   #tripsummary sub {
+     margin-left: 5px;
+     font-size: 11px;
+   }
+   
+   #button {
+     text-align: center;
+     margin-top: 20px;
+   }
+   
+   details {
+        margin: auto;
+        margin-bottom: 70px;
+        border: 1px solid rgb(2, 39, 53);
+        width: 50%;
+        border-radius: 10px;
+      }
+      
+     details > ul {
+        margin: auto;
+        padding: 0;
+        width: 90%;
+        margin-bottom: 20px;
+     }
+      
+      details li {
+        font-size: 15px;
+        margin: 10px;
+        list-style: square;
+      }
+      
+     details > p {
+        padding: 10px;
+        margin: 10px 0 0 5px;
+      }
+      
+    details > h5 {
+      margin: 10px 0 0 0;
+      padding-left: 10px;
+    }
+     
+      
+    summary {
+      padding: 5px;
+      border-bottom: 1px solid rgb(2, 39, 53);
+      border-radius: 10px;
+      padding-left: 30px;
+      margin-bottom: 1px;
+      cursor: pointer;
+    }
 
       
       
       
       
 @media only screen and (max-width: 1000px) { 
-   #logo {
+  #logo {
      bottom: 20px;
+   }
+   
+  #payroll {
+     width: 80%
+   }
+   
+   details {
+     width: 80%;
    }
   
 }
@@ -224,6 +333,10 @@
     height: 150px;
     padding-top: 20px;
   } 
+  
+  summary {
+    font-size: 14px;
+  }
 
   
 }
@@ -251,11 +364,20 @@
   </header> 
   
   <section>
+    
+   <details>
+    <summary>Guide</summary>
+    <p>Compute the wage of a freelancer from a specified date by selecting the freelancer category and entering freelancer ID.</p>
+    <h5>Note: </h5>
+    <ul>
+      <li>You must have updated your payroll model in the admin interface for this to work.</li>
+    </ul>
+    </details>
    
   <div id="radio">
-  <input type="radio" name="freelancer" value="driver" checked> Driver
-  <input type="radio" name="freelancer" value="mechanic"> Mechanic
-  <input type="radio" name="freelancer" value="loader"> Loader
+  <input class="radio" type="radio" name="freelancer" value="Driver" checked> Driver
+  <input class="radio" type="radio" name="freelancer" value="Mechanic"> Mechanic
+  <input class="radio" type="radio" name="freelancer" value="Loader"> Loader
   </div>
   
   <br/>
@@ -268,7 +390,7 @@
    <br/>
   
   <p id="input">
-    search trip from 
+    compute wage from 
     <label id="browse" for="time">this</label>
     date.
      <input
@@ -285,24 +407,102 @@
   
   <!-- construct the dialog that displays error on look up-->
   <dialog id="not_found">
-  <p> ID not found ! </p>
+  <p id="error"> ID not found ! </p>
   <form method="dialog">
-  <p> <button value="cancel">cancel</button> </p>
+  <p> <button class="button" value="cancel">cancel</button> </p>
   </form>
+  </dialog>
+  
+  
+  <!-- construct the dialog that displays trip and pay summary on look up-->
+  <dialog id="payroll">
+    
+  <div id="profile">
+  <p>• SULE ADESHOLA</p>
+  <a target="_blank" href="logo.jpeg">
+  <img src="logo.jpeg"/>
+  </a>
+  </div>
+  
+  <div id="tripsummary">
+    <h4>Trip summary<sub>from 2022-06-07</sub></h4>
+  <ul>
+    <li>Short-range: <span>Nil</span></li>
+    <li>Mid-range: <span>Nil</span></li>
+    <li>Long-range: <span>Nil</span></li>
+  </ul>
+  <p><b>Total: </b><span>Nil</span></p>
+  </div>
+  
+  <p><b>Wage: </b><span>Nil</span></p>
+  
+  <form method="dialog">
+  <p id="button"><button class="button" value="cancel">close</button></p>
+  </form>
+  
   </dialog>
   
   
   
  <script>
  
+ const body = document.querySelector('body');
+ const cancel = document.querySelectorAll('.button');
  const query = document.querySelector('#search > button');
  const not_found = document.querySelector('#not_found');
+ const error = document.querySelector('#error');
+ const radio = document.querySelectorAll('.radio');
+ const id = document.querySelector('#id');
+ const time = document.querySelector('#time');
+ const payroll = document.querySelector('#payroll');
+ 
+ 
+ let freelancer = 'Driver';
+ 
+ 
+ 
+ for (let elem of radio) {
+  elem.addEventListener('click', setfreelancer);
+ }
+ 
+ for (let elem of cancel) {
+  elem.addEventListener('click', bodyreset);
+ }
  
  query.addEventListener('click', lookup);
  
  
+ 
+ 
  function lookup() {
-   not_found.showModal()
+   if (!id.value || !time.value ) {
+     error.innerHTML = "Please enter freelancer ID and date to continue";
+     //not_found.showModal();
+     payroll.showModal();
+     body.style.overflow = "hidden";
+     
+   } else {
+     let searchObj = {
+       'freelancer': freelancer,
+       'id': id.value,
+       'time': time.value
+     };
+     console.log(searchObj);
+     payroll.showModal();
+   }
+ }
+ 
+ 
+ function setfreelancer(e) {
+  // console.log(freelancer);
+   elem = e.target;
+   freelancer = elem.value;
+  // console.log(freelancer);
+ }
+ 
+ 
+ function bodyreset() {
+   body.style.overflow = "scroll";
  }
  
  </script>
