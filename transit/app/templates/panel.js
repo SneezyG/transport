@@ -3,7 +3,9 @@
 const summary = document.querySelectorAll('summary');
 const copyButtons = document.querySelectorAll('.para > img');
 const removeButtons = document.querySelectorAll('.remove');
-const copied = document.querySelectorAll('.copy')
+const copied = document.querySelectorAll('.copy');
+const scan = document.querySelectorAll('.para > span');
+const not_found = document.querySelector('#not_found');
 
 
 
@@ -23,7 +25,19 @@ const copied = document.querySelectorAll('.copy')
    elem.addEventListener('animationend', resetAnime);
  }
  
+ for (let elem of scan) {
+    elem.addEventListener('click', lookup);
+ }
  
+ 
+ 
+ 
+ 
+ 
+ 
+ function lookup() {
+   not_found.showModal()
+ }
  
  
  
@@ -33,8 +47,8 @@ const copied = document.querySelectorAll('.copy')
     let elem = e.target;
     for (let child of elem.children) {
       let tag = child.tagName;
-      console.log(tag);
-      if (tag != "SPAN" && tag != "P") {
+      //console.log(tag);
+      if (tag != "SPAN") {
         child.style.visibility = "hidden";
       }
     }

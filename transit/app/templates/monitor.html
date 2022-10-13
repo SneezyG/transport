@@ -63,7 +63,7 @@
       }
       
       header > hr {
-        margin-top: 20px;
+        margin-top: 10px;
       }
       
       #logo {
@@ -75,10 +75,12 @@
       }
       
       #nav {
-        text-align: center;
         margin: auto;
-        margin-top: 10px;
-        width: 80%
+        width: 80%;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        bottom: 10px;
       }
       
       #nav > span {
@@ -86,7 +88,7 @@
         width: 40%;
         padding: 7px;
         border: 1px solid rgb(2, 39, 53);
-        border-radius: 5px;
+        text-align: center;
       }
       
       #trip {
@@ -106,7 +108,7 @@
         width: 50%;
         overflow: hidden;
         position: relative;
-        top: 220px;
+        top: 200px;
         margin: auto;
         margin-bottom: 50px;
         animation: removeAnime;
@@ -210,6 +212,10 @@
        transition: 0.2s;
      }
      
+     #more::-webkit-scrollbar {
+        display: none;
+      }
+      
      #origin {
        margin: 20px 0 0 0;
        padding: 0 0 0 75px;
@@ -335,6 +341,10 @@
   #origin {
     margin: 20px 0 0 0;
   }
+  
+  #logo {
+    bottom: 20px;
+  }
 
   .first {
     margin-right: 50px;
@@ -367,6 +377,7 @@
 
   details {
      width: 90%;
+     top: 180px;
    }
 
   summary {
