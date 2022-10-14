@@ -40,8 +40,8 @@ for (let elem of cancel) {
  
  
  function lookup() {
-   //not_found.showModal();
-   barcontainer.showModal();
+   not_found.showModal();
+   //barcontainer.showModal();
    body.style.overflow = "hidden";
  }
  
@@ -101,7 +101,7 @@ for (let elem of cancel) {
  
  
 function bodyreset() {
-   body.style.overflow = "scroll";
+   body.style.overflow = "auto";
  }
  
  

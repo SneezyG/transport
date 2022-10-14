@@ -32,7 +32,7 @@
       
     #header {
         width: 180px;
-        border: 2px solid rgb(2, 39, 53);
+       /* border: 2px solid rgb(2, 39, 53); */
         margin: auto;
         margin-top: 10px;
         display: flex;
@@ -43,6 +43,8 @@
       
     #header h4 { 
         margin: 5px;
+        position: relative;
+        top: 5px;
         font-weight: normal;
         color: rgb(2, 39, 53);
       }
@@ -75,7 +77,8 @@
       header > h3 {
         text-align: center;
         position: relative;
-        bottom: 15px;
+        right: 18%;
+        bottom: 10px;
         margin: 0;
         color: rgb(2, 39, 53);
       }
@@ -256,6 +259,7 @@
        position: relative;
        left: 5px;
        top: 5px;
+       cursor: pointer;
      }
      
    .para > span::-webkit-scrollbar {
@@ -374,6 +378,7 @@
      padding: 5px;
      background-color: #D3D3D3;
      width: 80px;
+     cursor: pointer;
    }
    
   #not_found {
@@ -383,7 +388,7 @@
    }
    
    #barcode {
-     width: 60%
+     width: 50%
    }
    
    #barcode > form {
@@ -405,12 +410,17 @@
 @media only screen and (max-width: 1000px) { 
   
   details {
-    width: 70%;
+    width: 60%;
   }
   
   #barcode {
-     width: 80%
+     width: 60%
    }
+  
+  #code {
+    height: 250px;
+    width: 320px;
+  }
 
   #origin {
     margin: 20px 0 0 0;
@@ -434,6 +444,14 @@
 
   .status button {
     cursor: auto;
+  }
+
+  .para > span {
+    cursor: default;
+  }
+
+  dialog button {
+   cursor: default;
   }
   
 
@@ -491,6 +509,12 @@
   #not_found {
     width: 270px;
   } 
+
+
+  #barcode {
+    width: 70%
+  }
+
   
 }
 

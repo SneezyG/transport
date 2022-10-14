@@ -1,0 +1,353 @@
+
+
+body {
+    margin: 0;
+    padding: 0 0 300px 0;
+    background-color: #D3D3D3;
+    overflow-y: auto;
+    overflow-x: hidden;
+    user-select: none;
+  }
+  
+#header {
+    width: 180px;
+    /*border: 2px solid rgb(2, 39, 53);*/
+    margin: auto;
+    margin-top: 10px;
+    display: flex;
+    border-radius: 10px;
+    padding: 4px;
+    justify-content: center;
+  }
+  
+#header h4 { 
+    margin: 5px;
+    position: relative;
+    top: 3px;
+    font-weight: normal;
+    color: rgb(2, 39, 53);
+  }
+  
+  #pin {
+    width: 23px;
+    margin: 2px 0 0 0;
+    opacity: 0.7;
+  }
+
+  header {
+    position: fixed;
+    background-color: #D3D3D3;
+    width: 100%;
+    z-index: 1; 
+  }
+  
+  header > hr {
+    margin-top: 10px;
+  }
+  
+  #logo {
+    width: 50px;
+    border-radius: 10px;
+    position: relative;
+    bottom: 10px;
+    left: 20px;
+  }
+  
+  #nav {
+    margin: auto;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    bottom: 10px;
+  }
+  
+  #nav > span {
+    display: inline-block;
+    width: 40%;
+    padding: 7px;
+    border: 1px solid rgb(2, 39, 53);
+    text-align: center;
+  }
+  
+  #pay {
+    color: rgb(2, 39, 53);
+    background-color: #D3D3D3;
+  }
+  
+  #trip {
+    color: white;
+    background-color: rgb(2, 39, 53);
+  }
+  
+  section {
+     position: relative;
+     top: 220px;
+  }
+  
+  #search {
+    width: 60%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+  }
+  
+  #search > input {
+    width: 70%;
+    padding: 7px;
+    padding-left: 30px;
+    font-size: 15px;
+    border: 1px solid #91A3B0;
+  }
+  
+  input:focus {
+    outline: none;
+    background-color: ;
+  }
+  
+  #search > button{
+    width: 20%;
+    background-color: green;
+    color: white;
+  }
+  
+ .visually-hidden {
+    position: absolute !important;
+    background-color: red;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+}
+
+input.visually-hidden:is(:focus, :focus-within) + label {
+   outline: thin dotted;
+}
+
+#browse {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#input {
+  text-align: center;
+  margin: 5px;
+  margin-top: 20px;
+}
+
+#radio {
+  text-align: center;
+  padding-right: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+#radio > input {
+  margin-left: 20px;
+}
+
+dialog {
+    position: fixed;
+    bottom: 50px;
+    z-index: 2;
+    background-color: #F5F5F5;
+    border: 2px solid rgb(2, 39, 53);
+  }
+  
+dialog::backdrop {
+    background: lightblue;
+    opacity: 0.7;
+  }
+  
+#not_found {
+ width: 400px;
+ height: 200px;
+ overflow: hidden;
+ padding-top: 50px;
+}
+
+#not_found  p {
+ text-align: center;
+}
+
+#not_found > form {
+ margin-top: 50px;
+}
+
+dialog button {
+ font-size: 15px;
+ padding: 5px;
+ width: 80px;
+ background-color: #D3D3D3;
+}
+
+#payroll {
+ width: 600px;
+ bottom: 0;
+}
+
+#payroll > form {
+margin-top: 30px;
+}
+
+#profile {
+text-align: center;
+margin-bottom: 30px;
+}
+
+#profile img {
+height: 120px;
+width: 140px;
+margin: 0;
+padding: 0;
+border-radius: 5px;
+}
+
+#profile > p {
+ padding: 0;
+ margin: 0;
+ margin-bottom: 10px;
+}
+
+
+#tripsummary {
+ margin-bottom: 40px;
+}
+
+#tripsummary > ul {
+ list-style: none;
+ text-align: center;
+ padding: 0;
+ margin-bottom: 30px;
+}
+
+#tripsummary li {
+ display: inline;
+ margin-right: 30px;
+ font-size: 14px;
+}
+
+#tripsummary > p {
+ text-align: center;
+}
+
+#tripsummary sub {
+ margin-left: 5px;
+ font-size: 11px;
+ font-weight: normal;
+}
+
+#button {
+ text-align: center;
+ margin-top: 20px;
+}
+
+details {
+    margin: auto;
+    margin-bottom: 70px;
+    border: 1px solid rgb(2, 39, 53);
+    width: 50%;
+    border-radius: 10px;
+  }
+  
+ details > ul {
+    margin: auto;
+    padding: 0;
+    width: 90%;
+    margin-bottom: 20px;
+ }
+  
+  details li {
+    font-size: 15px;
+    margin: 10px;
+    list-style: square;
+  }
+  
+ details > p {
+    padding: 10px;
+    margin: 10px 0 0 5px;
+  }
+  
+details > h5 {
+  margin: 10px 0 0 0;
+  padding-left: 10px;
+}
+ 
+  
+summary {
+  padding: 5px;
+  border-bottom: 1px solid rgb(2, 39, 53);
+  border-radius: 10px;
+  padding-left: 30px;
+  margin-bottom: 1px;
+  cursor: pointer;
+}
+
+  
+  
+  
+  
+@media only screen and (max-width: 1000px) { 
+#logo {
+ bottom: 20px;
+}
+
+#payroll {
+ width: 500px;
+}
+
+details {
+ width: 80%;
+}
+
+}
+
+
+@media only screen and (max-width: 650px) { 
+
+header > img {
+ width: 37px;
+}
+
+#header {
+width: 150px;
+}
+
+header h4 { 
+ font-size: 15px;
+}
+
+#logo {
+width: 35px;
+}
+
+#nav {
+width: 100%;
+}
+
+#search {
+width: 90%;
+}
+
+#not_found {
+width: 270px;
+height: 150px;
+padding-top: 20px;
+} 
+
+summary {
+font-size: 14px;
+}
+
+#payroll {
+ width: 400px;
+}
+
+#tripsummary li {
+ margin-right: 18px;
+}
+
+
+
+}
