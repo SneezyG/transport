@@ -1,48 +1,89 @@
 
 const body = document.querySelector('body');
-const cancel = document.querySelectorAll('.button');
 const summary = document.querySelectorAll('summary');
 const copyButtons = document.querySelectorAll('.para > img');
-const removeButtons = document.querySelectorAll('.remove');
-const copied = document.querySelectorAll('.copy');
 const scan = document.querySelectorAll('.para > span');
 const not_found = document.querySelector('#not_found');
 const barcontainer = document.querySelector('#barcode');
+const chat = document.querySelectorAll('#chat');
+const msg = document.querySelector('#msg');
+const back = document.querySelector('#back');
+const tag = document.querySelector('#tag');
+const header = document.querySelector('#msg > header');
+const main = document.querySelector('#msg > main');
 
 
 
-
-for (let elem of cancel) {
-  elem.addEventListener('click', bodyreset);
- }
 
  for (let elem of summary) {
-    elem.addEventListener('click', open, {once:true});
+    elem.addEventListener('click', open);
  }
  
  for (let elem of copyButtons) {
     elem.addEventListener('click', copy);
  }
- 
- 
- for (let elem of copied) {
-   elem.addEventListener('animationend', resetAnime);
- }
+
  
  for (let elem of scan) {
     elem.addEventListener('click', lookup);
  }
  
+ for (let elem of chat){
+    elem.addEventListener('click', openchat);
+ }
  
  
+ 
+ function openchat(e) {
+   let elem = e.target;
+   let name = elem.dataset.name;
+   console.log(name);
+   let child1 = elem.children[0];
+   let child2 = elem.children[1];
+   child1.style.animationPlayState = "running";
+   child2.style.visibility = "hidden";
+   child1.addEventListener('animationend', (e) => {
+     
+   let rect = elem.getBoundingClientRect();
+   let width = window.innerWidth;
+   let right = (width - rect.right) + 20;
+   
+   msg.style.top = rect.top + "px";
+   msg.style.right = right + "px";
+   msg.style.animationPlayState = "running";
+   
+   msg.addEventListener('animationend', () => {
+     body.style.overflow = "hidden";
+     main.style.visibility = "visible";
+     header.style.visibility = "visible";
+     tag.innerHTML = name;
+   }, {once:true});
+   
+   back.addEventListener('click', () => {
+     child2.style.visibility = "visible";
+     body.style.overflow = "auto";
+     main.style.visibility = "hidden";
+     header.style.visibility = "hidden";
+     resetAnime(child1);
+     resetAnime(msg);
+   }, {once: true});
+   
+   }, {once:true});
+   
+ }
  
  
  
  
  function lookup() {
-   not_found.showModal();
-   //barcontainer.showModal();
+   //let model = barcontainer;
+   let model = not_found;
+   model.showModal();
+   let child = model.children[1].children[0].children[0];
    body.style.overflow = "hidden";
+   child.addEventListener('click', () => {
+     body.style.overflow = "auto";
+   }, {once:true});
  }
  
  
@@ -53,7 +94,6 @@ for (let elem of cancel) {
     let elem = e.target;
     for (let child of elem.children) {
       let tag = child.tagName;
-      //console.log(tag);
       if (tag != "SPAN") {
         child.style.visibility = "hidden";
       }
@@ -68,7 +108,6 @@ for (let elem of cancel) {
     for (let child of elem.children) {
       child.style.visibility = "visible";
     }
-    elem.addEventListener('click', open, {once:true});
  }
  
  
@@ -76,13 +115,13 @@ for (let elem of cancel) {
  function copy(e) {
    let elem = e.target;
    let parent = elem.parentElement;
-   let parentNodes = parent.children;
-   let id = parentNodes[0].innerHTML.trim();
-   let copied = parentNodes[2];
-  // console.log(id);
+   let childNodes = parent.children;
+   let id = elem.dataset.id.trim();
+   let copied = childNodes[2];
    
    navigator.clipboard.writeText(id).then(() => {
      copied.style.animationPlayState = "running";
+     copied.addEventListener('animationend', resetAnime, {once:true});
   }, () => {
       return null;
   });
@@ -91,18 +130,11 @@ for (let elem of cancel) {
 
 
 
-
  function resetAnime(e) {
-     let elem = e.target;
+     let elem = e.target ?? e;
      elem.style.animation = "none";
      elem.offsetWidth;
      elem.style.animation = null;
  }
- 
- 
-function bodyreset() {
-   body.style.overflow = "auto";
- }
- 
  
  

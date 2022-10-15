@@ -31,8 +31,7 @@
  function lookup() {
    if (!id.value || !time.value ) {
      error.innerHTML = "Please enter freelancer ID and date to continue";
-     //not_found.showModal();
-     payroll.showModal();
+     not_found.showModal();
      body.style.overflow = "hidden";
      
    } else {

@@ -451,7 +451,7 @@
     Trip ID: 
     <span> jdkkdkdkekskdjdjdjjejekdjdjjdjdjdkekekdkjdieieiejdjjwijsjdueiiekdjdjejueuejbdudhueuejdhhxuehbehhde
     </span>
-    <img src="copy.png"/>
+    <img data-id="jdkkdkdkekskdjdjdjjejekdjdjjdjdjdkekekdkjdieieiejdjjwijsjdueiiekdjdjejueuejbdudhueuejdhhxuehbehhde" src="copy.png"/>
     <h6 class="copy">coppied</h6>
     </div>
     
@@ -486,7 +486,7 @@
     Trip ID: 
     <span> jdkkdkdkekskdjdjdjjejekdjdjjdjdjdkekekdkjdieieiejdjjwijsjdueiiekdjdjejueuejbdudhueuejdhhxuehbehhde
     </span>
-    <img src="copy.png"/>
+    <img data-id="jdkkdkdkekskdjdjdjjejekdjdjjdjdjdkekekdkjdieieiejdjjwijsjdueiiekdjdjejueuejbdudhueuejdhhxuehbehhde" src="copy.png"/>
     <h6 class="copy">coppied</h6>
     </div>
     
@@ -521,7 +521,7 @@
     Trip ID: 
     <span> jdkkdkdkekskdjdjdjjejekdjdjjdjdjdkekekdkjdieieiejdjjwijsjdueiiekdjdjejueuejbdudhueuejdhhxuehbehhde
     </span>
-    <img src="copy.png"/>
+    <img data-id="jdkkdkdkekskdjdjdjjejekdjdjjdjdjdkekekdkjdieieiejdjjwijsjdueiiekdjdjejueuejbdudhueuejdhhxuehbehhde" src="copy.png"/>
     <h6 class="copy">coppied</h6>
     </div>
     
@@ -542,7 +542,6 @@
 
 const copyButtons = document.querySelectorAll('.para > img');
 const removeButtons = document.querySelectorAll('.remove');
-const copied = document.querySelectorAll('.copy')
 
 
 
@@ -554,21 +553,19 @@ for (let elem of removeButtons) {
    elem.addEventListener('click', remove, {once:true});
  }
  
-for (let elem of copied) {
-   elem.addEventListener('animationend', resetAnime);
- }
+
  
  
 function copy(e) {
    let elem = e.target;
    let parent = elem.parentElement;
    let parentNodes = parent.children;
-   let id = parentNodes[0].innerHTML.trim();
+   let id = elem.dataset.id.trim();
    let copied = parentNodes[2];
-  // console.log(id);
-   
+  
    navigator.clipboard.writeText(id).then(() => {
      copied.style.animationPlayState = "running";
+     copied.addEventListener('animationend', resetAnime, {once: true});
   }, () => {
       return null;
   });
@@ -589,8 +586,7 @@ function copy(e) {
    let elem = e.target;
    let ancestor1 = elem.parentElement.parentElement.parentElement;
    let ancestor2 = ancestor1.parentElement;
-   console.log(ancestor1);
-   console.log(ancestor2);
+   
    ancestor2.style.animationPlayState= "running";
    ancestor1.style.height = "200px";
    ancestor2.addEventListener('animationend', (e) => {
