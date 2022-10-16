@@ -10,7 +10,7 @@ const msg = document.querySelector('#msg');
 const back = document.querySelector('#back');
 const tag = document.querySelector('#tag');
 const header = document.querySelector('#msg > header');
-const main = document.querySelector('#msg > main');
+
 
 
 
@@ -54,7 +54,6 @@ const main = document.querySelector('#msg > main');
    
    msg.addEventListener('animationend', () => {
      body.style.overflow = "hidden";
-     main.style.visibility = "visible";
      header.style.visibility = "visible";
      tag.innerHTML = name;
    }, {once:true});
@@ -62,7 +61,6 @@ const main = document.querySelector('#msg > main');
    back.addEventListener('click', () => {
      child2.style.visibility = "visible";
      body.style.overflow = "auto";
-     main.style.visibility = "hidden";
      header.style.visibility = "hidden";
      resetAnime(child1);
      resetAnime(msg);
