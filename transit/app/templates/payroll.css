@@ -150,6 +150,7 @@ input.visually-hidden:is(:focus, :focus-within) + label {
 dialog {
     position: fixed;
     bottom: 50px;
+    overflow: hidden;
     z-index: 2;
     background-color: #F5F5F5;
     border: 2px solid rgb(2, 39, 53);
@@ -208,6 +209,11 @@ border-radius: 5px;
  padding: 0;
  margin: 0;
  margin-bottom: 10px;
+ overflow-wrap: break-word;
+}
+
+ .payspan {
+  overflow-wrap: break-word;
 }
 
 
@@ -220,6 +226,7 @@ border-radius: 5px;
  text-align: center;
  padding: 0;
  margin-bottom: 30px;
+ overflow-wrap: break-word;
 }
 
 #tripsummary li {

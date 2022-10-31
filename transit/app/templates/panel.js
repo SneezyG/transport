@@ -55,7 +55,7 @@ const header = document.querySelector('#msg > header');
    msg.addEventListener('animationend', () => {
      body.style.overflow = "hidden";
      header.style.visibility = "visible";
-     tag.innerHTML = name;
+     tag.innerHTML = name + "gddhjdiekdjdnndncbcbfnbdjdjdjdjdjjdjdjddj";
    }, {once:true});
    
    back.addEventListener('click', () => {

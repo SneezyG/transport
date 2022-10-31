@@ -127,7 +127,7 @@
       
       summary {
         border-bottom: 1px solid rgb(2, 39, 53);
-        padding: 10px 10px 2px 40px;
+        padding: 5px 10px 2px 40px;
         margin-bottom: 1px;
         overflow: auto;
         cursor: pointer;
@@ -156,7 +156,8 @@
         display: inline-block;
         width: 50%;
         white-space: nowrap;
-        overflow: scroll;
+        overflow: hidden;
+        text-overflow: ellipsis;
         position: relative;
         top: 3px;
       }
@@ -452,17 +453,22 @@
    
    #back {
      font-size: 16px;
+     text-align: right;
      position: relative;
      top: 10px;
-     left: 18%;
+     right: 18%;
+     text-decoration: underline;
    }
    
    #tag {
-     text-align: right;
      margin-top: 0;
+     width: 50%;
      font-size: 14px;
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
      position: relative;
-     right: 18%;
+     left: 18%;
    }
      
      
@@ -516,13 +522,12 @@
   }
 
   #back {
-    left:8%
+    right:8%;
   }
 
   #tag {
-    right: 8%;
+    left: 8%;
   }
-  
 
 
 

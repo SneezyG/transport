@@ -55,8 +55,8 @@ class Transporter(models.Model):
     
   
   sn = models.CharField(max_length=30, unique=True, verbose_name='id')
-  firstName = models.CharField(max_length=30, verbose_name='first name')
-  lastName = models.CharField(max_length=30, verbose_name='last name')
+  firstName = models.CharField(max_length=20, verbose_name='first name')
+  lastName = models.CharField(max_length=20, verbose_name='last name')
   birthday = models.DateField()
   sex = models.CharField(max_length=1, choices=sexType)
   phone = models.CharField(max_length=15, verbose_name="phone number")
