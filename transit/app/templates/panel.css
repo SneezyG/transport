@@ -127,7 +127,7 @@
       
       summary {
         border-bottom: 1px solid rgb(2, 39, 53);
-        padding: 5px 10px 2px 40px;
+        padding: 7px 10px 2px 40px;
         margin-bottom: 1px;
         overflow: auto;
         cursor: pointer;
@@ -460,15 +460,31 @@
      text-decoration: underline;
    }
    
-   #tag {
+   #tagcont {
      margin-top: 0;
+     max-width: 100%;
+     display: flex;
+     padding-left: 12%;
+     padding-bottom: 3px;
+   }
+   
+   #tag {
      width: 50%;
-     font-size: 14px;
+     font-size: 17px;
      white-space: nowrap;
      overflow: hidden;
      text-overflow: ellipsis;
-     position: relative;
-     left: 18%;
+     margin: 0;
+   }
+   
+   #tagcont > span {
+     display: inline-block;
+     width: 7px;
+     height: 7px;
+     padding: 3px;
+     margin-right: 5px;
+     border-radius: 10px;
+     background-color: green;
    }
      
      
@@ -524,9 +540,13 @@
   #back {
     right:8%;
   }
+  
+ #tag {
+   font-size: 15px;
+ }
 
-  #tag {
-    left: 8%;
+  #tagcont {
+    padding-left: 8%;
   }
 
 
