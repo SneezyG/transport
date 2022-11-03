@@ -30,7 +30,7 @@
      to {
        visibility: visible;
        width: 100%;
-       height: 120%;
+       height: 100%;
        top: 0;
        right: 0;
        opacity: 1;
@@ -434,6 +434,8 @@
    #msg {
      position: fixed;
      background-color: rgb(2, 39, 53);
+     padding-bottom: 20%;
+     padding-top: 70px;
      top: 100px;
      right: 0;
      z-index: 2;
@@ -443,13 +445,18 @@
      animation-timing-function: ease-in;
      animation-fill-mode: forwards;
    }
+   
    #msg > header {
      background-color: rgb(2, 39, 53);
+     position: fixed;
+     width: 100%;
+     top: 0;
      color: white;
      margin: 0;
      padding: 0;
      visibility: hidden;
    }
+  
    
    #back {
      font-size: 16px;
@@ -465,7 +472,7 @@
      max-width: 100%;
      display: flex;
      padding-left: 12%;
-     padding-bottom: 3px;
+     padding-bottom: 5px;
    }
    
    #tag {
@@ -475,6 +482,7 @@
      overflow: hidden;
      text-overflow: ellipsis;
      margin: 0;
+     padding: 0;
    }
    
    #tagcont > span {
@@ -486,6 +494,50 @@
      border-radius: 10px;
      background-color: green;
    }
+   
+   #input {
+     position: fixed;
+     bottom: 10px;
+     width: 100%;
+     text-align: center;
+     justify-content: center;
+     visibility: hidden;
+   }
+   
+   #textarea {
+     display: inline-block;
+     width: 70%;
+     text-align: left;
+     font-size: 14px;
+     resize: both;
+     padding: 13px 20px 13px 20px;
+     border-radius: 20px;
+     overflow: auto;
+     outline: none;
+     background-color: white;
+   }
+   
+   #textarea[contenteditable]:empty::before {
+     content: "Message";
+     color: gray;
+    }
+   
+   #send {
+     display: inline-block;
+     background-color: lightblue;
+     border-radius: 50px;
+     margin-left: 5px;
+     padding: 10px 0 10px 4px;
+     position: relative;
+     bottom: 8px;
+   }
+   
+   #send > img {
+     width: 50px;
+     position: relative;
+     top: 2px;
+   }
+
      
      
      

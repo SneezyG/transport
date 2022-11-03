@@ -1,4 +1,6 @@
 
+
+
 const body = document.querySelector('body');
 const summary = document.querySelectorAll('summary');
 const copyButtons = document.querySelectorAll('.para > img');
@@ -7,9 +9,12 @@ const not_found = document.querySelector('#not_found');
 const barcontainer = document.querySelector('#barcode');
 const chat = document.querySelectorAll('#chat');
 const msg = document.querySelector('#msg');
-const back = document.querySelector('#back');
+const back = document.querySelector('#back > span');
 const tag = document.querySelector('#tag');
 const header = document.querySelector('#msg > header');
+const input = document.querySelector('#input');
+const textarea = document.querySelector('#textarea');
+const send = document.querySelector('#send');
 
 
 
@@ -30,14 +35,19 @@ const header = document.querySelector('#msg > header');
  
  for (let elem of chat){
     elem.addEventListener('click', openchat);
- }
+ };
+ 
+ send.addEventListener('click', () => {
+   textarea.focus();
+ })
  
  
+ 
+
  
  function openchat(e) {
    let elem = e.target;
    let name = elem.dataset.name;
-   console.log(name);
    let child1 = elem.children[0];
    let child2 = elem.children[1];
    child1.style.animationPlayState = "running";
@@ -55,6 +65,8 @@ const header = document.querySelector('#msg > header');
    msg.addEventListener('animationend', () => {
      body.style.overflow = "hidden";
      header.style.visibility = "visible";
+     input.style.visibility = "visible";
+     
      tag.innerHTML = name + "gddhjdiekdjdnndncbcbfnbdjdjdjdjdjjdjdjddj";
    }, {once:true});
    
@@ -62,6 +74,7 @@ const header = document.querySelector('#msg > header');
      child2.style.visibility = "visible";
      body.style.overflow = "auto";
      header.style.visibility = "hidden";
+     input.style.visibility = "hidden";
      resetAnime(child1);
      resetAnime(msg);
    }, {once: true});
