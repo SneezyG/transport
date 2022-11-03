@@ -37,8 +37,23 @@ const send = document.querySelector('#send');
     elem.addEventListener('click', openchat);
  };
  
+ 
+ textarea.addEventListener('input', () => {
+   let charCount = textarea.innerHTML.length;
+   if (charCount > 0) {
+     send.style.opacity = 1;
+     send.style.pointerEvents = "auto";
+   }else {
+     send.style.opacity = 0.6;
+     send.style.pointerEvents = "none";
+   }
+ });
+ 
+ const inScreen = window.innerHeight;
  send.addEventListener('click', () => {
-   textarea.focus();
+   if (inScreen != window.innerHeight) {
+     textarea.focus();
+   }
  })
  
  
