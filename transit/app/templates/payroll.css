@@ -51,6 +51,7 @@ body {
     position: relative;
     bottom: 10px;
     left: 20px;
+    transform: scale(4);
   }
   
   #nav {

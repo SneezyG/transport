@@ -95,6 +95,7 @@
         position: relative;
         bottom: 10px;
         left: 20px;
+        transform: scale(4);
       }
       
       header > h3 {
@@ -435,7 +436,7 @@
      position: fixed;
      background-color: rgb(2, 39, 53);
      padding-bottom: 20%;
-     padding-top: 70px;
+     padding-top: 90px;
      top: 100px;
      right: 0;
      z-index: 2;
@@ -514,7 +515,9 @@
      border-radius: 20px;
      overflow: auto;
      outline: none;
-     background-color: white;
+     background-color: rgb(2, 39, 53);
+     color: white;
+     border: 1.5px solid #D3D3D3;
    }
    
    #textarea[contenteditable]:empty::before {
@@ -539,6 +542,66 @@
      position: relative;
      top: 2px;
    }
+   
+    #me, #you {
+     margin-bottom: 20px;
+    }
+   
+   
+   .text {
+     padding: 5px;
+     display: inline-block;
+     max-width: 70%;
+     overflow-wrap: break-word;
+     margin: 0;
+     padding: 10px 0 10px 20px;
+   }
+   
+   .text > span {
+     width: 75%;
+     display: inline-block;
+   }
+   
+   .text sub {
+     position: relative;
+     top: 5px;
+     left: 5px;
+   }
+   
+   .text img {
+     width: 20px;
+   }
+   
+   
+   #me > span{
+     background-color: rgb(2, 39, 53);
+     position: relative;
+     left: 21%;
+     border-radius: 20px 20px 0 20px;
+     color: white;
+     border: 1.5px solid #D3D3D3;
+   }
+   
+   #you > span{
+     background-color: #D3D3D3;
+     margin-left: 4%;
+     border-radius: 0 20px 20px 20px;
+   }
+   
+   #msgDate {
+     text-align: center;
+     margin: 0 0 15px 0;
+   }
+   
+   #msgDate > span {
+     background-color: #D3D3D3;
+     padding: 5px;
+     border-radius: 5px;
+     font-size: 10px;
+   }
+   
+  
+ 
 
      
      
