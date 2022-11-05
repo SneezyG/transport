@@ -435,17 +435,32 @@
    #msg {
      position: fixed;
      background-color: rgb(2, 39, 53);
-     padding-bottom: 20%;
-     padding-top: 90px;
-     top: 100px;
-     right: 0;
+     padding-top: 56px;
      z-index: 2;
      animation: msgAnime;
      animation-play-state: paused;
      animation-duration: 0.3s;
      animation-timing-function: ease-in;
      animation-fill-mode: forwards;
+     overflow: hidden;
    }
+   
+   #msg::-webkit-scrollbar {
+        display: none;
+      }
+   
+   #msg > section {
+     width: 90%;
+     margin: auto;
+     overflow-y: scroll;
+     display: flex;
+     flex-direction: column-reverse;
+     visibility: hidden;
+   }
+   
+   #msg > section::-webkit-scrollbar {
+        display: none;
+      }
    
    #msg > header {
      background-color: rgb(2, 39, 53);
@@ -458,27 +473,23 @@
      visibility: hidden;
    }
   
-   
-   #back {
+ 
+   #close {
      font-size: 16px;
-     text-align: right;
-     position: relative;
-     top: 10px;
-     right: 18%;
      text-decoration: underline;
+     position: absolute;
+     right: 20px;
    }
    
    #tagcont {
-     margin-top: 0;
-     max-width: 100%;
      display: flex;
-     padding-left: 12%;
-     padding-bottom: 5px;
+     padding-left: 18%;
+     margin: 15px 0 15px 0;
    }
    
    #tag {
      width: 50%;
-     font-size: 17px;
+     font-size: 16px;
      white-space: nowrap;
      overflow: hidden;
      text-overflow: ellipsis;
@@ -486,7 +497,7 @@
      padding: 0;
    }
    
-   #tagcont > span {
+   #online {
      display: inline-block;
      width: 7px;
      height: 7px;
@@ -498,10 +509,13 @@
    
    #input {
      position: fixed;
-     bottom: 10px;
+     z-index: 1;
+     bottom: 0;
+     padding-top: 10px;
      width: 100%;
      text-align: center;
      justify-content: center;
+     background-color: rgb(2, 39, 53);
      visibility: hidden;
    }
    
@@ -551,8 +565,9 @@
    .text {
      padding: 5px;
      display: inline-block;
-     max-width: 70%;
+     width: 70%;
      overflow-wrap: break-word;
+     font-size: 14px;
      margin: 0;
      padding: 10px 0 10px 20px;
    }
@@ -576,7 +591,7 @@
    #me > span{
      background-color: rgb(2, 39, 53);
      position: relative;
-     left: 21%;
+     left: 24%;
      border-radius: 20px 20px 0 20px;
      color: white;
      border: 1.5px solid #D3D3D3;
@@ -584,7 +599,6 @@
    
    #you > span{
      background-color: #D3D3D3;
-     margin-left: 4%;
      border-radius: 0 20px 20px 20px;
    }
    
@@ -653,18 +667,15 @@
   dialog button {
    cursor: default;
   }
-
-  #back {
-    right:8%;
-  }
   
  #tag {
-   font-size: 15px;
+   font-size: 14px;
+ }
+ 
+ #tagcont {
+   padding-left: 8%;
  }
 
-  #tagcont {
-    padding-left: 8%;
-  }
 
 
 

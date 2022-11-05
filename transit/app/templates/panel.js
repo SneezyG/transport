@@ -1,6 +1,5 @@
 
 
-
 const body = document.querySelector('body');
 const summary = document.querySelectorAll('summary');
 const copyButtons = document.querySelectorAll('.para > img');
@@ -9,12 +8,13 @@ const not_found = document.querySelector('#not_found');
 const barcontainer = document.querySelector('#barcode');
 const chat = document.querySelectorAll('#chat');
 const msg = document.querySelector('#msg');
-const back = document.querySelector('#back > span');
+const back = document.querySelector('#close');
 const tag = document.querySelector('#tag');
 const header = document.querySelector('#msg > header');
 const input = document.querySelector('#input');
 const textarea = document.querySelector('#textarea');
 const send = document.querySelector('#send');
+const section = document.querySelector('#msg > section');
 
 
 
@@ -49,6 +49,9 @@ const send = document.querySelector('#send');
    }
  });
  
+ 
+ 
+ 
  const inScreen = window.innerHeight;
  send.addEventListener('click', () => {
    if (inScreen != window.innerHeight) {
@@ -58,7 +61,6 @@ const send = document.querySelector('#send');
  
  
  
-
  
  function openchat(e) {
    let elem = e.target;
@@ -81,6 +83,10 @@ const send = document.querySelector('#send');
      body.style.overflow = "hidden";
      header.style.visibility = "visible";
      input.style.visibility = "visible";
+     section.style.visibility = "visible";
+     
+     window.addEventListener('resize', reset);
+     reset();
      
      tag.innerHTML = name + "gddhjdiekdjdnndncbcbfnbdjdjdjdjdjjdjdjddj";
    }, {once:true});
@@ -90,8 +96,11 @@ const send = document.querySelector('#send');
      body.style.overflow = "auto";
      header.style.visibility = "hidden";
      input.style.visibility = "hidden";
+     section.style.visibility = "hidden";
      resetAnime(child1);
      resetAnime(msg);
+     window.removeEventListener('resize', reset, {once:true});
+     
    }, {once: true});
    
    }, {once:true});
@@ -110,6 +119,19 @@ const send = document.querySelector('#send');
    child.addEventListener('click', () => {
      body.style.overflow = "auto";
    }, {once:true});
+ }
+ 
+ 
+ function reset() {
+   let windowHeight= window.innerHeight;
+   let inputHeight = input.offsetHeight;
+   let headerHeight = header.offsetHeight;
+   let availHeight = windowHeight - inputHeight - headerHeight;
+   section.style.height = availHeight + 'px';
+     /*
+     let sectionHeight = section.style.height;
+     console.log(msgHeight, inputHeight, headerHeight, availHeight, sectionHeight);
+     */
  }
  
  
