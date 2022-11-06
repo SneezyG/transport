@@ -565,22 +565,21 @@
    .text {
      padding: 5px;
      display: inline-block;
-     width: 70%;
+     position: relative;
      overflow-wrap: break-word;
      font-size: 14px;
      margin: 0;
-     padding: 10px 0 10px 20px;
+     padding: 10px 10px 10px 20px;
    }
    
    .text > span {
-     width: 75%;
      display: inline-block;
    }
    
    .text sub {
      position: relative;
-     top: 5px;
-     left: 5px;
+     top: 3px;
+     margin-left: 5px;
    }
    
    .text img {
@@ -591,7 +590,6 @@
    #me > span{
      background-color: rgb(2, 39, 53);
      position: relative;
-     left: 24%;
      border-radius: 20px 20px 0 20px;
      color: white;
      border: 1.5px solid #D3D3D3;
