@@ -130,14 +130,14 @@ const section = document.querySelector('#msg > section');
    let inputHeight = input.offsetHeight;
    let headerHeight = header.offsetHeight;
    let availHeight = windowHeight - inputHeight - headerHeight;
-   let sectionHeight = section.offsetHeight;
    
+   section.style.height = "none";
+   section.offsetWidth;
+   section.style.height = null;
+   
+   let sectionHeight = section.offsetHeight;
    if (sectionHeight >= availHeight) {
      section.style.height = availHeight + 'px';
-   }else {
-     section.style.height = "none";
-     section.offsetWidth;
-     section.style.height = null;
    }
    
    let newWidth = section.offsetWidth;
@@ -145,10 +145,7 @@ const section = document.querySelector('#msg > section');
      displace(newWidth);
      sectionWidth = newWidth;
    }
-     /*
-     let sectionHeight = section.style.height;
-     console.log(msgHeight, inputHeight, headerHeight, availHeight, sectionHeight);
-     */
+
  }
  
  
@@ -249,9 +246,14 @@ const section = document.querySelector('#msg > section');
    let spans = document.querySelectorAll(".text > span");
    let maxWidth = width * 0.6;
    for (let elem of spans) {
+     elem.style.width = "none";
+     elem.offsetWidth;
+     elem.style.width = null;
+     
      if (elem.offsetWidth > maxWidth) {
        elem.style.width = maxWidth + "px";
      }
+     
      let parent = elem.parentElement;
      let ancestor = parent.parentElement;
      if (ancestor.id == "me") {
