@@ -57,7 +57,12 @@ const section = document.querySelector('#msg > section');
    if (inScreen != window.innerHeight) {
      textarea.focus();
    }
- })
+ });
+ 
+ 
+const resizeObserver = new ResizeObserver(() => {
+    reset();
+});
  
  
  
@@ -86,6 +91,7 @@ const section = document.querySelector('#msg > section');
      section.style.visibility = "visible";
      sectionWidth = section.offsetWidth;
      window.addEventListener('resize', reset);
+     resizeObserver.observe(textarea);
      
      render();
      displace(sectionWidth);
@@ -103,6 +109,7 @@ const section = document.querySelector('#msg > section');
      resetAnime(child1);
      resetAnime(msg);
      window.removeEventListener('resize', reset, {once:true});
+     resizeObserver.unobserve(textarea);
      
    }, {once: true});
    
@@ -252,13 +259,6 @@ const section = document.querySelector('#msg > section');
      
      if (elem.offsetWidth > maxWidth) {
        elem.style.width = maxWidth + "px";
-     }
-     
-     let parent = elem.parentElement;
-     let ancestor = parent.parentElement;
-     if (ancestor.id == "me") {
-        let displace = (width - parent.offsetWidth) - 1;
-        parent.style.left = displace + "px";
      }
    }
  }

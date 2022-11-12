@@ -524,10 +524,11 @@
      width: 70%;
      text-align: left;
      font-size: 14px;
+     max-height: 120px;
      resize: both;
      padding: 13px 20px 13px 20px;
      border-radius: 20px;
-     overflow: auto;
+     overflow: scroll;
      outline: none;
      background-color: rgb(2, 39, 53);
      color: white;
@@ -560,6 +561,11 @@
     #me, #you {
      margin-bottom: 20px;
     }
+    
+    #me {
+      display: flex;
+      flex-direction: row-reverse;
+    }
    
    
    .text {
@@ -583,7 +589,7 @@
    }
    
    .text img {
-     width: 20px;
+     width: 15px;
    }
    
    
