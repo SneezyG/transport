@@ -9,6 +9,8 @@
  const id = document.querySelector('#id');
  const time = document.querySelector('#time');
  const payroll = document.querySelector('#payroll');
+ const search = document.querySelector('#search');
+ const mark = document.querySelector('#mark');
  
  
  let freelancer = 'Driver';
@@ -24,6 +26,14 @@
  }
  
  query.addEventListener('click', lookup);
+ 
+ const resizeObserver = new ResizeObserver((e) => {
+    let rect = search.getBoundingClientRect();
+    mark.style.paddingLeft = rect.left + "px";
+    console.log(rect.left);
+    console.log(mark.style.paddingLeft);
+});
+ resizeObserver.observe(search);
  
  
  
