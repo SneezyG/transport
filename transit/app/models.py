@@ -68,6 +68,7 @@ class Transporter(models.Model):
   state = models.CharField(max_length=30,)
   nationality = models.CharField(max_length=30)
   zipcode = models.IntegerField()
+  pay_day = models.DateField(auto_now=True, verbose_name="last pay-day")
   date = models.DateTimeField(auto_now_add=True)
   
   class Meta:
