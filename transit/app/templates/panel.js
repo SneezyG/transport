@@ -1,5 +1,6 @@
 
 
+// get the dom element this script depend on.
 const body = document.querySelector('body');
 const summary = document.querySelectorAll('summary');
 const copyButtons = document.querySelectorAll('.para > img');
@@ -36,6 +37,8 @@ const contactList  = document.querySelectorAll(".no > span");
  }
  
  
+ 
+ // copy contact within a particular trip box.
  function copyContact(e) {
    let elem = e.target
    let copy = e.target.parentElement.lastElementChild;
@@ -52,6 +55,7 @@ const contactList  = document.querySelectorAll(".no > span");
 
  
  
+ // generate a barcode for a trip id.
  function lookup() {
    //let model = barcontainer;
    let model = not_found;
@@ -66,7 +70,7 @@ const contactList  = document.querySelectorAll(".no > span");
  
  
  
- 
+ // hide some trip info on trip box open.
  function open(e) {
     let elem = e.target;
     for (let child of elem.children) {
@@ -79,7 +83,7 @@ const contactList  = document.querySelectorAll(".no > span");
  }
  
  
- 
+ // show some trip info on trip box close.
  function close(e) {
     let elem = e.target;
     for (let child of elem.children) {
@@ -88,7 +92,7 @@ const contactList  = document.querySelectorAll(".no > span");
  }
  
  
- 
+ // copy trip id within a particular trip box.
  function copy(e) {
    let elem = e.target;
    let parent = elem.parentElement;
@@ -106,7 +110,7 @@ const contactList  = document.querySelectorAll(".no > span");
  }
 
 
-
+// reset style animation of element.
  function resetAnime(e) {
      let elem = e.target ?? e;
      elem.style.animation = "none";
@@ -116,6 +120,7 @@ const contactList  = document.querySelectorAll(".no > span");
  
  
  
+ // show the contact tab within a trip box.
  function resetPhone(e) {
     let elem = e.target;
     let parent = elem.parentElement;

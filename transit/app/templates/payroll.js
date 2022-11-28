@@ -1,5 +1,5 @@
 
-
+// get dom element that this script depend on.
  const body = document.querySelector('body');
  const cancel = document.querySelectorAll('.button');
  const query = document.querySelector('#search > button');
@@ -12,7 +12,7 @@
  const search = document.querySelector('#search');
  const mark = document.querySelector('#mark');
  
- 
+ // set default freelancer.
  let freelancer = 'Driver';
  
  
@@ -30,14 +30,12 @@
  const resizeObserver = new ResizeObserver((e) => {
     let rect = search.getBoundingClientRect();
     mark.style.paddingLeft = rect.left + "px";
-    console.log(rect.left);
-    console.log(mark.style.paddingLeft);
 });
  resizeObserver.observe(search);
  
  
  
- 
+ // look up a freelancer trip/wage summary.
  function lookup() {
    if (!id.value || !time.value ) {
      error.innerHTML = "Please enter freelancer ID and date to continue";
@@ -55,15 +53,14 @@
    }
  }
  
- 
+ // update the value of freelancer global variable.
  function setfreelancer(e) {
-  // console.log(freelancer);
    elem = e.target;
    freelancer = elem.value;
-  // console.log(freelancer);
  }
  
  
+ // reset style overflow attr of body elements.
  function bodyreset() {
    body.style.overflow = "auto";
  }

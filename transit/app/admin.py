@@ -1,7 +1,7 @@
 
 from django.contrib import admin
 from django.contrib.admin.models import LogEntry
-from .models import Driver, Mechanic, Loader, Trip, Report, Message, Booking, Payroll
+from .models import Driver, Mechanic, Loader, Trip, Report, Booking, Payroll
 
 # Register your models here.
 
@@ -212,36 +212,4 @@ class ReportAdmin(admin.ModelAdmin):
         return request.user.is_superuser
   
 
-  
-
-
-@admin.register(Message)
-class MessageAdmin(admin.ModelAdmin):
-  
-  """
-    Register the Message model into the admin.
-    Add some customization and also define user access permission.
-  """ 
-  
-  date_hierarchy = 'date'
-
-  list_display = ('trip', 'message', 'label', 'status', 'date')
-
-  list_filter = ('label', 'status', 'date',)
-  
-  preserve_filters = False
-
-  search_fields = ('trip__sn',)
-  
-  
-  def has_add_permission(self, request):
-        return False
-
-  def has_change_permission(self, request, obj=None):
-        return False
-
-  def has_delete_permission(self, request, obj=None):
-        return False
-
-  def has_view_permission(self, request, obj=None):
-        return request.user.is_superuser
+ 

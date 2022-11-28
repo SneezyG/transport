@@ -266,33 +266,3 @@ class Report(models.Model):
     return text.title()
   
  
- 
-class Message(models.Model):
-  
-  """
-  store a single message data.
-  
-  A message is related to the trip table through a foreign key relationship.
-  """
-  
-  labelType = (
-    ('D', 'Driver'), 
-    ('M', 'Management')
-  )
- 
-  statusType = (
-    ('S', 'send'),
-    ('D', 'delivered'),
-    ('R', 'read')
-  )
- 
-  message = models.TextField()
-  trip = models.ForeignKey(Trip, on_delete=models.CASCADE, related_name='messages')
-  label = models.CharField(max_length=2, choices=labelType)
-  status = models.CharField(max_length=2, choices=statusType)
-  date = models.DateTimeField(auto_now_add=True)
-  
-  def __str__(self):
-    text = '%s...(%s)' % (self.message[:10], self.get_status_display())
-    return text.title()
-    

@@ -2,7 +2,8 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-   
+    <title>Transit Monitor Screen</title>
+     
    <style>
       @keyframes copyAnime {
     0%   {opacity: 0;}
@@ -544,6 +545,8 @@
 
 <script> 
 
+
+// get dom element this script depend on.
 const copyButtons = document.querySelectorAll('.para > img');
 const removeButtons = document.querySelectorAll('.remove');
 
@@ -553,6 +556,7 @@ for (let elem of copyButtons) {
     elem.addEventListener('click', copy);
  }
  
+
 for (let elem of removeButtons) {
    elem.addEventListener('click', remove, {once:true});
  }
@@ -560,6 +564,7 @@ for (let elem of removeButtons) {
 
  
  
+// copy a particular trip id within a trip box.
 function copy(e) {
    let elem = e.target;
    let parent = elem.parentElement;
@@ -577,7 +582,7 @@ function copy(e) {
  }
 
 
-
+// reset style animation for passed in element.
  function resetAnime(e) {
      let elem = e.target;
      elem.style.animation = "none";
@@ -586,6 +591,8 @@ function copy(e) {
  }
  
  
+ 
+ // remove a trip box with a simple animation.
  function remove(e) {
    let elem = e.target;
    let ancestor1 = elem.parentElement.parentElement.parentElement;

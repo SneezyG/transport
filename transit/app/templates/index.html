@@ -2,7 +2,8 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+    <title>Transit</title>
+    
 <style>
 
   @keyframes rotate {
@@ -58,6 +59,7 @@
 
 <script>
 
+ // set the src attr of an image if there exist a logo context.
  {% if logo %}
  let img = document.getElementById('img');
  img.src = "/media/" + "{{ logo }}";
