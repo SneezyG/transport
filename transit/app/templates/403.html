@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<html>
+<head>
+    <title>403 forbidden</title>
+<style>
+html,body{
+    margin: 0;
+    background-color: #D3D3D3;
+}
+
+body > img {
+  width: 50px;
+  display: block;
+  border-radius: 7px;
+  margin: 100px auto 0 auto;
+  transform: scale(4);
+}
+
+.flex-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  margin-top: 120px;
+}
+.container h1{
+    font-size: 80px;
+    color: rgb(36, 35, 35);
+    margin: 0;
+}
+.container p{
+    font-size: 15px;
+    color: #3a3b3d;
+    margin: 10px;
+
+}
+
+
+#msg {
+  width: 90%;
+  margin: auto;
+  padding-top: 20px;
+  letter-spacing: 0.8px;
+  word-spacing: 3px;
+}
+
+@media screen and (max-width:600px) {
+  .flex-container > div {
+      max-width: 80%;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+.container p{
+    font-size: 15px;
+}
+}
+</style>
+</head>
+<body>
+<div class="flex-container">
+  <div class="container">
+    <h1>403</h1>
+    <p style="font-size: 30px;color:rgb(53, 51, 51);">Permission Denied</h2> 
+    <p id="msg">You don't have the permission to view the page you are looking for.<br><br><a href="#" onclick="Back()">Go back</a> to choose a new direction.</p> 
+  </div>
+</div>
+
+<img src="logo.png" alt="logo" />
+
+<script>
+
+function Back() {
+    window.history.back();
+}
+</script>
+
+</body>
+</html>
+
+
