@@ -123,9 +123,10 @@
     
     <div class="para"> 
     Trip ID: 
-    <span> jdkkdkdkekskdjdjdjjejekdjdjjdjdjdkekekdkjdieieiejdjjwijsjdueiiekdjdjejueuejbdudhueuejdhhxuehbehhde
+    <span> 
+    cea088de-498a-4511-93d4-3bb0b23cd845
     </span>
-    <img data-id="jdkkdkdkekskdjdjdjjejekdjdjjdjdjdkekekdkjdieieiejdjjwijsjdueiiekdjdjejueuejbdudhueuejdhhxuehbehhde" src="copy.png"/>
+    <img data-id="cea088de-498a-4511-93d4-3bb0b23cd845" src="copy.png"/>
     <h6 class="copy">coppied</h6>
     </div>
     
@@ -252,9 +253,9 @@
     <div class="para"> 
     Trip ID: 
     <span>
-      jdkkdkdkekskdjdjdjjejekdjdjjdjdjdkekekdkjdieieiejdjjwijsjdueiiekdjdjejueuejbdudhueuejdhhxuehbehhde
+      525e56d6-a4fc-45e5-844a-7636df7ebcd5
     </span>
-    <img data-id="jdkkdkdkekskdjdjdjjejekdjdjjdjdjdkekekdkjdieieiejdjjwijsjdueiiekdjdjejueuejbdudhueuejdhhxuehbehhde" src="copy.png"/>
+    <img data-id="525e56d6-a4fc-45e5-844a-7636df7ebcd5" src="copy.png"/>
     <h6 class="copy">coppied</h6>
     </div>
     
@@ -381,9 +382,9 @@
     <div class="para">
       Trip ID: 
     <span>
-     jdkkdkdkekskdjdjdjjejekdjdjjdjdjdkekekdkjdieieiejdjjwijsjdueiiekdjdjejueuejbdudhueuejdhhxuehbehhde
+     1edb3c02-e640-4116-829d-36f09c21de65
     </span>
-    <img data-id="jdkkdkdkekskdjdjdjjejekdjdjjdjdjdkekekdkjdieieiejdjjwijsjdueiiekdjdjejueuejbdudhueuejdhhxuehbehhde" src="copy.png"/>
+    <img data-id="1edb3c02-e640-4116-829d-36f09c21de65" src="copy.png"/>
     <h6 class="copy">coppied</h6>
     </div>
     
@@ -444,29 +445,20 @@
   </details>
   </main>
   
-  
-  <!-- construct the dialog that displays error during barcode generation-->
-  <dialog id="not_found">
-  <p> Error, please try again</p>
-  <form method="dialog">
-  <p> <button value="cancel">cancel</button> </p>
-  </form>
-  </dialog>
-  
-  
+ 
   
   <!-- construct the dialog that displays barcode generated from trip id-->
   <dialog id="barcode">
-  <div>
-    <img id="code" src="logo.jpeg"/>
-  </div>
+  <h3>Scan QRCode to sync this Trip</h3>
+  <div id="qrCode"></div>
   <form method="dialog">
-  <p><button value="cancel">close</button> </p>
+  <button id="close" value="cancel">close</button>
   </form>
   </dialog>
   
     
  <script src="panel.js"></script>
+ <script type="text/javascript" src="qrcode.min.js"></script>
 
 </body>
 </html>

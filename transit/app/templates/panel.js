@@ -5,10 +5,11 @@ const body = document.querySelector('body');
 const summary = document.querySelectorAll('summary');
 const copyButtons = document.querySelectorAll('.para > img');
 const scan = document.querySelectorAll('.para > span');
-const not_found = document.querySelector('#not_found');
 const barcontainer = document.querySelector('#barcode');
 const phone = document.querySelectorAll(".phone");
 const contactList  = document.querySelectorAll(".no > span");
+const codeCont = document.querySelector("#qrCode");
+const closeQr = document.querySelector("#close");
 
 
 
@@ -56,13 +57,19 @@ const contactList  = document.querySelectorAll(".no > span");
  
  
  // generate a barcode for a trip id.
- function lookup() {
-   //let model = barcontainer;
-   let model = not_found;
-   model.showModal();
-   let child = model.children[1].children[0].children[0];
+ function lookup(e) {
+   // remove previous barcode
+   codeCont.replaceChildren();
+   let data = e.target.innerHTML.trim()
+   var qrcode = new QRCode(codeCont, {
+        text: data,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+    });
+   barcontainer.showModal();
    body.style.overflow = "hidden";
-   child.addEventListener('click', () => {
+   closeQr.addEventListener('click', () => {
      body.style.overflow = "auto";
    }, {once:true});
  }

@@ -9,8 +9,14 @@
    
    
    @keyframes phoneAnime {
-     from { width: 30px; }
-     to { width: 40px; }
+     from { 
+       width: 30px; 
+       visibility: visible;
+     }
+     to { 
+       width: 40px; 
+       visibility: hidden;
+     }
    }
   
   
@@ -131,12 +137,14 @@
       summary span {
         pointer-events: none;
         display: inline-block;
+        font-weight: 600;
         width: 50%;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         position: relative;
         top: 3px;
+        text-transform: uppercase;
       }
       
       summary > p {
@@ -210,7 +218,7 @@
      }
      
      #origin span {
-       font-size: 14px;
+       font-size: 15px;
        color: rgb(2, 39, 53);
        font-weight: 600;
        opacity: 0.7;
@@ -348,10 +356,7 @@
        font-size: 15px;
      }
      
-     dialog {
-        position: fixed;
-        bottom: 50px;
-        z-index: 3;
+   dialog {
         background-color: #F5F5F5;
         border: 2px solid rgb(2, 39, 53);
       }
@@ -361,15 +366,7 @@
         opacity: 0.7;
       }
    
-   dialog  p {
-     text-align: center;
-     margin: 0;
-   }
-   
-   dialog > form {
-     margin-top: 50px;
-   }
-   
+
    dialog button {
      font-size: 15px;
      padding: 5px;
@@ -378,28 +375,25 @@
      cursor: pointer;
    }
    
-  #not_found {
-     width: 400px;
-     padding-top: 50px;
-     padding-bottom: 50px;
+   #barcode {
+     width: 40%
    }
    
-   #barcode {
-     width: 50%
+   #barcode > h3 {
+     text-align: center;
+     margin: 0;
    }
    
    #barcode > form {
-     margin-top: 20px;
-   }
-   
-   #barcode > div {
+     margin-top: 40px;
      text-align: center;
-     margin-top: 10px;
    }
    
-   #code {
+   #qrCode {
+     display: flex;
+     margin-top: 30px;
+     justify-content: center;
      height: 270px;
-     width: 350px;
    }
    
    .contact {
@@ -471,14 +465,9 @@
   details {
     width: 70%;
   }
- 
-  #barcode {
-     width: 60%
-   }
   
-  #code {
-    height: 250px;
-    width: 320px;
+  #barcode {
+    width: 50%
   }
 
   .first {
@@ -505,8 +494,6 @@
    cursor: default;
   }
  
-
-
 
 }
 
@@ -560,11 +547,6 @@
     width: 250px;
   }
   
-  #not_found {
-    width: 270px;
-  } 
-
-
   #barcode {
     width: 70%
   }
