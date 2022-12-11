@@ -22,7 +22,7 @@ def index(request):
    except:
       path = 0
   
-   return render(request, 'index.html', {"logo": path})
+   return render(request, 'app/index.html', {"logo": path})
 
 
 
@@ -33,5 +33,5 @@ def panel(request):
   Check if user is logged in, then check the user permissions and return a panel page build according to the amount of authority the user have.
   """
   
-  return render(request, 'panel.html')
+  return render(request, 'app/panel.html')
 

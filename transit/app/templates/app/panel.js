@@ -10,6 +10,10 @@ const phone = document.querySelectorAll(".phone");
 const contactList  = document.querySelectorAll(".no > span");
 const codeCont = document.querySelector("#qrCode");
 const closeQr = document.querySelector("#close");
+const map = document.querySelector("#map");
+const mapCont = document.querySelector("#map > div");
+const locationBtn = document.querySelectorAll("article button");
+const backdrop = document.querySelector("#backdrop");
 
 
 
@@ -36,6 +40,29 @@ const closeQr = document.querySelector("#close");
  for (let elem of contactList) {
    elem.addEventListener("click", copyContact);
  }
+ 
+ for (let button of locationBtn) {
+   button.addEventListener("click", () => {
+        map.open = true;
+        backdrop.style.visibility = 'visible';
+        body.style.overflow = 'hidden';
+        map.style.animationPlayState = "running";
+        map.addEventListener("animationend", () => {
+          mapCont.style.visibility = "visible";
+        });
+    });
+ }
+  
+  backdrop.addEventListener('click', () => {
+      map.open = false;
+      backdrop.style.visibility = 'hidden';
+      mapCont.style.visibility = "hidden";
+      body.style.overflow = 'visible';
+      // reset dialog animation.
+      map.style.animation = "none";
+      map.offsetWidth;
+      map.style.animation = null;
+  });
  
  
  

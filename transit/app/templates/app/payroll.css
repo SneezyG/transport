@@ -66,17 +66,12 @@ body {
   #nav > span {
     display: inline-block;
     width: 40%;
-    padding: 7px;
+    padding: 8px;
     border: 1px solid rgb(2, 39, 53);
     text-align: center;
   }
   
-  #pay {
-    color: rgb(2, 39, 53);
-    background-color: #D3D3D3;
-  }
-  
-  #trip {
+  .active {
     color: white;
     background-color: rgb(2, 39, 53);
   }
@@ -279,12 +274,13 @@ details {
  }
   
   details li {
-    font-size: 15px;
+    font-size: 14px;
     margin: 10px;
     list-style: square;
   }
   
  details > p {
+    font-size: 14px;
     padding: 10px;
     margin: 10px 0 0 5px;
   }

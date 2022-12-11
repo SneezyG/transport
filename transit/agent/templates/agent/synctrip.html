@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Agent Index Page</title>
+    
+  <style>
+  
+  @keyframes modalAnime {
+      0% {
+        opacity: 0.2;
+        height: 0;
+      }
+      100% {
+        opacity: 1;
+        height: 700px;
+      }
+   }
+   
+  
+  body {
+    margin: 0;
+    background-color: #D3D3D3;
+    user-select: none;
+  }
+  
+  body > img {
+    width: 50px;
+    transform: scale(2);
+    position: absolute;
+    top: 20px;
+    left: 20px;
+  }
+  
+  #draw {
+    margin-top: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #draw > button {
+    padding: 12px 40px 12px 40px;
+    color: white;
+    background-color: rgb(2, 39, 53);
+    margin-top: 30px;
+    font-size: 15px;
+  }
+  
+  dialog {
+    width: 99.8%;
+    height: 720px;
+    padding: 0;
+    position: fixed;
+    bottom: 0;
+    border: none;
+    border-radius: 20px 20px 0 0;
+    background-color: rgb(2, 39, 53);
+    animation: modalAnime;
+    animation-play-state: paused;
+    animation-duration: 0.4s;
+    animation-fill-mode: forwards;
+  }
+  
+  #backdrop {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background-color: lightblue;
+    opacity: 0.6;
+    visibility: hidden;
+  }
+  
+  dialog > div {
+    margin: auto;
+    width: 65%;
+    height: 250px;
+    border: 2px solid white;
+    margin-top: 150px;
+    visibility: hidden;
+  }
+    
+  
+  
+</style>
+</head>
+ 
+<body>
+   <img src="logo.png" alt="logo" />
+   
+   <div id="draw">
+     <p>scan QRcode to sync trip </p>
+     <button>Scanner</button>
+   </div>
+   
+   <div id="backdrop"> 
+   </div>
+   
+   <dialog>
+     <div>
+     </div>
+   </dialog>
+
+
+<script>
+  
+  const body = document.querySelector("body");
+  const dialog = document.querySelector("dialog");
+  const content = document.querySelector("dialog > div");
+  const button = document.querySelector("#draw > button");
+  const backdrop = document.querySelector("#backdrop");
+  
+  button.addEventListener("click", () => {
+      dialog.open = true;
+      backdrop.style.visibility = 'visible';
+      body.style.overflow = 'hidden';
+      dialog.style.animationPlayState = "running";
+      dialog.addEventListener("animationend", () => {
+         content.style.visibility = "visible";
+      });
+  });
+  
+  backdrop.addEventListener('click', () => {
+      dialog.open = false;
+      backdrop.style.visibility = 'hidden';
+      content.style.visibility = "hidden";
+      body.style.overflow = 'visible';
+      // reset dialog animation.
+      dialog.style.animation = "none";
+      dialog.offsetWidth;
+      dialog.style.animation = null;
+  });
+
+  
+</script>
+</body>
+</html>

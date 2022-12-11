@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent Index Page</title>
+
+<style> 
+
+  html,body{
+    margin: 0;
+    background-color: #D3D3D3;
+    user-select: none;
+  }
+  
+  body > img {
+    width: 50px;
+    transform: scale(2);
+    position: absolute;
+    top: 20px;
+    left: 20px;
+  }
+  
+  details {
+    margin: auto;
+    margin-top: 80px;
+    border: 1px solid rgb(2, 39, 53);
+    width: 50%;
+    border-radius: 10px;
+  }
+  
+  details > ul {
+    margin: auto;
+    padding: 0;
+    width: 90%;
+    margin-bottom: 20px;
+ }
+  
+  details li {
+    font-size: 13px;
+    margin: 10px;
+    list-style: square;
+  }
+ 
+  summary {
+    padding: 5px;
+    border-bottom: 1px solid rgb(2, 39, 53);
+    border-radius: 10px;
+    padding-left: 30px;
+    margin-bottom: 1px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+
+  #agent {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px;
+  }
+  
+  #agent > img {
+    width: 70px;
+    transform: scale(2);
+  }
+  
+  #agent > p {
+    margin: 0;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    margin-top: 40px;
+    padding: 20px 0 20px 0;
+  }
+  
+  input {
+    width: 70%;
+    padding: 13px 10px 13px 30px;
+    font-size: 15px;
+    background-color: #D3D3D3;
+    outline: none;
+    border: 1.5px solid rgb(2, 39, 53);
+    border-radius: 10px;
+  }
+  
+  form > button {
+    padding: 10px 30px 10px 30px;
+    color: white;
+    background-color: rgb(2, 39, 53);
+    margin-top: 30px;
+  }
+
+
+
+@media only screen and (max-width: 1000px) { 
+  details {
+    width: 70%;
+  }
+}
+
+
+@media only screen and (max-width: 800px) { 
+  
+}
+
+</style>
+
+<head>
+<body>
+  <img src="logo.png" alt="logo" />
+  
+  <details>
+    <summary>Guide</summary>
+    <ul>
+      <li> A special authentication is required to access this part of transit application.</li>
+      <li>This authentication can only be done with the help of an auth-agent which can only be created by the superuser in the admin interface.</li>
+    </ul>
+  </details>
+  
+  <div id="agent">
+     <img src="agent.png" alt="logo" />
+     <p> Authenticate agent to gain access. </p>
+  </div>
+  
+  <form action="#" method="post">
+   <input id="name" placeholder="Agent Name" autofocus/>
+   <br/>
+   <input id="pass" type="password" placeholder="Agent Pass"/>
+   <br/>
+   <button type="button"> Continue </button>
+  </form>
+
+
+</body>
+</html>

@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/transit', admin.site.urls),
     path('accounts/login/', auth_views.LoginView.as_view(redirect_authenticated_user=True, template_name="admin/login.html"), name="login"),
     path('', include(('app.urls', 'app'), namespace='app')),
+    path('agent/', include(('agent.urls', 'agent'), namespace='agent')),
     path('^admin/', admin.site.urls),
     path('doc/', include('django.contrib.admindocs.urls')),
     path('admin/password_reset/', auth_views.PasswordResetView.as_view(),name='admin_password_reset',),

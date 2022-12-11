@@ -5,7 +5,7 @@
     <title>Transit Monitor Screen</title>
      
    <style>
-      @keyframes copyAnime {
+   @keyframes copyAnime {
     0%   {opacity: 0;}
     50%  {opacity: 1;}
     100% {opacity: 0;}
@@ -90,17 +90,12 @@
       #nav > span {
         display: inline-block;
         width: 40%;
-        padding: 7px;
+        padding: 8px;
         border: 1px solid rgb(2, 39, 53);
         text-align: center;
       }
-      
-      #trip {
-        color: rgb(2, 39, 53);
-        background-color: #D3D3D3;
-      }
-      
-      #pay {
+     
+      .active {
         color: white;
         background-color: rgb(2, 39, 53);
       }
@@ -432,10 +427,10 @@
      <img id="logo" src="logo.png"/>
    </a>
    
-   <h3 id="nav">
-     <span id="trip">Trips</span>
+   <h4 id="nav">
+     <span id="trip" class="active">Trips</span>
      <span id="pay">Payroll</span>
-   </h3>
+   </h4>
    <hr/>
   </header> 
   
@@ -551,6 +546,7 @@
 // get dom element this script depend on.
 const copyButtons = document.querySelectorAll('.para > img');
 const removeButtons = document.querySelectorAll('.remove');
+const links = document.querySelectorAll("#nav > span");
 
 
 
@@ -562,7 +558,22 @@ for (let elem of copyButtons) {
 for (let elem of removeButtons) {
    elem.addEventListener('click', remove, {once:true});
  }
- 
+
+  
+for (let elem of links) {
+  elem.addEventListener("click", (e) => {
+    let elem = e.target;
+    let children = elem.parentElement.children;
+    for (let child of children) {
+      if (child == elem) {
+         child.className = "active";
+      }else {
+         child.className = "";
+      }
+    }
+  });
+}
+
 
  
  

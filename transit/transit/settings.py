@@ -43,6 +43,7 @@ PASSWORD_RESET_TIMEOUT = 3 * 60
 
 INSTALLED_APPS = [
     'app.apps.AppConfig',
+    'agent.apps.AgentConfig',
     "admin_interface",
     "colorfield",
     'django.contrib.admin',

@@ -11,6 +11,7 @@
  const payroll = document.querySelector('#payroll');
  const search = document.querySelector('#search');
  const mark = document.querySelector('#mark');
+ const links = document.querySelectorAll("#nav > span");
  
  // set default freelancer.
  let freelancer = 'Driver';
@@ -30,8 +31,22 @@
  const resizeObserver = new ResizeObserver((e) => {
     let rect = search.getBoundingClientRect();
     mark.style.paddingLeft = rect.left + "px";
-});
+  });
  resizeObserver.observe(search);
+ 
+ for (let elem of links) {
+  elem.addEventListener("click", (e) => {
+    let elem = e.target;
+    let children = elem.parentElement.children;
+    for (let child of children) {
+      if (child == elem) {
+         child.className = "active";
+      }else {
+         child.className = "";
+      }
+    }
+  });
+}
  
  
  

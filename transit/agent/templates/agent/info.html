@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Trip info Page</title>
+<style>
+
+
+   @keyframes copyAnime {
+    0%   {opacity: 0;}
+    50%  {opacity: 1;}
+    100% {opacity: 0;}
+   }
+   
+  html,body{
+    margin: 0;
+    background-color: #D3D3D3;
+    user-select: none;
+  }
+  
+  main {
+    margin-top: 160px;
+    margin-bottom: 200px;
+  }
+  
+  header > img {
+    width: 50px;
+    transform: scale(2);
+    margin: 10px 20px 0 20px;
+  }
+
+  header {
+    position: fixed;
+    background-color: #D3D3D3;
+    width: 100%;
+    z-index: 1;
+    top: 0;
+  }
+  
+  header > hr {
+    margin-top: 10px;
+  }
+ 
+  #nav {
+    margin: auto;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    bottom: 7px;
+  }
+  
+  #nav > span {
+    display: inline-block;
+    width: 40%;
+    padding: 9px 7px 9px 7px;
+    border: 1px solid rgb(2, 39, 53);
+    text-align: center;
+  }
+  
+  .active {
+    background-color: rgb(2, 39, 53);
+    color: white;
+  }
+  
+  main > div {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 50px;
+    overflow-wrap: break-word;
+  }
+  
+  main hr {
+    width: 80%;
+    margin-bottom: 0;
+    height: 3px;
+  }
+  
+  main p {
+    margin: 0;
+    font-size: 12px;
+  }
+  
+  #header {
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  #address {
+    margin: 7px 0 0 30px;
+    border-left: 1.5px solid rgb(2, 39, 53);
+    padding: 5px 0 5px 7px;
+    overflow-wrap: break-word;
+  }
+  
+  .info, .phone{
+    font-size: 16px;
+    text-transform: capitalize;
+    color: rgb(2, 39, 53);
+    font-weight: 600;
+    opacity: 0.7;
+  }
+  
+  .title {
+    display: inline-block;
+  }
+  
+  .phone:hover {
+     text-decoration: underline;
+  }
+  
+  #phoneCont {
+    display: inline;
+  }
+  
+  .copied {
+    margin-left: 10px;
+    font-size: 12px;
+    animation: copyAnime;
+    animation-duration: 1.5s;
+    animation-play-state: paused;
+  }
+  
+
+@media only screen and (max-width: 650px) { 
+  
+  #nav {
+    width: 100%;
+  }
+ 
+  
+}
+      
+</style>
+</head>
+<body>
+ 
+  <header>
+  <img src="logo.png" alt="logo" />
+  <h5 id="nav">
+     <span id="report">Trips Report</span>
+     <span id="info" class="active">Trip Info</span>
+   </h5>
+   <hr/>
+  </header> 
+  
+  <main>
+  <div>
+    <p id="header"> PICK-UP INFORMATION </p>
+    <hr> <br>
+    <p>PICK-UP ADDRESS:</p>
+    <p id="address" class="info">dhjeekdkmdnfnejieieoeolelemdnxbdnkskkeedhjekekdkmdnfnejieieoeolelemdnxbdnkskkee</p>
+    <br>
+   <p class="title">NAME:</p>
+   <span class="info"> Ismail Ahmad </span>
+   <br>
+   <br>
+   <p class="title">PHONE:</p>
+   <div id="phoneCont">
+   <span class="phone">09099865422</span>
+   <span class="copied">copied</span>
+   </div>
+  </div>
+  
+  <div>
+    <p id="header"> DELIVERY INFORMATION </p>
+    <hr> <br>
+    <p>DELIVERY ADDRESS:</p>
+    <p id="address" class="info">dhjeekdkmdnfnejieieoeolelemdnxbdnkskkeedhjekekdkmdnfnejieieoeolelemdnxbdnkskkee</p>
+    <br>
+   <p class="title">NAME:</p>
+   <span class="info"> Ismail Ahmad </span>
+   <br>
+   <br>
+   <p class="title">PHONE:</p>
+   <div id="phoneCont">
+   <span class="phone">09099865422</span>
+   <span class="copied">copied</span>
+   </div>
+  </div>
+  
+  <div>
+    <p id="header"> MANAGEMENT INFORMATION </p>
+    <hr> <br>
+   <p class="title">NAME:</p>
+   <span class="info"> Ismail Ahmad </span>
+   <br>
+   <br>
+   <p class="title">OFFICE-PHONE:</p>
+   <div id="phoneCont">
+   <span class="phone">09099865422</span>
+   <span class="copied">copied</span>
+   </div>
+   <br>
+   <br> 
+   <p class="title">PERSONAL-PHONE:</p>
+   <div id="phoneCont">
+   <span class="phone">09099865422</span>
+   <span class="copied">copied</span>
+   </div>
+  </div>
+  
+  </main>
+
+
+<script>
+  const links = document.querySelectorAll("#nav > span");
+  const contactList  = document.querySelectorAll(".phone");
+  
+  for (let elem of links) {
+    elem.addEventListener("click", (e) => {
+      let elem = e.target;
+      let children = elem.parentElement.children;
+      for (let child of children) {
+        if (child == elem) {
+           child.className = "active";
+        }else {
+           child.className = "";
+        }
+      }
+    });
+  }
+  
+  for (let elem of contactList) {
+   elem.addEventListener("click", copyContact);
+ }
+ 
+ // copy contact from trip information.
+ function copyContact(e) {
+   let elem = e.target
+   let copy = e.target.parentElement.lastElementChild;
+   let contact = elem.innerHTML.trim()
+   navigator.clipboard.writeText(contact).then(() => {
+     console.log("contact");
+     copy.style.animationPlayState = "running";
+     copy.addEventListener('animationend', resetAnime, {once:true});
+  }, () => {
+      return "contact copying failed";
+  });
+ }
+ 
+ 
+ // reset style animation of element.
+ function resetAnime(e) {
+     let elem = e.target;
+     elem.style.animation = "none";
+     elem.offsetWidth;
+     elem.style.animation = null;
+ }
+ 
+  
+  
+</script>
+
+</body>
+</html>
