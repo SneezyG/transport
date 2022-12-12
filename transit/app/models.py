@@ -257,7 +257,7 @@ class Report(models.Model):
   statusType = (
      ('G', 'Green'),
      ('R', 'Red'),
-     ('Y', 'Gray')
+     ('Y', 'yellow')
   )
   
   trip = models.ForeignKey(Trip, on_delete=models.CASCADE, related_name='reports')

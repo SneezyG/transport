@@ -5,11 +5,424 @@
     <title>Agent report Page</title>
     
   <style>
+  
+  @keyframes shortAnime {
+     from {
+       transform: scale(1);
+     }
+     to {
+       transform: scale(1.2);
+     }
+  }
+  
+  html,body{
+    margin: 0;
+    background-color: #D3D3D3;
+    user-select: none;
+  }
+  
+  main {
+    margin: 180px auto 200px auto;
+    width: 90%;
+  }
+  
+  header > img {
+    width: 50px;
+    transform: scale(2);
+    margin: 10px 20px 0 20px;
+    position: absolute;
+  }
+
+  header {
+    position: fixed;
+    background-color: #D3D3D3;
+    width: 100%;
+    z-index: 1;
+    top: 0;
+  }
+  
+  #due {
+    text-align: center;
+    margin-bottom: 0;
+    font-size: 15px;
+  }
+  
+  #due sub {
+    color: green;
+  }
+  
+  header > hr {
+    margin-top: ;
+  }
+ 
+  #nav {
+    margin: auto;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+  }
+  
+  #nav > span {
+    display: inline-block;
+    width: 40%;
+    padding: 9px 7px 9px 7px;
+    border: 1px solid rgb(2, 39, 53);
+    text-align: center;
+  }
+  
+  .active {
+    background-color: rgb(2, 39, 53);
+    color: white;
+  }
+  
+  main > div {
+
+  }
+  
+  #short {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  #short > span {
+    border-radius: 18px;
+    font-size: 13px;
+    display: inline-block;
+    animation: shortAnime;
+    animation-duration: 0.2s;
+    animation-play-state: paused;
+  }
+  
+  .green {
+    background-color: rgb(9, 155, 135);
+    margin-right: 30px;
+    padding: 12px 20px;
+  }
+  
+  .yellow {
+    background-color: rgb(214, 163, 21);
+    margin-right: 30px;
+    padding: 12px 15px;
+  }
+  
+  .red {
+    background-color: rgb(240, 106, 28);
+    padding: 12px 23px;
+  }
+  
+  form {
+    border: 1.2px solid rgb(2, 39, 53);
+    width: 85%;
+    margin: auto;
+    padding: 20px;
+    background-color: #C4AEAD;
+    border-radius: 15px;
+    display: none;
+  }
+  
+  form p {
+    margin: 0;
+  }
+  
+  #button > button {
+    padding: 5px 10px;
+    font-size: 13px;
+  }
+  
+  #status {
+    margin-top: 5px;
+    text-align: center;
+    /*padding-left: 55px;*/
+    font-size: 14px;
+  }
+  
+  #status > input {
+    transform: scale(1.2);
+  }
+  
+  #yellow, #red {
+    margin-left: 20px;
+  }
+  
+  .submit {
+    margin-right: 20px;
+    background-color: rgb(2, 39, 53);
+    color: white;
+  }
+  
+  .cancel {
+    background-color: #D3D3D3;
+  }
+  
+  #progress {
+    margin-top: 7px;
+    padding-left: 60px;
+  }
+  
+  #progress > select {
+    padding: 5px;
+    border-radius: 7px 8px;
+  }
+  
+  #remark {
+    padding-left: 60px;
+  }
+  
+  #remark > input {
+    width: 50%;
+    padding: 5px 0 5px 10px;
+    font-size: 13px;
+    background-color: #C4AEAD;
+    outline: none;
+    border: none;
+    border-bottom: 1.5px solid rgb(2, 39, 53);
+  }
+  
+  .label {
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+  
+  .title {
+    text-transform: uppercase;
+  }
+  
+  main hr {
+    margin: 20px 0 40px 0;
+  }
+  
+  
+  
+  
+
+@media only screen and (max-width: 650px) { 
+  
+  #nav {
+    width: 100%;
+  }
+ 
+  
+}
+      
+  
   </style>
   </head>
+  
 <body>
+  
+  <header>
+  <img src="logo.png" alt="logo" />
+  <h5 id="nav">
+     <span id="report" class="active">Trips Report</span>
+     <span id="info">Trip Info</span>
+   </h5>
+   <p id="due">
+    <span>Due report</span> 
+    <sub>4(0)</sub> 
+   </p>
+   <hr/>
+  </header> 
+  
+  <main>
+    
+  <div>
+   <p class="title"> FIRST REPORT: </p>
+   <p id="short">
+     <span class="green" data-id="green">Good</span>
+     <span class="yellow" data-id="yellow">Not-bad</span>
+     <span class="red" data-id="red">Bad</span>
+   </p>
+     
+   <form>
+     <p class="label">Status:</p>
+     <p id="status">
+     <input id="green" type="radio" name="status" value="green"> Good
+     <input id="yellow" type="radio" name="status" value="yellow"> Not-bad
+     <input id="red" type="radio" name="status" value="red"> Bad
+     </p>
+     
+     <br>
+     
+     <p class="label">Progress:</p>
+     <p id="progress"> 
+       <select name="progress">
+       <option value="0">Pending</option>
+       <option value="1">Departed</option>
+       <option value="2">Pickup</option>
+       <option value="3">Onroad</option>
+       <option value="4">Delivered</option>
+       <option value="5">Arrive</option>
+     </select>
+     </p>
+     
+     <br>
+     
+     <p class="label">Remark:</p>
+     <p id="remark">
+       <input type="text" name="remark" placeholder="remark" autofocus>
+     </p>
+     
+     <br>
+     <br>
+     
+     <p id="button">
+       <button class="submit" type="button">Submit</button>
+       <button class="cancel" type="button">Cancel</button>
+     </p>
+   </form>
+    <hr>
+  </div>
+  
+  
+  <div>
+   <p class="title"> second report: </p>
+   <p id="short">
+     <span class="green" data-id="green">Good</span>
+     <span class="yellow" data-id="yellow">Not-bad</span>
+     <span class="red" data-id="red">Bad</span>
+   </p>
+     
+   <form>
+     <p class="label">Status:</p>
+     <p id="status">
+     <input id="green" type="radio" name="status" value="green"> Good
+     <input id="yellow" type="radio" name="status" value="yellow"> Not-bad
+     <input id="red" type="radio" name="status" value="red"> Bad
+     </p>
+     
+     <br/>
+     
+     <p class="label">Progress:</p>
+     <p id="progress"> 
+       <select name="progress">
+       <option value="0">Pending</option>
+       <option value="1">Departed</option>
+       <option value="2">Pickup</option>
+       <option value="3">Onroad</option>
+       <option value="4">Delivered</option>
+       <option value="5">Arrive</option>
+     </select>
+     </p>
+     
+     <br/>
+     
+     <p class="label">Remark:</p>
+     <p id="remark">
+       <input type="text" name="remark" placeholder="remark" autofocus>
+     </p>
+     
+     <br>
+     <br>
+     
+     <p id="button">
+       <button class="submit" type="button">Submit</button>
+       <button class="cancel" type="button">Cancel</button>
+     </p>
+   </form>
+    <hr>
+  </div>
+  
+  </main>
+  
+  
+  
+  
 
-
+<script>
+ const links = document.querySelectorAll("#nav > span");
+ const shorts = document.querySelectorAll("#short > span");
+ const submit = document.querySelectorAll(".submit");
+ const cancel = document.querySelectorAll(".cancel");
+ 
+ 
+ const form = document.querySelector("form");
+ // form.style.backgroundColor = "#B2BEB5";
+ 
+ for (let elem of submit) {
+   elem.addEventListener('click', () => {
+     return null;
+   });
+ }
+ 
+ for (let elem of cancel) {
+   elem.addEventListener('click', (e) => {
+     let elem = e.target;
+     let form = elem.parentElement.parentElement;
+     form.style.display = "none";
+   });
+ }
+    
+  
+ for (let elem of links) {
+    elem.addEventListener("click", (e) => {
+      let elem = e.target;
+      let children = elem.parentElement.children;
+      for (let child of children) {
+        if (child == elem) {
+           child.className = "active";
+        }else {
+           child.className = "";
+        }
+      }
+    });
+ }
+ 
+ 
+ for (let elem of shorts) {
+    elem.addEventListener("click", (e) => {
+      let elem = e.target;
+      let elemID = elem.dataset.id;
+      let ancestor = elem.parentElement.parentElement;
+      let form = ancestor.children[2];
+      showForm(form, elemID);
+      elem.style.animationPlayState = "running";
+      elem.addEventListener("animationend", () => {
+          form.style.display = "block";
+          resetAnime(elem);
+       });
+   });
+ }
+ 
+ 
+ // show form for a report.
+ function showForm(form, elemID) {
+    let radios = form.children[1].children;
+    for (let radio of radios) {
+      if (radio.id == elemID) {
+        radio.checked = true;
+      }
+    }
+    let input = form.children[7].lastElementChild;
+    if (elemID == "green") {
+       input.value = "An awesome trip";
+       input.style.backgroundColor = "#B2BEB5";
+       form.style.backgroundColor = "#B2BEB5";
+    }
+    else if (elemID == "yellow") {
+       input.value = "A cool trip";
+       input.style.backgroundColor = "#B6B3A8";
+       form.style.backgroundColor = "#B6B3A8";
+    }
+    else {
+       input.value = "A wretched trip";
+       input.style.backgroundColor = "#C4AEAD";
+       form.style.backgroundColor = "#C4AEAD";
+    }
+ }
+ 
+ 
+ // reset style animation of element.
+ function resetAnime(e) {
+     let elem = e.target ?? e;
+     elem.style.animation = "none";
+     elem.offsetWidth;
+     elem.style.animation = null;
+ }
+ 
+ 
+ 
+</script>
 
 </body>
 </html>
