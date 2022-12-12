@@ -78,7 +78,7 @@
     height: 250px;
     border: 2px solid white;
     margin-top: 150px;
-    visibility: hidden;
+    visibility: ;
   }
     
   
@@ -117,14 +117,14 @@
       body.style.overflow = 'hidden';
       dialog.style.animationPlayState = "running";
       dialog.addEventListener("animationend", () => {
-         content.style.visibility = "visible";
+         //content.style.visibility = "visible";
       });
   });
   
   backdrop.addEventListener('click', () => {
       dialog.open = false;
       backdrop.style.visibility = 'hidden';
-      content.style.visibility = "hidden";
+      //content.style.visibility = "hidden";
       body.style.overflow = 'visible';
       // reset dialog animation.
       dialog.style.animation = "none";

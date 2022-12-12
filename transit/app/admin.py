@@ -1,7 +1,8 @@
 
 from django.contrib import admin
 from django.contrib.admin.models import LogEntry
-from .models import Driver, Mechanic, Loader, Trip, Report, Booking, Payroll
+from .models import User, Driver, Mechanic, Loader, Trip, Report, Booking, Payroll
+from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
 
@@ -59,7 +60,35 @@ class LogEntryAdmin(admin.ModelAdmin):
         return request.user.is_superuser
 
     
- 
+
+
+
+
+@admin.register(User)
+class UserEntryAdmin(UserAdmin):
+  
+    """
+    Register the User table into the admin.
+    Add some customization.
+    """
+    
+    date_hierarchy = 'date_joined'
+    
+    fieldsets = (
+        (None, {'fields': ('username', 'email', 'password', 'office_line', 'personal_line', 'groups', 'user_permissions', 'is_active', 'is_staff', 'is_superuser', 'is_agent')}),
+        )
+    
+    list_display = ('username', 'email', 'last_login', 'is_active', 'is_staff', 'is_superuser', 'is_agent', 'date_joined')
+    
+    list_filter = ('is_staff', 'is_active', 'is_superuser', 'is_agent', 'date_joined')
+    
+    preserve_filters = False
+
+    search_fields = ('username',)
+
+
+
+
  
    
 class TranspoterAdmin(admin.ModelAdmin):
@@ -145,7 +174,7 @@ class BookingAdmin(admin.ModelAdmin):
 
   exclude = ('sn',)
   
-  list_display = ('sn', 'booker', 'contact', 'charges', 'paid', 'goods', 'pickup', 'delivery', 'date')
+  list_display = ('sn', 'booker', 'contact1', 'charges', 'paid', 'goods', 'pickup', 'delivery', 'date')
   
   list_filter = ("paid", "date")
   

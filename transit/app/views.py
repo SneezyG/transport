@@ -26,7 +26,7 @@ def index(request):
 
 
 
-# return the panel page
+# return the panel pages.
 def panel(request):
   
   """
@@ -34,4 +34,15 @@ def panel(request):
   """
   
   return render(request, 'app/panel.html')
+  
+  
+  
+# return the welcome page after user authentication.
+def welcome(request):
+  
+  """
+  Check if user is authenticated and return a welcome page.
+  """
+  
+  return render(request, 'app/welcome.html')
 

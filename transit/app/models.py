@@ -1,6 +1,7 @@
 
 from django.db import models
 from django.conf import settings
+from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
 import uuid
 
@@ -35,7 +36,21 @@ def castValidator(value):
      error = "Only decimal and integer is valid for this field"
      raise ValidationError(error)
       
- 
+
+
+
+class User(AbstractUser): 
+  
+  """
+  store a single user data.
+  extend the django abstract-user class.
+  and this model is the new auth_user_model
+  """
+  
+  office_line = models.CharField(max_length=15, verbose_name="Office-line", null=True, blank=True)
+  personal_line = models.CharField(max_length=15, verbose_name="Personal-line", null=True, blank=True)
+  is_agent = models.BooleanField(default=False, help_text="Designates that this user have access to the trip reporting part of this web-app")
+  
  
  
   
