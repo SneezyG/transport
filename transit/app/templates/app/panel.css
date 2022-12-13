@@ -183,7 +183,7 @@
      
      .created{
        font-size: 12px;
-       padding-left: 10px;
+       padding-left: 2px;
        margin-bottom: 0;
      }
      
@@ -243,10 +243,6 @@
      
      #origin span::-webkit-scrollbar {
         display: none;
-     }
-     
-     .first {
-       margin-right: 40%;
      }
      
      .mark {
@@ -327,6 +323,7 @@
        padding: 7px 10px 10px 10px;
        padding-left: 20px;
        margin-bottom: 30px;
+       position: relative;
      }
 
      .status {
@@ -356,12 +353,16 @@
      #report {
        margin-top: 10px;
        margin-bottom: 15px;
+       margin-left: 2px;
      }
      
      #report button {
        background-color: rgb(2, 39, 53);
        color: white;
        font-size: 12px;
+       position: absolute;
+       right: 10%;
+       top: 40px
      }
      
      #remark {
@@ -423,6 +424,9 @@
      z-index: 1;
      border: 1px solid rgb(2, 39, 53);
      border-radius: 5px;
+     -webkit-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.3);
+     -moz-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.3);
+     box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.3);
    }
    
    .contact > h4 {
@@ -521,10 +525,6 @@
   
   #barcode {
     width: 50%
-  }
-
-  .first {
-    margin-right: 30%;
   }
 
   summary {

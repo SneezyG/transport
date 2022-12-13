@@ -8,21 +8,11 @@ from django.db import connection
 def index(request):
   
    """
-   Query the recent company logo and return an HTML page with animated company logo and with a link to the login interface
+   return the transit-app index page with a link to the login interface.
    """
-   
-   try:
-      # select company recently uploaded logo.
-      with connection.cursor() as cursor:
-        cursor.execute("SELECT logo FROM admin_interface_theme")
-        path = cursor.fetchone()
-        path = path[0]
-        print(path)
-
-   except:
-      path = 0
   
-   return render(request, 'app/index.html', {"logo": path})
+   return render(request, 'index.html')
+
 
 
 

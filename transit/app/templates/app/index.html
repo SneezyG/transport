@@ -8,14 +8,12 @@
 
   @keyframes rotate {
     from {
-      transform: rotateZ(0deg);
+      transform: rotateZ(0deg) scale(2);
       width: 180px;
-      height: 180px;
     }
     to {
       transform: rotateZ(360deg);
       width: 100px;
-      height: 100px;
     }
   }
   
@@ -33,7 +31,6 @@
   
   img {
     width: 180px;
-    height: 180px;
     border-radius: 10px;
     animation-name: rotate;
     animation-duration: 15s;
@@ -58,17 +55,11 @@
 <body>
   
   
-<img id="img" style="display: none" alt="site logo"/> 
+<img src="logo.png" alt="site logo"/> 
 <a href="{% url "login" %}">TRANSIT</a>
 
-<script>
 
- // set the src attr of an image if there exist a logo context.
- {% if logo %}
- let img = document.getElementById('img');
- img.src = "/media/" + "{{ logo }}";
- img.style.display = "block";
- {% endif %}
+<script>
    
 </script>
 
