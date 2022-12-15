@@ -275,8 +275,18 @@ class Report(models.Model):
      ('Y', 'yellow')
   )
   
+  progressType = (
+     ("0", "pending"),
+     ("1", "Departed"),
+     ("2", "Pickup"),
+     ("3", "Onroad"),
+     ("4", "Delivered"),
+     ("5", "Arrived")
+  )
+  
   trip = models.ForeignKey(Trip, on_delete=models.CASCADE, related_name='reports')
   status = models.CharField(max_length=2, choices=statusType)
+  progress = models.CharField(max_length=2, choices=progressType, default="0")
   remark = models.CharField(max_length=25)
   coord = models.TextField()
   date = models.DateTimeField(auto_now_add=True)

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Agent Index Page</title>
+   <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+   <title>Agent Index Page</title>
     
   <style>
   
@@ -14,6 +14,15 @@
       100% {
         opacity: 1;
         height: 700px;
+      }
+   }
+   
+    @keyframes scanAnime {
+      0% {
+        top: 5px;
+      }
+      100% {
+        top: 315px;
       }
    }
    
@@ -69,16 +78,42 @@
     top: 0;
     background-color: lightblue;
     opacity: 0.6;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     visibility: hidden;
   }
   
   dialog > div {
     margin: auto;
-    width: 65%;
-    height: 250px;
-    border: 2px solid white;
+    width: 75%;
+    max-width: 400px;
+    height: 320px;
     margin-top: 150px;
-    visibility: ;
+    position: relative;
+  }
+  
+  dialog canvas {
+    border: 2px solid white;
+    height: 100%;
+    width: 100%;
+  }
+  
+  #scanning {
+    padding: 0;
+    margin: 0 0 0 2px;
+    width: 100%;
+    position: absolute;
+    animation: scanAnime;
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+    animation-play-state: paused;
+    animation-direction: alternate;
+    animation-timing-function: linear;
+    background-color: green;
+    height: 3px;
+    border: none;
+    visibility: hidden;
   }
     
   
@@ -98,41 +133,16 @@
    </div>
    
    <dialog>
-     <div>
-     </div>
+    <div>
+     <hr id="scanning"/>
+    <canvas id="qr-canvas"></canvas>
+    </div>
    </dialog>
 
 
-<script>
-  
-  const body = document.querySelector("body");
-  const dialog = document.querySelector("dialog");
-  const content = document.querySelector("dialog > div");
-  const button = document.querySelector("#draw > button");
-  const backdrop = document.querySelector("#backdrop");
-  
-  button.addEventListener("click", () => {
-      dialog.open = true;
-      backdrop.style.visibility = 'visible';
-      body.style.overflow = 'hidden';
-      dialog.style.animationPlayState = "running";
-      dialog.addEventListener("animationend", () => {
-         //content.style.visibility = "visible";
-      });
-  });
-  
-  backdrop.addEventListener('click', () => {
-      dialog.open = false;
-      backdrop.style.visibility = 'hidden';
-      //content.style.visibility = "hidden";
-      body.style.overflow = 'visible';
-      // reset dialog animation.
-      dialog.style.animation = "none";
-      dialog.offsetWidth;
-      dialog.style.animation = null;
-  });
+<script src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js"></script>
+<script src="qrCodeScanner.js"></script>
 
-  
-</script>
+
 </body>
 </html>
