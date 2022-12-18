@@ -7,6 +7,16 @@
     100% {opacity: 0;}
    }
    
+   @keyframes markAnime {
+    from {opacity: 0}
+    to {opacity: 1}
+   }
+   
+   @keyframes notifyAnime {
+    0%   {opacity: 0;}
+    35%  {opacity: 1;}
+    100% {opacity: 0;}
+   }
    
    @keyframes phoneAnime {
      from { 
@@ -26,14 +36,14 @@
       }
       100% {
         opacity: 1;
-        height: 85%;
+        height: 88%;
       }
    }
   
    
     body {
         margin: 0;
-        padding: 0 0 100px 0;
+        padding: 0;
         background-color: #D3D3D3;
         overflow-y: auto;
         overflow-x: hidden;
@@ -74,7 +84,7 @@
       }
       
       main {
-        margin-top: 170px;
+        margin-top: 175px;
       }
       
       header > hr {
@@ -125,7 +135,7 @@
         overflow: auto;
         cursor: pointer;
         border-radius: 10px;
-        font-size: 15px;
+        font-size: 15.5px;
         color: rgb(2, 39, 53);
       }
       
@@ -162,7 +172,7 @@
         padding: 0;
         padding-top: 5px;
         text-align: center;
-        font-size: 12px;
+        font-size: 13px;
         pointer-events: none;
       }
       
@@ -173,7 +183,7 @@
       
       sub {
         color: green;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: normal;
         position: relative;
         left: 3px;
@@ -182,7 +192,7 @@
       }
      
      .created{
-       font-size: 12px;
+       font-size: 13px;
        padding-left: 2px;
        margin-bottom: 0;
      }
@@ -193,7 +203,7 @@
      
      .created sub {
        color: black;
-       font-size: 11px;
+       font-size: 12px;
      }
      
      #more {
@@ -223,12 +233,12 @@
 
    
      #origin > li {
-       font-size: 12px;
+       font-size: 13px;
        padding-bottom: 10px;
      }
      
      #origin span {
-       font-size: 15px;
+       font-size: 16px;
        color: rgb(2, 39, 53);
        font-weight: 600;
        opacity: 0.7;
@@ -246,18 +256,18 @@
      }
      
      .mark {
-       margin-left: 18%;
+       margin-left: 15%;
      }
-     
+    
      .para {
        margin: 2px 0 0 20px;
-       font-size: 13px;
+       font-size: 14px;
        font-weight: bold;
        color: rgb(2, 39, 53);
      }
      
      .para > span {
-       font-size: 13px;
+       font-size: 14px;
        font-weight: normal;
        display: inline-block;
        width: 65%;
@@ -288,11 +298,10 @@
     .copy {
       margin: 0;
       padding: 2px 0 0 80px;
-      font-size: 11px;
+      font-size: 12px;
       position: relative;
       width: 100%;
       text-align: center;
-      opacity: 0;
       animation: copyAnime;
       animation-duration: 1.5s;
       animation-play-state: paused;
@@ -333,14 +342,25 @@
     
     .status > li {
       display: inline-block;
-      font-size: 12px;
+      font-size: 14px;
     }
     
     .status span {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: bold;
       color: rgb(2, 39, 53);
     }
+    
+    .mark > span {
+       font-size: 12px;
+       color: green;
+       animation: markAnime;
+       animation-play-state: paused;
+       animation-duration: 1.2s;
+       animation-iteration-count: infinite;
+       animation-direction: alternate;
+       animation-timing-function: linear;
+     }
     
     .status button {
       background-color: orange;
@@ -487,7 +507,6 @@
   
   dialog#map {
     width: 99.8%;
-    height: 85%;
     padding: 0;
     position: fixed;
     bottom: 0;
@@ -503,12 +522,46 @@
   
   dialog#map > div {
     margin: auto;
-    width: 80%;
-    height: 70%;
+    width: 70%;
+    height: 80%;
     border: 2px solid white;
-    margin-top: 100px;
+    margin-top: 60px;
     visibility: hidden;
   }
+  
+  
+   #notify {
+      text-align: center;
+      width: 100%;
+      font-size: 13px;
+      position: fixed;
+      top: 120px;
+      z-index: 5;
+      font-weight: 600;
+    }
+    
+    #notify > p {
+      padding: 6px 17px 8px 18px;
+      display: inline-block;
+      margin: 0 auto 0 auto;
+      background-color: #343434;
+      color: white;
+      border-radius: 12px;
+      animation: notifyAnime;
+      animation-duration: 2.5s;
+      animation-play-state: paused;
+    }
+    
+    #notify span {
+      display: inline-block;
+      max-width: 150px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      margin-bottom: -4px;
+      text-transform: uppercase;
+    }
+      
    
   
   
@@ -553,6 +606,14 @@
 @media only screen and (max-width: 800px) { 
   article {
     width: 270px
+  }
+
+  dialog#map > div {
+    width: 80%;
+  }
+  
+  .mark {
+   margin-left: 10%;
   }
   
 }

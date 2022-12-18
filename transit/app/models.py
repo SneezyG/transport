@@ -50,6 +50,7 @@ class User(AbstractUser):
   office_line = models.CharField(max_length=15, verbose_name="Office-line", null=True, blank=True)
   personal_line = models.CharField(max_length=15, verbose_name="Personal-line", null=True, blank=True)
   is_agent = models.BooleanField(default=False, help_text="Designates that this user have access to the trip reporting part of this web-app")
+  trip_id = models.CharField(max_length=50, null=True)
   
  
  

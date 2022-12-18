@@ -12,6 +12,7 @@
  const search = document.querySelector('#search');
  const mark = document.querySelector('#mark');
  const links = document.querySelectorAll("#nav > span");
+ const spiner = document.querySelector("#spiner");
  
  // set default freelancer.
  let freelancer = 'Driver';
@@ -52,25 +53,28 @@
  
  // look up a freelancer trip/wage summary.
  function lookup() {
+   body.style.overflow = "hidden";
    if (!id.value || !time.value ) {
      error.innerHTML = "Please enter freelancer ID and date to continue";
      not_found.showModal();
-     body.style.overflow = "hidden";
      
    } else {
+     spiner.open = true;
      let searchObj = {
        'freelancer': freelancer,
        'id': id.value,
        'time': time.value
-     };
-     console.log(searchObj);
-     payroll.showModal();
+      };
+      setTimeout(() => {
+        spiner.open = false;
+        payroll.showModal();
+      }, 5000);
    }
  }
  
  // update the value of freelancer global variable.
  function setfreelancer(e) {
-   elem = e.target;
+   let elem = e.target;
    freelancer = elem.value;
  }
  

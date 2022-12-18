@@ -14,8 +14,14 @@ const map = document.querySelector("#map");
 const mapCont = document.querySelector("#map > div");
 const locationBtn = document.querySelectorAll("article button");
 const backdrop = document.querySelector("#backdrop");
+const notify = document.querySelector("#notify > p");
+const markButtons = document.querySelectorAll('.mark');
 
 
+
+for (let elem of markButtons) {
+   elem.addEventListener('click', mark);
+ }
 
  for (let elem of summary) {
     elem.addEventListener('click', open);
@@ -165,6 +171,20 @@ const backdrop = document.querySelector("#backdrop");
        contact.style.display = "none";
     });
     resetAnime(elem);
+ }
+ 
+ 
+ function mark(e) {
+   let parent = e.target.parentElement;
+   let name = parent.dataset.name;
+   let update = parent.lastElementChild;
+   update.style.animationPlayState = "running";
+   setTimeout(() => {
+      resetAnime(update);
+      notify.style.animationPlayState = "running";
+      notify.childNodes[1].innerHTML = name;
+      notify.addEventListener("animationend", resetAnime);
+   }, 5000);
  }
  
  

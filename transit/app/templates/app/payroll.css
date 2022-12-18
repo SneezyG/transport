@@ -1,5 +1,17 @@
 
 
+
+@keyframes rotate {
+  from {
+    transform: rotateZ(0deg);
+    width: 250px;
+  }
+  to {
+    transform: rotateZ(360deg);
+    width: 150px;
+  }
+}
+
 body {
     margin: 0;
     padding: 0 0 300px 0;
@@ -46,7 +58,7 @@ body {
   }
   
   #logo {
-    width: 50px;
+    width: 40px;
     border-radius: 10px;
     position: relative;
     bottom: 10px;
@@ -175,7 +187,7 @@ dialog::backdrop {
 }
 
 #not_found > form {
- margin-top: 50px;
+ margin-top: 40px;
 }
 
 dialog button {
@@ -196,7 +208,7 @@ margin-top: 30px;
 
 #profile {
 text-align: center;
-margin-bottom: 30px;
+margin-bottom: 10px;
 }
 
 #profile img {
@@ -205,6 +217,7 @@ width: 140px;
 margin: 0;
 padding: 0;
 border-radius: 5px;
+border: 1px solid red;
 }
 
 #profile > p {
@@ -214,7 +227,7 @@ border-radius: 5px;
  overflow-wrap: break-word;
 }
 
- .payspan {
+.payspan {
   overflow-wrap: break-word;
 }
 
@@ -299,6 +312,31 @@ summary {
   margin-bottom: 1px;
   cursor: pointer;
 }
+
+
+#spiner {
+  background-color: #D3D3D3;
+  position: fixed;
+  top: 0;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  border: none;
+  text-align: center;
+}
+
+#spiner > img {
+  width: 80px;
+  border-radius: 20px;
+  animation-name: rotate;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  position: relative;
+  top: 35%
+}
+
 
   
   

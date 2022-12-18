@@ -24,7 +24,7 @@
   }
   
   header > img {
-    width: 50px;
+    width: 60px;
     transform: scale(2);
     margin: 10px 20px 0 20px;
   }
@@ -56,6 +56,7 @@
     padding: 9px 7px 9px 7px;
     border: 1px solid rgb(2, 39, 53);
     text-align: center;
+    font-size: 15px;
   }
   
   .active {
@@ -64,14 +65,14 @@
   }
   
   main > div {
-    width: 80%;
+    width: 60%;
     margin: auto;
     margin-bottom: 50px;
     overflow-wrap: break-word;
   }
   
   main hr {
-    width: 80%;
+    width: 60%;
     margin-bottom: 0;
     height: 2px;
   }
@@ -85,6 +86,11 @@
     text-align: center;
     font-weight: bold;
     font-size: 14.5px;
+  }
+
+  #content {
+    width: 80%;
+    margin: auto
   }
   
   #address {
@@ -123,9 +129,34 @@
   }
   
 
-@media only screen and (max-width: 650px) { 
+@media only screen and (max-width: 1000px) { 
+  main > div {
+    width: 70%;
+  }
+
+}
+
+
+
+@media only screen and (max-width: 800px) { 
   
   #nav {
+    width: 100%;
+  }
+
+  header > img {
+    width: 55px;
+  }
+
+  main > div {
+    width: 80%;
+  }
+
+  main hr {
+    width: 80%;
+  }
+
+  #content {
     width: 100%;
   }
  
@@ -149,6 +180,7 @@
   <div>
     <p id="header"> PICK-UP INFORMATION </p>
     <hr> <br>
+  <div id="content">
     <p>PICK-UP ADDRESS:</p>
     <p id="address" class="info">dhjeekdkmdnfnejieieoeolelemdnxbdnkskkeedhjekekdkmdnfnejieieoeolelemdnxbdnkskkee</p>
     <br>
@@ -161,11 +193,13 @@
    <span class="phone">09099865422</span>
    <span class="copied">copied</span>
    </div>
+   </div>
   </div>
   
   <div>
     <p id="header"> DELIVERY INFORMATION </p>
     <hr> <br>
+   <div id="content">
     <p>DELIVERY ADDRESS:</p>
     <p id="address" class="info">dhjeekdkmdnfnejieieoeolelemdnxbdnkskkeedhjekekdkmdnfnejieieoeolelemdnxbdnkskkee</p>
     <br>
@@ -178,11 +212,13 @@
    <span class="phone">09099865422</span>
    <span class="copied">copied</span>
    </div>
+   </div>
   </div>
   
   <div>
     <p id="header"> MANAGEMENT INFORMATION </p>
     <hr> <br>
+   <div id="content">
    <p class="title">NAME:</p>
    <span class="info"> Ismail Ahmad </span>
    <br>
@@ -198,6 +234,7 @@
    <div id="phoneCont">
    <span class="phone">09099865422</span>
    <span class="copied">copied</span>
+   </div>
    </div>
   </div>
   
