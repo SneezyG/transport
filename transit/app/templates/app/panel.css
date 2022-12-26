@@ -382,7 +382,8 @@
        font-size: 12px;
        position: absolute;
        right: 10%;
-       top: 40px
+       top: 40px;
+       border-radius: 5px;
      }
      
      #remark {
@@ -470,7 +471,7 @@
    
    .contact span {
      padding-left: 10px;
-     font-size: 13px;
+     font-size: 14px;
    }
    
    .no {
@@ -481,6 +482,7 @@
      font-size: 16px;
      letter-spacing: 3px;
      text-decoration: none;
+     color: rgb(2, 39, 53);
    }
    
    .no > span:hover {
