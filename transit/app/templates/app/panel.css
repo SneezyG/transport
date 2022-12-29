@@ -190,11 +190,15 @@
         bottom: 3px;
         pointer-events: none;
       }
-     
+      
+     #date {
+       margin: 10px 0 0 15px;
+     }
+      
      .created{
        font-size: 13px;
        padding-left: 2px;
-       margin-bottom: 0;
+       margin: 0;
      }
      
      .created > span {
@@ -329,9 +333,8 @@
        margin: auto;
        background-color: #F5F5F5;
        border-radius: 10px;
-       padding: 7px 10px 10px 10px;
-       padding-left: 20px;
-       margin-bottom: 30px;
+       padding: 10px 0 5px 20px;
+       margin-bottom: 15px;
        position: relative;
      }
 
@@ -377,12 +380,12 @@
      }
      
      #report button {
-       background-color: rgb(2, 39, 53);
+       background-color: rgb(65, 109, 124);
        color: white;
        font-size: 12px;
        position: absolute;
        right: 10%;
-       top: 40px;
+       top: 33px;
        border-radius: 5px;
      }
      
@@ -458,15 +461,22 @@
      background-color: rgb(2, 39, 53);
    }
    
+   .contact p {
+     margin: 0;
+     padding: 0;
+   }
+   
    .contact ul {
      list-style: none;
      padding: 0;
+     margin: 7px 0 0 0;
    }
    
    .contact div {
     max-height: 230px;
     overflow-y: scroll;
     overflow-x: hidden;
+    padding-top: 7px;
    }
    
    .contact span {
