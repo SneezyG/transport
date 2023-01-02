@@ -16,7 +16,43 @@ const locationBtn = document.querySelectorAll("article button");
 const backdrop = document.querySelector("#backdrop");
 const notify = document.querySelector("#notify > p");
 const markButtons = document.querySelectorAll('.mark');
+const articleConts = document.querySelectorAll('#article');
 
+
+// set the display value for the first article.
+for (let cont of articleConts) {
+   let article = cont.querySelector('article');
+   let seemore = cont.querySelector('#seeMore');
+   let seeless = cont.querySelector('#seeLess');
+   article.style.display = 'block';
+   
+   seemore.addEventListener('click', () =>{
+     let articles = cont.querySelectorAll('article');
+     for (let elem of articles) {
+        setTimeout(() => {
+          elem.style.display = 'block';
+          seemore.style.display = "none";
+          seeless.style.display = "block";
+        }, 100);
+     }
+   });
+   
+   seeless.addEventListener('click', () =>{
+     let articles = cont.querySelectorAll('article');
+     let firstArticle = cont.querySelector('article');
+     for (let elem of articles) {
+        setTimeout(() => {
+          elem.style.display = 'none';
+          if (elem == firstArticle) {
+            firstArticle.style.display = "block";
+          }
+          seemore.style.display = "block";
+          seeless.style.display = "none";
+        }, 100);
+     }
+   });
+  
+}
 
 
 for (let elem of markButtons) {
@@ -126,9 +162,26 @@ for (let elem of markButtons) {
  // show some trip info on trip box close.
  function close(e) {
     let elem = e.target;
+    let parent = elem.parentElement;
     for (let child of elem.children) {
       child.style.visibility = "visible";
     }
+    
+    let articles = parent.querySelectorAll('article');
+    let firstArticle = parent.querySelector('article');
+    let seemore = parent.querySelector('#seeMore');
+    let seeless = parent.querySelector('#seeLess');
+    for (let elem of articles) {
+        setTimeout(() => {
+          elem.style.display = 'none';
+          if (elem == firstArticle) {
+            firstArticle.style.display = "block";
+          }
+          seemore.style.display = "block";
+          seeless.style.display = "none";
+        }, 100);
+     }
+    
  }
  
  

@@ -67,6 +67,7 @@
         top: 5px;
         font-weight: normal;
         color: rgb(2, 39, 53);
+        text-transform: capitalize;
       }
       
       #pin {
@@ -139,26 +140,12 @@
         color: rgb(2, 39, 53);
       }
       
-      summary > ul {
-        display: inline-block;
-        margin: 0;
-        padding: 0;
-        padding-right: 20px;
-        float: right;
-        pointer-events: none;
-      }
-      
-      summary li {
-        display: inline-block;
-        margin-right: 15px;
-        pointer-events: none;
-      }
-      
       summary span {
         pointer-events: none;
         display: inline-block;
         font-weight: 600;
         width: 50%;
+        margin-right: 20%;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -174,6 +161,23 @@
         text-align: center;
         font-size: 13px;
         pointer-events: none;
+      }
+      
+      #info {
+        position: relative;
+        left: 30px;
+        font-size: 15.5px;
+        color: rgb(2, 39, 53);
+      }
+      
+      #info > span {
+        display: inline-block;
+        width: 5px;
+        height: 5px;
+        padding: 4px;
+        margin-right: 5px;
+        border-radius: 10px;
+        background-color: green;
       }
       
       summary span::-webkit-scrollbar {
@@ -227,6 +231,7 @@
        animation: phoneAnime;
        animation-play-state: paused;
        animation-duration: 0.1s;
+       cursor: pointer;
      }
      
      #origin {
@@ -253,6 +258,7 @@
        overflow: scroll;
        position: relative;
        top: 4px;
+       text-transform: capitalize;
      }
      
      #origin span::-webkit-scrollbar {
@@ -334,8 +340,23 @@
        background-color: #F5F5F5;
        border-radius: 10px;
        padding: 10px 0 5px 20px;
-       margin-bottom: 15px;
+       margin-bottom: 20px;
        position: relative;
+       display: none;
+     }
+     
+     .see {
+       text-align: center;
+       color: green;
+       text-decoration: none;
+     }
+     
+     .see:hover {
+       text-decoration: underline;
+     }
+     
+     #seeLess {
+       display: none;
      }
 
      .status {
@@ -352,6 +373,11 @@
       font-size: 16px;
       font-weight: bold;
       color: rgb(2, 39, 53);
+      text-transform: capitalize;
+    }
+    
+    .mark {
+      position: relative;
     }
     
     .mark > span {
@@ -363,6 +389,9 @@
        animation-iteration-count: infinite;
        animation-direction: alternate;
        animation-timing-function: linear;
+       position: absolute;
+       left: 20px;
+       bottom: 35px;
      }
     
     .status button {
@@ -371,12 +400,24 @@
       font-size: 13px;
       padding: 5px 7px;
     }
+    
+    .reportCount {
+      padding-left: 5px;
+      color: green;
+      font-size: ;
+    }
 
 
      #report {
-       margin-top: 10px;
-       margin-bottom: 15px;
-       margin-left: 2px;
+       margin: 0 0 10px 2px;
+     }
+     
+     #report span {
+       font-size: 14px;
+     }
+     
+     #report > li {
+       margin-top: 10px
      }
      
      #report button {
@@ -385,7 +426,7 @@
        font-size: 12px;
        position: absolute;
        right: 10%;
-       top: 33px;
+       top: 43px;
        border-radius: 5px;
      }
      
@@ -396,11 +437,17 @@
      
      #remark > span {
        font-size: 15px;
+       display: inline-block;
+     }
+     
+     #remark > span:first-letter {
+        text-transform: capitalize;
      }
      
    dialog {
         background-color: #F5F5F5;
         border: 2px solid rgb(2, 39, 53);
+        user-select: none;
       }
       
    dialog::backdrop {
@@ -484,6 +531,10 @@
      font-size: 14px;
    }
    
+   .contactFoot {
+     cursor: pointer;
+   }
+   
    .no {
      padding: 3px 0 3px 40px;
    }
@@ -545,7 +596,7 @@
    #notify {
       text-align: center;
       width: 100%;
-      font-size: 13px;
+      font-size: 14px;
       position: fixed;
       top: 120px;
       z-index: 5;
@@ -553,7 +604,7 @@
     }
     
     #notify > p {
-      padding: 6px 17px 8px 18px;
+      padding: 13px 30px;
       display: inline-block;
       margin: 0 auto 0 auto;
       background-color: #343434;
@@ -628,6 +679,14 @@
    margin-left: 10%;
   }
   
+  .phone {
+    cursor: auto;
+  }
+  
+  .contactFoot {
+    cursor: auto;
+  }
+  
 }
      
 
@@ -661,14 +720,6 @@
     font-size: 14px;
   }
 
-  summary > ul {
-    padding-right: 10px;
-  }
-  
-  summary li {
-    margin-right: 10px;
-  }
-  
   article {
     width: 250px;
   }

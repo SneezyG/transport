@@ -57,6 +57,7 @@
         top: 5px;
         font-weight: normal;
         color: rgb(2, 39, 53);
+        text-transform: capitalize;
       }
       
       #pin {
@@ -101,6 +102,7 @@
         padding: 8px;
         border: 1px solid rgb(2, 39, 53);
         text-align: center;
+        cursor: pointer;
       }
      
       .active {
@@ -250,6 +252,7 @@
        overflow: scroll;
        position: relative;
        top: 4px;
+       text-transform: capitalize;
      }
      
      #origin span::-webkit-scrollbar {
@@ -258,6 +261,7 @@
      
      .first {
        margin-right: 80px;
+       text-transform: capitalize;
      }
      
      .para {
@@ -339,13 +343,14 @@
     
     #progress > b {
       font-size: 16px;
-      color: rgb(2, 39, 53)
+      color: rgb(2, 39, 53);
+      text-transform: capitalize;
     }
     
     #notify {
       text-align: center;
       width: 100%;
-      font-size: 13px;
+      font-size: 14px;
       position: fixed;
       top: 140px;
       z-index: 5;
@@ -353,7 +358,7 @@
     }
     
     #notify > p {
-      padding: 6px 17px;
+      padding: 13px 30px;
       display: inline-block;
       margin: 0 auto 0 auto;
       background-color: #343434;
@@ -403,6 +408,10 @@
   }
 
   .status button {
+    cursor: auto;
+  }
+  
+  #nav > span {
     cursor: auto;
   }
   
@@ -460,7 +469,7 @@
   <header>
     <div id="header">
       <img id='pin' src="pin.png"/>
-       <h4> Admin</h4>
+       <h4> admin </h4>
     </div>
      
    <a href="/admin/transit">
@@ -495,7 +504,7 @@
     
     <ul id="origin"> 
     <li>pickup: <span> Ikire stationnnnnnnsjsjjsjskskskskkskshshjdjdjdsjsjsjs</span></li>
-    <li>delivery: <span>Akureddddddxxxxxxxxxxxxhshhshshshgdhshshjshsjshshsh</span></li>
+    <li>delivery: <span>Akureddddd dxxxxxxxxxxxxhshhshshshgdhshshjshsjshshsh</span></li>
     </ul>
     
     <div class="para"> 
@@ -512,7 +521,7 @@
     </ul>
     <br>
     
-   <p id="progress">progress: <b>Delivered</b></p>
+   <p id="progress">progress: <b>pending</b></p>
     
   </div>
   </details>
@@ -542,7 +551,7 @@
     </div>
     
     <ul class="status"> 
-    <li class="first">status: <span>open<span></li>
+    <li class="first">status: <span>close<span></li>
     <li><button data-name="PINNACLE STUDIOgdhdjjdjdjdjdjjdhdhdhdjdjrjjdjdjdjdfjfjhdhejrbdbdjrjriirjrhfjrjr" class="remove">mark as closed</button></li>
     </ul>
     <br>

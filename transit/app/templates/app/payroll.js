@@ -55,7 +55,7 @@
  function lookup() {
    body.style.overflow = "hidden";
    if (!id.value || !time.value ) {
-     error.innerHTML = "Please enter freelancer ID and date to continue";
+     error.innerHTML = "Please enter freelancer ID and date to continue.";
      not_found.showModal();
      
    } else {

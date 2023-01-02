@@ -14,7 +14,7 @@
   <header>
     <div id="header">
       <img id='pin' src="pin.png"/>
-       <h4> Admin </h4>
+       <h4> admin </h4>
     </div>
      
    <a href="#">
@@ -36,9 +36,7 @@
   <details>
     <summary>
       <span>PINNACLE STUDIO</span>
-      <ul>
-        <li>reports <sup>1</sup> </li>
-      </ul>
+      <sub id="info"><span></span>report</sub>
      <p>delivered</p>
     </summary>
     
@@ -123,8 +121,8 @@
     <p class="created" id="date">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
     
     <ul id="origin"> 
-    <li>pickup: <span> Ikire stationnnnnnnsjsjjsjskskskskkskshshjdjdjdsjsjsjs</span></li>
-    <li>delivery: <span>Akureddddddxxxxxxxxxxxxhshhshshshgdhshshjshsjshshsh</span></li>
+    <li>pickup: <span> Ikire sta tionnnnnnnsjsjjsjskskskskkskshshjdjdjdsjsjsjs</span></li>
+    <li>delivery: <span>Akured dddddxxxxxxxxxxxxhshhshshshgdhshshjshsjshshsh</span></li>
     </ul>
     
     <div class="para"> 
@@ -137,7 +135,7 @@
     </div>
     
     <ul class="status"> 
-    <li>progress: <span>Delivered<span></li>
+    <li>progress: <span>delivered<span></li>
     <li class="mark" data-name="PINNACLE STUDIO">
       <button>mark as arrived</button>
       <span>updating ...</span>
@@ -147,16 +145,23 @@
     <br>
     <hr>
     
-    <h4 id="expect"> REPORT<span>Expected reports: 4 </span></h4>
+    <h4 id="expect">
+     REPORT
+   <span>Expected reports:<span class="reportCount">4(4)</span></span>
+   </h4>
+    <div id="article">
     <article>
     <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
     <ul id="report" class="status"> 
-    <li>status: <span>Good</span></li>
+    <li>status: <span>good</span></li>
+    <br/>
+    <li>progress: <span>pending</span></li>
     <li><button> location </button></li>
     </ul>
     <p id="remark">
       remark: 
-      <span> trip is going as planned </span></p>
+      <span> trip is going as planned </span>
+    </p>
     </article>
     
     <article>
@@ -192,6 +197,10 @@
       <span> trip is going as planned </span></p>
     </article>
     
+    <p id="seeMore" class="see">see more reports </p>
+    <p id="seeLess" class="see">see less reports </p>
+    </div>
+    
   </div>
   </details>
   
@@ -199,9 +208,7 @@
    <details>
     <summary>
       <span>Crown STUDIO</span>
-      <ul>
-        <li>reports <sup>1</sup> </li>
-      </ul>
+      <sub id="info"><span></span>report</sub>
      <p>delivered</p>
     </summary>
     
@@ -309,7 +316,11 @@
     <br>
     <hr>
     
-    <h4 id="expect"> REPORT<span>Expected reports: 4 </span></h4>
+   <h4 id="expect">
+     REPORT
+   <span>Expected reports:<span class="reportCount">4(4)</span></span>
+   </h4>
+    <div id="article">
     <article>
     <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
     <ul id="report" class="status"> 
@@ -353,6 +364,10 @@
       remark: 
       <span> trip is going as planned </span></p>
     </article>
+    
+    <p id="seeMore" class="see">see more reports</p>
+    <p id="seeLess" class="see">see less reports</p>
+    </div>
     
   </div>
   </details>
@@ -361,9 +376,7 @@
   <details>
     <summary>
       <span>Gileard STUDIO</span>
-      <ul>
-        <li>reports <sup>1</sup> </li>
-      </ul>
+      <sub id="info"><span></span>report</sub>
     <p>delivered</p>
     </summary>
     
@@ -471,7 +484,12 @@
     <br>
     <hr>
     
-    <h4 id="expect"> REPORT<span>Expected reports: 4 </span></h4>
+   <h4 id="expect">
+     REPORT
+   <span>Expected reports:<span class="reportCount">4(4)</span></span>
+   </h4>
+   
+   <div id="article">
     <article>
     <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
     <ul id="report" class="status"> 
@@ -515,6 +533,10 @@
       remark: 
       <span> trip is going as planned </span></p>
     </article>
+    
+    <p id="seeMore" class="see"> see more reports </p>
+    <p id="seeLess" class="see"> see less reports </p>
+    </div>
     
   </div>
   </details>
