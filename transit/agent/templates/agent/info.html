@@ -276,7 +276,7 @@
    let copy = e.target.parentElement.lastElementChild;
    let contact = elem.innerHTML.trim()
    navigator.clipboard.writeText(contact).then(() => {
-     console.log("contact");
+     console.log(contact);
      copy.style.animationPlayState = "running";
      copy.addEventListener('animationend', resetAnime, {once:true});
   }, () => {

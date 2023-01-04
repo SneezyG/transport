@@ -349,6 +349,7 @@
        text-align: center;
        color: green;
        text-decoration: none;
+       cursor: pointer;
      }
      
      .see:hover {
@@ -687,6 +688,10 @@
     cursor: auto;
   }
   
+  .see {
+    cursor: auto;
+  }
+  
 }
      
 
@@ -726,6 +731,10 @@
   
   #barcode {
     width: 70%
+  }
+  
+  #logo {
+    width: 35px;
   }
 
   

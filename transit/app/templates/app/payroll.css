@@ -100,7 +100,7 @@ button {
   }
   
   #search {
-    width: 60%;
+    width: 40%;
     margin: auto;
     display: flex;
     justify-content: center;
@@ -288,7 +288,7 @@ details {
     margin: auto;
     margin-bottom: 70px;
     border: 1px solid rgb(2, 39, 53);
-    width: 50%;
+    width: 55%;
     border-radius: 10px;
   }
   
@@ -365,7 +365,11 @@ summary {
 }
 
 details {
- width: 80%;
+ width: 70%;
+}
+
+#search {
+  width: 60%;
 }
 
 }
@@ -421,8 +425,13 @@ width: 35px;
 width: 100%;
 }
 
+
+details {
+ width: 80%;
+}
+
 #search {
-width: 90%;
+ width: 90%;
 }
 
 #not_found {
