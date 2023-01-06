@@ -404,7 +404,7 @@
   
   </main>
   
-  <!-- construct the dialog that displays error on look up-->
+  <!-- construct the dialog that alert report submition success-->
   <dialog id="success" autofocus>
   <p>Report submitted successfully.</p>
   <form method="dialog">
@@ -412,7 +412,7 @@
   </form>
   </dialog>
   
-  <!-- construct the dialog that displays error on look up-->
+  <!-- construct the dialog that displays error during report submition-->
   <dialog id="failure" autofocus>
   <p id="error"> Report submition failed.</p>
   <form method="dialog">
@@ -537,7 +537,7 @@
       elem.style.animationPlayState = "running";
       elem.addEventListener("animationend", () => {
           resetAnime(elem);
-       });
+       }, {once:true});
    });
  }
  

@@ -173,7 +173,6 @@ input.visually-hidden:is(:focus, :focus-within) + label {
 
 dialog {
     position: fixed;
-    bottom: 50px;
     overflow: hidden;
     z-index: 2;
     background-color: #F5F5F5;

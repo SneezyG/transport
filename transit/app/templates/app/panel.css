@@ -13,9 +13,8 @@
    }
    
    @keyframes notifyAnime {
-    0%   {opacity: 0;}
-    35%  {opacity: 1;}
-    100% {opacity: 0;}
+    0% {opacity: 0;}
+    100% {opacity: 1;}
    }
    
    @keyframes phoneAnime {
@@ -48,7 +47,11 @@
         overflow-y: auto;
         overflow-x: hidden;
         user-select: none;
-      }
+    }
+    
+    button {
+       cursor: pointer;
+    }
       
     #header {
         width: 180px;
@@ -397,7 +400,6 @@
     
     .status button {
       background-color: orange;
-      cursor: pointer;
       font-size: 13px;
       padding: 5px 7px;
     }
@@ -447,6 +449,7 @@
      
    dialog {
         background-color: #F5F5F5;
+        position: fixed;
         border: 2px solid rgb(2, 39, 53);
         user-select: none;
       }
@@ -457,12 +460,11 @@
       }
    
 
-   dialog button {
+   button#continue, #barcode button  {
      font-size: 15px;
      padding: 5px;
      background-color: #D3D3D3;
      width: 80px;
-     cursor: pointer;
    }
    
    #barcode {
@@ -597,7 +599,7 @@
    #notify {
       text-align: center;
       width: 100%;
-      font-size: 14px;
+      font-size: 13px;
       position: fixed;
       top: 120px;
       z-index: 5;
@@ -605,15 +607,16 @@
     }
     
     #notify > p {
-      padding: 13px 30px;
+      padding: 11px 20px;
       display: inline-block;
       margin: 0 auto 0 auto;
       background-color: #343434;
       color: white;
-      border-radius: 12px;
+      border-radius: 15px;
       animation: notifyAnime;
-      animation-duration: 2.5s;
+      animation-duration: 1s;
       animation-play-state: paused;
+      animation-fill-mode: forward;
     }
     
     #notify span {
@@ -625,9 +628,46 @@
       margin-bottom: -4px;
       text-transform: uppercase;
     }
-      
+    
+    #confirm {
+     width: 400px;
+     height: 200px;
+     overflow: hidden;
+     padding-top: 50px;
+    }
+    
+    #confirm  p {
+     text-align: center;
+     margin-top: 25px;
+     font-size: 15px;
+    }
+    
+    #confirm > form {
+     margin-top: 40px;
+    }
+    
+    #confirmMsg > span {
+     display: inline-block;
+     margin-top: 5px;
+     font-weight: bold;
+     max-width: 200px;
+     overflow: hidden;
+     text-overflow: ellipsis;
+     text-transform: uppercase;
+     white-space: nowrap;
+     position: relative;
+     top: 3.5px;
+     color: rgb(2, 39, 53);
+   }
+    
+    button#cancel {
+     position: absolute;
+     top: 10px;
+     right: 10px;
+     font-weight: bold;
+   }
    
-  
+
   
  
 
@@ -644,28 +684,10 @@
     width: 50%
   }
 
-  summary {
-    cursor: auto;
-  }
-
-  .para > img {
-    cursor: auto;
-  }
-
-  .status button {
-    cursor: auto;
-  }
-
-  .para > span {
-    cursor: default;
-  }
-
-  dialog button {
-   cursor: default;
-  }
- 
-
 }
+
+
+
 
 @media only screen and (max-width: 800px) { 
   article {
@@ -691,6 +713,23 @@
   .see {
     cursor: auto;
   }
+  
+  summary {
+    cursor: auto;
+  }
+
+  .para > img {
+    cursor: auto;
+  }
+
+  .para > span {
+    cursor: auto;
+  }
+
+  button {
+   cursor: auto;
+  }
+  
   
 }
      
@@ -736,6 +775,13 @@
   #logo {
     width: 35px;
   }
+  
+  #confirm {
+    width: 270px;
+    height: 150px;
+    padding-top: 20px;
+  } 
+ 
 
   
 }

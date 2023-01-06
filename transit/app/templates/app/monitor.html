@@ -12,11 +12,14 @@
    }
    
   @keyframes notifyAnime {
-    0%   {opacity: 0;}
-    35%  {opacity: 1;}
-    100% {opacity: 0;}
+    0% {opacity: 0;}
+    100% {opacity: 1;}
    }
    
+   @keyframes closeAnime {
+    from {opacity: 0}
+    to {opacity: 1}
+   }
    
    @keyframes removeAnime {
       0%   {
@@ -38,6 +41,10 @@
       
    main {
       margin-top: 195px;
+   }
+   
+   button {
+     cursor: pointer;
    }
       
     #header {
@@ -330,7 +337,6 @@
     
     .status button {
       background-color: orange;
-      cursor: pointer;
       padding: 3px;
     }
     
@@ -350,7 +356,7 @@
     #notify {
       text-align: center;
       width: 100%;
-      font-size: 14px;
+      font-size: 13px;
       position: fixed;
       top: 140px;
       z-index: 5;
@@ -358,15 +364,16 @@
     }
     
     #notify > p {
-      padding: 13px 30px;
+      padding: 11px 20px;
       display: inline-block;
       margin: 0 auto 0 auto;
       background-color: #343434;
       color: white;
-      border-radius: 12px;
+      border-radius: 15px;
       animation: notifyAnime;
-      animation-duration: 2.5s;
+      animation-duration: 1s;
       animation-play-state: paused;
+      animation-fill-mode: forward;
     }
     
     #notify span {
@@ -378,8 +385,84 @@
       margin-bottom: -4px;
       text-transform: uppercase;
     }
+    
+    dialog {
+      background-color: #F5F5F5;
+      position: fixed;
+      border: 2px solid rgb(2, 39, 53);
+      user-select: none;
+    }
+  
+    dialog::backdrop {
+        background: lightblue;
+        opacity: 0.7;
+    }
       
-      
+    #confirm {
+     width: 400px;
+     height: 200px;
+     overflow: hidden;
+     padding-top: 50px;
+    }
+    
+    #confirm  p {
+     text-align: center;
+     margin-top: 25px;
+     font-size: 15px;
+    }
+    
+    #confirm > form {
+     margin-top: 40px;
+    }
+    
+    button#continue {
+     font-size: 15px;
+     padding: 5px;
+     width: 80px;
+     background-color: #D3D3D3;
+    }
+    
+   button#cancel {
+     position: absolute;
+     top: 10px;
+     right: 10px;
+     font-weight: bold;
+   }
+   
+   #confirmMsg > span {
+     display: inline-block;
+     margin-top: 5px;
+     font-weight: bold;
+     max-width: 200px;
+     overflow: hidden;
+     text-overflow: ellipsis;
+     text-transform: uppercase;
+     white-space: nowrap;
+     position: relative;
+     top: 3.5px;
+     color: rgb(2, 39, 53);
+   }
+  
+  
+  .remove {
+    position: relative;
+  }
+  
+  .remove > span {
+     font-size: 12px;
+     color: green;
+     animation: closeAnime;
+     animation-play-state: paused;
+     animation-duration: 1.2s;
+     animation-iteration-count: infinite;
+     animation-direction: alternate;
+     animation-timing-function: linear;
+     position: absolute;
+     left: 20px;
+     bottom: 27px;
+   }
+  
+
       
       
 @media only screen and (max-width: 1000px) { 
@@ -398,7 +481,14 @@
   .first {
     margin-right: 50px;
   }
+  
+}
 
+
+
+
+@media only screen and (max-width: 800px) { 
+  
   summary {
     cursor: auto;
   }
@@ -406,16 +496,19 @@
   .para > img {
     cursor: auto;
   }
-
-  .status button {
-    cursor: auto;
-  }
   
   #nav > span {
     cursor: auto;
   }
   
+  button {
+    cursor: auto;
+  }
+  
 }
+
+
+
 
 
 @media only screen and (max-width: 650px) { 
@@ -457,6 +550,12 @@
   #nav {
     width: 100%;
   }
+  
+  #confirm {
+    width: 270px;
+    height: 150px;
+    padding-top: 20px;
+  } 
  
   
 }
@@ -517,7 +616,10 @@
     
     <ul class="status"> 
     <li class="first">status: <span>open<span></li>
-    <li><button data-name="PINNACLE STUDIO" class="remove">mark as closed</button></li>
+    <li class="remove">
+     <button data-name="PINNACLE STUDIO">mark as closed</button>
+     <span>updating ...</span>
+    </li>
     </ul>
     <br>
     
@@ -552,7 +654,10 @@
     
     <ul class="status"> 
     <li class="first">status: <span>close<span></li>
-    <li><button data-name="PINNACLE STUDIOgdhdjjdjdjdjdjjdhdhdhdjdjrjjdjdjdjdfjfjhdhejrbdbdjrjriirjrhfjrjr" class="remove">mark as closed</button></li>
+    <li class="remove">
+      <button data-name="PINNACLE STUDIOgdhdjjdjdjdjdjjdhdhdhdjdjrjjdjdjdjdfjfjhdhejrbdbdjrjriirjrhfjrjr">mark as closed</button>
+      <span>updating ...</span>
+    </li>
     </ul>
     <br>
     
@@ -587,7 +692,10 @@
     
     <ul class="status"> 
     <li class="first">status: <span>open<span></li>
-    <li><button data-name="PINNACLE studio" class="remove">mark as closed</button></li>
+    <li class="remove">
+      <button data-name="PINNACLE studio">mark as closed</button>
+      <span>updating ...</span>
+    </li>
     </ul>
     <br>
     
@@ -596,6 +704,25 @@
   </div>
   </details>
   </main>
+  
+  <!-- construct the dialog for action confirmation -->
+  <dialog id="confirm">
+  <p id="confirmMsg"> Click continue to close 
+  <br>
+  <span>thiseyeyeyeye
+  hehjejeiejjdjdjdjdjdjdjdjdjdjdjdjjdjdjdjdjdjdjdjjdjjddjdjdjdjjdjjdjddjjjdjdjdjdjdjdjdjdjd.
+  </span> trip
+  </p>
+ 
+  <form method="dialog">
+  <p><button class="button" id="continue">continue</button></p>
+  </form>
+  
+  <form method="dialog">
+  <p><button class="button" id="cancel">X</button></p>
+  </form>
+  </dialog>
+  
 
 
 
@@ -604,9 +731,10 @@
 
 // get dom element this script depend on.
 const copyButtons = document.querySelectorAll('.para > img');
-const removeButtons = document.querySelectorAll('.remove');
+const removeButtons = document.querySelectorAll('.remove > button');
 const links = document.querySelectorAll("#nav > span");
 const notify = document.querySelector("#notify > p");
+const confirm = document.querySelector("#confirm");
 
 
 // select and open the first trip.
@@ -621,7 +749,7 @@ for (let elem of copyButtons) {
  
 
 for (let elem of removeButtons) {
-   elem.addEventListener('click', remove, {once:true});
+   elem.addEventListener('click', remove);
  }
 
   
@@ -660,37 +788,65 @@ function copy(e) {
  }
 
 
-// reset style animation for passed in element.
- function resetAnime(e) {
-     let elem = e.target;
-     elem.style.animation = "none";
-     elem.offsetWidth;
-     elem.style.animation = null;
- }
- 
- 
- 
+
  // remove a trip box with a simple animation.
  function remove(e) {
    let elem = e.target;
    let name = elem.dataset.name;
+   
    let ancestor1 = elem.parentElement.parentElement.parentElement;
    let ancestor2 = ancestor1.parentElement;
+   let sibling = elem.parentElement.children[1];
    
-   ancestor2.style.animationPlayState= "running";
-   ancestor1.style.height = "200px";
-   ancestor2.addEventListener('animationend', (e) => {
-     notify.style.animationPlayState = "running";
-     notify.childNodes[1].innerHTML = name;
-     notify.childNodes[2].data = " trip closed successfully";
-     notify.addEventListener("animationend", resetAnime)
-     let elem = e.target;
-     // we remove element on server response.
-     elem.style.display = "none";
-   }, 
-   {once:true})
-  
+   document.querySelector("#confirmMsg > span").innerHTML = name;
+   confirm.showModal();
+   let button = confirm.querySelector('#continue');
+   
+   button.addEventListener('click', () => {
+     sibling.style.animationPlayState = 'running';
+     // simulate server request.
+     setTimeout(timeIt, 3000);
+     
+     function timeIt() {
+       resetAnime(sibling);
+       ancestor2.style.animationPlayState= "running";
+       ancestor1.style.height = "200px";
+       ancestor2.addEventListener('animationend', (e) => {
+         notify.style.animationPlayState = "running";
+         notify.childNodes[1].innerHTML = name;
+         notify.childNodes[2].data = " trip closed successfully";
+         notify.addEventListener("animationend", resetNotify, {once:true});
+         let elem = e.target;
+         elem.style.display = "none";
+        }, {once:true});
+      }
+      
+   }, {once:true});
+
  }
+ 
+ 
+ // reset style animation for passed in element.
+ function resetAnime(e) {
+     let elem = e.target ?? e;
+     elem.style.animation = "none";
+     elem.offsetWidth;
+     elem.style.animation = null;
+  }
+  
+  
+ // reset notify element after notification.
+ function resetNotify(e) {
+     let elem = e.target;
+     setTimeout(() => resetAnime(elem), 4000);
+  }
+
+ // reset notify element after notification. 
+ document.addEventListener('click', () => {
+    resetAnime(notify);
+ });
+ 
+ 
  
  
 </script>

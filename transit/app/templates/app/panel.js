@@ -17,6 +17,7 @@ const backdrop = document.querySelector("#backdrop");
 const notify = document.querySelector("#notify > p");
 const markButtons = document.querySelectorAll('.mark');
 const articleConts = document.querySelectorAll('#article');
+const confirm = document.querySelector("#confirm");
 
 
 // set the display value for the first article.
@@ -91,7 +92,7 @@ for (let elem of markButtons) {
         map.style.animationPlayState = "running";
         map.addEventListener("animationend", () => {
           mapCont.style.visibility = "visible";
-        });
+        }, {once:true});
     });
  }
   
@@ -222,7 +223,7 @@ for (let elem of markButtons) {
     contact.style.display = "block";
     cancel.addEventListener('click', () => {
        contact.style.display = "none";
-    });
+    }, {once:true});
     resetAnime(elem);
  }
  
@@ -231,14 +232,36 @@ for (let elem of markButtons) {
    let parent = e.target.parentElement;
    let name = parent.dataset.name;
    let update = parent.lastElementChild;
-   update.style.animationPlayState = "running";
-   setTimeout(() => {
-      resetAnime(update);
-      notify.style.animationPlayState = "running";
-      notify.childNodes[1].innerHTML = name;
-      notify.addEventListener("animationend", resetAnime);
-   }, 5000);
+   
+   document.querySelector("#confirmMsg > span").innerHTML = name;
+   confirm.showModal();
+   let button = confirm.querySelector('#continue');
+   
+   button.addEventListener('click', () => {
+     update.style.animationPlayState = "running";
+     setTimeout(() => {
+        resetAnime(update);
+        notify.style.animationPlayState = "running";
+        notify.childNodes[1].innerHTML = name;
+        notify.addEventListener("animationend", resetNotify, {once:true});
+     }, 5000);
+   }, {once:true});
+   
  }
+
+  
+ // reset notify element after notification.
+ function resetNotify(e) {
+     let elem = e.target;
+     setTimeout(() => resetAnime(elem), 4000);
+  }
+
+ // reset notify element after notification. 
+ document.addEventListener('click', () => {
+    resetAnime(notify);
+ });
+ 
+ 
  
  
  
