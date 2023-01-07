@@ -20,6 +20,8 @@ const articleConts = document.querySelectorAll('#article');
 const confirm = document.querySelector("#confirm");
 
 
+
+
 // set the display value for the first article.
 for (let cont of articleConts) {
    let article = cont.querySelector('article');
@@ -61,7 +63,7 @@ for (let elem of markButtons) {
  }
 
  for (let elem of summary) {
-    elem.addEventListener('click', open);
+    elem.addEventListener('click', open, {once: true});
  }
  
  for (let elem of copyButtons) {
@@ -150,19 +152,24 @@ for (let elem of markButtons) {
  // hide some trip info on trip box open.
  function open(e) {
     let elem = e.target;
+    let detail = elem.parentElement;
     for (let child of elem.children) {
       let tag = child.tagName;
       if (tag != "SPAN") {
         child.style.visibility = "hidden";
       }
     }
+   
     elem.addEventListener('click', close, {once:true});
+    setTimeout(() => {
+      scroll(detail);
+    }, 250);
  }
  
  
  // show some trip info on trip box close.
  function close(e) {
-    let elem = e.target;
+    let elem = e.target ?? e;
     let parent = elem.parentElement;
     for (let child of elem.children) {
       child.style.visibility = "visible";
@@ -182,7 +189,23 @@ for (let elem of markButtons) {
           seeless.style.display = "none";
         }, 100);
      }
+     
+   elem.addEventListener('click', open, {once:true});
     
+ }
+ 
+ 
+ function scroll(cont) {
+   let box = cont.getBoundingClientRect();
+   let headHeight = document.querySelector('body > header').offsetHeight;
+   let scrollby = box.top + window.pageYOffset - headHeight - 30;
+   let more = cont.querySelector('#more');
+   more.scroll(0, 0);
+   document.documentElement.scroll({
+       top: scrollby,
+       left: 0,
+       behaviour: 'smooth'
+   });
  }
  
  
@@ -241,6 +264,7 @@ for (let elem of markButtons) {
      update.style.animationPlayState = "running";
      setTimeout(() => {
         resetAnime(update);
+        notify.parentElement.style.display = 'block';
         notify.style.animationPlayState = "running";
         notify.childNodes[1].innerHTML = name;
         notify.addEventListener("animationend", resetNotify, {once:true});
@@ -253,15 +277,20 @@ for (let elem of markButtons) {
  // reset notify element after notification.
  function resetNotify(e) {
      let elem = e.target;
-     setTimeout(() => resetAnime(elem), 4000);
+     let eventArray = ['touchstart', 'scroll', 'click'];
+     for (let event of eventArray) {
+       document.addEventListener(event, () => {
+          resetAnime(elem);
+          elem.parentElement.style.display = 'none';
+       }, {once:true});
+     }
+     setTimeout(() => {
+       resetAnime(elem)
+       elem.parentElement.style.display = 'none';
+     }, 4000);
   }
 
- // reset notify element after notification. 
- document.addEventListener('click', () => {
-    resetAnime(notify);
- });
- 
- 
+
  
  
  

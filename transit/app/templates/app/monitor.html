@@ -41,6 +41,7 @@
       
    main {
       margin-top: 195px;
+      margin-bottom: 350px;
    }
    
    button {
@@ -121,7 +122,7 @@
       details {
         border: 1px solid rgb(2, 39, 53);
         border-radius: 10px;
-        width: 50%;
+        width: 55%;
         overflow: hidden;
         margin: auto;
         margin-bottom: 50px;
@@ -142,21 +143,6 @@
         color: rgb(2, 39, 53);
       }
       
-      summary > ul {
-        display: inline-block;
-        margin: 0;
-        padding: 0;
-        padding-right: 20px;
-        float: right;
-        pointer-events: none;
-      }
-      
-      summary li {
-        display: inline-block;
-        margin-right: 15px;
-        pointer-events: none;
-      }
-      
       summary span {
         pointer-events: none;
         display: inline-block;
@@ -175,13 +161,15 @@
         margin: 3px 0 0 0;
         padding: 0;
         text-align: center;
-        font-size: 13px;
+        font-size: 14px;
+        pointer-events: none;
       }
       
       #info {
         position: relative;
         left: 30px;
         font-size: 15.5px;
+        pointer-events: none;
       }
       
       #info > span {
@@ -236,7 +224,7 @@
       }
       
      #origin {
-       margin: 20px 0 0 0;
+       margin: 25px 0 15px 0;
        padding: 0 0 0 75px;
        width: 100%;
      }
@@ -320,7 +308,7 @@
     }
     
     .status {
-      margin: 30px 0 0 20px;
+      margin: 35px 0 0 20px;
       padding: 0;
     }
     
@@ -361,6 +349,7 @@
       top: 140px;
       z-index: 5;
       font-weight: 600;
+      display: none;
     }
     
     #notify > p {
@@ -735,14 +724,14 @@ const removeButtons = document.querySelectorAll('.remove > button');
 const links = document.querySelectorAll("#nav > span");
 const notify = document.querySelector("#notify > p");
 const confirm = document.querySelector("#confirm");
-
-
-// select and open the first trip.
-const firstTrip = document.querySelector("details");
-firstTrip.open = true;
+const summary = document.querySelectorAll('summary');
 
 
 
+for (let elem of summary) {
+   elem.addEventListener('click', open, {once: true});
+}
+ 
 for (let elem of copyButtons) {
     elem.addEventListener('click', copy);
  }
@@ -768,6 +757,37 @@ for (let elem of links) {
 }
 
 
+function open(e) {
+  let elem = e.target;
+  let detail = elem.parentElement;
+  elem.addEventListener('click', close, {once:true});
+    setTimeout(() => {
+      scroll(detail);
+    }, 250);
+} 
+
+
+function close(e) {
+  let elem = e.target;
+  elem.addEventListener('click', open, {once:true});
+}
+
+
+
+function scroll(cont) {
+   let box = cont.getBoundingClientRect();
+   let headHeight = document.querySelector('body > header').offsetHeight;
+   let scrollby = box.top + window.pageYOffset - headHeight - 30;
+   let more = cont.querySelector('#more');
+   more.scroll(0, 0);
+   document.documentElement.scroll({
+       top: scrollby,
+       left: 0,
+       behaviour: 'smooth'
+   });
+ }
+ 
+ 
  
  
 // copy a particular trip id within a trip box.
@@ -812,6 +832,7 @@ function copy(e) {
        ancestor2.style.animationPlayState= "running";
        ancestor1.style.height = "200px";
        ancestor2.addEventListener('animationend', (e) => {
+         notify.parentElement.style.display = 'block';
          notify.style.animationPlayState = "running";
          notify.childNodes[1].innerHTML = name;
          notify.childNodes[2].data = " trip closed successfully";
@@ -838,13 +859,18 @@ function copy(e) {
  // reset notify element after notification.
  function resetNotify(e) {
      let elem = e.target;
-     setTimeout(() => resetAnime(elem), 4000);
+     let eventArray = ['touchstart', 'scroll', 'click'];
+     for (let event of eventArray) {
+       document.addEventListener(event, () => {
+          resetAnime(elem);
+          elem.parentElement.style.display = 'none';
+       }, {once:true});
+     }
+     setTimeout(() => {
+       resetAnime(elem)
+       elem.parentElement.style.display = 'none';
+     }, 4000);
   }
-
- // reset notify element after notification. 
- document.addEventListener('click', () => {
-    resetAnime(notify);
- });
  
  
  
