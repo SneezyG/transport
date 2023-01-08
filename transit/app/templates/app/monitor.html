@@ -4,552 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Transit Monitor Screen</title>
      
-   <style>
-   @keyframes copyAnime {
-    0%   {opacity: 0;}
-    50%  {opacity: 1;}
-    100% {opacity: 0;}
-   }
-   
-  @keyframes notifyAnime {
-    0% {opacity: 0;}
-    100% {opacity: 1;}
-   }
-   
-   @keyframes closeAnime {
-    from {opacity: 0}
-    to {opacity: 1}
-   }
-   
-   @keyframes removeAnime {
-      0%   {
-        opacity: 1;
-      }
-      100% {
-        opacity: 0;
-      }
-   }
-   
-   body {
-        margin: 0;
-        padding: 0;
-        background-color: #D3D3D3;
-        overflow-y: auto;
-        overflow-x: hidden;
-        user-select: none;
-      }
-      
-   main {
-      margin-top: 195px;
-      margin-bottom: 350px;
-   }
-   
-   button {
-     cursor: pointer;
-   }
-      
-    #header {
-        width: 180px;
-       /* border: 2px solid rgb(2, 39, 53); */
-        margin: auto;
-        margin-top: 10px;
-        display: flex;
-        border-radius: 10px;
-        padding: 4px;
-        justify-content: center;
-      }
-      
-    #header h4 { 
-        margin: 5px;
-        position: relative;
-        top: 5px;
-        font-weight: normal;
-        color: rgb(2, 39, 53);
-        text-transform: capitalize;
-      }
-      
-      #pin {
-        width: 23px;
-        margin: 2px 0 0 0;
-        opacity: 0.7;
-      }
-
-      header {
-        position: fixed;
-        top: 0;
-        background-color: #D3D3D3;
-        width: 100%;
-        z-index: 1;
-      }
-      
-      header > hr {
-        margin-top: 10px;
-      }
-      
-      #logo {
-        width: 40px;
-        border-radius: 10px;
-        position: relative;
-        bottom: 10px;
-        left: 20px;
-        transform: scale(4);
-      }
-      
-      #nav {
-        margin: auto;
-        width: 80%;
-        display: flex;
-        justify-content: center;
-        position: relative;
-        bottom: 10px;
-      }
-      
-      #nav > span {
-        display: inline-block;
-        width: 40%;
-        padding: 8px;
-        border: 1px solid rgb(2, 39, 53);
-        text-align: center;
-        cursor: pointer;
-      }
-     
-      .active {
-        color: white;
-        background-color: rgb(2, 39, 53);
-      }
-      
-      
-      details {
-        border: 1px solid rgb(2, 39, 53);
-        border-radius: 10px;
-        width: 55%;
-        overflow: hidden;
-        margin: auto;
-        margin-bottom: 50px;
-        animation: removeAnime;
-        animation-play-state: paused;
-        animation-duration: 0.2s;
-        animation-fill-mode: forwards;
-      }
-      
-      summary {
-        border-bottom: 1px solid rgb(2, 39, 53);
-        padding: 7px 10px 2px 40px;
-        margin-bottom: 1px;
-        overflow: auto;
-        cursor: pointer;
-        border-radius: 10px;
-        font-size: 15px;
-        color: rgb(2, 39, 53);
-      }
-      
-      summary span {
-        pointer-events: none;
-        display: inline-block;
-        font-weight: 600;
-        width: 50%;
-        margin-right: 20%;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        position: relative;
-        top: 3px;
-        text-transform: uppercase;
-      }
-      
-      summary > p {
-        margin: 3px 0 0 0;
-        padding: 0;
-        text-align: center;
-        font-size: 14px;
-        pointer-events: none;
-      }
-      
-      #info {
-        position: relative;
-        left: 30px;
-        font-size: 15.5px;
-        pointer-events: none;
-      }
-      
-      #info > span {
-        display: inline-block;
-        width: 5px;
-        height: 5px;
-        padding: 4px;
-        margin-right: 5px;
-        border-radius: 10px;
-        background-color: green;
-      }
-      
-      summary span::-webkit-scrollbar {
-        display: none;
-      }
-      
-      
-      sub {
-        font-size: 12px;
-        font-weight: normal;
-        position: relative;
-        left: 3px;
-        bottom: 3px;
-        pointer-events: none;
-      }
-     
-     .created{
-       font-size: 13px;
-       padding-left: 10px;
-       margin-bottom: 0;
-     }
-     
-     .created > span {
-       font-size: 14px;
-     }
-     
-     .created sub {
-       color: black;
-       font-size: 12px;
-     }
-     
-     #more {
-       position: relative;
-       height: 260px;
-       overflow-y: scroll;
-       overflow-x: hidden;
-       transition: 0.2s;
-     }
-     
-     #more::-webkit-scrollbar {
-        display: none;
-      }
-      
-     #origin {
-       margin: 25px 0 15px 0;
-       padding: 0 0 0 75px;
-       width: 100%;
-     }
-
-   
-     #origin > li {
-       font-size: 13px;
-       padding-bottom: 10px;
-     }
-     
-     #origin span {
-       font-size: 16px;
-       color: rgb(2, 39, 53);
-       font-weight: 600;
-       opacity: 0.7;
-       margin-left: 10px;
-       display: inline-block;
-       width: 60%;
-       white-space: nowrap;
-       overflow: scroll;
-       position: relative;
-       top: 4px;
-       text-transform: capitalize;
-     }
-     
-     #origin span::-webkit-scrollbar {
-        display: none;
-     }
-     
-     .first {
-       margin-right: 80px;
-       text-transform: capitalize;
-     }
-     
-     .para {
-       margin: 10px 0 10px 20px;
-       font-size: 14px;
-       font-weight: bold;
-       color: rgb(2, 39, 53);
-     }
-     
-     .para > span {
-       font-size: 14px;
-       font-weight: normal;
-       display: inline-block;
-       width: 65%;
-       white-space: nowrap;
-       padding: 5px 5px 5px 10px;
-       color: black;
-       background-color: #E5E4E2;
-       border-radius: 2px;
-       overflow: scroll;
-       position: relative;
-       left: 5px;
-       top: 5px;
-     }
-     
-   .para > span::-webkit-scrollbar {
-        display: none;
-    }
-    
-    .para > img {
-      width: 30px;
-      position: relative;
-      top: 10px;
-      left: 5px;
-      cursor: pointer;
-    }
-     
-    .copy {
-      margin: 0;
-      padding: 2px 0 0 80px;
-      font-size: 12px;
-      position: absolute;
-      width: 100%;
-      text-align: center;
-      opacity: 0;
-      animation: copyAnime;
-      animation-duration: 1.5s;
-      animation-play-state: paused;
-    }
-    
-    .status {
-      margin: 35px 0 0 20px;
-      padding: 0;
-    }
-    
-    .status > li {
-      display: inline-block;
-      font-size: 14px;
-    }
-    
-    .status span {
-      font-size: 16px;
-      font-weight: bold;
-      color: rgb(2, 39, 53);
-    }
-    
-    .status button {
-      background-color: orange;
-      padding: 3px;
-    }
-    
-    #progress {
-      position: absolute;
-      bottom: 0;
-      right: 30px;
-      font-size: 14px;
-    }
-    
-    #progress > b {
-      font-size: 16px;
-      color: rgb(2, 39, 53);
-      text-transform: capitalize;
-    }
-    
-    #notify {
-      text-align: center;
-      width: 100%;
-      font-size: 13px;
-      position: fixed;
-      top: 140px;
-      z-index: 5;
-      font-weight: 600;
-      display: none;
-    }
-    
-    #notify > p {
-      padding: 11px 20px;
-      display: inline-block;
-      margin: 0 auto 0 auto;
-      background-color: #343434;
-      color: white;
-      border-radius: 15px;
-      animation: notifyAnime;
-      animation-duration: 1s;
-      animation-play-state: paused;
-      animation-fill-mode: forward;
-    }
-    
-    #notify span {
-      display: inline-block;
-      max-width: 150px;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      margin-bottom: -4px;
-      text-transform: uppercase;
-    }
-    
-    dialog {
-      background-color: #F5F5F5;
-      position: fixed;
-      border: 2px solid rgb(2, 39, 53);
-      user-select: none;
-    }
-  
-    dialog::backdrop {
-        background: lightblue;
-        opacity: 0.7;
-    }
-      
-    #confirm {
-     width: 400px;
-     height: 200px;
-     overflow: hidden;
-     padding-top: 50px;
-    }
-    
-    #confirm  p {
-     text-align: center;
-     margin-top: 25px;
-     font-size: 15px;
-    }
-    
-    #confirm > form {
-     margin-top: 40px;
-    }
-    
-    button#continue {
-     font-size: 15px;
-     padding: 5px;
-     width: 80px;
-     background-color: #D3D3D3;
-    }
-    
-   button#cancel {
-     position: absolute;
-     top: 10px;
-     right: 10px;
-     font-weight: bold;
-   }
-   
-   #confirmMsg > span {
-     display: inline-block;
-     margin-top: 5px;
-     font-weight: bold;
-     max-width: 200px;
-     overflow: hidden;
-     text-overflow: ellipsis;
-     text-transform: uppercase;
-     white-space: nowrap;
-     position: relative;
-     top: 3.5px;
-     color: rgb(2, 39, 53);
-   }
-  
-  
-  .remove {
-    position: relative;
-  }
-  
-  .remove > span {
-     font-size: 12px;
-     color: green;
-     animation: closeAnime;
-     animation-play-state: paused;
-     animation-duration: 1.2s;
-     animation-iteration-count: infinite;
-     animation-direction: alternate;
-     animation-timing-function: linear;
-     position: absolute;
-     left: 20px;
-     bottom: 27px;
-   }
-  
-
-      
-      
-@media only screen and (max-width: 1000px) { 
-  details {
-    width: 70%;
-  }
-
-  #origin {
-    margin: 20px 0 0 0;
-  }
-  
-  #logo {
-    bottom: 20px;
-  }
-
-  .first {
-    margin-right: 50px;
-  }
-  
-}
-
-
-
-
-@media only screen and (max-width: 800px) { 
-  
-  summary {
-    cursor: auto;
-  }
-
-  .para > img {
-    cursor: auto;
-  }
-  
-  #nav > span {
-    cursor: auto;
-  }
-  
-  button {
-    cursor: auto;
-  }
-  
-}
-
-
-
-
-
-@media only screen and (max-width: 650px) { 
-  
-   header {
-     padding: 2px;
-   }
-
-   #header {
-    width: 150px;
-   }
-
-  details {
-     width: 90%;
-     top: 180px;
-   }
-
-  summary {
-    padding-left: 20px;
-    font-size: 14px;
-  }
-
-  summary > ul {
-    padding-right: 10px;
-  }
-  
-  summary li {
-    margin-right: 10px;
-  }
-
-  .first {
-    margin-right: 50px;
-  }
-  
-  #logo {
-    width: 35px;
-  }
-  
-  #nav {
-    width: 100%;
-  }
-  
-  #confirm {
-    width: 270px;
-    height: 150px;
-    padding-top: 20px;
-  } 
- 
-  
-}
-     
-   </style>
+    <link rel="stylesheet" type="text/css" href="monitor.css">
     
   </head>
   
@@ -692,6 +147,118 @@
     
   </div>
   </details>
+  <details>
+    <summary>
+      <span>PINNACLE STUDIO</span>
+      <sub id="info"><span></span>report</sub>
+      <p>delivered</p>
+    </summary>
+    
+   <div id="more">
+    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
+    
+    <ul id="origin"> 
+    <li>pickup: <span> Ikire stationnnnnnnsjsjjsjskskskskkskshshjdjdjdsjsjsjs</span></li>
+    <li>delivery: <span>Akureddddd dxxxxxxxxxxxxhshhshshshgdhshshjshsjshshsh</span></li>
+    </ul>
+    
+    <div class="para"> 
+    Trip ID: 
+    <span> cea088de-498a-4511-93d4-3bb0b23cd845
+    </span>
+    <img data-id="cea088de-498a-4511-93d4-3bb0b23cd845" src="copy.png"/>
+    <h6 class="copy">coppied</h6>
+    </div>
+    
+    <ul class="status"> 
+    <li class="first">status: <span>open<span></li>
+    <li class="remove">
+     <button data-name="PINNACLE STUDIO">mark as closed</button>
+     <span>updating ...</span>
+    </li>
+    </ul>
+    <br>
+    
+   <p id="progress">progress: <b>pending</b></p>
+    
+  </div>
+  </details>
+  
+  
+  <details>
+    <summary>
+      <span>PINNACLE STUDIOgdhdjjdjdjdjdjjdhdhdhdjdjrjjdjdjdjdfjfjhdhejrbdbdjrjriirjrhfjrjr</span>
+      <sub id="info"><span></span>report</sub>
+      <p>delivered</p>
+    </summary>
+    
+   <div id="more">
+    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
+    
+    <ul id="origin"> 
+    <li>pickup: <span> Ikire stationnnnnnnsjsjjsjskskskskkskshshjdjdjdsjsjsjs</span></li>
+    <li>delivery: <span>Akureddddddxxxxxxxxxxxxhshhshshshgdhshshjshsjshshsh</span></li>
+    </ul>
+    
+    <div class="para"> 
+    Trip ID: 
+    <span> 525e56d6-a4fc-45e5-844a-7636df7ebcd5
+    </span>
+    <img data-id="525e56d6-a4fc-45e5-844a-7636df7ebcd5" src="copy.png"/>
+    <h6 class="copy">coppied</h6>
+    </div>
+    
+    <ul class="status"> 
+    <li class="first">status: <span>close<span></li>
+    <li class="remove">
+      <button data-name="PINNACLE STUDIOgdhdjjdjdjdjdjjdhdhdhdjdjrjjdjdjdjdfjfjhdhejrbdbdjrjriirjrhfjrjr">mark as closed</button>
+      <span>updating ...</span>
+    </li>
+    </ul>
+    <br>
+    
+   <p id="progress">progress: <b>Delivered</b></p>
+    
+  </div>
+  </details>
+  
+  
+ <details>
+    <summary>
+      <span>PINNACLE studio</span>
+      <sub id="info"><span></span>report</sub>
+      <p>delivered</p>
+    </summary>
+    
+   <div id="more">
+    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
+    
+    <ul id="origin"> 
+    <li>pickup: <span> Ikire stationnnnnnnsjsjjsjskskskskkskshshjdjdjdsjsjsjs</span></li>
+    <li>delivery: <span>Akureddddddxxxxxxxxxxxxhshhshshshgdhshshjshsjshshsh</span></li>
+    </ul>
+    
+    <div class="para"> 
+    Trip ID: 
+    <span> 1edb3c02-e640-4116-829d-36f09c21de65
+    </span>
+    <img data-id="1edb3c02-e640-4116-829d-36f09c21de65" src="copy.png"/>
+    <h6 class="copy">coppied</h6>
+    </div>
+    
+    <ul class="status"> 
+    <li class="first">status: <span>open<span></li>
+    <li class="remove">
+      <button data-name="PINNACLE studio">mark as closed</button>
+      <span>updating ...</span>
+    </li>
+    </ul>
+    <br>
+    
+   <p id="progress">progress: <b>Delivered</b></p>
+    
+  </div>
+  </details>
   </main>
   
   <!-- construct the dialog for action confirmation -->
@@ -715,167 +282,7 @@
 
 
 
-<script> 
-
-
-// get dom element this script depend on.
-const copyButtons = document.querySelectorAll('.para > img');
-const removeButtons = document.querySelectorAll('.remove > button');
-const links = document.querySelectorAll("#nav > span");
-const notify = document.querySelector("#notify > p");
-const confirm = document.querySelector("#confirm");
-const summary = document.querySelectorAll('summary');
-
-
-
-for (let elem of summary) {
-   elem.addEventListener('click', open, {once: true});
-}
- 
-for (let elem of copyButtons) {
-    elem.addEventListener('click', copy);
- }
- 
-
-for (let elem of removeButtons) {
-   elem.addEventListener('click', remove);
- }
-
-  
-for (let elem of links) {
-  elem.addEventListener("click", (e) => {
-    let elem = e.target;
-    let children = elem.parentElement.children;
-    for (let child of children) {
-      if (child == elem) {
-         child.className = "active";
-      }else {
-         child.className = "";
-      }
-    }
-  });
-}
-
-
-function open(e) {
-  let elem = e.target;
-  let detail = elem.parentElement;
-  elem.addEventListener('click', close, {once:true});
-    setTimeout(() => {
-      scroll(detail);
-    }, 250);
-} 
-
-
-function close(e) {
-  let elem = e.target;
-  elem.addEventListener('click', open, {once:true});
-}
-
-
-
-function scroll(cont) {
-   let box = cont.getBoundingClientRect();
-   let headHeight = document.querySelector('body > header').offsetHeight;
-   let scrollby = box.top + window.pageYOffset - headHeight - 30;
-   let more = cont.querySelector('#more');
-   more.scroll(0, 0);
-   document.documentElement.scroll({
-       top: scrollby,
-       left: 0,
-       behaviour: 'smooth'
-   });
- }
- 
- 
- 
- 
-// copy a particular trip id within a trip box.
-function copy(e) {
-   let elem = e.target;
-   let parent = elem.parentElement;
-   let parentNodes = parent.children;
-   let id = elem.dataset.id.trim();
-   let copied = parentNodes[2];
-  
-   navigator.clipboard.writeText(id).then(() => {
-     copied.style.animationPlayState = "running";
-     copied.addEventListener('animationend', resetAnime, {once: true});
-  }, () => {
-      return null;
-  });
-   
- }
-
-
-
- // remove a trip box with a simple animation.
- function remove(e) {
-   let elem = e.target;
-   let name = elem.dataset.name;
-   
-   let ancestor1 = elem.parentElement.parentElement.parentElement;
-   let ancestor2 = ancestor1.parentElement;
-   let sibling = elem.parentElement.children[1];
-   
-   document.querySelector("#confirmMsg > span").innerHTML = name;
-   confirm.showModal();
-   let button = confirm.querySelector('#continue');
-   
-   button.addEventListener('click', () => {
-     sibling.style.animationPlayState = 'running';
-     // simulate server request.
-     setTimeout(timeIt, 3000);
-     
-     function timeIt() {
-       resetAnime(sibling);
-       ancestor2.style.animationPlayState= "running";
-       ancestor1.style.height = "200px";
-       ancestor2.addEventListener('animationend', (e) => {
-         notify.parentElement.style.display = 'block';
-         notify.style.animationPlayState = "running";
-         notify.childNodes[1].innerHTML = name;
-         notify.childNodes[2].data = " trip closed successfully";
-         notify.addEventListener("animationend", resetNotify, {once:true});
-         let elem = e.target;
-         elem.style.display = "none";
-        }, {once:true});
-      }
-      
-   }, {once:true});
-
- }
- 
- 
- // reset style animation for passed in element.
- function resetAnime(e) {
-     let elem = e.target ?? e;
-     elem.style.animation = "none";
-     elem.offsetWidth;
-     elem.style.animation = null;
-  }
-  
-  
- // reset notify element after notification.
- function resetNotify(e) {
-     let elem = e.target;
-     let eventArray = ['touchstart', 'scroll', 'click'];
-     for (let event of eventArray) {
-       document.addEventListener(event, () => {
-          resetAnime(elem);
-          elem.parentElement.style.display = 'none';
-       }, {once:true});
-     }
-     setTimeout(() => {
-       resetAnime(elem)
-       elem.parentElement.style.display = 'none';
-     }, 4000);
-  }
- 
- 
- 
- 
-</script>
+<script src="monitor.js"></script>
   
 </body>
   

@@ -18,11 +18,18 @@ const notify = document.querySelector("#notify > p");
 const markButtons = document.querySelectorAll('.mark');
 const articleConts = document.querySelectorAll('#article');
 const confirm = document.querySelector("#confirm");
+const tripBoxs = document.querySelectorAll("details");
+const header = document.querySelector('body > header');
+const logo = document.querySelector('#logo');
+
+
+// document current scroll
+let domScroll;
 
 
 
 
-// set the display value for the first article.
+// set the display prop for the first article.
 for (let cont of articleConts) {
    let article = cont.querySelector('article');
    let seemore = cont.querySelector('#seeMore');
@@ -86,11 +93,11 @@ for (let elem of markButtons) {
    elem.addEventListener("click", copyContact);
  }
  
+ // show map associated with a report.
  for (let button of locationBtn) {
    button.addEventListener("click", () => {
         map.open = true;
         backdrop.style.visibility = 'visible';
-        body.style.overflow = 'hidden';
         map.style.animationPlayState = "running";
         map.addEventListener("animationend", () => {
           mapCont.style.visibility = "visible";
@@ -102,7 +109,6 @@ for (let elem of markButtons) {
       map.open = false;
       backdrop.style.visibility = 'hidden';
       mapCont.style.visibility = "hidden";
-      body.style.overflow = 'visible';
       // reset dialog animation.
       map.style.animation = "none";
       map.offsetWidth;
@@ -136,14 +142,10 @@ for (let elem of markButtons) {
    var qrcode = new QRCode(codeCont, {
         text: data,
         colorDark : "#000000",
-        colorLight : "#ffffff",
+        colorLight : "#D3D3D3",
         correctLevel : QRCode.CorrectLevel.H
     });
    barcontainer.showModal();
-   body.style.overflow = "hidden";
-   closeQr.addEventListener('click', () => {
-     body.style.overflow = "auto";
-   }, {once:true});
  }
  
  
@@ -152,28 +154,52 @@ for (let elem of markButtons) {
  // hide some trip info on trip box open.
  function open(e) {
     let elem = e.target;
+    body.style.overflowY = "hidden";
+    logo.parentElement.style.pointerEvents = "none";
     let detail = elem.parentElement;
-    for (let child of elem.children) {
-      let tag = child.tagName;
-      if (tag != "SPAN") {
-        child.style.visibility = "hidden";
+
+    for (let elem of tripBoxs) {
+      if (elem == detail) {
+        elem.style.boxShadow = "10px 10px 5px #888888";
+        elem.querySelector('#more').scroll(0, 0);
+      } else {
+        elem.style.pointerEvents = "none";
+        elem.style.filter = "blur(1px)";
       }
     }
-   
+    header.style.filter = "blur(1px)";
     elem.addEventListener('click', close, {once:true});
     setTimeout(() => {
+      domScroll = document.documentElement.scrollTop;
       scroll(detail);
-    }, 250);
+    }, 200);
  }
  
  
  // show some trip info on trip box close.
  function close(e) {
-    let elem = e.target ?? e;
+    body.style.overflowY = "auto";
+    logo.parentElement.style.pointerEvents = "auto";
+    header.style.filter = "blur(0)";
+    document.documentElement.scroll({
+       top: domScroll,
+       left: 0,
+       behaviour: 'smooth'
+    });
+
+    let elem = e.target;
     let parent = elem.parentElement;
-    for (let child of elem.children) {
-      child.style.visibility = "visible";
+
+    for (let elem of tripBoxs) {
+      if (elem == parent) {
+        elem.style.boxShadow = "";
+      } else {
+        elem.style.filter = "blur(0)";
+        elem.style.pointerEvents = "auto";
+      }
     }
+    
+    parent.querySelector('.contact').style.display = "none";
     
     let articles = parent.querySelectorAll('article');
     let firstArticle = parent.querySelector('article');
@@ -194,13 +220,11 @@ for (let elem of markButtons) {
     
  }
  
- 
+ // scroll the dom relative to a trip coord.
  function scroll(cont) {
    let box = cont.getBoundingClientRect();
-   let headHeight = document.querySelector('body > header').offsetHeight;
-   let scrollby = box.top + window.pageYOffset - headHeight - 30;
-   let more = cont.querySelector('#more');
-   more.scroll(0, 0);
+   let headHeight = header.offsetHeight;
+   let scrollby = box.top + window.pageYOffset - headHeight - 10;
    document.documentElement.scroll({
        top: scrollby,
        left: 0,
@@ -245,12 +269,13 @@ for (let elem of markButtons) {
     let cancel = contact.lastElementChild;
     contact.style.display = "block";
     cancel.addEventListener('click', () => {
+       contact.querySelector('div').scroll(0, 0);
        contact.style.display = "none";
     }, {once:true});
     resetAnime(elem);
  }
  
- 
+ // update a trip status
  function mark(e) {
    let parent = e.target.parentElement;
    let name = parent.dataset.name;

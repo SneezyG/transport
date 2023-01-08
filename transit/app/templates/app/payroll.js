@@ -29,12 +29,15 @@
  
  query.addEventListener('click', lookup);
  
+ // set a resize event listener for search input.
  const resizeObserver = new ResizeObserver((e) => {
     let rect = search.getBoundingClientRect();
     mark.style.paddingLeft = rect.left + "px";
   });
  resizeObserver.observe(search);
  
+ 
+ // set the style prop of active nav buttons
  for (let elem of links) {
   elem.addEventListener("click", (e) => {
     let elem = e.target;

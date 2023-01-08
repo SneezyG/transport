@@ -164,7 +164,7 @@ input.visually-hidden:is(:focus, :focus-within) + label {
 #mark {
   margin: 2px 0 0 0;
   padding-left: 20px;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 #mark > input {
@@ -175,7 +175,7 @@ dialog {
     position: fixed;
     overflow: hidden;
     z-index: 2;
-    background-color: #F5F5F5;
+    background-color: #D3D3D3;
     border: 2px solid rgb(2, 39, 53);
     user-select: none;
   }
@@ -289,6 +289,7 @@ details {
     border: 1px solid rgb(2, 39, 53);
     width: 55%;
     border-radius: 10px;
+    font-size: 15px;
   }
   
  details > ul {
@@ -299,13 +300,11 @@ details {
  }
   
   details li {
-    font-size: 14px;
     margin: 10px;
     list-style: square;
   }
   
  details > p {
-    font-size: 14px;
     padding: 10px;
     margin: 10px 0 0 5px;
   }
@@ -323,6 +322,7 @@ summary {
   padding-left: 30px;
   margin-bottom: 1px;
   cursor: pointer;
+  font-size: 17px;
 }
 
 
