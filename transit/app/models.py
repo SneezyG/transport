@@ -4,6 +4,7 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
 import uuid
+import decimal
 
 
 
@@ -31,7 +32,7 @@ def doc2(instance, filename):
 def castValidator(value):
    #try to cast CharField to float and throw error on failure.
    try:
-     float(value)
+     decimal.Decimal(value)
    except:
      error = "Only decimal and integer is valid for this field"
      raise ValidationError(error)
@@ -177,6 +178,7 @@ class Booking(models.Model):
   
   sn = models.UUIDField(primary_key=True, default=uuid.uuid4, verbose_name="id")
   booker = models.CharField(max_length=40, verbose_name="Booker's name")
+  booker_rep = models.CharField(max_length=40, verbose_name="Booker's rep name")
   name1 = models.CharField(max_length=40, verbose_name="Pick-up name")
   name2 = models.CharField(max_length=40, verbose_name="Delivery name")
   contact1 = models.CharField(max_length=15, verbose_name="Booker's contact")
@@ -289,7 +291,8 @@ class Report(models.Model):
   status = models.CharField(max_length=2, choices=statusType)
   progress = models.CharField(max_length=2, choices=progressType, default="0")
   remark = models.CharField(max_length=25)
-  coord = models.TextField()
+  longitude = models.CharField(max_length=20)
+  latitude = models.TextField(max_length=20)
   date = models.DateTimeField(auto_now_add=True)
   
   def __str__(self):

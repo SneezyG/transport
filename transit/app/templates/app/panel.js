@@ -157,6 +157,8 @@ for (let elem of markButtons) {
     body.style.overflowY = "hidden";
     logo.parentElement.style.pointerEvents = "none";
     let detail = elem.parentElement;
+    
+    elem.querySelector('p > sub').style.display = "none";
 
     for (let elem of tripBoxs) {
       if (elem == detail) {
@@ -265,12 +267,16 @@ for (let elem of markButtons) {
  function resetPhone(e) {
     let elem = e.target;
     let parent = elem.parentElement;
+    parent.style.overflowY = "hidden";
+    parent.style.pointerEvents = "none";
     let contact = parent.children[1];
     let cancel = contact.lastElementChild;
     contact.style.display = "block";
     cancel.addEventListener('click', () => {
        contact.querySelector('div').scroll(0, 0);
        contact.style.display = "none";
+       parent.style.overflowY = "auto";
+       parent.style.pointerEvents = "auto";
     }, {once:true});
     resetAnime(elem);
  }

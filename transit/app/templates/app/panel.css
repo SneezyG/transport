@@ -101,7 +101,7 @@
         position: relative;
         bottom: 10px;
         left: 20px;
-        transform: scale(4);
+        transform: scale(2);
       }
       
       header > h3 {
@@ -113,16 +113,6 @@
         color: rgb(2, 39, 53);
       }
       
-     sup {
-       background-color: white;
-       font-weight: normal;
-       font-size: 13px;
-       padding: 1px 2px 1px 2px;
-       border-radius: 10px;
-       pointer-events: none;
-     }
- 
-     
      details {
         border: 1px solid rgb(111, 127, 133);
         border-radius: 20px;
@@ -523,6 +513,7 @@
      z-index: 1;
      border: 1px solid rgb(2, 39, 53);
      border-radius: 5px;
+     pointer-events: auto;
      -webkit-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.3);
      -moz-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.3);
      box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.3);

@@ -4,11 +4,11 @@
 @keyframes rotate {
   from {
     transform: rotateZ(0deg);
-    width: 250px;
+    width: 200px;
   }
   to {
     transform: rotateZ(360deg);
-    width: 150px;
+    width: 100px;
   }
 }
 
@@ -68,7 +68,7 @@ button {
     position: relative;
     bottom: 10px;
     left: 20px;
-    transform: scale(4);
+    transform: scale(2);
   }
   
   #nav {
