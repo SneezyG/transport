@@ -51,7 +51,7 @@ class User(AbstractUser):
   office_line = models.CharField(max_length=15, verbose_name="Office-line", null=True, blank=True)
   personal_line = models.CharField(max_length=15, verbose_name="Personal-line", null=True, blank=True)
   is_agent = models.BooleanField(default=False, help_text="Designates that this user have access to the trip reporting part of this web-app")
-  trip_id = models.CharField(max_length=50, null=True)
+  currentTrip_id= models.CharField(max_length=50, null=True)
   
  
  
@@ -177,8 +177,8 @@ class Booking(models.Model):
   """
   
   sn = models.UUIDField(primary_key=True, default=uuid.uuid4, verbose_name="id")
+  name = models.CharField(max_length=40, verbose_name="Company's name" null=True, blank=True)
   booker = models.CharField(max_length=40, verbose_name="Booker's name")
-  booker_rep = models.CharField(max_length=40, verbose_name="Booker's rep name")
   name1 = models.CharField(max_length=40, verbose_name="Pick-up name")
   name2 = models.CharField(max_length=40, verbose_name="Delivery name")
   contact1 = models.CharField(max_length=15, verbose_name="Booker's contact")

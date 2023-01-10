@@ -174,7 +174,7 @@ class BookingAdmin(admin.ModelAdmin):
 
   exclude = ('sn',)
   
-  list_display = ('sn', 'booker', 'contact1', 'charges', 'paid', 'goods', 'pickup', 'delivery', 'date')
+  list_display = ('sn', 'name', 'booker', 'contact1', 'charges', 'paid', 'goods', 'pickup', 'delivery', 'date')
   
   list_filter = ("paid", "date")
   
@@ -219,7 +219,7 @@ class ReportAdmin(admin.ModelAdmin):
   
   date_hierarchy = 'date'
 
-  list_display = ('trip', 'status', 'remark', 'coord', 'date')
+  list_display = ('trip', 'status', 'progress', 'remark', 'date')
 
   list_filter = ('status', 'date',)
   

@@ -533,14 +533,14 @@
    }
    
    .contact ul {
-     list-style: none;
+     list-style-type: circle;
      padding: 0;
-     margin: 7px 0 0 0;
+     margin: 7px 0 0 60px;
    }
    
    .contact div {
     max-height: 230px;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     padding-top: 7px;
    }
@@ -575,15 +575,26 @@
      cursor: pointer;
    }
    
-   .no {
-     padding: 3px 0 3px 40px;
+   li.no {
+     padding: 3px 0 3px 0;
+     margin-bottom: 7px;
+   }
+   
+   .no > p {
+     text-transform: capitalize;
+     margin: -13px 0 5px 0;
+     font-size: 15px;
+     padding-right: 20px;
+     overflow-wrap: break-word;
    }
    
    .no > span {
-     font-size: 16px;
+     font-size: 14px;
      letter-spacing: 3px;
      text-decoration: none;
      color: rgb(2, 39, 53);
+     padding-left: 0;
+     cursor: pointer;
    }
    
    .no > span:hover {
@@ -778,6 +789,10 @@
   
   .contact div::-webkit-scrollbar {
     width: 5px;
+  }
+  
+  .no > span {
+    cursor: auto;
   }
   
   
