@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -336,10 +337,10 @@
 <body>
   
   <header>
-  <img src="logo.png" alt="logo" />
+  <img src="{% static 'agent/image/logo.png' %}" alt="logo" />
   <h5 id="nav">
-     <span id="report" class="active">Trips Report</span>
-     <span id="info">Trip Info</span>
+     <span id="report" class="active" data-url="{% url "agent:report" %}">Trips Report</span>
+     <span id="info" data-url="{% url "agent:info" %}">Trip Info</span>
    </h5>
    <p id="due">
     <span>Due report</span> 
@@ -422,12 +423,12 @@
   
   <!-- construct the dialog that displays loader-->
   <dialog id="spiner" autofocus>
-  <img src="logo.png" alt="site logo"/>
+  <img src="{% static 'agent/image/logo.png' %}" alt="site logo"/>
   </dialog>
   
   
 
-<script src="report.js"></script>
+<script src="{% static 'agent/script/report.js' %}"></script>
 
 </body>
 </html>

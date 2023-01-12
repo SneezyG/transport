@@ -582,7 +582,7 @@
    
    .no > p {
      text-transform: capitalize;
-     margin: -13px 0 5px 0;
+     margin: 0 0 5px 0;
      font-size: 15px;
      padding-right: 20px;
      overflow-wrap: break-word;

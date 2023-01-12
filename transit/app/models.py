@@ -177,7 +177,7 @@ class Booking(models.Model):
   """
   
   sn = models.UUIDField(primary_key=True, default=uuid.uuid4, verbose_name="id")
-  name = models.CharField(max_length=40, verbose_name="Company's name" null=True, blank=True)
+  name = models.CharField(max_length=40, verbose_name="Company's name", null=True, blank=True)
   booker = models.CharField(max_length=40, verbose_name="Booker's name")
   name1 = models.CharField(max_length=40, verbose_name="Pick-up name")
   name2 = models.CharField(max_length=40, verbose_name="Delivery name")

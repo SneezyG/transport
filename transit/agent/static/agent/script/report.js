@@ -96,6 +96,7 @@
       for (let child of children) {
         if (child == elem) {
            child.className = "active";
+           window.location.assign(child.dataset.url);
         }else {
            child.className = "";
         }

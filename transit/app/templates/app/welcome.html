@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,12 +45,12 @@
 </head>
 <body>
   
-   <img src="logo.png" alt="logo" />
+  <img src="{% static 'app/image/logo.png' %}" alt="logo" />
    
    <div id="welcome">
-     <img src="agent.png" alt="logo" />
+     <img src="{% static 'app/image/agent.png' %}" alt="logo" />
      <p>Welcome back agent</p>
-     <a href="#"><button>Go to application</button></a>
+     <a href="{% url "app:panel" %}"><button>Go to application</button></a>
    </div>
 
 

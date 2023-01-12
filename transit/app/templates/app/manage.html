@@ -1,11 +1,12 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
   <head>
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Transit Panel Screen</title>
+    <title>Transit Manage Screen</title>
     
-    <link rel="stylesheet" type="text/css" href="panel.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/manage.css' %}">
     
   </head>
   
@@ -13,12 +14,12 @@
 
   <header>
     <div id="header">
-      <img id='pin' src="pin.png"/>
+      <img id='pin' src="{% static 'app/image/pin.png' %}"/>
        <h4> admin </h4>
     </div>
      
-   <a href="#">
-     <img id="logo" src="logo.png"/>
+   <a href="/admin/transit">
+     <img id="logo" src="{% static 'app/image/logo.png' %}"/>
    </a>
    
    <h3> Tasks<sub>(6)</sub></h3>
@@ -43,7 +44,7 @@
     
    <div id="more">
     
-      <img class="phone" src="phone.png"/>
+      <img class="phone" src="{% static 'app/image/phone.png' %}"/>
       
       <div class="contact">
       <h4 class="contactHead"> Contacts </h4>
@@ -52,7 +53,6 @@
           <span>Bookers</span>
           <ul>
             <li class="no">
-              <br>
               <p>oyelodunafonjaoyelodunafonjaoyelodunafonjaoyelodunafonja
               </p>
               <span>3773838383</span>
@@ -66,19 +66,16 @@
          <span>Drivers</span>
          <ul>
             <li class="no">
-              <br>
               <p>oyelodun afonja</p>
               <span>3773838383</span>
               <sub>copied</sub>
               </li>
             <li class="no">
-              <br>
               <p>oyelodun afonja</p>
               <span>3838838333</span>
               <sub>copied</sub>
               </li>
             <li class="no">
-              <br>
               <p>oyelodun afonja</p>
               <span>3773838383</span>
               <sub>copied</sub>
@@ -91,19 +88,16 @@
          <span>Mechanics</span>
          <ul>
             <li class="no">
-              <br>
               <p>oyelodun afonja</p>
               <span>3773838383</span>
               <sub>copied</sub>
               </li>
             <li class="no">
-              <br>
               <p>oyelodun afonja</p>
               <span>3838838333</span>
               <sub>copied</sub>
               </li>
             <li class="no">
-              <br>
               <p>oyelodun afonja</p>
               <span>3773838383</span>
               <sub>copied</sub>
@@ -116,19 +110,16 @@
          <span>Loaders</span>
          <ul>
             <li class="no">
-              <br>
               <p>oyelodun afonja</p>
               <span>3773838383</span>
               <sub>copied</sub>
               </li>
             <li class="no">
-              <br>
               <p>oyelodun afonja</p>
               <span>3838838333</span>
               <sub>copied</sub>
               </li>
             <li class="no">
-              <br>
               <p>oyelodun afonja</p>
               <span>3773838383</span>
               <sub>copied</sub>
@@ -152,7 +143,7 @@
     <span> 
     cea088de-498a-4511-93d4-3bb0b23cd845
     </span>
-    <img data-id="cea088de-498a-4511-93d4-3bb0b23cd845" src="copy.png"/>
+    <img data-id="cea088de-498a-4511-93d4-3bb0b23cd845" src="{% static 'app/image/copy.png' %}"/>
     <h6 class="copy">coppied</h6>
     </div>
     
@@ -241,7 +232,7 @@
     </summary>
     
    <div id="more">
-      <img class="phone" src="phone.png"/>
+      <img class="phone" src="{% static 'app/image/phone.png' %}"/>
       
      <div class="contact">
       <h4 class="contactHead"> Contacts </h4>
@@ -329,7 +320,7 @@
     <span>
       525e56d6-a4fc-45e5-844a-7636df7ebcd5
     </span>
-    <img data-id="525e56d6-a4fc-45e5-844a-7636df7ebcd5" src="copy.png"/>
+    <img data-id="525e56d6-a4fc-45e5-844a-7636df7ebcd5" src="{% static 'app/image/copy.png' %}"/>
     <h6 class="copy">coppied</h6>
     </div>
     
@@ -417,7 +408,7 @@
     </summary>
     
    <div id="more">
-    <img class="phone" src="phone.png"/>
+      <img class="phone" src="{% static 'app/image/phone.png' %}"/>
     
    <div class="contact">
       <h4 class="contactHead"> Contacts </h4>
@@ -505,7 +496,7 @@
     <span>
      1edb3c02-e640-4116-829d-36f09c21de65
     </span>
-    <img data-id="1edb3c02-e640-4116-829d-36f09c21de65" src="copy.png"/>
+    <img data-id="1edb3c02-e640-4116-829d-36f09c21de65" src="{% static 'app/image/copy.png' %}"/>
     <h6 class="copy">coppied</h6>
     </div>
     
@@ -593,7 +584,7 @@
     
    <div id="more">
     
-      <img class="phone" src="phone.png"/>
+      <img class="phone" src="{% static 'app/image/phone.png' %}"/>
       
       <div class="contact">
       <h4 class="contactHead"> Contacts </h4>
@@ -681,7 +672,7 @@
     <span> 
     cea088de-498a-4511-93d4-3bb0b23cd845
     </span>
-    <img data-id="cea088de-498a-4511-93d4-3bb0b23cd845" src="copy.png"/>
+    <img data-id="cea088de-498a-4511-93d4-3bb0b23cd845" src="{% static 'app/image/copy.png' %}"/>
     <h6 class="copy">coppied</h6>
     </div>
     
@@ -770,7 +761,7 @@
     </summary>
     
    <div id="more">
-      <img class="phone" src="phone.png"/>
+      <img class="phone" src="{% static 'app/image/phone.png' %}"/>
       
      <div class="contact">
       <h4 class="contactHead"> Contacts </h4>
@@ -858,7 +849,7 @@
     <span>
       525e56d6-a4fc-45e5-844a-7636df7ebcd5
     </span>
-    <img data-id="525e56d6-a4fc-45e5-844a-7636df7ebcd5" src="copy.png"/>
+    <img data-id="525e56d6-a4fc-45e5-844a-7636df7ebcd5" src="{% static 'app/image/copy.png' %}"/>
     <h6 class="copy">coppied</h6>
     </div>
     
@@ -946,7 +937,7 @@
     </summary>
     
    <div id="more">
-    <img class="phone" src="phone.png"/>
+    <img class="phone" src="{% static 'app/image/phone.png' %}"/>
     
    <div class="contact">
       <h4 class="contactHead"> Contacts </h4>
@@ -1034,7 +1025,7 @@
     <span>
      1edb3c02-e640-4116-829d-36f09c21de65
     </span>
-    <img data-id="1edb3c02-e640-4116-829d-36f09c21de65" src="copy.png"/>
+    <img data-id="1edb3c02-e640-4116-829d-36f09c21de65" src="{% static 'app/image/copy.png' %}"/>
     <h6 class="copy">coppied</h6>
     </div>
     
@@ -1156,8 +1147,8 @@
   
   
     
- <script src="panel.js"></script>
- <script type="text/javascript" src="qrcode.min.js"></script>
+ <script src="{% static 'app/script/manage.js' %}"></script>
+ <script type="text/javascript" src="{% static 'app/script/qrcode.min.js' %}"></script>
 
 </body>
 </html>

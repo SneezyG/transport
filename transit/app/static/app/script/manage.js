@@ -174,7 +174,7 @@ for (let elem of markButtons) {
     setTimeout(() => {
       domScroll = document.documentElement.scrollTop;
       scroll(detail);
-    }, 200);
+    }, 250);
  }
  
  

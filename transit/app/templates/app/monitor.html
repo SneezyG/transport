@@ -1,27 +1,28 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Transit Monitor Screen</title>
      
-    <link rel="stylesheet" type="text/css" href="monitor.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/monitor.css' %}">
     
   </head>
   
 <body>
   <header>
     <div id="header">
-      <img id='pin' src="pin.png"/>
+      <img id='pin' src="{% static 'app/image/pin.png' %}"/>
        <h4> admin </h4>
     </div>
      
    <a href="/admin/transit">
-     <img id="logo" src="logo.png"/>
+     <img id="logo" src="{% static 'app/image/logo.png' %}"/>
    </a>
    
    <h4 id="nav">
-     <span id="trip" class="active">Trips</span>
-     <span id="pay">Payroll</span>
+     <span id="trip" class="active" data-url="{% url "app:monitor" %}">Trips</span>
+     <span id="pay" data-url="{% url "app:payroll" %}">Payroll</span>
    </h4>
    <hr/>
   </header> 
@@ -54,7 +55,7 @@
     Trip ID: 
     <span> cea088de-498a-4511-93d4-3bb0b23cd845
     </span>
-    <img data-id="cea088de-498a-4511-93d4-3bb0b23cd845" src="copy.png"/>
+    <img data-id="cea088de-498a-4511-93d4-3bb0b23cd845" src="{% static 'app/image/copy.png' %}"/>
     <h6 class="copy">coppied</h6>
     </div>
     
@@ -92,7 +93,7 @@
     Trip ID: 
     <span> 525e56d6-a4fc-45e5-844a-7636df7ebcd5
     </span>
-    <img data-id="525e56d6-a4fc-45e5-844a-7636df7ebcd5" src="copy.png"/>
+    <img data-id="525e56d6-a4fc-45e5-844a-7636df7ebcd5" src="{% static 'app/image/copy.png' %}"/>
     <h6 class="copy">coppied</h6>
     </div>
     
@@ -130,7 +131,7 @@
     Trip ID: 
     <span> 1edb3c02-e640-4116-829d-36f09c21de65
     </span>
-    <img data-id="1edb3c02-e640-4116-829d-36f09c21de65" src="copy.png"/>
+    <img data-id="1edb3c02-e640-4116-829d-36f09c21de65" src="{% static 'app/image/copy.png' %}"/>
     <h6 class="copy">coppied</h6>
     </div>
     
@@ -166,7 +167,7 @@
     Trip ID: 
     <span> cea088de-498a-4511-93d4-3bb0b23cd845
     </span>
-    <img data-id="cea088de-498a-4511-93d4-3bb0b23cd845" src="copy.png"/>
+    <img data-id="cea088de-498a-4511-93d4-3bb0b23cd845" src="{% static 'app/image/copy.png' %}"/>
     <h6 class="copy">coppied</h6>
     </div>
     
@@ -204,7 +205,7 @@
     Trip ID: 
     <span> 525e56d6-a4fc-45e5-844a-7636df7ebcd5
     </span>
-    <img data-id="525e56d6-a4fc-45e5-844a-7636df7ebcd5" src="copy.png"/>
+    <img data-id="525e56d6-a4fc-45e5-844a-7636df7ebcd5" src="{% static 'app/image/copy.png' %}"/>
     <h6 class="copy">coppied</h6>
     </div>
     
@@ -242,7 +243,7 @@
     Trip ID: 
     <span> 1edb3c02-e640-4116-829d-36f09c21de65
     </span>
-    <img data-id="1edb3c02-e640-4116-829d-36f09c21de65" src="copy.png"/>
+    <img data-id="1edb3c02-e640-4116-829d-36f09c21de65" src="{% static 'app/image/copy.png' %}"/>
     <h6 class="copy">coppied</h6>
     </div>
     
@@ -282,7 +283,7 @@
 
 
 
-<script src="monitor.js"></script>
+<script src="{% static 'app/script/monitor.js' %}"></script>
   
 </body>
   

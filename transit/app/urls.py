@@ -1,13 +1,16 @@
 from django.urls import path
-
-from . import views
+from django.contrib.auth.decorators import login_required
+from app.views import Index, Panel, Manage, Monitor, Welcome, Payroll
 
 
 
 urlpatterns = [
 
-  path('', views.index, name='index'),
-  path('welcome/', views.welcome, name='welcome'),
-  path('panel/', views.panel, name='panel'),
+  path('', Index, name='index'),
+  path('welcome/', login_required(Welcome), name='welcome'),
+  path('panel/', login_required(Panel), name='panel'),
+  path('manage/', login_required(Manage), name='manage'),
+  path('monitorTrip/', login_required(Monitor), name='monitor'),
+  path('payroll/', login_required(Payroll.as_view()), name='payroll'),
   
 ]

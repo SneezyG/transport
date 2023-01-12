@@ -1,14 +1,49 @@
 from django.shortcuts import render
+from django.views import View
 
 # Create your views here.
 
-# return the agent syncTrip page.
-def sync(request):
+
+def Sync(request):
  
   """
-  This return the syncTrip page of the agent app and it's main function is to sync a trip into the agent application.
+  This return the syncTrip page of the agent app
   """
   
-  return render(request, 'agent/synctrip.html')
+  template = 'agent/synctrip.html'
+  return render(request, template)
+  
+  
+  
+def Info(request):
+  
+  """
+  This return the information page about a particular synced trip.
+  """ 
+  
+  template = 'agent/info.html'
+  return render(request, template)
 
 
+
+class Report(View):
+  
+  """
+  This return the report page on get request and update trip report in the database on post request.
+  """
+  
+  template = "agent/report.html"
+  
+  def get(self, request, *args, **kwargs):
+    return render(request, self.template) 
+    
+    
+  def post(self, request, *args, **kwargs):
+    pass
+
+
+
+
+def Error(request):
+  template = '500.html'
+  return render(request, template)

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -5,24 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
     <title>Transit Payroll Screen</title>
     
-    <link rel="stylesheet" type="text/css" href="payroll.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/payroll.css' %}">
     
   </head>
   
 <body>
   <header>
     <div id="header">
-      <img id='pin' src="pin.png"/>
+      <img id='pin' src="{% static 'app/image/pin.png' %}"/>
        <h4> admin </h4>
     </div>
      
    <a href="/admin/transit">
-     <img id="logo" src="logo.png"/>
+     <img id="logo" src="{% static 'app/image/logo.png' %}"/>
    </a>
    
    <h4 id="nav">
-     <span id="trip">Trips</span>
-     <span id="pay" class="active">Payroll</span>
+     <span id="trip" data-url="{% url "app:monitor" %}">Trips</span>
+     <span id="pay" class="active" data-url="{% url "app:payroll" %}">Payroll</span>
    </h4>
    <hr/>
   </header> 
@@ -116,13 +117,13 @@
   
   <!-- construct the dialog that displays loader-->
   <dialog id="spiner" autofocus>
-  <img src="logo.png" alt="site logo"/>
+  <img src="{% static 'app/image/logo.png' %}" alt="site logo"/>
   </dialog>
 
   
   
   
-<script src="payroll.js"></script>
+<script src="{% static 'app/script/payroll.js' %}"></script>
   
 </body>
   

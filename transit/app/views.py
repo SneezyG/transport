@@ -1,38 +1,85 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.db import connection
+from django.views import View
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 
 
-# return the index page
-def index(request):
+def Index(request):
   
    """
    return the transit-app index page with a link to the login interface.
    """
-  
-   return render(request, 'index.html')
+    
+   template = "app/index.html"
+   return render(request, template)
 
 
 
 
-# return the panel pages.
-def panel(request):
+def Panel(request):
   
   """
-  Check if user is logged in, then check the user permissions and return a panel page build according to the amount of authority the user have.
+  Check if user is logged in, then re-direct to a specific view based on the user permissions.
   """
   
-  return render(request, 'app/panel.html')
+  user = request.user
   
-  
-  
-# return the welcome page after user authentication.
-def welcome(request):
+  if user.is_superuser:
+    return HttpResponseRedirect(reverse('app:monitor'))
+  elif user.is_agent:
+    return HttpResponseRedirect(reverse('agent:sync'))
+  else:
+    return HttpResponseRedirect(reverse('app:manage'))
+
+
+
+def Manage(request):
   
   """
-  Check if user is authenticated and return a welcome page.
+  This return the the management panel
   """
   
-  return render(request, 'app/welcome.html')
+  template = "app/manage.html"
+  return render(request, template)
+  
+ 
+ 
+def Monitor(request):
+  
+  """
+  This return the the monitor panel for the supervisor.
+  """
+  template = "app/monitor.html"
+  return render(request, template)
+  
+  
+  
+  
+def Welcome(request):
+  
+  """
+  Return a welcome page after user authentication.
+  """
+  
+  template = 'app/welcome.html'
+  return render(request, template)
+  
+ 
+  
+
+class Payroll(View):
+  
+  """
+  This return the payroll page on get request and query a trip summary of a freelancer on post request.
+  """
+  
+  template = "app/payroll.html"
+  
+  def get(self, request, *args, **kwargs):
+    return render(request, self.template) 
+    
+    
+  def post(self, request, *args, **kwargs):
+    pass
 
