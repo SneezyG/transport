@@ -353,7 +353,7 @@
      }
      
      article {
-       width: 300px;
+       width: 320px;
        margin: auto;
        background-color: #dad6d6;
        border-radius: 10px;
@@ -740,7 +740,7 @@
 
 @media only screen and (max-width: 800px) { 
   article {
-    width: 270px
+    width: 300px
   }
 
   dialog#map > div {
@@ -830,7 +830,7 @@
   }
 
   article {
-    width: 250px;
+    width: ;
   }
   
   #barcode {

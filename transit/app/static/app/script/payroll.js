@@ -11,7 +11,6 @@
  const payroll = document.querySelector('#payroll');
  const search = document.querySelector('#search');
  const mark = document.querySelector('#mark');
- const links = document.querySelectorAll("#nav > span");
  const spiner = document.querySelector("#spiner");
  
  // set default freelancer.
@@ -35,25 +34,8 @@
     mark.style.paddingLeft = rect.left + "px";
   });
  resizeObserver.observe(search);
- 
- 
- // set the style prop of active nav buttons
- for (let elem of links) {
-  elem.addEventListener("click", (e) => {
-    let elem = e.target;
-    let children = elem.parentElement.children;
-    for (let child of children) {
-      if (child == elem) {
-         child.className = "active";
-         window.location.assign(child.dataset.url);
-      }else {
-         child.className = "";
-      }
-    }
-  });
-}
- 
- 
+
+
  
  // look up a freelancer trip/wage summary.
  function lookup() {

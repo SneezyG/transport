@@ -29,21 +29,6 @@ for (let elem of removeButtons) {
    elem.addEventListener('click', remove);
  }
 
-// set the style prop of active nav button 
-for (let elem of links) {
-  elem.addEventListener("click", (e) => {
-    let elem = e.target;
-    let children = elem.parentElement.children;
-    for (let child of children) {
-      if (child == elem) {
-         child.className = "active";
-         window.location.assign(child.dataset.url);
-      }else {
-         child.className = "";
-      }
-    }
-  });
-}
 
 
 function open(e) {

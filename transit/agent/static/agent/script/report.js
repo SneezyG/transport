@@ -1,6 +1,5 @@
 
  const body = document.querySelector("body");
- const links = document.querySelectorAll("#nav > span");
  const shorts = document.querySelectorAll("#short > span");
  const submit = document.querySelector(".submit");
  const cancel = document.querySelector(".cancel");
@@ -88,22 +87,7 @@
  });
     
   
- // set style for active nav buttons
- for (let elem of links) {
-    elem.addEventListener("click", (e) => {
-      let elem = e.target;
-      let children = elem.parentElement.children;
-      for (let child of children) {
-        if (child == elem) {
-           child.className = "active";
-           window.location.assign(child.dataset.url);
-        }else {
-           child.className = "";
-        }
-      }
-    });
- }
- 
+
 
  for (let elem of shorts) {
     elem.addEventListener("click", (e) => {

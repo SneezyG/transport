@@ -51,7 +51,6 @@ class User(AbstractUser):
   office_line = models.CharField(max_length=15, verbose_name="Office-line", null=True, blank=True)
   personal_line = models.CharField(max_length=15, verbose_name="Personal-line", null=True, blank=True)
   is_agent = models.BooleanField(default=False, help_text="Designates that this user have access to the trip reporting part of this web-app")
-  currentTrip_id= models.CharField(max_length=50, null=True)
   
  
  
@@ -74,7 +73,6 @@ class Transporter(models.Model):
   sn = models.CharField(max_length=30, unique=True, verbose_name='id')
   firstName = models.CharField(max_length=20, verbose_name='first name')
   lastName = models.CharField(max_length=20, verbose_name='last name')
-  active = models.BooleanField(default=False)
   birthday = models.DateField()
   sex = models.CharField(max_length=1, choices=sexType)
   phone = models.CharField(max_length=15, verbose_name="phone number")

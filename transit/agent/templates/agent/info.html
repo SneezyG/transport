@@ -51,19 +51,21 @@
     bottom: 7px;
   }
   
-  #nav > span {
+  #nav > a {
     display: inline-block;
     width: 40%;
+    color: rgb(2, 39, 53);
     padding: 9px 7px 9px 7px;
     border: 1px solid rgb(2, 39, 53);
     text-align: center;
-    font-size: 15px;
+    font-size: 14px;
     cursor: pointer;
+    text-decoration: none;
   }
   
-  .active {
+  .inactive {
     background-color: rgb(2, 39, 53);
-    color: white;
+    color: white !important;
   }
   
   main > div {
@@ -164,10 +166,9 @@
     width: 100%;
   }
   
-  #nav > span {
+  #nav > a {
     cursor: auto;
   }
- 
   
 }
       
@@ -178,8 +179,12 @@
   <header>
   <img src="{% static 'agent/image/logo.png' %}" alt="logo" />
   <h5 id="nav">
-     <span id="report" data-url="{% url "agent:report" %}">Trips Report</span>
-     <span id="info" class="active" data-url="{% url "agent:info" %}">Trip Info</span>
+     <a class="inactive" href="{% url "agent:report" %}">
+         Trips Report
+     </a>
+     <a href="{% url "agent:info" %}">
+        Trip Info
+     </a>
    </h5>
    <hr/>
   </header> 
@@ -250,27 +255,12 @@
 
 
 <script>
-  const links = document.querySelectorAll("#nav > span");
-  const contactList  = document.querySelectorAll(".phone");
+ 
+ const contactList  = document.querySelectorAll(".phone");
 
-  
-  // set style for active nav buttons
-  for (let elem of links) {
-    elem.addEventListener("click", (e) => {
-      let elem = e.target;
-      let children = elem.parentElement.children;
-      for (let child of children) {
-        if (child == elem) {
-           child.className = "active";
-           window.location.assign(child.dataset.url);
-        }else {
-           child.className = "";
-        }
-      }
-    });
-  }
-  
-  for (let elem of contactList) {
+ 
+ 
+ for (let elem of contactList) {
    elem.addEventListener("click", copyContact);
  }
  

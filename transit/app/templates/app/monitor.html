@@ -21,8 +21,8 @@
    </a>
    
    <h4 id="nav">
-     <span id="trip" class="active" data-url="{% url "app:monitor" %}">Trips</span>
-     <span id="pay" data-url="{% url "app:payroll" %}">Payroll</span>
+     <a href="{% url "app:monitor" %}">Trips</a>
+     <a class="inactive" href="{% url "app:payroll" %}">Payroll</a>
    </h4>
    <hr/>
   </header> 
