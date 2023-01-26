@@ -211,7 +211,7 @@
      
      #more {
        height: 350px;
-       padding-top: 5px;
+       padding: 20px;
        position: relative;
        overflow-y: scroll;
        overflow-x: hidden;
