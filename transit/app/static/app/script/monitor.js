@@ -3,7 +3,7 @@
 const body = document.querySelector('body');
 const copyButtons = document.querySelectorAll('.para > img');
 const removeButtons = document.querySelectorAll('.remove > button');
-const links = document.querySelectorAll("#nav > span");
+const links = document.querySelectorAll("#nav > a");
 const notify = document.querySelector("#notify > p");
 const confirm = document.querySelector("#confirm");
 const summary = document.querySelectorAll('summary');
@@ -30,7 +30,7 @@ for (let elem of removeButtons) {
  }
 
 
-
+// open up a trip box
 function open(e) {
   let elem = e.target;
   let detail = elem.parentElement;
@@ -56,7 +56,7 @@ function open(e) {
     }, 250);
 } 
 
-
+// close a trip box
 function close(e) {
   let elem = e.target;
   let parent = elem.parentElement;
