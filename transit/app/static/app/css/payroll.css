@@ -72,11 +72,12 @@ button {
   
   #nav {
     margin: auto;
-    width: 80%;
+    width: 50%;
     display: flex;
     justify-content: center;
     position: relative;
     bottom: 10px;
+    font-size: 14px;
   }
   
   #nav > a {
@@ -381,6 +382,11 @@ details {
   cursor: auto;
 }
 
+#nav {
+  width: 70%;
+  font-size: 13px;
+}
+
 #tripsummary li {
   width: 24%;
 }
@@ -425,11 +431,6 @@ header h4 {
 #logo {
 width: 35px;
 }
-
-#nav {
-width: 100%;
-}
-
 
 details {
  width: 80%;

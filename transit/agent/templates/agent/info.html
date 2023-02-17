@@ -44,11 +44,12 @@
  
   #nav {
     margin: auto;
-    width: 80%;
+    width: 50%;
     display: flex;
     justify-content: center;
     position: relative;
     bottom: 7px;
+    font-size: 14px;
   }
   
   #nav > a {
@@ -58,7 +59,6 @@
     padding: 9px 7px 9px 7px;
     border: 1px solid rgb(2, 39, 53);
     text-align: center;
-    font-size: 14px;
     cursor: pointer;
     text-decoration: none;
   }
@@ -147,7 +147,8 @@
 @media only screen and (max-width: 800px) { 
   
   #nav {
-    width: 100%;
+    width: 70%;
+    font-size: 13px;
   }
 
   header > img {
@@ -180,10 +181,10 @@
   <img src="{% static 'agent/image/logo.png' %}" alt="logo" />
   <h5 id="nav">
      <a class="inactive" href="{% url "agent:report" %}">
-         Trips Report
+         Report
      </a>
      <a href="{% url "agent:info" %}">
-        Trip Info
+        Info
      </a>
    </h5>
    <hr/>

@@ -85,7 +85,7 @@ for (let elem of markButtons) {
  for (let elem of phone) {
     elem.addEventListener('click', () => {
       elem.style.animationPlayState = "running";
-      elem.addEventListener("animationend", resetPhone, {once:true});
+      elem.addEventListener("animationend", setPhone, {once:true});
     });
  };
  
@@ -195,6 +195,12 @@ for (let elem of markButtons) {
     for (let elem of tripBoxs) {
       if (elem == parent) {
         elem.style.boxShadow = "";
+        let more = elem.querySelector('#more');
+        let contact = more.children[1];
+        contact.querySelector('div').scroll(0, 0);
+        contact.style.display = "none";
+        more.style.overflowY = "auto";
+        more.style.pointerEvents = "auto";
       } else {
         elem.style.filter = "blur(0)";
         elem.style.pointerEvents = "auto";
@@ -264,7 +270,7 @@ for (let elem of markButtons) {
  
  
  // show the contact tab within a trip box.
- function resetPhone(e) {
+ function setPhone(e) {
     let elem = e.target;
     let parent = elem.parentElement;
     parent.style.overflowY = "hidden";

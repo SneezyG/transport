@@ -91,11 +91,12 @@
       
       #nav {
         margin: auto;
-        width: 80%;
+        width: 50%;
         display: flex;
         justify-content: center;
         position: relative;
         bottom: 10px;
+        font-size: 14px;
       }
       
       #nav > a {
@@ -488,6 +489,12 @@
     cursor: auto;
   }
   
+  #nav {
+    width: 70%;
+    font-size: 13px;
+  }
+  
+  
   button {
     cursor: auto;
   }
@@ -537,10 +544,6 @@
   
   #logo {
     width: 35px;
-  }
-  
-  #nav {
-    width: 100%;
   }
   
   #confirm {
