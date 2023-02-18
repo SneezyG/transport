@@ -289,8 +289,8 @@ class Report(models.Model):
   status = models.CharField(max_length=2, choices=statusType)
   progress = models.CharField(max_length=2, choices=progressType, default="0")
   remark = models.CharField(max_length=25)
-  longitude = models.CharField(max_length=20)
-  latitude = models.TextField(max_length=20)
+  longitude = models.DecimalField(max_digits=9, decimal_places=6)
+  latitude = models.DecimalField(max_digits=8, decimal_places=6)
   date = models.DateTimeField(auto_now_add=True)
   
   def __str__(self):

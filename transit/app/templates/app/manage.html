@@ -8,6 +8,8 @@
     
     <link rel="stylesheet" type="text/css" href="{% static 'app/css/manage.css' %}">
     
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet">
+    
   </head>
   
 <body>
@@ -169,7 +171,7 @@
     <li>status: <span>good</span></li>
     <br/>
     <li>progress: <span>pending</span></li>
-    <li><button> location </button></li>
+    <li><button data-lat="48.8584" data-long="2.2945"> location </button></li>
     </ul>
     <p id="remark">
       remark: 
@@ -183,7 +185,7 @@
     <li>status: <span>Not-bad</span></li>
     <br/>
     <li>progress: <span>pending</span></li>
-    <li><button> location </button></li>
+    <li><button data-lat="36.1069" data-long="-112.1123"> location </button></li>
     </ul>
     <p id="remark">
       remark: 
@@ -196,7 +198,7 @@
     <li>status: <span>Good</span></li>
     <br/>
     <li>progress: <span>pending</span></li>
-    <li><button> location </button></li>
+    <li><button data-lat="-18.2861" data-long="147.7000"> location </button></li>
     </ul>
     <p id="remark">
       remark: 
@@ -209,7 +211,7 @@
     <li>status: <span>Good</span></li>
     <br/>
     <li>progress: <span>pending</span></li>
-    <li><button> location </button></li>
+    <li><button data-lat="41.8902" data-long="12.4922"> location </button></li>
     </ul>
     <p id="remark">
       remark: 
@@ -1121,9 +1123,9 @@
   <div id="backdrop"> 
   </div>
   
-  <!-- construct the dialog that displays transporter location at a particular report-->
-  <dialog id="map">
-     <div>
+  <!-- construct the dialog that displays transporter map at a particular report-->
+  <dialog id="mapCont">
+     <div id="map">
      </div>
   </dialog>
   
@@ -1149,6 +1151,7 @@
     
  <script src="{% static 'app/script/manage.js' %}"></script>
  <script type="text/javascript" src="{% static 'app/script/qrcode.min.js' %}"></script>
+ <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
 
 </body>
 </html>

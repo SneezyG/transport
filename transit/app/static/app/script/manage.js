@@ -10,8 +10,8 @@ const phone = document.querySelectorAll(".phone");
 const contactList  = document.querySelectorAll(".no > span");
 const codeCont = document.querySelector("#qrCode");
 const closeQr = document.querySelector("#close");
+const mapCont = document.querySelector("#mapCont");
 const map = document.querySelector("#map");
-const mapCont = document.querySelector("#map > div");
 const locationBtn = document.querySelectorAll("article button");
 const backdrop = document.querySelector("#backdrop");
 const notify = document.querySelector("#notify > p");
@@ -95,28 +95,37 @@ for (let elem of markButtons) {
  
  // show map associated with a report.
  for (let button of locationBtn) {
-   button.addEventListener("click", () => {
-        map.open = true;
+   button.addEventListener("click", (e) => {
+        let elem = e.target;
+        let lat = Number(elem.dataset.lat);
+        let long = Number(elem.dataset.long);
+        let coord = [long, lat];
+        mapCont.open = true;
         backdrop.style.visibility = 'visible';
-        map.style.animationPlayState = "running";
-        map.addEventListener("animationend", () => {
-          mapCont.style.visibility = "visible";
+        mapCont.style.animationPlayState = "running";
+        mapCont.addEventListener("animationend", () => {
+          //alert(coord);
+          mapConstruct(coord);
+          map.style.visibility = "visible";
         }, {once:true});
     });
  }
   
   backdrop.addEventListener('click', () => {
-      map.open = false;
+      mapCont.open = false;
       backdrop.style.visibility = 'hidden';
-      mapCont.style.visibility = "hidden";
+      map.style.visibility = "hidden";
       // reset dialog animation.
-      map.style.animation = "none";
-      map.offsetWidth;
-      map.style.animation = null;
+      mapCont.style.animation = "none";
+      mapCont.offsetWidth;
+      mapCont.style.animation = null;
+      
+      // remove the previous map
+      map.replaceChildren();
   });
  
  
- 
+
  // copy contact within a particular trip box.
  function copyContact(e) {
    let elem = e.target
@@ -326,6 +335,24 @@ for (let elem of markButtons) {
        elem.parentElement.style.display = 'none';
      }, 4000);
   }
+  
+  
+  
+// map constructor
+
+function mapConstruct(coord) {
+  mapboxgl.accessToken = 'pk.eyJ1Ijoic25lZXp5ZyIsImEiOiJjbGU4c2ltajYwaW5yM29sOGNvc2p6Mm9sIn0.gfgiXz_Snua47-NbzOBEww';
+  
+  const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/sneezyg/cle9qb5o6002h01qiktb021g1',
+    center: coord,
+    zoom: 15
+  });
+  
+  const marker1 = new mapboxgl.Marker().setLngLat(coord).addTo(map);
+  
+}
 
 
  

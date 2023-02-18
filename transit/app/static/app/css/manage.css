@@ -342,13 +342,13 @@
        font-size: 15px;
      }
 
-      #expect {
+     #expect {
         color: rgb(2, 39, 53);
       }
      
      #expect span {
        float: right;
-       margin-right: 10px;
+       margin-right: 2px;
        font-weight: normal;
      }
      
@@ -619,7 +619,7 @@
     z-index: 3;
   }
   
-  dialog#map {
+  dialog#mapCont {
     width: 99.8%;
     padding: 0;
     position: fixed;
@@ -634,11 +634,12 @@
     z-index: 4;
   }
   
-  dialog#map > div {
+  dialog#mapCont > div {
     margin: auto;
     width: 70%;
     height: 80%;
     border: 2px solid white;
+    border-radius: 5px;
     margin-top: 60px;
     visibility: hidden;
   }
@@ -743,7 +744,7 @@
     width: 300px
   }
 
-  dialog#map > div {
+  dialog#mapCont > div {
     width: 80%;
   }
   
