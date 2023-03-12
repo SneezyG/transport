@@ -39,9 +39,8 @@ button {
     margin: 5px;
     position: relative;
     top: 5px;
-    font-weight: normal;
-    color: rgb(2, 39, 53);
     text-transform: capitalize;
+    color: #828E84;
   }
   
   #pin {
@@ -421,10 +420,6 @@ header > img {
 
 #header {
 width: 150px;
-}
-
-header h4 { 
- font-size: 15px;
 }
 
 #logo {

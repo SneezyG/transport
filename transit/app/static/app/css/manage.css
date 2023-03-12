@@ -67,8 +67,7 @@
         margin: 5px;
         position: relative;
         top: 5px;
-        font-weight: normal;
-        color: rgb(2, 39, 53);
+        color: #828E84;
         text-transform: capitalize;
       }
       
@@ -506,7 +505,7 @@
    .contact {
      display: none;
      position: absolute;
-     width: 250px;
+     width: 230px;
      right: 10px;
      top: 10px;
      background-color: #c0bcbc;
@@ -535,11 +534,11 @@
    .contact ul {
      list-style-type: circle;
      padding: 0;
-     margin: 7px 0 0 60px;
+     margin: 7px 0 0 40px;
    }
    
    .contact div {
-    max-height: 230px;
+    height: 280px;
     overflow-y: auto;
     overflow-x: hidden;
     padding-top: 7px;
@@ -816,10 +815,6 @@
    #header {
     width: 150px;
    }
-
-   header h4 { 
-     font-size: 15px;
-  }
  
   details {
      width: 90%;
