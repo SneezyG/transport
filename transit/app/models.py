@@ -12,14 +12,6 @@ def driv(instance, filename):
   #create a unique path for drivers photo.
   return 'driver/driv_{0}/{1}'.format(instance.sn, filename)
 
-def mech(instance, filename):
-  #create a unique path for mechanics photo.
-  return 'mechanic/mech_{0}/{1}'.format(instance.sn, filename)
-  
-def load(instance, filename):
-  #create a unique path for loaders photo.
-  return 'loader/load_{0}/{1}'.format(instance.sn, filename)
-
 def doc1(instance, filename):
   #create a unique path for doc1.
   return 'doc1/doc_{0}/{1}'.format(instance.sn, filename)
@@ -58,8 +50,6 @@ class User(AbstractUser):
 class Transporter(models.Model):
   
   """
-  This model is a generalisation model of Driver, Mechanic and Loader model.
-  
   Transporters are freelancers which are paid based on the type and amount of trip they go.
   """
   
@@ -85,10 +75,9 @@ class Transporter(models.Model):
   nationality = models.CharField(max_length=30)
   zipcode = models.IntegerField()
   pay_day = models.DateField(auto_now=True, verbose_name="last pay-day")
+  photo = models.ImageField(upload_to=driv, null=True, blank=True)
   date = models.DateTimeField(auto_now_add=True)
   
-  class Meta:
-    abstract = True
 
   def fullName(self):
     "Returns the person's full name."
@@ -108,35 +97,7 @@ class Transporter(models.Model):
     return address.title()
 
 
-class Driver(Transporter):
-  """
-  Stores a single driver data.
-  This is specialization of abstract Transporter model.
-  """
-  photo = models.ImageField(upload_to=driv, null=True, blank=True)
-  class Meta(Transporter.Meta):
-    db_table = "driver"
-  
 
-class Mechanic(Transporter):
-  """
-  Stores a single Mechanic data.
-  This is specialization of abstract Transporter model.
-  """
-  photo = models.ImageField(upload_to=mech, null=True, blank=True)
-  class Meta(Transporter.Meta):
-    db_table = "mechanic"
-  
-class Loader(Transporter):
-  """
-  Stores a single Loader data.
-  This is specialization of abstract Transporter model.
-  """
-  photo = models.ImageField(upload_to=load, null=True, blank=True)
-  class Meta(Transporter.Meta):
-    db_table = "loader"
-  
-  
 
 
 class Payroll(models.Model):
@@ -144,16 +105,9 @@ class Payroll(models.Model):
  """
   This is rather a simple model to persist the amount paid per trip to freelancer transporters.
   
-  The amount pay per trip depend on the category of transporter and type of trip.
+  The amount pay per trip depend on the amount & type of trip.
  """
   
- freeType = (
-   ("driv", "Driver"),
-   ("mech", "Mechanic"),
-   ("load", "Loader")
-  )
- 
- freelancer = models.CharField(max_length=5, choices=freeType, unique=True)
  short_range = models.CharField(max_length=30, verbose_name="pay/short-range trip in $", validators=[castValidator])
  mid_range = models.CharField(max_length=30, verbose_name="pay/mid-range trip in $", validators=[castValidator])
  long_range = models.CharField(max_length=30, verbose_name="pay/long-range trip in $", validators=[castValidator])
@@ -235,9 +189,7 @@ class Trip(models.Model):
   sn = models.UUIDField(primary_key=True, default=uuid.uuid4, verbose_name="id")
   booking = models.OneToOneField(Booking, on_delete=models.CASCADE, related_name="trip")
   category = models.CharField(max_length=3, choices=catgType)
-  drivers = models.ManyToManyField(Driver, related_name='trips')
-  mechanics = models.ManyToManyField(Mechanic, related_name='trips')
-  loaders = models.ManyToManyField(Loader, related_name='trips')
+  transporters = models.ManyToManyField(Transporter, related_name='trips')
   management = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name='trips',
   limit_choices_to={'is_superuser': False})
   report = models.IntegerField(verbose_name='Expected report')

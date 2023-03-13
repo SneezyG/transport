@@ -151,17 +151,6 @@ input.visually-hidden:is(:focus, :focus-within) + label {
   margin-top: 20px;
 }
 
-#radio {
-  text-align: center;
-  padding-right: 20px;
-  margin-bottom: 20px;
-}
-
-#radio > input {
-  margin-left: 20px;
-  cursor: pointer;
-}
-
 #mark {
   margin: 2px 0 0 0;
   padding-left: 20px;
@@ -390,10 +379,6 @@ details {
 }
 
 summary {
-  cursor: auto;
-}
-
-#radio > input {
   cursor: auto;
 }
 

@@ -5,7 +5,6 @@
  const query = document.querySelector('#search > button');
  const not_found = document.querySelector('#not_found');
  const error = document.querySelector('#error');
- const radio = document.querySelectorAll('.radio');
  const id = document.querySelector('#id');
  const time = document.querySelector('#time');
  const payroll = document.querySelector('#payroll');
@@ -13,14 +12,7 @@
  const mark = document.querySelector('#mark');
  const spiner = document.querySelector("#spiner");
  
- // set default freelancer.
- let freelancer = 'Driver';
  
- 
- 
- for (let elem of radio) {
-  elem.addEventListener('click', setfreelancer);
- }
  
  for (let elem of cancel) {
   elem.addEventListener('click', bodyreset);
@@ -47,7 +39,6 @@
    } else {
      spiner.open = true;
      let searchObj = {
-       'freelancer': freelancer,
        'id': id.value,
        'time': time.value
       };
@@ -58,13 +49,7 @@
    }
  }
  
- // update the value of freelancer global variable.
- function setfreelancer(e) {
-   let elem = e.target;
-   freelancer = elem.value;
- }
- 
- 
+
  // reset style overflow attr of body elements.
  function bodyreset() {
    body.style.overflow = "auto";

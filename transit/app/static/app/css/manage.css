@@ -505,25 +505,28 @@
    .contact {
      display: none;
      position: absolute;
+     box-sizing: border-box;
      width: 230px;
      right: 10px;
      top: 10px;
-     background-color: #c0bcbc;
+     background-color: rgb(2, 39, 53);
      z-index: 1;
-     border: 1px solid rgb(2, 39, 53);
-     border-radius: 5px;
+     border: 1.5px solid rgb(2, 39, 53);
+     border-radius: 7px;
      pointer-events: auto;
-     -webkit-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.3);
-     -moz-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.3);
-     box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.3);
+     box-shadow:  -1px 0 1px rgba(0,0,0,0.13), 
+         -2px 0 2px rgba(0,0,0,0.13), 
+         -4px 0 4px rgba(0,0,0,0.13), 
+         -8px 0 8px rgba(0,0,0,0.13), 
+         -16px 0 16px rgba(0,0,0,0.13);
+         -20px 0 30px rgba(0,0,0,0.13);
    }
    
    .contact > h4 {
      margin: 0;
      text-align: center;
-     padding: 10px 20px 10px 20px;
+     padding: 10px 0;
      color: white;
-     background-color: rgb(2, 39, 53);
    }
    
    .contact p {
@@ -542,6 +545,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     padding-top: 7px;
+    background-color: #c0bcbc;
    }
 
  .contact div::-webkit-scrollbar {

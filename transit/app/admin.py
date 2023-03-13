@@ -1,7 +1,7 @@
 
 from django.contrib import admin
 from django.contrib.admin.models import LogEntry
-from .models import User, Driver, Mechanic, Loader, Trip, Report, Booking, Payroll
+from .models import User, Trip, Report, Booking, Payroll, Transporter
 from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
@@ -90,7 +90,7 @@ class UserEntryAdmin(UserAdmin):
 
 
  
-   
+@admin.register(Transporter)  
 class TranspoterAdmin(admin.ModelAdmin):
   
   """
@@ -121,27 +121,8 @@ class TranspoterAdmin(admin.ModelAdmin):
   search_fields = ('sn', 'firstName', 'lastName')
   
 
-@admin.register(Driver)
-class DriverAdmin(TranspoterAdmin):
-   """
-   This is subclass of TranspoterAdmin
-   """
-   pass
+
    
-@admin.register(Mechanic)
-class MechanicAdmin(TranspoterAdmin):
-   """
-   This is subclass of TranspoterAdmin
-   """
-   pass
-  
-@admin.register(Loader)
-class MechanicAdmin(TranspoterAdmin):
-   """
-   This is subclass of TranspoterAdmin
-   """  
-   pass
-  
 
 
 @admin.register(Payroll)
@@ -154,9 +135,7 @@ class PayrollAdmin(admin.ModelAdmin):
   
   date_hierarchy = 'date'
 
-  list_display = ("freelancer", "short_range", "mid_range", "long_range", "date")
-  
-  list_filter = ("freelancer",)
+  list_display = ("short_range", "mid_range", "long_range", "date")
   
   preserve_filters = False
   
@@ -204,7 +183,7 @@ class TripAdmin(admin.ModelAdmin):
 
   search_fields = ('sn',)
   
-  autocomplete_fields = ('drivers', 'booking', 'mechanics', 'loaders', 'management')
+  autocomplete_fields = ('transporters', 'booking', 'management')
 
 
 
