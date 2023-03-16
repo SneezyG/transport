@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Agent welcome Page</title>
+    <title>User welcome Page</title>
 <style>
 
  html,body{
@@ -38,8 +38,15 @@
     background-color: rgb(2, 39, 53);
     margin-top: 60px;
   }
-
   
+  p.group {
+    padding: 0;
+    margin: 0;
+    font-size: 13.5px;
+    color: #0066b2;
+  }
+  
+
   
 </style>
 </head>
@@ -49,7 +56,8 @@
    
    <div id="welcome">
      <img src="{% static 'app/image/agent.png' %}" alt="logo" />
-     <p>Welcome back agent</p>
+     <p>Welcome back <b>Adigun</b></p>
+     <p class="group">You are signed in as supervisor</p>
      <a href="{% url "app:panel" %}"><button>Go to application</button></a>
    </div>
 

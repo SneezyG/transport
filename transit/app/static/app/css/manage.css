@@ -586,13 +586,13 @@
    .no > p {
      text-transform: capitalize;
      margin: 0 0 5px 0;
-     font-size: 15px;
+     font-size: 13.5px;
      padding-right: 20px;
      overflow-wrap: break-word;
    }
    
    .no > span {
-     font-size: 14px;
+     font-size: 13.5px;
      letter-spacing: 3px;
      text-decoration: none;
      color: rgb(2, 39, 53);

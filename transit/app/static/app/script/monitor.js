@@ -45,7 +45,7 @@ function open(e) {
       elem.querySelector('#more').scroll(0, 0);
     } else {
       elem.style.pointerEvents = "none";
-      elem.style.filter = "blur(1px)";
+      elem.style.filter = "blur(1px) opacity(50%)";
     }
   }
   header.style.filter = "blur(1px)";
@@ -75,7 +75,7 @@ function close(e) {
     if (elem == parent) {
       elem.style.boxShadow = "";
     } else {
-      elem.style.filter = "blur(0)";
+      elem.style.filter = "blur(0) opacity(100%)";
       elem.style.pointerEvents = "auto";
     }
   }

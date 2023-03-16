@@ -176,6 +176,7 @@ for (let elem of markButtons) {
       } else {
         elem.style.pointerEvents = "none";
         elem.style.filter = "blur(1px)";
+        elem.style.opacity = 0.5;
       }
     }
     header.style.filter = "blur(1px)";
@@ -212,6 +213,7 @@ for (let elem of markButtons) {
         more.style.pointerEvents = "auto";
       } else {
         elem.style.filter = "blur(0)";
+        elem.style.opacity = 1;
         elem.style.pointerEvents = "auto";
       }
     }
@@ -339,7 +341,6 @@ for (let elem of markButtons) {
   
   
 // map constructor
-
 function mapConstruct(coord) {
   mapboxgl.accessToken = 'pk.eyJ1Ijoic25lZXp5ZyIsImEiOiJjbGU4c2ltajYwaW5yM29sOGNvc2p6Mm9sIn0.gfgiXz_Snua47-NbzOBEww';
   
