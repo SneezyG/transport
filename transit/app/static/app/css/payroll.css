@@ -1,6 +1,6 @@
 
 
-
+/* this animate the transit logo */
 @keyframes rotate {
   from {
     transform: rotateZ(0deg);

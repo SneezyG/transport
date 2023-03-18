@@ -1,21 +1,24 @@
 
-
+  /* this animate the copy text */
    @keyframes copyAnime {
     0%   {opacity: 0;}
     50%  {opacity: 1;}
     100% {opacity: 0;}
    }
-   
+
+ /* this animate the notify bar */  
   @keyframes notifyAnime {
     0% {opacity: 0;}
     100% {opacity: 1;}
    }
-   
+  
+  /* this animate the updating text */
    @keyframes closeAnime {
     from {opacity: 0}
     to {opacity: 1}
    }
-   
+ 
+ /* this animate the trip-box on removal */
    @keyframes removeAnime {
       0%   {
         opacity: 1;

@@ -1,22 +1,25 @@
 
 
-
+  /* this animate the copy text */
    @keyframes copyAnime {
     0%   {opacity: 0;}
     50%  {opacity: 1;}
     100% {opacity: 0;}
    }
    
+  /* this animate the updating text */
    @keyframes markAnime {
     from {opacity: 0}
     to {opacity: 1}
    }
-   
+ 
+ /* this animate the notify bar */
    @keyframes notifyAnime {
     0% {opacity: 0;}
     100% {opacity: 1;}
    }
-   
+ 
+ /* this animate the phone icon */
    @keyframes phoneAnime {
      from { 
        width: 30px; 
@@ -27,7 +30,8 @@
        visibility: hidden;
      }
    }
-   
+  
+  /* this animate the map modal */
    @keyframes modalAnime {
       0% {
         opacity: 0.2;
