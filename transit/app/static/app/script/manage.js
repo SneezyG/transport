@@ -151,7 +151,7 @@ for (let elem of markButtons) {
    var qrcode = new QRCode(codeCont, {
         text: data,
         colorDark : "#000000",
-        colorLight : "#D3D3D3",
+        colorLight : "#e9e8e8",
         correctLevel : QRCode.CorrectLevel.H
     });
    barcontainer.showModal();
@@ -167,7 +167,7 @@ for (let elem of markButtons) {
     logo.parentElement.style.pointerEvents = "none";
     let detail = elem.parentElement;
     
-    elem.querySelector('p > sub').style.display = "none";
+    elem.querySelector('.new').style.display = "none";
 
     for (let elem of tripBoxs) {
       if (elem == detail) {

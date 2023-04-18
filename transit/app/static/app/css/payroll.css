@@ -13,9 +13,10 @@
 }
 
 body {
+    font-family: 'Times New Roman', Times, serif;
     margin: 0;
     padding: 0 0 300px 0;
-    background-color: #D3D3D3;
+    background-color: #e9e8e8;
     overflow-y: auto;
     overflow-x: hidden;
     user-select: none;
@@ -47,11 +48,12 @@ button {
     width: 23px;
     margin: 2px 0 0 0;
     opacity: 0.7;
+    filter: brightness(70%) saturate(2);
   }
 
   header {
     position: fixed;
-    background-color: #D3D3D3;
+    background-color: #e9e8e8;
     width: 100%;
     z-index: 1; 
   }
@@ -165,7 +167,7 @@ dialog {
     position: fixed;
     overflow: hidden;
     z-index: 2;
-    background-color: #D3D3D3;
+    background-color: #e9e8e8;
     border: 2px solid rgb(2, 39, 53);
     user-select: none;
   }
@@ -184,7 +186,7 @@ dialog::backdrop {
 
 #not_found  p {
  text-align: center;
- font-size: 15px;
+ font-size: 15.5px;
 }
 
 #not_found > form {
@@ -317,7 +319,7 @@ summary {
 
 
 #spiner {
-  background-color: #D3D3D3;
+  background-color: #e9e8e8;
   position: fixed;
   top: 0;
   padding: 0;

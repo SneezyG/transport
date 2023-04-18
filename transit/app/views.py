@@ -5,6 +5,18 @@ from django.urls import reverse
 
 
 
+
+def Test(request):
+  
+   """
+   return the transit-app index page with a link to the login interface.
+   """
+    
+   template = "app/payroll.html"
+   return render(request, template)
+
+
+
 def Index(request):
   
    """

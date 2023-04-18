@@ -29,9 +29,10 @@
    }
    
    body {
+        font-family: 'Times New Roman', Times, serif;
         margin: 0;
         padding: 0;
-        background-color: #D3D3D3;
+        background-color: #e9e8e8;
         overflow-y: auto;
         overflow-x: hidden;
         user-select: none;
@@ -68,12 +69,13 @@
         width: 23px;
         margin: 2px 0 0 0;
         opacity: 0.7;
+        filter: brightness(70%) saturate(2);
       }
 
       header {
         position: fixed;
         top: 0;
-        background-color: #D3D3D3;
+        background-color: #e9e8e8;
         width: 100%;
         z-index: 1;
       }
@@ -123,7 +125,7 @@
         border-radius: 20px;
         width: 55%;
         overflow: hidden;
-        background-color: #c0bcbc;
+        background-color: #cecbcb;
         margin: auto;
         margin-bottom: 50px;
         animation: removeAnime;
@@ -134,27 +136,29 @@
       
       summary {
         border-bottom: 1px solid rgb(111, 127, 133);
-        padding: 7px 10px 2px 40px;
+        padding: 8px 10px 3px 40px;
         margin-bottom: 1px;
         overflow: auto;
         cursor: pointer;
         border-radius: 20px;
-        font-size: 15px;
+        font-size: 15.5px;
         color: rgb(2, 39, 53);
+        position: relative;
       }
       
-      summary span {
+      summary > span {
         pointer-events: none;
         display: inline-block;
         font-weight: 600;
+        opacity: 0.8;
+        font-size: 16px;
         width: 35%;
-        margin-right: 40%;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         position: relative;
-        top: 3px;
-        text-transform: uppercase;
+        top: 4px;
+        text-transform: capitalize;
       }
       
       summary > p {
@@ -166,20 +170,24 @@
       }
       
       #info {
-        position: relative;
-        left: 30px;
         font-size: 15.5px;
+        color: rgb(2, 39, 53);
         pointer-events: none;
+        position: absolute;
+        top: 10px;
+        right: 30px;
       }
       
       #info > span {
         display: inline-block;
         width: 5px;
         height: 5px;
-        padding: 4px;
         margin-right: 5px;
+        padding: 4px;
         border-radius: 10px;
-        background-color: green;
+        background-color: rgb(32, 179, 32);
+        position: relative;
+        top: 3px;
       }
       
       summary span::-webkit-scrollbar {
@@ -275,7 +283,7 @@
        white-space: nowrap;
        padding: 5px 5px 5px 10px;
        color: black;
-       background-color: #D3D3D3;
+       background-color: #e0dede;
        border-radius: 2px;
        overflow: scroll;
        position: relative;
@@ -377,7 +385,7 @@
     }
     
     dialog {
-      background-color: #D3D3D3;
+      background-color: #e9e8e8;
       position: fixed;
       border: 2px solid rgb(2, 39, 53);
       user-select: none;
@@ -500,11 +508,11 @@
   button {
     cursor: auto;
   }
-  
-  summary > span {
-    margin-right: 35%;
+
+  #origin {
+    padding-left: 60px;
   }
- 
+  
   
 }
 
