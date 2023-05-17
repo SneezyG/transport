@@ -65,7 +65,6 @@ class Transporter(models.Model):
   state = models.CharField(max_length=30,)
   nationality = models.CharField(max_length=30)
   zipcode = models.IntegerField()
-  pay_day = models.DateField(verbose_name="last-pay-day")
   photo = models.ImageField(upload_to=driv, null=True, blank=True)
   date = models.DateTimeField(auto_now_add=True)
   

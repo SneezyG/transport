@@ -9,7 +9,6 @@
  const time = document.querySelector('#time');
  const payroll = document.querySelector('#payroll');
  const search = document.querySelector('#search');
- const mark = document.querySelector('#mark');
  const spiner = document.querySelector("#spiner");
  
  
@@ -20,14 +19,6 @@
  
  query.addEventListener('click', lookup);
  
- // set a resize event listener for search input.
- const resizeObserver = new ResizeObserver((e) => {
-    let rect = search.getBoundingClientRect();
-    mark.style.paddingLeft = rect.left + "px";
-  });
- resizeObserver.observe(search);
-
-
  
  // look up a freelancer trip/wage summary.
  function lookup() {

@@ -153,15 +153,6 @@ input.visually-hidden:is(:focus, :focus-within) + label {
   margin-top: 20px;
 }
 
-#mark {
-  margin: 2px 0 0 0;
-  padding-left: 20px;
-  font-size: 14px;
-}
-
-#mark > input {
-  cursor: pointer;
-}
 
 dialog {
     position: fixed;
@@ -388,9 +379,6 @@ button {
   cursor: auto;
 }
 
-#mark > input {
-  cursor: auto;
-}
 
 #browse {
   cursor: auto;
