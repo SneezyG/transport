@@ -21,14 +21,6 @@ def doc2(instance, filename):
   return 'doc2/doc_{0}/{1}'.format(instance.sn, filename)
   
     
-def castValidator(value):
-   #try to cast CharField to float and throw error on failure.
-   try:
-     decimal.Decimal(value)
-   except:
-     error = "Only decimal and integer is valid for this field"
-     raise ValidationError(error)
-      
 
 
 
@@ -42,7 +34,7 @@ class User(AbstractUser):
   
   office_line = models.CharField(max_length=15, verbose_name="Office-line", null=True, blank=True)
   personal_line = models.CharField(max_length=15, verbose_name="Personal-line", null=True, blank=True)
-  is_agent = models.BooleanField(default=False, help_text="Designates that this user have access to the trip reporting part of this web-app")
+  is_agent = models.BooleanField(default=False, help_text="Designates that this user have access to the trip reporting part of this web-app", verbose_name="is-agent")
   
  
  
@@ -66,7 +58,6 @@ class Transporter(models.Model):
   birthday = models.DateField()
   sex = models.CharField(max_length=1, choices=sexType)
   phone = models.CharField(max_length=15, verbose_name="phone number")
-  photo = models.ImageField()
   aptNo = models.IntegerField(verbose_name='apartment number')
   laneNo = models.IntegerField(verbose_name='lane number')
   street = models.CharField(max_length=30)
@@ -74,7 +65,7 @@ class Transporter(models.Model):
   state = models.CharField(max_length=30,)
   nationality = models.CharField(max_length=30)
   zipcode = models.IntegerField()
-  pay_day = models.DateField(auto_now=True, verbose_name="last pay-day")
+  pay_day = models.DateField(verbose_name="last-pay-day")
   photo = models.ImageField(upload_to=driv, null=True, blank=True)
   date = models.DateTimeField(auto_now_add=True)
   
@@ -108,14 +99,11 @@ class Payroll(models.Model):
   The amount pay per trip depend on the amount & type of trip.
  """
   
- short_range = models.CharField(max_length=30, verbose_name="pay/short-range trip in $", validators=[castValidator])
- mid_range = models.CharField(max_length=30, verbose_name="pay/mid-range trip in $", validators=[castValidator])
- long_range = models.CharField(max_length=30, verbose_name="pay/long-range trip in $", validators=[castValidator])
+ short_range = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="pay/short-range trip in $")
+ mid_range = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="pay/mid-range trip in $")
+ long_range = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="pay/long-range trip in $")
  date = models.DateTimeField(auto_now=True)
  
- def __str__(self):
-    return self.get_freelancer_display()
-    
  
 
 
@@ -136,7 +124,7 @@ class Booking(models.Model):
   contact1 = models.CharField(max_length=15, verbose_name="Booker's contact")
   contact2 = models.CharField(max_length=15, verbose_name="Pick-up contact")
   contact3 = models.CharField(max_length=15, verbose_name="Delivery contact")
-  charges = models.CharField(max_length=30, verbose_name="Amount due($)", validators=[castValidator])
+  charges = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Amount due($)")
   paid = models.BooleanField(default=False)
   goods = models.TextField(verbose_name="Goods description")
   pickup = models.CharField(max_length=150, verbose_name="pickup address")
@@ -191,7 +179,7 @@ class Trip(models.Model):
   category = models.CharField(max_length=3, choices=catgType)
   transporters = models.ManyToManyField(Transporter, related_name='trips')
   management = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name='trips',
-  limit_choices_to={'is_superuser': False})
+  limit_choices_to={'is_superuser': False, 'is_agent': False})
   report = models.IntegerField(verbose_name='Expected report')
   status = models.CharField(max_length=3, choices=statusType, default="one")
   progress = models.CharField(max_length=2, choices=progressType, default="0")
@@ -201,14 +189,6 @@ class Trip(models.Model):
   def __str__(self):
     text = '%s(schedule: %s)' % (self.get_category_display(), self.date)
     return text.title()
-  
-  # overide the save method.
-  def save(self, *args, **kwargs):
-    if not self.management.is_superuser:
-      super().save(*args, **kwargs)
-    else:
-      text = "Admin can't be assign to a trip"
-      raise ValidationError(text)
       
   
   

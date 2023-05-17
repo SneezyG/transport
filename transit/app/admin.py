@@ -138,8 +138,23 @@ class PayrollAdmin(admin.ModelAdmin):
   list_display = ("short_range", "mid_range", "long_range", "date")
   
   preserve_filters = False
+
+
+  def has_add_permission(self, request):
+    return False
+  
+  def has_change_permission(self, request, obj=None):
+    return request.user.is_superuser
+
+  def has_delete_permission(self, request, obj=None):
+    return False
+
+  def has_view_permission(self, request, obj=None):
+    return request.user.is_superuser
   
   
+
+
 
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
@@ -160,6 +175,7 @@ class BookingAdmin(admin.ModelAdmin):
   preserve_filters = False
 
   search_fields = ('sn', 'booker')
+   
    
    
     
