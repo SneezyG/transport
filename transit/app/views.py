@@ -12,7 +12,7 @@ def Test(request):
    return the transit-app index page with a link to the login interface.
    """
     
-   template = "app/payroll.html"
+   template = "app/manage.html"
    return render(request, template)
 
 
