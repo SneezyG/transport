@@ -32,9 +32,15 @@ class User(AbstractUser):
   and this model is the new auth_user_model
   """
   
+  userType = (
+      ('manager', 'manager'),
+      ('supervisor', 'supervisor'),
+      ('agent', 'agent'),
+    )
+  
   office_line = models.CharField(max_length=15, verbose_name="Office-line", null=True, blank=True)
   personal_line = models.CharField(max_length=15, verbose_name="Personal-line", null=True, blank=True)
-  is_agent = models.BooleanField(default=False, help_text="Designates that this user have access to the trip reporting part of this web-app", verbose_name="is-agent")
+  user_type = models.CharField(max_length=12, choices=userType, help_text="This field define the user access level to the transit panel.")
   
  
  

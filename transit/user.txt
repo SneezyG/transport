@@ -2,19 +2,20 @@ User and their password for this application
 
 
 There will be 3 type of user for this application.
-1. freelancer - Go on trip and send trip updates.
-
-2. supervisor - co-ordinate trips assigned to him from pending to finished.
-
-3. manager - create and monitor bookings/trips, he is fully responsible for the freelancers.
+1. agent - trip sync, report and info (admin: no permission).
+2. supervisor - manage trips (admin: view trips permission).
+3. manager(superuser)- monitor trips (admin: superuser permission).
 
 
-supervisor: gshsj626#-+#
-This user is a superuser
-Email = ahmadgbolly97@gmail.com
+
+manager: hshs627£-;"+#
+
+supervisor: hshsj7373-£+
+
+agent: wyeha272#£
 
 
-managementA: wyeha272#£
+
 
 
 Note: remember to round up lat/long to 6 decimal places before storing in the database.

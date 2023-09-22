@@ -75,10 +75,10 @@ class UserEntryAdmin(UserAdmin):
     date_hierarchy = 'date_joined'
     
     fieldsets = (
-        (None, {'fields': ('username', 'email', 'password', 'office_line', 'personal_line', 'groups', 'user_permissions', 'is_active', 'is_staff', 'is_superuser', 'is_agent')}),
+        (None, {'fields': ('username', 'email', 'password', 'user_type', 'office_line', 'personal_line', 'groups', 'user_permissions', 'is_active', 'is_staff', 'is_superuser')}),
         )
     
-    list_display = ('username', 'email', 'last_login', 'is_active', 'is_staff', 'is_superuser', 'is_agent', 'date_joined')
+    list_display = ('username', 'email', 'last_login', 'is_active', 'is_staff', 'is_superuser', 'user_type', 'date_joined')
     
     list_filter = ('is_staff', 'is_active', 'is_superuser', 'is_agent', 'date_joined')
     
