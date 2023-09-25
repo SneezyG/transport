@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views import View
+from django.core.exceptions import PermissionDenied
 
 # Create your views here.
 
@@ -11,7 +12,11 @@ def Sync(request):
   """
   
   template = 'agent/synctrip.html'
-  return render(request, template)
+  user_type = request.user.user_type
+  
+  if user_type == "agent":
+    return render(request, template)
+  raise PermissionDenied
   
   
   
@@ -22,7 +27,11 @@ def Info(request):
   """ 
   
   template = 'agent/info.html'
-  return render(request, template)
+  user_type = request.user.user_type
+  
+  if user_type == "agent":
+    return render(request, template)
+  raise PermissionDenied
 
 
 
@@ -34,16 +43,17 @@ class Report(View):
   
   template = "agent/report.html"
   
+  def dispatch(self, request, *args, **kwargs):
+    user_type = request.user.user_type
+    if user_type == "agent":
+      return super().dispatch(request, *args, **kwargs)
+    raise PermissionDenied
+  
   def get(self, request, *args, **kwargs):
-    return render(request, self.template) 
+    return render(request, self.template)
     
     
   def post(self, request, *args, **kwargs):
     pass
 
 
-
-
-def Error(request):
-  template = '500.html'
-  return render(request, template)

@@ -17,14 +17,17 @@
   <header>
     <div id="header">
       <img id='pin' src="{% static 'app/image/pin.png' %}"/>
-       <h4> admin </h4>
+       <h4>
+          {{ user.username }} 
+          <sub> {{ user.user_type }} </sub>
+       </h4>
     </div>
      
    <a href="/admin/transit">
      <img id="logo" src="{% static 'app/image/logo.png' %}"/>
    </a>
    
-   <h3> Tasks<sub>(6)</sub></h3>
+   <h3> Trips<sub>(6)</sub></h3>
    <hr/>
   </header> 
   
@@ -37,6 +40,8 @@
     </p>
   </div>
 
+  <h5 class="due">Due in 2 days</h5>
+  
   <details>
     <summary>
       <span>pinnacle studio</span>
@@ -577,6 +582,9 @@
     
   </div>
   </details>
+  
+  <h5 class="due">Due in 4 days</h5>
+  
   <details>
     <summary>
       <span>pinnacle studio</span>
@@ -930,6 +938,7 @@
   </div>
   </details>
   
+  <h5 class="due">Due in 1 week</h5>
   
   <details>
     <summary>

@@ -36,6 +36,7 @@ class User(AbstractUser):
       ('manager', 'manager'),
       ('supervisor', 'supervisor'),
       ('agent', 'agent'),
+      ('payroll', 'payroll')
     )
   
   office_line = models.CharField(max_length=15, verbose_name="Office-line", null=True, blank=True)
@@ -188,7 +189,8 @@ class Trip(models.Model):
   report = models.IntegerField(verbose_name='Expected report')
   status = models.CharField(max_length=3, choices=statusType, default="one")
   progress = models.CharField(max_length=2, choices=progressType, default="0")
-  date = models.DateTimeField()
+  created_date = models.DateTimeField()
+  due_date = models.DateTimeField()
   
   
   def __str__(self):

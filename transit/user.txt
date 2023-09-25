@@ -3,8 +3,9 @@ User and their password for this application
 
 There will be 3 type of user for this application.
 1. agent - trip sync, report and info (admin: no permission).
-2. supervisor - manage trips (admin: view trips permission).
+2. supervisor - manage trips (admin: view trips and bookings permission).
 3. manager(superuser)- monitor trips (admin: superuser permission).
+4. payroll - payroll (admin: no permission)
 
 
 
@@ -14,8 +15,14 @@ supervisor: hshsj7373-£+
 
 agent: wyeha272#£
 
+payroll: hshhs27&#+#
 
 
 
 
-Note: remember to round up lat/long to 6 decimal places before storing in the database.
+
+Note: remember to round up lat/long to 6 decimal places before storing in the database
+
+
+todo:
+add a logout link to manage, monitor and payroll panel.

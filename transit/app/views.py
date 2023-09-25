@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.core.exceptions import PermissionDenied
 
 
 
@@ -35,14 +36,19 @@ def Panel(request):
   Check if user is logged in, then re-direct to a specific view based on the user permissions.
   """
   
-  user = request.user
+  user_type = request.user.user_type
+  is_super = request.user.is_superuser
   
-  if user.is_superuser:
+  if user_type == 'manager' or is_super:
     return HttpResponseRedirect(reverse('app:monitor'))
-  elif user.is_agent:
+  elif user_type == 'agent':
     return HttpResponseRedirect(reverse('agent:sync'))
-  else:
+  elif user_type == 'supervisor':
     return HttpResponseRedirect(reverse('app:manage'))
+  elif user_type == 'payroll':
+    return HttpResponseRedirect(reverse('app:payroll'))
+  else:
+    raise PermissionDenied
 
 
 
@@ -53,7 +59,11 @@ def Manage(request):
   """
   
   template = "app/manage.html"
-  return render(request, template)
+  user_type = request.user.user_type
+  
+  if user_type == "supervisor":
+    return render(request, template)
+  raise PermissionDenied
   
  
  
@@ -63,7 +73,12 @@ def Monitor(request):
   This return the the monitor panel for the supervisor.
   """
   template = "app/monitor.html"
-  return render(request, template)
+  user_type = request.user.user_type
+  is_super = request.user.is_superuser
+  
+  if user_type == "manager" or is_super:
+    return render(request, template)
+  raise PermissionDenied
   
   
   
@@ -88,8 +103,14 @@ class Payroll(View):
   
   template = "app/payroll.html"
   
+  def dispatch(self, request, *args, **kwargs):
+    user_type = request.user.user_type
+    if user_type == "payroll":
+      return super().dispatch(request, *args, **kwargs)
+    raise PermissionDenied
+  
   def get(self, request, *args, **kwargs):
-    return render(request, self.template) 
+    return render(request, self.template)
     
     
   def post(self, request, *args, **kwargs):

@@ -13,7 +13,10 @@
   <header>
     <div id="header">
       <img id='pin' src="{% static 'app/image/pin.png' %}"/>
-       <h4> admin </h4>
+       <h4>
+          {{ user.username }}
+          <sub> {{ user.user_type }} </sub>
+       </h4>
     </div>
      
    <a href="/admin/transit">
@@ -22,7 +25,6 @@
    
    <h4 id="nav">
      <a href="{% url "app:monitor" %}">Trips</a>
-     <a class="inactive" href="{% url "app:payroll" %}">Payroll</a>
    </h4>
    <hr/>
   </header> 
@@ -36,6 +38,8 @@
     </p>
   </div>
   
+ <h5 class="due">Due in two days</h5>
+ 
   <details>
     <summary>
       <span>pinnacle studio</span>
@@ -68,7 +72,10 @@
     </ul>
     <br>
     
-   <p id="progress">progress: <b>pending</b></p>
+   <p id="progress">
+     progress: <b>pending</b>
+     <sub> (to be delivered by 25-06-2022) </sub>
+   </p>
     
   </div>
   </details>
@@ -106,7 +113,10 @@
     </ul>
     <br>
     
-   <p id="progress">progress: <b>Delivered</b></p>
+   <p id="progress">
+     progress: <b>Delivered</b>
+     <sub> (to be delivered by 25-06-2022) </sub>
+   </p>
     
   </div>
   </details>
@@ -144,10 +154,16 @@
     </ul>
     <br>
     
-   <p id="progress">progress: <b>Delivered</b></p>
+   <p id="progress">
+     progress: <b>Delivered</b>
+     <sub> (to be delivered by 25-06-2022) </sub>
+   </p>
     
   </div>
   </details>
+  
+  <h5 class="due">Due in 1 week</h5>
+  
   <details>
     <summary>
       <span>pinnacle studio</span>
@@ -180,7 +196,10 @@
     </ul>
     <br>
     
-   <p id="progress">progress: <b>pending</b></p>
+   <p id="progress">
+     progress: <b>pending</b>
+     <sub> (to be delivered by 25-06-2022) </sub>
+  </p>
     
   </div>
   </details>
@@ -218,11 +237,15 @@
     </ul>
     <br>
     
-   <p id="progress">progress: <b>Delivered</b></p>
+   <p id="progress">
+     progress: <b>Delivered</b>
+     <sub> (to be delivered by 25-06-2022) </sub>
+   </p>
     
   </div>
   </details>
   
+  <h5 class="due"> Due in 10 days </h5>
   
  <details>
     <summary>
@@ -256,7 +279,10 @@
     </ul>
     <br>
     
-   <p id="progress">progress: <b>Delivered</b></p>
+   <p id="progress">
+     progress: <b>Delivered</b>
+     <sub> (to be delivered by 25-06-2022) </sub>
+   </p>
     
   </div>
   </details>

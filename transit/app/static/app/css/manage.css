@@ -59,7 +59,7 @@
     }
       
     #header {
-        width: 180px;
+        width: 80%;
         margin: auto;
         margin-top: 10px;
         display: flex;
@@ -75,6 +75,15 @@
         color: #828E84;
         text-transform: capitalize;
       }
+    
+    #header sub {
+      color: #828E84;
+      font-size: 12px;
+      font-weight: normal;
+      position: relative;
+      left: 3px;
+      bottom: 3px;
+    }
       
       #pin {
         width: 23px;
@@ -118,6 +127,11 @@
         color: rgb(2, 39, 53);
       }
       
+      h5.due {
+        width: 60%;
+        margin: 50px auto 15px auto;
+      }
+      
      details {
         border: 1px solid rgb(111, 127, 133);
         border-radius: 20px;
@@ -125,7 +139,7 @@
         width: 55%;
         overflow: hidden;
         margin: auto;
-        margin-bottom: 50px;
+        margin-bottom: 25px;
       }
       
       summary {
@@ -747,6 +761,10 @@
     width: 70%;
   }
   
+  h5.due {
+    width: 75%;
+  }
+  
   #barcode {
     width: 50%
   }
@@ -833,14 +851,14 @@
    header {
      padding: 2px;
    }
-
-   #header {
-    width: 150px;
-   }
  
   details {
      width: 90%;
    }
+   
+   h5.due {
+    width: 95%;
+  }
 
   summary {
     padding-left: 20px;

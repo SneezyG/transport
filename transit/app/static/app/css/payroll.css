@@ -27,7 +27,7 @@ button {
 }
   
 #header {
-    width: 180px;
+    width: 80%;
     margin: auto;
     margin-top: 10px;
     display: flex;
@@ -42,6 +42,14 @@ button {
     top: 5px;
     text-transform: capitalize;
     color: #828E84;
+  }
+  
+  #header sub {
+    font-size: 12px;
+    font-weight: normal;
+    position: relative;
+    left: 3px;
+    bottom: 3px;
   }
   
   #pin {
@@ -90,11 +98,6 @@ button {
     text-align: center;
     cursor: pointer;
     text-decoration: none;
-  }
-  
-  .inactive {
-    color: white !important;
-    background-color: rgb(2, 39, 53);
   }
   
   section {
@@ -391,10 +394,6 @@ button {
 
 header > img {
  width: 37px;
-}
-
-#header {
-width: 150px;
 }
 
 #logo {

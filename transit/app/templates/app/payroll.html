@@ -14,15 +14,17 @@
   <header>
     <div id="header">
       <img id='pin' src="{% static 'app/image/pin.png' %}"/>
-       <h4> admin </h4>
+       <h4>
+          {{ user.username }} 
+          <sub> {{ user.user_type }}</sub>
+       </h4>
     </div>
      
-   <a href="/admin/transit">
+   <a href="#">
      <img id="logo" src="{% static 'app/image/logo.png' %}"/>
    </a>
    
    <h4 id="nav">
-     <a class="inactive" href="{% url "app:monitor" %}">Trips</a>
      <a href="{% url "app:payroll" %}">Payroll</a>
    </h4>
    <hr/>

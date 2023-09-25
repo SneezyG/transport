@@ -80,7 +80,7 @@ class UserEntryAdmin(UserAdmin):
     
     list_display = ('username', 'email', 'last_login', 'is_active', 'is_staff', 'is_superuser', 'user_type', 'date_joined')
     
-    list_filter = ('is_staff', 'is_active', 'is_superuser', 'is_agent', 'date_joined')
+    list_filter = ('is_staff', 'is_active', 'is_superuser', 'user_type', 'date_joined')
     
     preserve_filters = False
 
@@ -187,13 +187,13 @@ class TripAdmin(admin.ModelAdmin):
     Add some customization.
   """ 
   
-  date_hierarchy = 'date'
+  date_hierarchy = 'created_date'
   
   exclude = ('sn',)
   
-  list_display = ('sn', 'booking', 'category', 'management', 'report', 'status', 'progress', 'date')
+  list_display = ('sn', 'booking', 'category', 'management', 'report', 'status', 'progress', 'created_date', 'due_date')
   
-  list_filter = ('category', 'status', 'progress', 'date',)
+  list_filter = ('category', 'status', 'progress', 'created_date', 'due_date')
   
   preserve_filters = False
 

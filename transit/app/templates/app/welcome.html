@@ -58,8 +58,10 @@
    
    <div id="welcome">
      <img src="{% static 'app/image/agent.png' %}" alt="logo" />
-     <p>Welcome back <b>Adigun</b></p>
-     <p class="group">You are signed in as supervisor</p>
+     <p>Welcome back <b>{{ user.username|capfirst }}</b></p>
+     <p class="group">
+       You are signed in as {{ user.user_type|default:"unknown" }}
+     </p>
      <a href="{% url "app:panel" %}"><button>Go to application</button></a>
    </div>
 
