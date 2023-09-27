@@ -80,6 +80,13 @@
         z-index: 1;
       }
       
+      .logout {
+        position: absolute;
+        right: 10%;
+        bottom: 15px;
+        font-size: 14px;
+      }
+      
       header > hr {
         margin-top: 10px;
       }
@@ -87,9 +94,7 @@
       #logo {
         width: 40px;
         border-radius: 10px;
-        position: relative;
-        bottom: 10px;
-        left: 20px;
+        margin-left: 10px;
         transform: scale(2);
       }
       

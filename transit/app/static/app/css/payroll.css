@@ -66,6 +66,13 @@ button {
     z-index: 1; 
   }
   
+  .logout {
+    position: absolute;
+    right: 10%;
+    bottom: 15px;
+    font-size: 14px;
+  }
+  
   header > hr {
     margin-top: 10px;
   }

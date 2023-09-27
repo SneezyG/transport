@@ -54,7 +54,7 @@
                 {% if user.has_usable_password %}
                 <a href="{% url 'admin:password_change' %}">{% translate 'Change password' %}</a> /
                 {% endif %}
-                <form style="display:inline-block;" id="logout-form" method="post" action="{% url 'admin:logout' %}">
+                <form style="display:inline-block;" id="logout-form" method="post" action="{% url 'logout' %}">
                     {% csrf_token %}
                     <button type="submit">{% translate 'Log out' %}</button>
                 </form>
