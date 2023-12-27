@@ -29,7 +29,10 @@ class User(AbstractUser):
   """
   store a single user data.
   extend the django abstract-user class.
-  and this model is the new auth_user_model
+  and this model is the new auth_user_model.
+  *** user access ***
+  only manager and supervisor are staff users.
+  only the manager is a superuser.
   """
   
   userType = (
@@ -185,7 +188,7 @@ class Trip(models.Model):
   category = models.CharField(max_length=3, choices=catgType)
   transporters = models.ManyToManyField(Transporter, related_name='trips')
   management = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name='trips',
-  limit_choices_to={'is_superuser': False, 'is_agent': False})
+  limit_choices_to={'user_type': "supervisor"})
   report = models.IntegerField(verbose_name='Expected report')
   status = models.CharField(max_length=3, choices=statusType, default="one")
   progress = models.CharField(max_length=2, choices=progressType, default="0")
@@ -194,7 +197,7 @@ class Trip(models.Model):
   
   
   def __str__(self):
-    text = '%s(schedule: %s)' % (self.get_category_display(), self.date)
+    text = '%s(due: %s)' % (self.get_category_display(), self.due_date)
     return text.title()
       
   
