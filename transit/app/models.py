@@ -143,7 +143,7 @@ class Booking(models.Model):
   date = models.DateTimeField(auto_now_add=True)
   
   def __str__(self):
-    text = '%s(goods: %s)' % (self.booker, self.goods)
+    text = '%s(goods: %s)' % (self.name, self.goods)
     return text.title()
 
 
@@ -190,14 +190,16 @@ class Trip(models.Model):
   management = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name='trips',
   limit_choices_to={'user_type': "supervisor"})
   report = models.IntegerField(verbose_name='Expected report')
+  latest_report = models.OneToOneField("Report", on_delete=models.SET_NULL, null=True, related_name='related_trip')
   status = models.CharField(max_length=3, choices=statusType, default="one")
   progress = models.CharField(max_length=2, choices=progressType, default="0")
   created_date = models.DateTimeField()
   due_date = models.DateTimeField()
+  closed_date = models.DateTimeField()
   
   
   def __str__(self):
-    text = '%s(due: %s)' % (self.get_category_display(), self.due_date)
+    text = '%s(due: %s)' % (self.booking.name, self.due_date)
     return text.title()
       
   
@@ -211,6 +213,9 @@ class Report(models.Model):
   
   A report is related to the trip table through a foreign key relationship.
   """
+  
+  class Meta:
+     ordering = ['-date']
   
   statusType = (
      ('G', 'Green'),
@@ -231,8 +236,8 @@ class Report(models.Model):
   status = models.CharField(max_length=2, choices=statusType)
   progress = models.CharField(max_length=2, choices=progressType, default="0")
   remark = models.CharField(max_length=25)
-  longitude = models.DecimalField(max_digits=9, decimal_places=6)
-  latitude = models.DecimalField(max_digits=8, decimal_places=6)
+  longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True)
+  latitude = models.DecimalField(max_digits=8, decimal_places=6, null=True)
   date = models.DateTimeField(auto_now_add=True)
   
   def __str__(self):

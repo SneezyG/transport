@@ -188,12 +188,12 @@
 <body>
  
   <header>
-  <img src="{% static 'agent/image/logo.png' %}" alt="logo" />
+  <img src="{% static 'app/image/logo.png' %}" alt="logo" />
   <h5 id="nav">
-     <a class="inactive" href="{% url "agent:report" %}">
+     <a class="inactive" href="{% url "agent:report" trip.sn %}">
          Report
      </a>
-     <a href="{% url "agent:info" %}">
+     <a href="{% url "agent:info" trip.sn %}">
         Info
      </a>
    </h5>
@@ -206,19 +206,19 @@
     <hr> <br>
   <div id="content">
     <p>PICK-UP ADDRESS:</p>
-    <p id="address" class="info">dhjeekdkm dnfnejieieoeolelemdnxbdnkskkeedhjekekdkmdnfnejieieoeolelemdnxbdnkskkee</p>
+    <p id="address" class="info">{{trip.booking.pickup }}</p>
     <br>
    <p class="title">NAME:</p>
    <a class="name" href="#">
     <span class="info"> 
-      Ismail Ahmad 
+      {{trip.booking.name1}}
     </span>
    </a>
    <br>
    <br>
    <p class="title">PHONE:</p>
    <div id="phoneCont">
-   <span class="phone">09099865422</span>
+   <span class="phone">{{trip.booking.contact2}}</span>
    <span class="copied">copied</span>
    </div>
    </div>
@@ -229,19 +229,19 @@
     <hr> <br>
    <div id="content">
     <p>DELIVERY ADDRESS:</p>
-    <p id="address" class="info">dhjeekdkmdnfnejieieoeolelemdnxbdnkskkeedhjekekdkmdnfnejieieoeolelemdnxbdnkskkee</p>
+    <p id="address" class="info">{{trip.booking.delivery}}</p>
     <br>
    <p class="title">NAME:</p>
    <a class="name" href="#">
     <span class="info"> 
-      Ismail Ahmad 
+      {{trip.booking.name2}}
     </span>
    </a>
    <br>
    <br>
    <p class="title">PHONE:</p>
    <div id="phoneCont">
-   <span class="phone">09099865422</span>
+   <span class="phone">{{trip.booking.contact3}}</span>
    <span class="copied">copied</span>
    </div>
    </div>
@@ -253,22 +253,21 @@
    <div id="content">
    <p class="title">NAME:</p>
    <a class="name" href="#">
-    <span class="info"> 
-      Ismail Ahmad 
+    <span class="info"> {{trip.management.first_name}} {{trip.management.last_name}}
     </span>
    </a>
    <br>
    <br>
    <p class="title">OFFICE-PHONE:</p>
    <div id="phoneCont">
-   <span class="phone">09099865422</span>
+   <span class="phone">{{trip.management.office_line}}</span>
    <span class="copied">copied</span>
    </div>
    <br>
    <br> 
    <p class="title">PERSONAL-PHONE:</p>
    <div id="phoneCont">
-   <span class="phone">09099865422</span>
+   <span class="phone">{{trip.management.personal_line}}</span>
    <span class="copied">copied</span>
    </div>
    </div>

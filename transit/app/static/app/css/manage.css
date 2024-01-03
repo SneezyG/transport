@@ -43,15 +43,20 @@
       }
    }
     
+    html {
+      height: 100%;
+    }
     
     body {
-        font-family: 'Times New Roman', Times, serif;
-        margin: 0;
-        padding: 0;
-        background-color: #e9e8e8;
-        overflow-y: auto;
-        overflow-x: hidden;
-        user-select: none;
+      font-family: 'Times New Roman', Times, serif;
+      margin: 0;
+      padding: 0;
+      background-color: #e9e8e8;
+      height: 100%;
+      overflow: hidden;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
     }
     
     button {
@@ -66,7 +71,7 @@
         border-radius: 10px;
         padding: 4px;
         justify-content: center;
-      }
+    }
       
     #header h4 { 
         margin: 5px;
@@ -93,23 +98,19 @@
       }
 
       header {
-        position: fixed;
-        top: 0;
         background-color: #e9e8e8;
-        width: 100%;
-        z-index: 2;
       }
       
       main {
-        margin-top: 175px;
-        margin-bottom: 450px;
+        padding-bottom: 450px;
+        flex: 1;
+        overflow: auto;
       }
       
      .logout {
-        position: absolute;
-        right: 10%;
-        bottom: 15px;
-        font-size: 14px;
+        font-size: 12px;
+        margin-left: 10px;
+        color: red;
       }
       
       header > hr {
@@ -130,6 +131,18 @@
         bottom: 10px;
         margin: 0;
         color: rgb(2, 39, 53);
+      }
+      
+      .due-links > a {
+        margin: 0 10px;
+        margin-bottom: 5px;
+        display: inline-block;
+        font-size: 13px;
+        color: #003366;
+      }
+      
+      .due-links {
+        text-align: center;
       }
       
       h5.due {
@@ -198,7 +211,7 @@
         padding: 4px;
         margin-right: 5px;
         border-radius: 10px;
-        background-color: rgb(32, 179, 32);
+        background-color: green;
         position: relative;
         top: 3px;
       }
@@ -220,6 +233,8 @@
 
       .new {
         bottom: 0;
+        display: none;
+        font-size: 11px;
       }
       
      #date {
@@ -642,6 +657,7 @@
      animation: copyAnime;
      animation-duration: 1.5s;
      animation-play-state: paused;
+     font-size: 11px;
    }
    
    #backdrop {

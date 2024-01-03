@@ -20,6 +20,7 @@
        <h4>
           {{ user.username }} 
           <sub> {{ user.user_type }} </sub>
+          <a class="logout" href="{% url "logout" %}">Logout</a>
        </h4>
     </div>
      
@@ -29,940 +30,70 @@
    
    <h3> Trips<sub>(6)</sub></h3>
    
-   <a class="logout" href="{% url "logout" %}">
-     Logout
-   </a>
+   <div class="due-links">
+     {% if due_trips %}
+     <a href="#due-trip"> due trips </a>
+     {% endif %}
+     {% if oneDay_trips %}
+     <a href="#one-day"> due in 24 hours </a>
+     {% endif %}
+     {% if twoDays_trips %}
+     <a href="#two-days"> due in 2 day </a>
+     {% endif %}
+     {% if oneWeek_trips %}
+     <a href="#one-week"> due in A week </a>
+     {% endif %}
+     {% if twoWeeks_trips %}
+     <a href="#two-weeks"> due 2 weeks </a>
+     {% endif %}
+     {% if oneMonth_trips %}
+     <a href="#one-month"> due 1 month </a>
+     {% endif %}
+     {% if months_trips %}
+     <a href="#months"> due in months </a>
+     {% endif %}
+   </div>
    
    <hr/>
   </header> 
   
   
   <main>
-  <div id="notify">
+   <div id="notify">
     <p>
      <span>PINNACLE STUDIO</span>
      trip updated successfully
     </p>
-  </div>
-
-  <h5 class="due">Due in 2 days</h5>
+   </div>
   
+  {% if due_trips %}
+  <h5 id="due-trip" class="due">Already due</h5>
+  {% for trip in due_trips %}
   <details>
     <summary>
-      <span>pinnacle studio</span>
-      <div id="info"><span></span>report</div>
-     <p>delivered<span class="new">(new)</span></p>
+      <span>{{ trip.booking.name }}</span>
+      <div id="info">
+        {% with report=trip.latest_report %}
+        <span style="background-color:{{report.get_status_display|lower}};"></span>
+        {% endwith %}
+        report
+     </div>
+     <p>{{ trip.get_progress_display }}<span class="new">new</span></p>
     </summary>
     
    <div id="more">
     
-      <img class="phone" src="{% static 'app/image/phone.png' %}"/>
-      
-      <div class="contact">
-      <h4 class="contactHead"> Contacts </h4>
-      <div>
-        <p>
-          <span>Bookers</span>
-          <ul>
-            <li class="no">
-              <p>oyelodunafonjaoyelodunafonjaoyelodunafonjaoyelodunafonja
-              </p>
-              <span>3773838383</span>
-              <sub>copied</sub>
-            </li>
-          </ul>
-          <hr>
-        </p>
-        
-        <p>
-         <span>Drivers</span>
-         <ul>
-            <li class="no">
-              <p>oyelodun afonja</p>
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <p>oyelodun afonja</p>
-              <span>3838838333</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <p>oyelodun afonja</p>
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-          </ul>
-          <hr>
-        </p>
-        
-        <p>
-         <span>Mechanics</span>
-         <ul>
-            <li class="no">
-              <p>oyelodun afonja</p>
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <p>oyelodun afonja</p>
-              <span>3838838333</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <p>oyelodun afonja</p>
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-          </ul>
-          <hr>
-        </p>
-        
-        <p>
-         <span>Loaders</span>
-         <ul>
-            <li class="no">
-              <p>oyelodun afonja</p>
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <p>oyelodun afonja</p>
-              <span>3838838333</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <p>oyelodun afonja</p>
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-          </ul>
-          <hr>
-        </p>
-       </div>
-      <h4 class="contactFoot">X</h4>
-      </div>
-   
-    <p class="created" id="date">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    
-    <ul id="origin"> 
-    <li>pickup: <span> Ikire sta tionnnnnnnsjsjjsjskskskskkskshshjdjdjdsjsjsjs</span></li>
-    <li>delivery: <span>Akured dddddxxxxxxxxxxxxhshhshshshgdhshshjshsjshshsh</span></li>
-    </ul>
-    
-    <div class="para"> 
-    Trip ID: 
-    <span> 
-    cea088de-498a-4511-93d4-3bb0b23cd845
-    </span>
-    <img data-id="cea088de-498a-4511-93d4-3bb0b23cd845" src="{% static 'app/image/copy.png' %}"/>
-    <h6 class="copy">coppied</h6>
-    </div>
-    
-    <ul class="status"> 
-    <li>progress: <span>delivered<span></li>
-    <li class="mark" data-name="PINNACLE STUDIO">
-      <button>mark as arrived</button>
-      <span>updating ...</span>
-    </li>
-    </ul>
-    
-    <br>
-    <hr>
-    
-    <h4 id="expect">
-     REPORT
-   <span>Expected reports:<span class="reportCount">4(4)</span></span>
-   </h4>
-    <div id="article">
-    <article>
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    <ul id="report" class="status"> 
-    <li>status: <span>good</span></li>
-    <br/>
-    <li>progress: <span>pending</span></li>
-    <li><button data-lat="48.8584" data-long="2.2945"> location </button></li>
-    </ul>
-    <p id="remark">
-      remark: 
-      <span> trip is going as planned </span>
-    </p>
-    </article>
-    
-    <article>
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    <ul id="report" class="status"> 
-    <li>status: <span>Not-bad</span></li>
-    <br/>
-    <li>progress: <span>pending</span></li>
-    <li><button data-lat="36.1069" data-long="-112.1123"> location </button></li>
-    </ul>
-    <p id="remark">
-      remark: 
-      <span> trip is going as planned </span></p>
-    </article>
-    
-    <article>
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    <ul id="report" class="status"> 
-    <li>status: <span>Good</span></li>
-    <br/>
-    <li>progress: <span>pending</span></li>
-    <li><button data-lat="-18.2861" data-long="147.7000"> location </button></li>
-    </ul>
-    <p id="remark">
-      remark: 
-      <span> trip is going as planned </span></p>
-    </article>
-    
-    <article>
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    <ul id="report" class="status"> 
-    <li>status: <span>Good</span></li>
-    <br/>
-    <li>progress: <span>pending</span></li>
-    <li><button data-lat="41.8902" data-long="12.4922"> location </button></li>
-    </ul>
-    <p id="remark">
-      remark: 
-      <span> trip is going as planned </span></p>
-    </article>
-    
-    <p id="seeMore" class="see">see more reports </p>
-    <p id="seeLess" class="see">see less reports </p>
-    </div>
-    
-  </div>
-  </details>
-  
-  
-   <details>
-    <summary>
-      <span>crown studio</span>
-      <div id="info"><span></span>report</div>
-     <p>delivered<span class="new">(new)</span></p>
-    </summary>
-    
-   <div id="more">
-      <img class="phone" src="{% static 'app/image/phone.png' %}"/>
-      
-     <div class="contact">
-      <h4 class="contactHead"> Contacts </h4>
-      <div>
-        <p>
-          <span>Bookers </span>
-          <ul>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-            </li>
-          </ul>
-          <hr>
-        </p>
-        
-        <p>
-         <span>Drivers</span>
-         <ul>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3838838333</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-          </ul>
-          <hr>
-        </p>
-        
-        <p>
-         <span>Mechanics</span>
-         <ul>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3838838333</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-          </ul>
-          <hr>
-        </p>
-        
-        <p>
-         <span>Loaders</span>
-         <ul>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3838838333</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-          </ul>
-          <hr>
-        </p>
-       </div>
-      <h4 class="contactFoot">X</h4>
-      </div>
-      
-    <p class="created" id="date">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    
-    <ul id="origin"> 
-    <li>pickup: <span>Ibadanhshhshehsbbdbxbbxbxjjisksjjsndndnndndndndndndn</span></li>
-    <li>delivery: <span>Akuregsheuuebxbnsjskisiksjsnsnsnsnjsjsjdjjdjsjdjjd</span></li>
-    </ul>
-    
-    <div class="para"> 
-    Trip ID: 
-    <span>
-      525e56d6-a4fc-45e5-844a-7636df7ebcd5
-    </span>
-    <img data-id="525e56d6-a4fc-45e5-844a-7636df7ebcd5" src="{% static 'app/image/copy.png' %}"/>
-    <h6 class="copy">coppied</h6>
-    </div>
-    
-    <ul class="status"> 
-    <li>progress: <span>Delivered<span></li>
-    <li class="mark" data-name="Crown STUDIO">
-      <button>mark as arrived</button>
-      <span>updating ...</span>
-    </li>
-    </ul>
-    
-    <br>
-    <hr>
-    
-   <h4 id="expect">
-     REPORT
-   <span>Expected reports:<span class="reportCount">4(4)</span></span>
-   </h4>
-    <div id="article">
-    <article>
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    <ul id="report" class="status"> 
-    <li>status: <span>Good</span></li>
-    <br/>
-    <li>progress: <span>pending</span></li>
-    <li><button> location </button></li>
-    </ul>
-    <p id="remark">
-      remark: 
-      <span> trip is going as planned </span></p>
-    </article>
-    
-    <article>
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    <ul id="report" class="status"> 
-    <li>status: <span>Good</span></li>
-    <br/>
-    <li>progress: <span>pending</span></li>
-    <li><button> location </button></li>
-    </ul>
-    <p id="remark">
-      remark: 
-      <span> trip is going as planned </span></p>
-    </article>
-    
-    <article>
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    <ul id="report" class="status"> 
-    <li>status: <span>Good</span></li>
-    <br/>
-    <li>progress: <span>pending</span></li>
-    <li><button> location </button></li>
-    </ul>
-    <p id="remark">
-      remark: 
-      <span> trip is going as planned </span></p>
-    </article>
-    
-    <article>
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    <ul id="report" class="status"> 
-    <li>status: <span>Good</span></li>
-    <br/>
-    <li>progress: <span>pending</span></li>
-    <li><button> location </button></li>
-    </ul>
-    <p id="remark">
-      remark: 
-      <span> trip is going as planned </span></p>
-    </article>
-    
-    <p id="seeMore" class="see">see more reports</p>
-    <p id="seeLess" class="see">see less reports</p>
-    </div>
-    
-  </div>
-  </details>
-  
-  
-  <details>
-    <summary>
-      <span>gileard studio</span>
-      <div id="info"><span></span>report</div>
-    <p>delivered<span class="new">(new)</span</p>
-    </summary>
-    
-   <div id="more">
-      <img class="phone" src="{% static 'app/image/phone.png' %}"/>
-    
-   <div class="contact">
-      <h4 class="contactHead"> Contacts </h4>
-      <div>
-        <p>
-          <span>Bookers </span>
-          <ul>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-            </li>
-          </ul>
-          <hr>
-        </p>
-        
-        <p>
-         <span>Drivers</span>
-         <ul>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3838838333</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-          </ul>
-          <hr>
-        </p>
-        
-        <p>
-         <span>Mechanics</span>
-         <ul>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3838838333</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-          </ul>
-          <hr>
-        </p>
-        
-        <p>
-         <span>Loaders</span>
-         <ul>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3838838333</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-          </ul>
-          <hr>
-        </p>
-       </div>
-      <h4 class="contactFoot">X</h4>
-      </div>
-     
-    <p class="created" id="date">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    
-    <ul id="origin"> 
-    <li>pickup: <span>Ibadanhdyeuejbxbxbzbbshsjjdjdjsjdjjsjsjsjjdjjdjdjjd</span></li>
-    <li>delivery: <span>Akurehdhdueiisjhdbxnjsksiieiskskksjsjsjsjsjjsjsjsjsjjs</span></li>
-    </ul>
-    
-    <div class="para">
-      Trip ID: 
-    <span>
-     1edb3c02-e640-4116-829d-36f09c21de65
-    </span>
-    <img data-id="1edb3c02-e640-4116-829d-36f09c21de65" src="{% static 'app/image/copy.png' %}"/>
-    <h6 class="copy">coppied</h6>
-    </div>
-    
-    <ul class="status"> 
-    <li>progress: <span>Delivered<span></li>
-    <li data-name="Gileard STUDIO" class="mark">
-      <button>mark as arrived</button>
-      <span>updating ...</span>
-      </li>
-    </ul>
-    
-    <br>
-    <hr>
-    
-   <h4 id="expect">
-     REPORT
-   <span>Expected reports:<span class="reportCount">4(4)</span></span>
-   </h4>
-   
-   <div id="article">
-    <article>
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    <ul id="report" class="status"> 
-    <li>status: <span>Good</span></li>
-    <br/>
-    <li>progress: <span>pending</span></li>
-    <li><button> location </button></li>
-    </ul>
-    <p id="remark">
-      remark: 
-      <span> trip is going as planned </span></p>
-    </article>
-    
-    <article>
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    <ul id="report" class="status"> 
-    <li>status: <span>Good</span></li>
-    <br/>
-    <li>progress: <span>pending</span></li>
-    <li><button> location </button></li>
-    </ul>
-    <p id="remark">
-      remark: 
-      <span> trip is going as planned </span></p>
-    </article>
-    
-    <article>
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    <ul id="report" class="status"> 
-    <li>status: <span>Good</span></li>
-    <br/>
-    <li>progress: <span>pending</span></li>
-    <li><button> location </button></li>
-    </ul>
-    <p id="remark">
-      remark: 
-      <span> trip is going as planned </span></p>
-    </article>
-    
-    <article>
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    <ul id="report" class="status"> 
-    <li>status: <span>Good</span></li>
-    <br/>
-    <li>progress: <span>pending</span></li>
-    <li><button> location </button></li>
-    </ul>
-    <p id="remark">
-      remark: 
-      <span> trip is going as planned </span></p>
-    </article>
-    
-    <p id="seeMore" class="see"> see more reports </p>
-    <p id="seeLess" class="see"> see less reports </p>
-    </div>
-    
-  </div>
-  </details>
-  
-  <h5 class="due">Due in 4 days</h5>
-  
-  <details>
-    <summary>
-      <span>pinnacle studio</span>
-      <div id="info"><span></span>report</div>
-     <p>delivered<span class="new">(new)</span></p>
-    </summary>
-    
-   <div id="more">
-    
-      <img class="phone" src="{% static 'app/image/phone.png' %}"/>
-      
-      <div class="contact">
-      <h4 class="contactHead"> Contacts </h4>
-      <div>
-        <p>
-          <span>Bookers</span>
-          <ul>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-            </li>
-          </ul>
-          <hr>
-        </p>
-        
-        <p>
-         <span>Drivers</span>
-         <ul>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3838838333</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-          </ul>
-          <hr>
-        </p>
-        
-        <p>
-         <span>Mechanics</span>
-         <ul>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3838838333</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-          </ul>
-          <hr>
-        </p>
-        
-        <p>
-         <span>Loaders</span>
-         <ul>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3838838333</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-          </ul>
-          <hr>
-        </p>
-       </div>
-      <h4 class="contactFoot">X</h4>
-      </div>
-   
-    <p class="created" id="date">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    
-    <ul id="origin"> 
-    <li>pickup: <span> Ikire sta tionnnnnnnsjsjjsjskskskskkskshshjdjdjdsjsjsjs</span></li>
-    <li>delivery: <span>Akured dddddxxxxxxxxxxxxhshhshshshgdhshshjshsjshshsh</span></li>
-    </ul>
-    
-    <div class="para"> 
-    Trip ID: 
-    <span> 
-    cea088de-498a-4511-93d4-3bb0b23cd845
-    </span>
-    <img data-id="cea088de-498a-4511-93d4-3bb0b23cd845" src="{% static 'app/image/copy.png' %}"/>
-    <h6 class="copy">coppied</h6>
-    </div>
-    
-    <ul class="status"> 
-    <li>progress: <span>delivered<span></li>
-    <li class="mark" data-name="PINNACLE STUDIO">
-      <button>mark as arrived</button>
-      <span>updating ...</span>
-    </li>
-    </ul>
-    
-    <br>
-    <hr>
-    
-    <h4 id="expect">
-     REPORT
-   <span>Expected reports:<span class="reportCount">4(4)</span></span>
-   </h4>
-    <div id="article">
-    <article>
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    <ul id="report" class="status"> 
-    <li>status: <span>good</span></li>
-    <br/>
-    <li>progress: <span>pending</span></li>
-    <li><button> location </button></li>
-    </ul>
-    <p id="remark">
-      remark: 
-      <span> trip is going as planned </span>
-    </p>
-    </article>
-    
-    <article>
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    <ul id="report" class="status"> 
-    <li>status: <span>Not-bad</span></li>
-    <br/>
-    <li>progress: <span>pending</span></li>
-    <li><button> location </button></li>
-    </ul>
-    <p id="remark">
-      remark: 
-      <span> trip is going as planned </span></p>
-    </article>
-    
-    <article>
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    <ul id="report" class="status"> 
-    <li>status: <span>Good</span></li>
-    <br/>
-    <li>progress: <span>pending</span></li>
-    <li><button> location </button></li>
-    </ul>
-    <p id="remark">
-      remark: 
-      <span> trip is going as planned </span></p>
-    </article>
-    
-    <article>
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    <ul id="report" class="status"> 
-    <li>status: <span>Good</span></li>
-    <br/>
-    <li>progress: <span>pending</span></li>
-    <li><button> location </button></li>
-    </ul>
-    <p id="remark">
-      remark: 
-      <span> trip is going as planned </span></p>
-    </article>
-    
-    <p id="seeMore" class="see">see more reports </p>
-    <p id="seeLess" class="see">see less reports </p>
-    </div>
-    
-  </div>
-  </details>
-  
-  
-   <details>
-    <summary>
-      <span>crown studio</span>
-      <div id="info"><span></span>report</div>
-     <p>delivered<span class="new">(new)</span></p>
-    </summary>
-    
-   <div id="more">
-      <img class="phone" src="{% static 'app/image/phone.png' %}"/>
-      
-     <div class="contact">
-      <h4 class="contactHead"> Contacts </h4>
-      <div>
-        <p>
-          <span>Bookers </span>
-          <ul>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-            </li>
-          </ul>
-          <hr>
-        </p>
-        
-        <p>
-         <span>Drivers</span>
-         <ul>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3838838333</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-          </ul>
-          <hr>
-        </p>
-        
-        <p>
-         <span>Mechanics</span>
-         <ul>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3838838333</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-          </ul>
-          <hr>
-        </p>
-        
-        <p>
-         <span>Loaders</span>
-         <ul>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3838838333</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-          </ul>
-          <hr>
-        </p>
-       </div>
-      <h4 class="contactFoot">X</h4>
-      </div>
-      
-    <p class="created" id="date">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    
-    <ul id="origin"> 
-    <li>pickup: <span>Ibadanhshhshehsbbdbxbbxbxjjisksjjsndndnndndndndndndn</span></li>
-    <li>delivery: <span>Akuregsheuuebxbnsjskisiksjsnsnsnsnjsjsjdjjdjsjdjjd</span></li>
-    </ul>
-    
-    <div class="para"> 
-    Trip ID: 
-    <span>
-      525e56d6-a4fc-45e5-844a-7636df7ebcd5
-    </span>
-    <img data-id="525e56d6-a4fc-45e5-844a-7636df7ebcd5" src="{% static 'app/image/copy.png' %}"/>
-    <h6 class="copy">coppied</h6>
-    </div>
-    
-    <ul class="status"> 
-    <li>progress: <span>Delivered<span></li>
-    <li class="mark" data-name="Crown STUDIO">
-      <button>mark as arrived</button>
-      <span>updating ...</span>
-    </li>
-    </ul>
-    
-    <br>
-    <hr>
-    
-   <h4 id="expect">
-     REPORT
-   <span>Expected reports:<span class="reportCount">4(4)</span></span>
-   </h4>
-    <div id="article">
-    <article>
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    <ul id="report" class="status"> 
-    <li>status: <span>Good</span></li>
-    <br/>
-    <li>progress: <span>pending</span></li>
-    <li><button> location </button></li>
-    </ul>
-    <p id="remark">
-      remark: 
-      <span> trip is going as planned </span></p>
-    </article>
-    
-    <article>
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    <ul id="report" class="status"> 
-    <li>status: <span>Good</span></li>
-    <br/>
-    <li>progress: <span>pending</span></li>
-    <li><button> location </button></li>
-    </ul>
-    <p id="remark">
-      remark: 
-      <span> trip is going as planned </span></p>
-    </article>
-    
-    <article>
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    <ul id="report" class="status"> 
-    <li>status: <span>Good</span></li>
-    <br/>
-    <li>progress: <span>pending</span></li>
-    <li><button> location </button></li>
-    </ul>
-    <p id="remark">
-      remark: 
-      <span> trip is going as planned </span></p>
-    </article>
-    
-    <article>
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    <ul id="report" class="status"> 
-    <li>status: <span>Good</span></li>
-    <br/>
-    <li>progress: <span>pending</span></li>
-    <li><button> location </button></li>
-    </ul>
-    <p id="remark">
-      remark: 
-      <span> trip is going as planned </span></p>
-    </article>
-    
-    <p id="seeMore" class="see">see more reports</p>
-    <p id="seeLess" class="see">see less reports</p>
-    </div>
-    
-  </div>
-  </details>
-  
-  <h5 class="due">Due in 1 week</h5>
-  
-  <details>
-    <summary>
-      <span>gileard studio</span>
-      <div id="info"><span></span>report</div>
-    <p>delivered<span class="new">(new)</span></p>
-    </summary>
-    
-   <div id="more">
     <img class="phone" src="{% static 'app/image/phone.png' %}"/>
-    
-   <div class="contact">
+      
+    <div class="contact">
       <h4 class="contactHead"> Contacts </h4>
       <div>
         <p>
-          <span>Bookers </span>
+          <span>Booker</span>
           <ul>
             <li class="no">
-              <span>3773838383</span>
+              <p>{{ trip.booking.booker }}</p>
+              <span>{{trip.booking.contact1}}</span>
               <sub>copied</sub>
             </li>
           </ul>
@@ -970,156 +101,993 @@
         </p>
         
         <p>
-         <span>Drivers</span>
+         <span>Transporters</span>
          <ul>
+         {% for escort in trip.transporters.all %}
             <li class="no">
-              <span>3773838383</span>
+              <p>{{ escort.firstName }} {{ escort.lastName}}</p>
+              <span>{{ escort.phone }}</span>
               <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3838838333</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
+            </li>
+         {% endfor %}
           </ul>
           <hr>
         </p>
         
-        <p>
-         <span>Mechanics</span>
-         <ul>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3838838333</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-          </ul>
-          <hr>
-        </p>
-        
-        <p>
-         <span>Loaders</span>
-         <ul>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3838838333</span>
-              <sub>copied</sub>
-              </li>
-            <li class="no">
-              <span>3773838383</span>
-              <sub>copied</sub>
-              </li>
-          </ul>
-          <hr>
-        </p>
-       </div>
-      <h4 class="contactFoot">X</h4>
       </div>
-     
-    <p class="created" id="date">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
+      <h4 class="contactFoot">X</h4>
+    </div>
+   
+    <p class="created" id="date">created: <span>{{ trip.created_date|date:"D d M Y" }}<sub>{{ trip.created_date|date:"H:i" }}.</sub></span></p>
     
     <ul id="origin"> 
-    <li>pickup: <span>Ibadanhdyeuejbxbxbzbbshsjjdjdjsjdjjsjsjsjjdjjdjdjjd</span></li>
-    <li>delivery: <span>Akurehdhdueiisjhdbxnjsksiieiskskksjsjsjsjsjjsjsjsjsjjs</span></li>
+    <li>pickup: <span>{{ trip.booking.pickup }}</span></li>
+    <li>delivery: <span>{{ trip.booking.delivery }}</span></li>
     </ul>
     
-    <div class="para">
-      Trip ID: 
-    <span>
-     1edb3c02-e640-4116-829d-36f09c21de65
+    <div class="para"> 
+    Trip ID: 
+    <span> 
+    {{ trip.sn }}
     </span>
-    <img data-id="1edb3c02-e640-4116-829d-36f09c21de65" src="{% static 'app/image/copy.png' %}"/>
+    <img data-id="{{ trip.sn }}" src="{% static 'app/image/copy.png' %}"/>
     <h6 class="copy">coppied</h6>
     </div>
     
     <ul class="status"> 
-    <li>progress: <span>Delivered<span></li>
-    <li data-name="Gileard STUDIO" class="mark">
-      <button>mark as arrived</button>
+    <li>progress: <span>{{ trip.get_progress_display }}</span></li>
+    <li class="mark" data-sn="{{ trip.sn }}" data-name="{{ trip.booking.name}}">
+       {% with progress=trip.progress %}
+         {% if progress == "0" %}
+         <button data-progress="1"> 
+           mark as Departed
+         </button>
+         {% elif progress == "1" %}
+         <button data-progress="2"> 
+           mark as Pickup
+         </button>
+         {% elif progress == "2" %}
+         <button data-progress="3"> 
+           mark as Onroad
+         </button>
+         {% elif progress == "3" %}
+         <button data-progress="4"> 
+           mark as Delivered
+         </button>
+         {% elif progress == "4" %}
+         <button data-progress="5"> 
+           mark as Arrived
+         </button>
+         {% endif %}
+       {% endwith %}
       <span>updating ...</span>
-      </li>
+    </li>
     </ul>
     
     <br>
     <hr>
     
-   <h4 id="expect">
+    <h4 id="expect">
      REPORT
-   <span>Expected reports:<span class="reportCount">4(4)</span></span>
-   </h4>
-   
-   <div id="article">
+    <span>Expected reports:<span class="reportCount">
+     {{trip.report}}({{trip.reports.count}})
+     </span></span>
+    </h4>
+    <div id="article">
+    {% with reports=trip.reports.all %}
+    {% for report in reports %}
     <article>
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
+    <p class="created">created: <span>{{ report.date|date:"D d M Y" }}<sub>{{ report.date|date:"H:i" }}</sub></span></p>
     <ul id="report" class="status"> 
-    <li>status: <span>Good</span></li>
+    <li>status: <span>
+      {% if report.status == "G" %}
+      Good
+      {% elif report.status == "Y" %}
+      Not Bad
+      {% else %}
+      Bad
+      {% endif %}
+    </span></li>
     <br/>
-    <li>progress: <span>pending</span></li>
-    <li><button> location </button></li>
+    <li>progress: <span>{{ report.get_progress_display }}</span></li>
+    <li><button data-lat="{{report.latitude}}" data-long="{{report.longitude}}"> location </button></li>
     </ul>
     <p id="remark">
       remark: 
-      <span> trip is going as planned </span></p>
+      <span> {{ report.remark }} </span>
+    </p>
     </article>
-    
-    <article>
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    <ul id="report" class="status"> 
-    <li>status: <span>Good</span></li>
-    <br/>
-    <li>progress: <span>pending</span></li>
-    <li><button> location </button></li>
-    </ul>
-    <p id="remark">
-      remark: 
-      <span> trip is going as planned </span></p>
-    </article>
-    
-    <article>
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    <ul id="report" class="status"> 
-    <li>status: <span>Good</span></li>
-    <br/>
-    <li>progress: <span>pending</span></li>
-    <li><button> location </button></li>
-    </ul>
-    <p id="remark">
-      remark: 
-      <span> trip is going as planned </span></p>
-    </article>
-    
-    <article>
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    <ul id="report" class="status"> 
-    <li>status: <span>Good</span></li>
-    <br/>
-    <li>progress: <span>pending</span></li>
-    <li><button> location </button></li>
-    </ul>
-    <p id="remark">
-      remark: 
-      <span> trip is going as planned </span></p>
-    </article>
-    
-    <p id="seeMore" class="see"> see more reports </p>
-    <p id="seeLess" class="see"> see less reports </p>
+    {% endfor %}
+    <p id="seeMore" class="see" 
+    {% if reports.count == 0 %}
+    style="display:none;"
+    {% endif %}
+    >see more reports </p>
+    <p id="seeLess" class="see">see less reports </p>
+    {% endwith %}
     </div>
     
   </div>
   </details>
+  {% endfor %}
+  {% endif %}
+  
+  {% if oneDay_trips %}
+  <h5 id="one-day" class="due">Due in 24 hours</h5>
+  {% for trip in oneDay_trips %}
+  <details>
+    <summary>
+      <span>{{ trip.booking.name }}</span>
+      <div id="info">
+        {% with report=trip.latest_report %}
+        <span style="background-color:{{report.get_status_display|lower}};"></span>
+        {% endwith %}
+        report
+     </div>
+     <p>{{ trip.get_progress_display }}<span class="new">new</span></p>
+    </summary>
+    
+   <div id="more">
+    
+    <img class="phone" src="{% static 'app/image/phone.png' %}"/>
+      
+    <div class="contact">
+      <h4 class="contactHead"> Contacts </h4>
+      <div>
+        <p>
+          <span>Booker</span>
+          <ul>
+            <li class="no">
+              <p>{{ trip.booking.booker }}</p>
+              <span>{{trip.booking.contact1}}</span>
+              <sub>copied</sub>
+            </li>
+          </ul>
+          <hr>
+        </p>
+        
+        <p>
+         <span>Transporters</span>
+         <ul>
+         {% for escort in trip.transporters.all %}
+            <li class="no">
+              <p>{{ escort.firstName }} {{ escort.lastName}}</p>
+              <span>{{ escort.phone }}</span>
+              <sub>copied</sub>
+            </li>
+         {% endfor %}
+          </ul>
+          <hr>
+        </p>
+        
+      </div>
+      <h4 class="contactFoot">X</h4>
+    </div>
+   
+    <p class="created" id="date">created: <span>{{ trip.created_date|date:"D d M Y" }}<sub>{{ trip.created_date|date:"H:i" }}.</sub></span></p>
+    
+    <ul id="origin"> 
+    <li>pickup: <span>{{ trip.booking.pickup }}</span></li>
+    <li>delivery: <span>{{ trip.booking.delivery }}</span></li>
+    </ul>
+    
+    <div class="para"> 
+    Trip ID: 
+    <span> 
+    {{ trip.sn }}
+    </span>
+    <img data-id="{{ trip.sn }}" src="{% static 'app/image/copy.png' %}"/>
+    <h6 class="copy">coppied</h6>
+    </div>
+    
+    <ul class="status"> 
+    <li>progress: <span>{{ trip.get_progress_display }} </span></li>
+    <li class="mark" data-sn="{{ trip.sn }}" data-name="{{ trip.booking.name}}">
+       {% with progress=trip.progress %}
+         {% if progress == "0" %}
+         <button data-progress="1"> 
+           mark as Departed
+         </button>
+         {% elif progress == "1" %}
+         <button data-progress="2"> 
+           mark as Pickup
+         </button>
+         {% elif progress == "2" %}
+         <button data-progress="3"> 
+           mark as Onroad
+         </button>
+         {% elif progress == "3" %}
+         <button data-progress="4"> 
+           mark as Delivered
+         </button>
+         {% elif progress == "4" %}
+         <button data-progress="5"> 
+           mark as Arrived
+         </button>
+         {% endif %}
+       {% endwith %}
+      <span>updating ...</span>
+    </li>
+    </ul>
+    
+    <br>
+    <hr>
+    
+    <h4 id="expect">
+     REPORT
+    <span>Expected reports:<span class="reportCount">
+     {{trip.report}}({{trip.reports.count}})
+     </span></span>
+    </h4>
+    <div id="article">
+    {% with reports=trip.reports.all %}
+    {% for report in reports %}
+    <article>
+    <p class="created">created: <span>{{ report.date|date:"D d M Y" }}<sub>{{ report.date|date:"H:i" }}</sub></span></p>
+    <ul id="report" class="status"> 
+    <li>status: <span>
+      {% if report.status == "G" %}
+      Good
+      {% elif report.status == "Y" %}
+      Not Bad
+      {% else %}
+      Bad
+      {% endif %}
+    </span></li>
+    <br/>
+    <li>progress: <span>{{ report.get_progress_display }}</span></li>
+    <li><button data-lat="{{report.latitude}}" data-long="{{report.longitude}}"> location </button></li>
+    </ul>
+    <p id="remark">
+      remark: 
+      <span> {{ report.remark }} </span>
+    </p>
+    </article>
+    {% endfor %}
+    <p id="seeMore" class="see"
+    {% if reports.count == 0 %}
+    style="display:none;"
+    {% endif %}
+    >see more reports </p>
+    <p id="seeLess" class="see">see less reports </p>
+    {% endwith %}
+    </div>
+    
+  </div>
+  </details>
+  {% endfor %}
+  {% endif %}
+  
+  {% if twoDays_trips %}
+  <h5 id="two-days" class="due">Due in 2 days</h5>
+  {% for trip in twoDays_trips %}
+  <details>
+    <summary>
+      <span>{{ trip.booking.name }}</span>
+      <div id="info">
+        {% with report=trip.latest_report %}
+        <span style="background-color:{{report.get_status_display|lower}};"></span>
+        {% endwith %}
+        report
+     </div>
+     <p>{{ trip.get_progress_display }}<span class="new">new</span></p>
+    </summary>
+    
+   <div id="more">
+    
+    <img class="phone" src="{% static 'app/image/phone.png' %}"/>
+      
+    <div class="contact">
+      <h4 class="contactHead"> Contacts </h4>
+      <div>
+        <p>
+          <span>Booker</span>
+          <ul>
+            <li class="no">
+              <p>{{ trip.booking.booker }}</p>
+              <span>{{trip.booking.contact1}}</span>
+              <sub>copied</sub>
+            </li>
+          </ul>
+          <hr>
+        </p>
+        
+        <p>
+         <span>Transporters</span>
+         <ul>
+         {% for escort in trip.transporters.all %}
+            <li class="no">
+              <p>{{ escort.firstName }} {{ escort.lastName}}</p>
+              <span>{{ escort.phone }}</span>
+              <sub>copied</sub>
+            </li>
+         {% endfor %}
+          </ul>
+          <hr>
+        </p>
+        
+      </div>
+      <h4 class="contactFoot">X</h4>
+    </div>
+   
+    <p class="created" id="date">created: <span>{{ trip.created_date|date:"D d M Y" }}<sub>{{ trip.created_date|date:"H:i" }}.</sub></span></p>
+    
+    <ul id="origin"> 
+    <li>pickup: <span>{{ trip.booking.pickup }}</span></li>
+    <li>delivery: <span>{{ trip.booking.delivery }}</span></li>
+    </ul>
+    
+    <div class="para"> 
+    Trip ID: 
+    <span> 
+    {{ trip.sn }}
+    </span>
+    <img data-id="{{ trip.sn }}" src="{% static 'app/image/copy.png' %}"/>
+    <h6 class="copy">coppied</h6>
+    </div>
+    
+    <ul class="status"> 
+    <li>progress: <span>{{ trip.get_progress_display }} </span></li>
+    <li class="mark" data-sn="{{ trip.sn }}" data-name="{{ trip.booking.name}}">
+       {% with progress=trip.progress %}
+         {% if progress == "0" %}
+         <button data-progress="1"> 
+           mark as Departed
+         </button>
+         {% elif progress == "1" %}
+         <button data-progress="2"> 
+           mark as Pickup
+         </button>
+         {% elif progress == "2" %}
+         <button data-progress="3"> 
+           mark as Onroad
+         </button>
+         {% elif progress == "3" %}
+         <button data-progress="4"> 
+           mark as Delivered
+         </button>
+         {% elif progress == "4" %}
+         <button data-progress="5"> 
+           mark as Arrived
+         </button>
+         {% endif %}
+       {% endwith %}
+      <span>updating ...</span>
+    </li>
+    </ul>
+    
+    <br>
+    <hr>
+    
+    <h4 id="expect">
+     REPORT
+    <span>Expected reports:<span class="reportCount">
+     {{trip.report}}({{trip.reports.count}})
+     </span></span>
+    </h4>
+    <div id="article">
+    {% with reports=trip.reports.all %}
+    {% for report in reports %}
+    <article>
+    <p class="created">created: <span>{{ report.date|date:"D d M Y" }}<sub>{{ report.date|date:"H:i" }}</sub></span></p>
+    <ul id="report" class="status"> 
+    <li>status: <span>
+      {% if report.status == "G" %}
+      Good
+      {% elif report.status == "Y" %}
+      Not Bad
+      {% else %}
+      Bad
+      {% endif %}
+    </span></li>
+    <br/>
+    <li>progress: <span>{{ report.get_progress_display }}</span></li>
+    <li><button data-lat="{{report.latitude}}" data-long="{{report.longitude}}"> location </button></li>
+    </ul>
+    <p id="remark">
+      remark: 
+      <span> {{ report.remark }} </span>
+    </p>
+    </article>
+    {% endfor %}
+    <p id="seeMore" class="see"
+    {% if reports.count == 0 %}
+    style="display:none;"
+    {% endif %}
+    >see more reports </p>
+    <p id="seeLess" class="see">see less reports </p>
+    {% endwith %}
+    </div>
+    
+  </div>
+  </details>
+  {% endfor %}
+  {% endif %}
+  
+  {% if oneWeek_trips %}
+  <h5 id="one-week" class="due">Due in 1 week</h5>
+  {% for trip in oneWeek_trips %}
+  <details>
+    <summary>
+      <span>{{ trip.booking.name }}</span>
+      <div id="info">
+        {% with report=trip.latest_report %}
+        <span style="background-color:{{report.get_status_display|lower}};"></span>
+        {% endwith %}
+        report
+     </div>
+     <p>{{ trip.get_progress_display }}<span class="new">new</span></p>
+    </summary>
+    
+   <div id="more">
+    
+    <img class="phone" src="{% static 'app/image/phone.png' %}"/>
+      
+    <div class="contact">
+      <h4 class="contactHead"> Contacts </h4>
+      <div>
+        <p>
+          <span>Booker</span>
+          <ul>
+            <li class="no">
+              <p>{{ trip.booking.booker }}</p>
+              <span>{{trip.booking.contact1}}</span>
+              <sub>copied</sub>
+            </li>
+          </ul>
+          <hr>
+        </p>
+        
+        <p>
+         <span>Transporters</span>
+         <ul>
+         {% for escort in trip.transporters.all %}
+            <li class="no">
+              <p>{{ escort.firstName }} {{ escort.lastName}}</p>
+              <span>{{ escort.phone }}</span>
+              <sub>copied</sub>
+            </li>
+         {% endfor %}
+          </ul>
+          <hr>
+        </p>
+        
+      </div>
+      <h4 class="contactFoot">X</h4>
+    </div>
+   
+    <p class="created" id="date">created: <span>{{ trip.created_date|date:"D d M Y" }}<sub>{{ trip.created_date|date:"H:i" }}.</sub></span></p>
+    
+    <ul id="origin"> 
+    <li>pickup: <span>{{ trip.booking.pickup }}</span></li>
+    <li>delivery: <span>{{ trip.booking.delivery }}</span></li>
+    </ul>
+    
+    <div class="para"> 
+    Trip ID: 
+    <span> 
+    {{ trip.sn }}
+    </span>
+    <img data-id="{{ trip.sn }}" src="{% static 'app/image/copy.png' %}"/>
+    <h6 class="copy">coppied</h6>
+    </div>
+    
+    <ul class="status"> 
+    <li>progress: <span>{{ trip.get_progress_display }} </span></li>
+    <li class="mark" data-sn="{{ trip.sn }}" data-name="{{ trip.booking.name}}">
+       {% with progress=trip.progress %}
+         {% if progress == "0" %}
+         <button data-progress="1"> 
+           mark as Departed
+         </button>
+         {% elif progress == "1" %}
+         <button data-progress="2"> 
+           mark as Pickup
+         </button>
+         {% elif progress == "2" %}
+         <button data-progress="3"> 
+           mark as Onroad
+         </button>
+         {% elif progress == "3" %}
+         <button data-progress="4"> 
+           mark as Delivered
+         </button>
+         {% elif progress == "4" %}
+         <button data-progress="5"> 
+           mark as Arrived
+         </button>
+         {% endif %}
+       {% endwith %}
+      <span>updating ...</span>
+    </li>
+    </ul>
+    
+    <br>
+    <hr>
+    
+    <h4 id="expect">
+     REPORT
+    <span>Expected reports:<span class="reportCount">
+     {{trip.report}}({{trip.reports.count}})
+     </span></span>
+    </h4>
+    <div id="article">
+    {% with reports=trip.reports.all %}
+    {% for report in reports %}
+    <article>
+    <p class="created">created: <span>{{ report.date|date:"D d M Y" }}<sub>{{ report.date|date:"H:i" }}</sub></span></p>
+    <ul id="report" class="status"> 
+    <li>status: <span>
+      {% if report.status == "G" %}
+      Good
+      {% elif report.status == "Y" %}
+      Not Bad
+      {% else %}
+      Bad
+      {% endif %}
+    </span></li>
+    <br/>
+    <li>progress: <span>{{ report.get_progress_display }}</span></li>
+    <li><button data-lat="{{report.latitude}}" data-long="{{report.longitude}}"> location </button></li>
+    </ul>
+    <p id="remark">
+      remark: 
+      <span> {{ report.remark }} </span>
+    </p>
+    </article>
+    {% endfor %}
+    <p id="seeMore" class="see"
+    {% if reports.count == 0 %}
+    style="display:none;"
+    {% endif %}
+    >see more reports </p>
+    <p id="seeLess" class="see">see less reports </p>
+    {% endwith %}
+    </div>
+    
+  </div>
+  </details>
+  {% endfor %}
+  {% endif %}
+  
+  {% if twoWeeks_trips %}
+  <h5 id="two-weeks" class="due">Due in 2 week</h5>
+    {% for trip in twoWeeks_trips %}
+  <details>
+    <summary>
+      <span>{{ trip.booking.name }}</span>
+      <div id="info">
+        {% with report=trip.latest_report %}
+        <span style="background-color:{{report.get_status_display|lower}};"></span>
+        {% endwith %}
+        report
+     </div>
+     <p>{{ trip.get_progress_display }}<span class="new">new</span></p>
+    </summary>
+    
+   <div id="more">
+    
+    <img class="phone" src="{% static 'app/image/phone.png' %}"/>
+      
+    <div class="contact">
+      <h4 class="contactHead"> Contacts </h4>
+      <div>
+        <p>
+          <span>Booker</span>
+          <ul>
+            <li class="no">
+              <p>{{ trip.booking.booker }}</p>
+              <span>{{trip.booking.contact1}}</span>
+              <sub>copied</sub>
+            </li>
+          </ul>
+          <hr>
+        </p>
+        
+        <p>
+         <span>Transporters</span>
+         <ul>
+         {% for escort in trip.transporters.all %}
+            <li class="no">
+              <p>{{ escort.firstName }} {{ escort.lastName}}</p>
+              <span>{{ escort.phone }}</span>
+              <sub>copied</sub>
+            </li>
+         {% endfor %}
+          </ul>
+          <hr>
+        </p>
+        
+      </div>
+      <h4 class="contactFoot">X</h4>
+    </div>
+   
+    <p class="created" id="date">created: <span>{{ trip.created_date|date:"D d M Y" }}<sub>{{ trip.created_date|date:"H:i" }}.</sub></span></p>
+    
+    <ul id="origin"> 
+    <li>pickup: <span>{{ trip.booking.pickup }}</span></li>
+    <li>delivery: <span>{{ trip.booking.delivery }}</span></li>
+    </ul>
+    
+    <div class="para"> 
+    Trip ID: 
+    <span> 
+    {{ trip.sn }}
+    </span>
+    <img data-id="{{ trip.sn }}" src="{% static 'app/image/copy.png' %}"/>
+    <h6 class="copy">coppied</h6>
+    </div>
+    
+    <ul class="status"> 
+    <li>progress: <span>{{ trip.get_progress_display }} </span></li>
+    <li class="mark" data-sn="{{trip.sn}}" data-name="{{ trip.booking.name}}">
+       {% with progress=trip.progress %}
+         {% if progress == "0" %}
+         <button data-progress="1"> 
+           mark as Departed
+         </button>
+         {% elif progress == "1" %}
+         <button data-progress="2"> 
+           mark as Pickup
+         </button>
+         {% elif progress == "2" %}
+         <button data-progress="3"> 
+           mark as Onroad
+         </button>
+         {% elif progress == "3" %}
+         <button data-progress="4"> 
+           mark as Delivered
+         </button>
+         {% elif progress == "4" %}
+         <button data-progress="5"> 
+           mark as Arrived
+         </button>
+         {% endif %}
+       {% endwith %}
+      <span>updating ...</span>
+    </li>
+    </ul>
+    
+    <br>
+    <hr>
+    
+    <h4 id="expect">
+     REPORT
+    <span>Expected reports:<span class="reportCount">
+     {{trip.report}}({{trip.reports.count}})
+     </span></span>
+    </h4>
+    <div id="article">
+    {% with reports=trip.reports.all %}
+    {% for report in reports %}
+    <article>
+    <p class="created">created: <span>{{ report.date|date:"D d M Y" }}<sub>{{ report.date|date:"H:i" }}</sub></span></p>
+    <ul id="report" class="status"> 
+    <li>status: <span>
+      {% if report.status == "G" %}
+      Good
+      {% elif report.status == "Y" %}
+      Not Bad
+      {% else %}
+      Bad
+      {% endif %}
+    </span></li>
+    <br/>
+    <li>progress: <span>{{ report.get_progress_display }}</span></li>
+    <li><button data-lat="{{report.latitude}}" data-long="{{report.longitude}}"> location </button></li>
+    </ul>
+    <p id="remark">
+      remark: 
+      <span> {{ report.remark }} </span>
+    </p>
+    </article>
+    {% endfor %}
+    <p id="seeMore" class="see"
+    {% if reports.count == 0 %}
+    style="display:none;"
+    {% endif %}
+    >see more reports </p>
+    <p id="seeLess" class="see">see less reports </p>
+    {% endwith %}
+    </div>
+    
+  </div>
+  </details>
+  {% endfor %}
+  {% endif %}
+  
+  {% if oneMonth_trips %}
+  <h5 id="one-month" class="due">Due in 1 month</h5>
+  {% for trip in oneMonth_trips %}
+  <details>
+    <summary>
+      <span>{{ trip.booking.name }}</span>
+      <div id="info">
+        {% with report=trip.latest_report %}
+        <span style="background-color:{{report.get_status_display|lower}};"></span>
+        {% endwith %}
+        report
+     </div>
+     <p>{{ trip.get_progress_display }}<span class="new">new</span></p>
+    </summary>
+    
+   <div id="more">
+    
+    <img class="phone" src="{% static 'app/image/phone.png' %}"/>
+      
+    <div class="contact">
+      <h4 class="contactHead"> Contacts </h4>
+      <div>
+        <p>
+          <span>Booker</span>
+          <ul>
+            <li class="no">
+              <p>{{ trip.booking.booker }}</p>
+              <span>{{trip.booking.contact1}}</span>
+              <sub>copied</sub>
+            </li>
+          </ul>
+          <hr>
+        </p>
+        
+        <p>
+         <span>Transporters</span>
+         <ul>
+         {% for escort in trip.transporters.all %}
+            <li class="no">
+              <p>{{ escort.firstName }} {{ escort.lastName}}</p>
+              <span>{{ escort.phone }}</span>
+              <sub>copied</sub>
+            </li>
+         {% endfor %}
+          </ul>
+          <hr>
+        </p>
+        
+      </div>
+      <h4 class="contactFoot">X</h4>
+    </div>
+   
+    <p class="created" id="date">created: <span>{{ trip.created_date|date:"D d M Y" }}<sub>{{ trip.created_date|date:"H:i" }}.</sub></span></p>
+    
+    <ul id="origin"> 
+    <li>pickup: <span>{{ trip.booking.pickup }}</span></li>
+    <li>delivery: <span>{{ trip.booking.delivery }}</span></li>
+    </ul>
+    
+    <div class="para"> 
+    Trip ID: 
+    <span> 
+    {{ trip.sn }}
+    </span>
+    <img data-id="{{ trip.sn }}" src="{% static 'app/image/copy.png' %}"/>
+    <h6 class="copy">coppied</h6>
+    </div>
+    
+    <ul class="status"> 
+    <li>progress: <span>{{ trip.get_progress_display }} </span></li>
+    <li class="mark" data-sn="{{trip.sn}}" data-name="{{ trip.booking.name}}">
+       {% with progress=trip.progress %}
+         {% if progress == "0" %}
+         <button data-progress="1"> 
+           mark as Departed
+         </button>
+         {% elif progress == "1" %}
+         <button data-progress="2"> 
+           mark as Pickup
+         </button>
+         {% elif progress == "2" %}
+         <button data-progress="3"> 
+           mark as Onroad
+         </button>
+         {% elif progress == "3" %}
+         <button data-progress="4"> 
+           mark as Delivered
+         </button>
+         {% elif progress == "4" %}
+         <button data-progress="5"> 
+           mark as Arrived
+         </button>
+         {% endif %}
+       {% endwith %}
+      <span>updating ...</span>
+    </li>
+    </ul>
+    
+    <br>
+    <hr>
+    
+    <h4 id="expect">
+     REPORT
+    <span>Expected reports:<span class="reportCount">
+     {{trip.report}}({{trip.reports.count}})
+     </span></span>
+    </h4>
+    <div id="article">
+    {% with reports=trip.reports.all %}
+    {% for report in reports %}
+    <article>
+    <p class="created">created: <span>{{ report.date|date:"D d M Y" }}<sub>{{ report.date|date:"H:i" }}</sub></span></p>
+    <ul id="report" class="status"> 
+    <li>status: <span>
+      {% if report.status == "G" %}
+      Good
+      {% elif report.status == "Y" %}
+      Not Bad
+      {% else %}
+      Bad
+      {% endif %}
+    </span></li>
+    <br/>
+    <li>progress: <span>{{ report.get_progress_display }}</span></li>
+    <li><button data-lat="{{report.latitude}}" data-long="{{report.longitude}}"> location </button></li>
+    </ul>
+    <p id="remark">
+      remark: 
+      <span> {{ report.remark }} </span>
+    </p>
+    </article>
+    {% endfor %}
+    <p id="seeMore" class="see"
+    {% if reports.count == 0 %}
+    style="display:none;"
+    {% endif %}
+    >see more reports </p>
+    <p id="seeLess" class="see">see less reports </p>
+    {% endwith %}
+    </div>
+    
+  </div>
+  </details>
+  {% endfor %}
+  {% endif %}
+  
+  {% if months_trips %}
+  <h5 id="months" class="due">Due in months</h5>
+  {% for trip in months_trips %}
+  <details>
+    <summary>
+      <span>{{ trip.booking.name }}</span>
+      <div id="info">
+        {% with report=trip.latest_report %}
+        <span style="background-color:{{report.get_status_display|lower}};"></span>
+        {% endwith %}
+        report
+     </div>
+     <p>{{ trip.get_progress_display }}<span class="new">new</span></p>
+    </summary>
+    
+   <div id="more">
+    
+    <img class="phone" src="{% static 'app/image/phone.png' %}"/>
+      
+    <div class="contact">
+      <h4 class="contactHead"> Contacts </h4>
+      <div>
+        <p>
+          <span>Booker</span>
+          <ul>
+            <li class="no">
+              <p>{{ trip.booking.booker }}</p>
+              <span>{{trip.booking.contact1}}</span>
+              <sub>copied</sub>
+            </li>
+          </ul>
+          <hr>
+        </p>
+        
+        <p>
+         <span>Transporters</span>
+         <ul>
+         {% for escort in trip.transporters.all %}
+            <li class="no">
+              <p>{{ escort.firstName }} {{ escort.lastName}}</p>
+              <span>{{ escort.phone }}</span>
+              <sub>copied</sub>
+            </li>
+         {% endfor %}
+          </ul>
+          <hr>
+        </p>
+        
+      </div>
+      <h4 class="contactFoot">X</h4>
+    </div>
+   
+    <p class="created" id="date">created: <span>{{ trip.created_date|date:"D d M Y" }}<sub>{{ trip.created_date|date:"H:i" }}.</sub></span></p>
+    
+    <ul id="origin"> 
+    <li>pickup: <span>{{ trip.booking.pickup }}</span></li>
+    <li>delivery: <span>{{ trip.booking.delivery }}</span></li>
+    </ul>
+    
+    <div class="para"> 
+    Trip ID: 
+    <span> 
+    {{ trip.sn }}
+    </span>
+    <img data-id="{{ trip.sn }}" src="{% static 'app/image/copy.png' %}"/>
+    <h6 class="copy">coppied</h6>
+    </div>
+    
+    <ul class="status"> 
+    <li>progress: <span>{{ trip.get_progress_display }} </span></li>
+    <li class="mark" data-sn="{{trip.sn}}" data-name="{{ trip.booking.name}}">
+       {% with progress=trip.progress %}
+         {% if progress == "0" %}
+         <button data-progress="1"> 
+           mark as Departed
+         </button>
+         {% elif progress == "1" %}
+         <button data-progress="2"> 
+           mark as Pickup
+         </button>
+         {% elif progress == "2" %}
+         <button data-progress="3"> 
+           mark as Onroad
+         </button>
+         {% elif progress == "3" %}
+         <button data-progress="4"> 
+           mark as Delivered
+         </button>
+         {% elif progress == "4" %}
+         <button data-progress="5"> 
+           mark as Arrived
+         </button>
+         {% endif %}
+       {% endwith %}
+      <span>updating ...</span>
+    </li>
+    </ul>
+    
+    <br>
+    <hr>
+    
+    <h4 id="expect">
+     REPORT
+    <span>Expected reports:<span class="reportCount">
+     {{trip.report}}({{trip.reports.count}})
+     </span></span>
+    </h4>
+    <div id="article">
+    {% with reports=trip.reports.all %}
+    {% for report in reports %}
+    <article>
+    <p class="created">created: <span>{{ report.date|date:"D d M Y" }}<sub>{{ report.date|date:"H:i" }}</sub></span></p>
+    <ul id="report" class="status"> 
+    <li>status: <span>
+      {% if report.status == "G" %}
+      Good
+      {% elif report.status == "Y" %}
+      Not Bad
+      {% else %}
+      Bad
+      {% endif %}
+    </span></li>
+    <br/>
+    <li>progress: <span>{{ report.get_progress_display }}</span></li>
+    <li><button data-lat="{{report.latitude}}" data-long="{{report.longitude}}"> location </button></li>
+    </ul>
+    <p id="remark">
+      remark: 
+      <span> {{ report.remark }} </span>
+    </p>
+    </article>
+    {% endfor %}
+    <p id="seeMore" class="see"
+    {% if reports.count == 0 %}
+    style="display:none;"
+    {% endif %}
+    >see more reports </p>
+    <p id="seeLess" class="see">see less reports </p>
+    {% endwith %}
+    </div>
+    
+  </div>
+  </details>
+  {% endfor %}
+  {% endif %}
+
   </main>
   
  

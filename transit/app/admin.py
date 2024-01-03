@@ -75,7 +75,7 @@ class UserEntryAdmin(UserAdmin):
     date_hierarchy = 'date_joined'
     
     fieldsets = (
-        (None, {'fields': ('username', 'email', 'password', 'user_type', 'office_line', 'personal_line', 'groups', 'user_permissions', 'is_active', 'is_staff', 'is_superuser')}),
+        (None, {'fields': ('username', 'email', 'password', 'first_name', 'last_name', 'user_type', 'office_line', 'personal_line', 'groups', 'user_permissions', 'is_active', 'is_staff', 'is_superuser')}),
         )
     
     list_display = ('username', 'email', 'last_login', 'is_active', 'is_staff', 'is_superuser', 'user_type', 'date_joined')
@@ -237,7 +237,7 @@ class ReportAdmin(admin.ModelAdmin):
   
   
   def has_add_permission(self, request):
-        return False
+        return request.user.is_superuser
 
   def has_change_permission(self, request, obj=None):
         return False

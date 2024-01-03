@@ -16,6 +16,7 @@
        <h4>
           {{ user.username }}
           <sub> {{ user.user_type }} </sub>
+          <a class="logout" href="{% url "logout" %}">Logout</a>
        </h4>
     </div>
      
@@ -27,9 +28,29 @@
      <a href="{% url "app:monitor" %}">Trips</a>
    </h4>
    
-   <a class="logout" href="{% url "logout" %}">
-     Logout
-   </a>
+<div class="due-links">
+     {% if due_trips %}
+     <a href="#due-trip"> due trips </a>
+     {% endif %}
+     {% if oneDay_trips %}
+     <a href="#one-day"> due in 24 hours </a>
+     {% endif %}
+     {% if twoDays_trips %}
+     <a href="#two-days"> due in 2 day </a>
+     {% endif %}
+     {% if oneWeek_trips %}
+     <a href="#one-week"> due in A week </a>
+     {% endif %}
+     {% if twoWeeks_trips %}
+     <a href="#two-weeks"> due 2 weeks </a>
+     {% endif %}
+     {% if oneMonth_trips %}
+     <a href="#one-month"> due 1 month </a>
+     {% endif %}
+     {% if months_trips %}
+     <a href="#months"> due in months </a>
+     {% endif %}
+   </div>
    
    <hr/>
   </header> 
@@ -42,255 +63,350 @@
      trip closed successfully
     </p>
   </div>
-  
- <h5 class="due">Due in two days</h5>
  
-  <details>
-    <summary>
-      <span>pinnacle studio</span>
-      <div id="info"><span></span>report</div>
-      <p>delivered</p>
-    </summary>
-    
-   <div id="more">
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    
-    <ul id="origin"> 
-    <li>pickup: <span> Ikire stationnnnnnnsjsjjsjskskskskkskshshjdjdjdsjsjsjs</span></li>
-    <li>delivery: <span>Akureddddd dxxxxxxxxxxxxhshhshshshgdhshshjshsjshshsh</span></li>
-    </ul>
-    
-    <div class="para"> 
-    Trip ID: 
-    <span> cea088de-498a-4511-93d4-3bb0b23cd845
-    </span>
-    <img data-id="cea088de-498a-4511-93d4-3bb0b23cd845" src="{% static 'app/image/copy.png' %}"/>
-    <h6 class="copy">coppied</h6>
-    </div>
-    
-    <ul class="status"> 
-    <li class="first">status: <span>open<span></li>
-    <li class="remove">
-     <button data-name="PINNACLE STUDIO">mark as closed</button>
-     <span>updating ...</span>
-    </li>
-    </ul>
-    <br>
-    
-   <p id="progress">
-     progress: <b>pending</b>
-     <sub> (to be delivered by 25-06-2022) </sub>
-   </p>
-    
-  </div>
-  </details>
-  
-  
-  <details>
-    <summary>
-      <span>pinnacle studiogdhdjjdjdjdjdjjdhdhdhdjdjrjjdjdjdjdfjfjhdhejrbdbdjrjriirjrhfjrjr</span>
-      <div id="info"><span></span>report</div>
-      <p>delivered</p>
-    </summary>
-    
-   <div id="more">
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
-    
-    <ul id="origin"> 
-    <li>pickup: <span> Ikire stationnnnnnnsjsjjsjskskskskkskshshjdjdjdsjsjsjs</span></li>
-    <li>delivery: <span>Akureddddddxxxxxxxxxxxxhshhshshshgdhshshjshsjshshsh</span></li>
-    </ul>
-    
-    <div class="para"> 
-    Trip ID: 
-    <span> 525e56d6-a4fc-45e5-844a-7636df7ebcd5
-    </span>
-    <img data-id="525e56d6-a4fc-45e5-844a-7636df7ebcd5" src="{% static 'app/image/copy.png' %}"/>
-    <h6 class="copy">coppied</h6>
-    </div>
-    
-    <ul class="status"> 
-    <li class="first">status: <span>close<span></li>
-    <li class="remove">
-      <button data-name="PINNACLE STUDIOgdhdjjdjdjdjdjjdhdhdhdjdjrjjdjdjdjdfjfjhdhejrbdbdjrjriirjrhfjrjr">mark as closed</button>
-      <span>updating ...</span>
-    </li>
-    </ul>
-    <br>
-    
-   <p id="progress">
-     progress: <b>Delivered</b>
-     <sub> (to be delivered by 25-06-2022) </sub>
-   </p>
-    
-  </div>
-  </details>
-  
-  
+ {% if due_trips %}
+ <h5 id="due-trip" class="due">Already due</h5>
+ {% for trip in due_trips %}
  <details>
     <summary>
-      <span>pinnacle studio</span>
-      <div id="info"><span></span>report</div>
-      <p>delivered</p>
+      <span>{{ trip.booking.name }}</span>
+      <div id="info">
+        {% with report=trip.latest_report %}
+        <span style="background-color:{{report.get_status_display|lower}};"></span>
+        {% endwith %}
+        report
+     </div>
+      <p>{{ trip.get_progress_display }}</p>
     </summary>
     
    <div id="more">
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
+    <p class="created">created: <span>{{ trip.created_date|date:"D d M Y" }}<sub>{{ trip.created_date|date:"H:i" }}.</sub></span></p>
     
     <ul id="origin"> 
-    <li>pickup: <span> Ikire stationnnnnnnsjsjjsjskskskskkskshshjdjdjdsjsjsjs</span></li>
-    <li>delivery: <span>Akureddddddxxxxxxxxxxxxhshhshshshgdhshshjshsjshshsh</span></li>
+    <li>pickup: <span> {{ trip.booking.pickup }}</span></li>
+    <li>delivery: <span>{{ trip.booking.delivery }}</span></li>
     </ul>
     
     <div class="para"> 
     Trip ID: 
-    <span> 1edb3c02-e640-4116-829d-36f09c21de65
-    </span>
-    <img data-id="1edb3c02-e640-4116-829d-36f09c21de65" src="{% static 'app/image/copy.png' %}"/>
+    <span> {{ trip.sn }} </span>
+    <img data-id="{{ trip.sn }}" src="{% static 'app/image/copy.png' %}"/>
     <h6 class="copy">coppied</h6>
     </div>
     
     <ul class="status"> 
-    <li class="first">status: <span>open<span></li>
+    <li class="first">status: <span>{{ trip.get_status_display }}<span></li>
     <li class="remove">
-      <button data-name="PINNACLE studio">mark as closed</button>
+      <button data-sn="{{trip.sn}}" data-name="{{ trip.booking.name }}">mark as closed</button>
       <span>updating ...</span>
     </li>
     </ul>
     <br>
     
    <p id="progress">
-     progress: <b>Delivered</b>
-     <sub> (to be delivered by 25-06-2022) </sub>
+     progress: <b>{{ trip.get_progress_display }}</b>
+     <sub> ({{ trip.due_date|date:"D d M Y" }}) </sub>
    </p>
     
   </div>
   </details>
+  {% endfor %}
+  {% endif %}
   
-  <h5 class="due">Due in 1 week</h5>
-  
+  {% if oneDay_trips %}
+  <h5 id="one-day" class="due">Due in 24 hours</h5>
+  {% for trip in oneDay_trips %}
   <details>
     <summary>
-      <span>pinnacle studio</span>
-      <div id="info"><span></span>report</div>
-      <p>delivered</p>
+      <span>{{ trip.booking.name }}</span>
+      <div id="info">
+        {% with report=trip.latest_report %}
+        <span style="background-color:{{report.get_status_display|lower}};"></span>
+        {% endwith %}
+        report
+     </div>
+      <p>{{ trip.get_progress_display }}</p>
     </summary>
     
    <div id="more">
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
+    <p class="created">created: <span>{{ trip.created_date|date:"D d M Y" }}<sub>{{ trip.created_date|date:"H:i" }}.</sub></span></p>
     
     <ul id="origin"> 
-    <li>pickup: <span> Ikire stationnnnnnnsjsjjsjskskskskkskshshjdjdjdsjsjsjs</span></li>
-    <li>delivery: <span>Akureddddd dxxxxxxxxxxxxhshhshshshgdhshshjshsjshshsh</span></li>
+    <li>pickup: <span> {{ trip.booking.pickup }}</span></li>
+    <li>delivery: <span>{{ trip.booking.delivery }}</span></li>
     </ul>
     
     <div class="para"> 
     Trip ID: 
-    <span> cea088de-498a-4511-93d4-3bb0b23cd845
-    </span>
-    <img data-id="cea088de-498a-4511-93d4-3bb0b23cd845" src="{% static 'app/image/copy.png' %}"/>
+    <span> {{ trip.sn }} </span>
+    <img data-id="{{ trip.sn }}" src="{% static 'app/image/copy.png' %}"/>
     <h6 class="copy">coppied</h6>
     </div>
     
     <ul class="status"> 
-    <li class="first">status: <span>open<span></li>
+    <li class="first">status: <span>{{ trip.get_status_display }}<span></li>
     <li class="remove">
-     <button data-name="PINNACLE STUDIO">mark as closed</button>
-     <span>updating ...</span>
+      <button data-sn="{{trip.sn}}" data-name="{{ trip.booking.name }}">mark as closed</button>
+      <span>updating ...</span>
     </li>
     </ul>
     <br>
     
    <p id="progress">
-     progress: <b>pending</b>
-     <sub> (to be delivered by 25-06-2022) </sub>
-  </p>
+     progress: <b>{{ trip.get_progress_display }}</b>
+     <sub> ({{ trip.due_date|date:"D d M Y" }}) </sub>
+   </p>
     
   </div>
   </details>
+  {% endfor %}
+  {% endif %}
   
-  
+  {% if twoDays_trips %}
+  <h5 id="two-days" class="due">Due in 2 days</h5>
+  {% for trip in twoDays_trips %}
   <details>
     <summary>
-      <span>pinnacle studiogdhdjjdjdjdjdjjdhdhdhdjdjrjjdjdjdjdfjfjhdhejrbdbdjrjriirjrhfjrjr</span>
-      <div id="info"><span></span>report</div>
-      <p>delivered</p>
+      <span>{{ trip.booking.name }}</span>
+      <div id="info">
+        {% with report=trip.latest_report %}
+        <span style="background-color:{{report.get_status_display|lower}};"></span>
+        {% endwith %}
+        report
+     </div>
+      <p>{{ trip.get_progress_display }}</p>
     </summary>
     
    <div id="more">
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
+    <p class="created">created: <span>{{ trip.created_date|date:"D d M Y" }}<sub>{{ trip.created_date|date:"H:i" }}.</sub></span></p>
     
     <ul id="origin"> 
-    <li>pickup: <span> Ikire stationnnnnnnsjsjjsjskskskskkskshshjdjdjdsjsjsjs</span></li>
-    <li>delivery: <span>Akureddddddxxxxxxxxxxxxhshhshshshgdhshshjshsjshshsh</span></li>
+    <li>pickup: <span> {{ trip.booking.pickup }}</span></li>
+    <li>delivery: <span>{{ trip.booking.delivery }}</span></li>
     </ul>
     
     <div class="para"> 
     Trip ID: 
-    <span> 525e56d6-a4fc-45e5-844a-7636df7ebcd5
-    </span>
-    <img data-id="525e56d6-a4fc-45e5-844a-7636df7ebcd5" src="{% static 'app/image/copy.png' %}"/>
+    <span> {{ trip.sn }} </span>
+    <img data-id="{{ trip.sn }}" src="{% static 'app/image/copy.png' %}"/>
     <h6 class="copy">coppied</h6>
     </div>
     
     <ul class="status"> 
-    <li class="first">status: <span>close<span></li>
+    <li class="first">status: <span>{{ trip.get_status_display }}<span></li>
     <li class="remove">
-      <button data-name="PINNACLE STUDIOgdhdjjdjdjdjdjjdhdhdhdjdjrjjdjdjdjdfjfjhdhejrbdbdjrjriirjrhfjrjr">mark as closed</button>
+      <button data-sn="{{trip.sn}}" data-name="{{ trip.booking.name }}">mark as closed</button>
       <span>updating ...</span>
     </li>
     </ul>
     <br>
     
    <p id="progress">
-     progress: <b>Delivered</b>
-     <sub> (to be delivered by 25-06-2022) </sub>
+     progress: <b>{{ trip.get_progress_display }}</b>
+     <sub> ({{ trip.due_date|date:"D d M Y" }}) </sub>
    </p>
     
   </div>
   </details>
+  {% endfor %}
+  {% endif %}
   
-  <h5 class="due"> Due in 10 days </h5>
-  
- <details>
+  {% if oneWeek_trips %}
+  <h5 id="one-week" class="due">Due in 1 week</h5>
+  {% for trip in oneWeek_trips %}
+  <details>
     <summary>
-      <span>pinnacle studio</span>
-      <div id="info"><span></span>report</div>
-      <p>delivered</p>
+      <span>{{ trip.booking.name }}</span>
+      <div id="info">
+        {% with report=trip.latest_report %}
+        <span style="background-color:{{report.get_status_display|lower}};"></span>
+        {% endwith %}
+        report
+     </div>
+      <p>{{ trip.get_progress_display }}</p>
     </summary>
     
    <div id="more">
-    <p class="created">created: <span>20-06-2022<sub>4:30pm.</sub></span></p>
+    <p class="created">created: <span>{{ trip.created_date|date:"D d M Y" }}<sub>{{ trip.created_date|date:"H:i" }}.</sub></span></p>
     
     <ul id="origin"> 
-    <li>pickup: <span> Ikire stationnnnnnnsjsjjsjskskskskkskshshjdjdjdsjsjsjs</span></li>
-    <li>delivery: <span>Akureddddddxxxxxxxxxxxxhshhshshshgdhshshjshsjshshsh</span></li>
+    <li>pickup: <span> {{ trip.booking.pickup }}</span></li>
+    <li>delivery: <span>{{ trip.booking.delivery }}</span></li>
     </ul>
     
     <div class="para"> 
     Trip ID: 
-    <span> 1edb3c02-e640-4116-829d-36f09c21de65
-    </span>
-    <img data-id="1edb3c02-e640-4116-829d-36f09c21de65" src="{% static 'app/image/copy.png' %}"/>
+    <span> {{ trip.sn }} </span>
+    <img data-id="{{ trip.sn }}" src="{% static 'app/image/copy.png' %}"/>
     <h6 class="copy">coppied</h6>
     </div>
     
     <ul class="status"> 
-    <li class="first">status: <span>open<span></li>
+    <li class="first">status: <span>{{ trip.get_status_display }}<span></li>
     <li class="remove">
-      <button data-name="PINNACLE studio">mark as closed</button>
+      <button data-sn="{{trip.sn}}" data-name="{{ trip.booking.name }}">mark as closed</button>
       <span>updating ...</span>
     </li>
     </ul>
     <br>
     
    <p id="progress">
-     progress: <b>Delivered</b>
-     <sub> (to be delivered by 25-06-2022) </sub>
+     progress: <b>{{ trip.get_progress_display }}</b>
+     <sub> ({{ trip.due_date|date:"D d M Y" }}) </sub>
    </p>
     
   </div>
   </details>
+  {% endfor %}
+  {% endif %}
+  
+  {% if twoWeeks_trips %}
+  <h5 id="two-weeks" class="due">Due in 2 week</h5>
+  {% for trip in twoWeeks_trips %}
+  <details>
+    <summary>
+      <span>{{ trip.booking.name }}</span>
+      <div id="info">
+        {% with report=trip.latest_report %}
+        <span style="background-color:{{report.get_status_display|lower}};"></span>
+        {% endwith %}
+        report
+     </div>
+      <p>{{ trip.get_progress_display }}</p>
+    </summary>
+    
+   <div id="more">
+    <p class="created">created: <span>{{ trip.created_date|date:"D d M Y" }}<sub>{{ trip.created_date|date:"H:i" }}.</sub></span></p>
+    
+    <ul id="origin"> 
+    <li>pickup: <span> {{ trip.booking.pickup }}</span></li>
+    <li>delivery: <span>{{ trip.booking.delivery }}</span></li>
+    </ul>
+    
+    <div class="para"> 
+    Trip ID: 
+    <span> {{ trip.sn }} </span>
+    <img data-id="{{ trip.sn }}" src="{% static 'app/image/copy.png' %}"/>
+    <h6 class="copy">coppied</h6>
+    </div>
+    
+    <ul class="status"> 
+    <li class="first">status: <span>{{ trip.get_status_display }}<span></li>
+    <li class="remove">
+      <button data-sn="{{trip.sn}}" data-name="{{ trip.booking.name }}">mark as closed</button>
+      <span>updating ...</span>
+    </li>
+    </ul>
+    <br>
+    
+   <p id="progress">
+     progress: <b>{{ trip.get_progress_display }}</b>
+     <sub> ({{ trip.due_date|date:"D d M Y" }}) </sub>
+   </p>
+    
+  </div>
+  </details>
+  {% endfor %}
+  {% endif %}
+  
+  {% if oneMonth_trips %}
+  <h5 id="one-month" class="due">Due in 1 month</h5>
+  {% for trip in oneMonth_trips %}
+  <details>
+    <summary>
+      <span>{{ trip.booking.name }}</span>
+      <div id="info">
+        {% with report=trip.latest_report %}
+        <span style="background-color:{{report.get_status_display|lower}};"></span>
+        {% endwith %}
+        report
+     </div>
+      <p>{{ trip.get_progress_display }}</p>
+    </summary>
+    
+   <div id="more">
+    <p class="created">created: <span>{{ trip.created_date|date:"D d M Y" }}<sub>{{ trip.created_date|date:"H:i" }}.</sub></span></p>
+    
+    <ul id="origin"> 
+    <li>pickup: <span> {{ trip.booking.pickup }}</span></li>
+    <li>delivery: <span>{{ trip.booking.delivery }}</span></li>
+    </ul>
+    
+    <div class="para"> 
+    Trip ID: 
+    <span> {{ trip.sn }} </span>
+    <img data-id="{{ trip.sn }}" src="{% static 'app/image/copy.png' %}"/>
+    <h6 class="copy">coppied</h6>
+    </div>
+    
+    <ul class="status"> 
+    <li class="first">status: <span>{{ trip.get_status_display }}<span></li>
+    <li class="remove">
+      <button data-sn="{{trip.sn}}" data-name="{{ trip.booking.name }}">mark as closed</button>
+      <span>updating ...</span>
+    </li>
+    </ul>
+    <br>
+    
+   <p id="progress">
+     progress: <b>{{ trip.get_progress_display }}</b>
+     <sub> ({{ trip.due_date|date:"D d M Y" }}) </sub>
+   </p>
+    
+  </div>
+  </details>
+  {% endfor %}
+  {% endif %}
+  
+  {% if months_trips %}
+  <h5 id="months" class="due">Due in months</h5>
+  {% for trip in months_trips %}
+  <details>
+    <summary>
+      <span>{{ trip.booking.name }}</span>
+      <div id="info">
+        {% with report=trip.latest_report %}
+        <span style="background-color:{{report.get_status_display|lower}};"></span>
+        {% endwith %}
+        report
+     </div>
+      <p>{{ trip.get_progress_display }}</p>
+    </summary>
+    
+   <div id="more">
+    <p class="created">created: <span>{{ trip.created_date|date:"D d M Y" }}<sub>{{ trip.created_date|date:"H:i" }}.</sub></span></p>
+    
+    <ul id="origin"> 
+    <li>pickup: <span> {{ trip.booking.pickup }}</span></li>
+    <li>delivery: <span>{{ trip.booking.delivery }}</span></li>
+    </ul>
+    
+    <div class="para"> 
+    Trip ID: 
+    <span> {{ trip.sn }} </span>
+    <img data-id="{{ trip.sn }}" src="{% static 'app/image/copy.png' %}"/>
+    <h6 class="copy">coppied</h6>
+    </div>
+    
+    <ul class="status"> 
+    <li class="first">status: <span>{{ trip.get_status_display }}<span></li>
+    <li class="remove">
+      <button data-sn="{{trip.sn}}" data-name="{{ trip.booking.name }}">mark as closed</button>
+      <span>updating ...</span>
+    </li>
+    </ul>
+    <br>
+    
+   <p id="progress">
+     progress: <b>{{ trip.get_progress_display }}</b>
+     <sub> ({{ trip.due_date|date:"D d M Y" }}) </sub>
+   </p>
+    
+  </div>
+  </details>
+  {% endfor %}
+  {% endif %}
+  
   </main>
   
   <!-- construct the dialog for action confirmation -->

@@ -83,6 +83,7 @@ function scan() {
 qrCode.callback = (res) => {
   if (res) {
     console.log(res);
+    // redirect the agent page with the captured trip seria_no.
     resetDom();
   }
 }

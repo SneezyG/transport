@@ -15,10 +15,13 @@
  const remark = document.querySelector("#remark > input");
  const radios = document.querySelectorAll("#status > input");
  
+
+ const nav = document.querySelector('#nav');
  
- // due report amd submitted report.
- const dueReport = 4;
- let submitedReport = 0;
+ // trip sn, due report and submitted report.
+ const sn = nav.dataset.sn;
+ const dueReport = Number(nav.dataset.due);
+ let submitedReport = Number(nav.dataset.submit);
  let status = "green";
  // set create new report button.
  resetReport();
@@ -41,30 +44,51 @@
  }
  
  // handle report submition
- submit.addEventListener('click', () => {
+ submit.addEventListener('click', async () => {
      // get user location(Navigator.location);
      body.style.overflow = "hidden";
-     if (!progress.value || !remark.value ) {
+     if (!progress.value || !remark.value || !status ) {
        document.querySelector("#error").innerHTML = "Please enter status, progress and remark to continue.";
        failure.showModal();
        
      } else {
        spiner.open = true;
-       let data = {
+       let reportData = {
+         'sn': sn,
          'status': status,
          'progress': progress.value,
          'remark': remark.value,
-         'location': "undefined"
+         'lat': "",
+         'long': ""
         };
-        console.log(data);
-        setTimeout(() => {
+        let response = await fetch(`/agent/report/${sn}/`, {
+          method: 'POST',
+          headers: {
+           'Content-Type': 'application/json;charset=utf-8',
+           'X-CSRFToken': getCSRFToken()
+          },
+          body: JSON.stringify(reportData)
+        });
+      
+        let data = await response.json(); 
+    
+        if (response.ok) {
+          setTimeout(() => {
           spiner.open = false;
           success.showModal();
-        }, 5000);
-        submitedReport += 1;
-        formBox.style.display = "none";
-        resetReport()
-        showForm("green");
+          }, 1000);
+          submitedReport += 1;
+          formBox.style.display = "none";
+          resetReport()
+          showForm("green");
+        } else {
+          setTimeout(() => {
+          spiner.open = false;
+          document.querySelector("#error").innerHTML = data.error;
+          failure.showModal();
+          }, 1000);
+        }
+        
      }
  });
  
@@ -148,5 +172,15 @@
  function bodyreset() {
    body.style.overflow = "auto";
  }
+ 
+ 
+ function getCSRFToken() {
+    const csrfCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('csrftoken='));
+    if (csrfCookie) {
+        return csrfCookie.split('=')[1];
+    }
+    return null;
+ }
+ 
  
  

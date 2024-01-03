@@ -342,14 +342,14 @@
 <body>
   
   <header>
-  <img src="{% static 'agent/image/logo.png' %}" alt="logo" />
-  <h5 id="nav">
-     <a href="{% url "agent:report" %}">Report</a>
-     <a class="inactive" href="{% url "agent:info" %}">Info</a>
+  <img src="{% static 'app/image/logo.png' %}" alt="logo" />
+  <h5 id="nav" data-sn="{{trip.sn}}" data-due="{{trip.report}}" data-submit="{{trip.reports.count}}">
+     <a href="{% url "agent:report" trip.sn %}">Report</a>
+     <a class="inactive" href="{% url "agent:info" trip.sn %}">Info</a>
    </h5>
    <p id="due">
     <span>Due report</span> 
-    <sub id="ratio">4(0)</sub> 
+    <sub id="ratio">{{trip.report}}({{trip.reports.count}})</sub> 
    </p>
    <hr/>
   </header> 
@@ -428,7 +428,7 @@
   
   <!-- construct the dialog that displays loader-->
   <dialog id="spiner" autofocus>
-  <img src="{% static 'agent/image/logo.png' %}" alt="site logo"/>
+  <img src="{% static 'app/image/logo.png' %}" alt="site logo"/>
   </dialog>
   
   

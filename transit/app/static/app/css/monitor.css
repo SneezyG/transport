@@ -28,19 +28,26 @@
       }
    }
    
+   html {
+     height: 100%;
+   }
+   
    body {
-        font-family: 'Times New Roman', Times, serif;
-        margin: 0;
-        padding: 0;
-        background-color: #e9e8e8;
-        overflow-y: auto;
-        overflow-x: hidden;
-        user-select: none;
-      }
+      font-family: 'Times New Roman', Times, serif;
+      margin: 0;
+      padding: 0;
+      background-color: #e9e8e8;
+      height: 100%;
+      overflow: hidden;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+  }
       
    main {
-      margin-top: 195px;
-      margin-bottom: 350px;
+      padding-bottom: 450px;
+      flex: 1;
+      overflow: auto;
    }
    
    button {
@@ -73,18 +80,30 @@
       }
 
       header {
-        position: fixed;
-        top: 0;
         background-color: #e9e8e8;
-        width: 100%;
-        z-index: 1;
       }
       
-      .logout {
-        position: absolute;
-        right: 10%;
-        bottom: 15px;
-        font-size: 14px;
+     .logout {
+        font-size: 12px;
+        margin-left: 10px;
+        color: red;
+      }
+      
+      .due-links > a {
+        margin: 0 10px;
+        margin-bottom: 5px;
+        display: inline-block;
+        font-size: 13px;
+        color: #003366;
+      }
+      
+      .due-links {
+        text-align: center;
+      }
+      
+      h5.due {
+        width: 60%;
+        margin: 50px auto 15px auto;
       }
       
       header > hr {
@@ -189,7 +208,7 @@
         margin-right: 5px;
         padding: 4px;
         border-radius: 10px;
-        background-color: rgb(32, 179, 32);
+        background-color: green;
         position: relative;
         top: 3px;
       }

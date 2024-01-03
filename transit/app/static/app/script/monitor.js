@@ -1,15 +1,16 @@
 
 // get dom element this script depend on.
 const body = document.querySelector('body');
+const main = document.querySelector('main');
 const copyButtons = document.querySelectorAll('.para > img');
 const removeButtons = document.querySelectorAll('.remove > button');
-const links = document.querySelectorAll("#nav > a");
 const notify = document.querySelector("#notify > p");
 const confirm = document.querySelector("#confirm");
 const summary = document.querySelectorAll('summary');
 const tripBoxs = document.querySelectorAll("details");
 const header = document.querySelector('body > header');
 const logo = document.querySelector('#logo');
+const dueHeader = document.querySelectorAll('.due');
 
 
 // document current scroll
@@ -33,44 +34,47 @@ for (let elem of removeButtons) {
 // open up a trip box
 function open(e) {
   let elem = e.target;
-  let detail = elem.parentElement;
-  body.style.overflowY = "hidden";
-  logo.parentElement.style.pointerEvents = "none";
-  for (let elem of links) {
-    elem.style.pointerEvents = "none";
+  main.style.overflowY = "hidden";
+  header.style.filter = "blur(1px)";
+  header.style.pointerEvents = "none";
+  for (let elem of dueHeader) {
+     elem.style.filter = "blur(1px)";
   }
+  
+  let detail = elem.parentElement;
   for (let elem of tripBoxs) {
     if (elem == detail) {
       elem.style.boxShadow = "10px 10px 5px #888888";
-      elem.querySelector('#more').scroll(0, 0);
     } else {
       elem.style.pointerEvents = "none";
       elem.style.filter = "blur(1px) opacity(50%)";
     }
   }
-  header.style.filter = "blur(1px)";
+  
   elem.addEventListener('click', close, {once:true});
     setTimeout(() => {
-      domScroll = document.documentElement.scrollTop;
+      domScroll = main.scrollTop;
       scroll(detail);
     }, 250);
 } 
 
 // close a trip box
 function close(e) {
-  let elem = e.target;
-  let parent = elem.parentElement;
-  body.style.overflowY = "auto";
-  logo.parentElement.style.pointerEvents = "auto";
-  document.documentElement.scroll({
+  main.style.overflowY = "auto";
+  header.style.filter = "none";
+  header.style.pointerEvents = "auto";
+  for (let elem of dueHeader) {
+    elem.style.filter = "none";
+  }
+  main.scroll({
      top: domScroll,
      left: 0,
      behaviour: 'smooth'
   });
-  for (let elem of links) {
-    elem.style.pointerEvents = "auto";
-  }
-  header.style.filter = "blur(0)";
+  
+  let elem = e.target;
+  let parent = elem.parentElement;
+  
   for (let elem of tripBoxs) {
     if (elem == parent) {
       elem.style.boxShadow = "";
@@ -86,9 +90,9 @@ function close(e) {
 // scroll the dom relative to a trip coord.
 function scroll(cont) {
    let box = cont.getBoundingClientRect();
-   let headHeight = document.querySelector('body > header').offsetHeight;
-   let scrollby = box.top + window.pageYOffset - headHeight - 10;
-   document.documentElement.scroll({
+   let headHeight = header.offsetHeight;
+   let scrollby = box.top + domScroll + window.pageYOffset - headHeight - 10;
+   main.scroll({
        top: scrollby,
        left: 0,
        behaviour: 'smooth'
@@ -121,6 +125,7 @@ function copy(e) {
  function remove(e) {
    let elem = e.target;
    let name = elem.dataset.name;
+   let sn = elem.dataset.sn;
    
    let ancestor1 = elem.parentElement.parentElement.parentElement;
    let ancestor2 = ancestor1.parentElement;
@@ -130,19 +135,37 @@ function copy(e) {
    confirm.showModal();
    let button = confirm.querySelector('#continue');
    
-   button.addEventListener('click', () => {
+   button.addEventListener('click', async () => {
      sibling.style.animationPlayState = 'running';
-     // simulate server request.
-     setTimeout(timeIt, 3000);
+     
+     let response = await fetch(`/tripclose/${sn}/`);
+
+     if (response.ok) {
+       setTimeout(timeIt(), 1000);
+     } else {
+       resetAnime(sibling);
+       console.log("something went wrong");
+     }
      
      function timeIt() {
        resetAnime(sibling);
-       body.style.overflowY = "auto";
-       header.style.filter = "blur(0)";
-       for (let elem of tripBoxs) {
-           elem.style.filter = "blur(0)";
-           elem.style.pointerEvents = "auto"
+       main.style.overflowY = "auto";
+       header.style.filter = "none";
+       header.style.pointerEvents = "auto";
+       for (let elem of dueHeader) {
+          elem.style.filter = "none";
        }
+       main.scroll({
+          top: domScroll,
+          left: 0,
+          behaviour: 'smooth'
+       });
+       
+       for (let elem of tripBoxs) {
+         elem.style.filter = "blur(0) opacity(100%)";
+         elem.style.pointerEvents = "auto"
+       }
+       
        ancestor2.style.animationPlayState= "running";
        ancestor1.style.height = "200px";
        ancestor2.addEventListener('animationend', (e) => {

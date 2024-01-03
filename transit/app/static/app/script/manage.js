@@ -2,6 +2,7 @@
 
 // get the dom element this script depend on.
 const body = document.querySelector('body');
+const main = document.querySelector('main');
 const summary = document.querySelectorAll('summary');
 const copyButtons = document.querySelectorAll('.para > img');
 const scan = document.querySelectorAll('.para > span');
@@ -21,6 +22,7 @@ const confirm = document.querySelector("#confirm");
 const tripBoxs = document.querySelectorAll("details");
 const header = document.querySelector('body > header');
 const logo = document.querySelector('#logo');
+const dueHeader = document.querySelectorAll('.due');
 
 
 // document current scroll
@@ -34,7 +36,10 @@ for (let cont of articleConts) {
    let article = cont.querySelector('article');
    let seemore = cont.querySelector('#seeMore');
    let seeless = cont.querySelector('#seeLess');
-   article.style.display = 'block';
+   
+   if (article) {
+     article.style.display = 'block';
+   }
    
    seemore.addEventListener('click', () =>{
      let articles = cont.querySelectorAll('article');
@@ -163,8 +168,12 @@ for (let elem of markButtons) {
  // hide some trip info on trip box open.
  function open(e) {
     let elem = e.target;
-    body.style.overflowY = "hidden";
-    logo.parentElement.style.pointerEvents = "none";
+    main.style.overflowY = "hidden";
+    header.style.filter = "blur(1px)";
+    header.style.pointerEvents = "none";
+    for (let elem of dueHeader) {
+      elem.style.filter = "blur(1px)";
+    }
     let detail = elem.parentElement;
     
     elem.querySelector('.new').style.display = "none";
@@ -179,10 +188,10 @@ for (let elem of markButtons) {
         elem.style.opacity = 0.5;
       }
     }
-    header.style.filter = "blur(1px)";
+    
     elem.addEventListener('click', close, {once:true});
     setTimeout(() => {
-      domScroll = document.documentElement.scrollTop;
+      domScroll = main.scrollTop;
       scroll(detail);
     }, 250);
  }
@@ -190,10 +199,13 @@ for (let elem of markButtons) {
  
  // show some trip info on trip box close.
  function close(e) {
-    body.style.overflowY = "auto";
-    logo.parentElement.style.pointerEvents = "auto";
-    header.style.filter = "blur(0)";
-    document.documentElement.scroll({
+    main.style.overflowY = "auto";
+    header.style.filter = "none";
+    header.style.pointerEvents = "auto";
+    for (let elem of dueHeader) {
+      elem.style.filter = "none";
+    }
+    main.scroll({
        top: domScroll,
        left: 0,
        behaviour: 'smooth'
@@ -203,6 +215,7 @@ for (let elem of markButtons) {
     let parent = elem.parentElement;
 
     for (let elem of tripBoxs) {
+      elem.style.filter = "none";
       if (elem == parent) {
         elem.style.boxShadow = "";
         let more = elem.querySelector('#more');
@@ -212,9 +225,9 @@ for (let elem of markButtons) {
         more.style.overflowY = "auto";
         more.style.pointerEvents = "auto";
       } else {
-        elem.style.filter = "blur(0)";
         elem.style.opacity = 1;
         elem.style.pointerEvents = "auto";
+        elem.style.filter = "none";
       }
     }
     
@@ -243,8 +256,8 @@ for (let elem of markButtons) {
  function scroll(cont) {
    let box = cont.getBoundingClientRect();
    let headHeight = header.offsetHeight;
-   let scrollby = box.top + window.pageYOffset - headHeight - 10;
-   document.documentElement.scroll({
+   let scrollby = box.top + domScroll + window.pageYOffset - headHeight - 10;
+   main.scroll({
        top: scrollby,
        left: 0,
        behaviour: 'smooth'
@@ -300,23 +313,66 @@ for (let elem of markButtons) {
  
  // update a trip status
  function mark(e) {
-   let parent = e.target.parentElement;
+   let progressBtn = e.target;
+   let parent = progressBtn.parentElement;
+   let parentSibling = parent.parentElement.childNodes[1];
    let name = parent.dataset.name;
+   let sn = parent.dataset.sn;
+   let progress = progressBtn.dataset.progress;
    let update = parent.lastElementChild;
    
    document.querySelector("#confirmMsg > span").innerHTML = name;
    confirm.showModal();
    let button = confirm.querySelector('#continue');
    
-   button.addEventListener('click', () => {
+   button.addEventListener('click', async () => {
      update.style.animationPlayState = "running";
-     setTimeout(() => {
+     
+     let response = await fetch(`/tripupdate/${sn}/${progress}/`);
+     if (response.ok) {
+       setTimeout(() => {
         resetAnime(update);
+        switch (progress) {
+          case '1':
+           progressBtn.innerHTML = "mark as Pickup";
+           progressBtn.dataset.progress = "2";
+           parentSibling.lastChild.innerHTML = 'Departed';
+           parent.parentElement.parentElement.parentElement.childNodes[1].childNodes[5].firstChild.replaceWith('Departed');
+           break;
+          case '2':
+           progressBtn.innerHTML = "mark as Onroad";
+           progressBtn.dataset.progress = "3";
+           parentSibling.lastChild.innerHTML = 'Pickup';
+           parent.parentElement.parentElement.parentElement.childNodes[1].childNodes[5].firstChild.replaceWith('Pickup');
+           break;
+          case '3':
+           progressBtn.innerHTML = "mark as Delivered";
+           progressBtn.dataset.progress = "4";
+           parentSibling.lastChild.innerHTML = 'Onroad';
+           parent.parentElement.parentElement.parentElement.childNodes[1].childNodes[5].firstChild.replaceWith('Onroad');
+           break;
+          case '4':
+           progressBtn.innerHTML = "mark as Arrived";
+           progressBtn.dataset.progress = "5";
+           parentSibling.lastChild.innerHTML = 'Delivered';
+           parent.parentElement.parentElement.parentElement.childNodes[1].childNodes[5].firstChild.replaceWith('Delivered');
+           break;
+          case '5':
+           progressBtn.style.display = "none";
+           parentSibling.lastChild.innerHTML = 'Arrived';
+           parent.parentElement.parentElement.parentElement.childNodes[1].childNodes[5].firstChild.replaceWith('Arrived');
+           break;
+        }
         notify.parentElement.style.display = 'block';
         notify.style.animationPlayState = "running";
         notify.childNodes[1].innerHTML = name;
         notify.addEventListener("animationend", resetNotify, {once:true});
-     }, 5000);
+        }, 1000);
+     } else {
+       resetAnime(update);
+       console.log("something went wrong");
+     }
+     
    }, {once:true});
    
  }
