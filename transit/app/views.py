@@ -12,19 +12,6 @@ from datetime import datetime
 
 
 
-def Test(request):
-  
-   """
-   return the transit-app index page with a link to the login interface.
-   """
-    
-   template = "app/manage.html"
-   return render(request, template)
-
-
-
-
-
 
 
 
@@ -47,7 +34,11 @@ def Index(request):
 def Panel(request):
   
   """
-  Check if user is logged in, then re-direct to a specific view based on the user permissions.
+  Check if user is logged in, then re-direct to a personalize view based on the user permissions.
+  A user of manager user_type is redirected to the Monitor view.
+  A user of supervisor user_type is redirected to the Manage view.
+  A user of payroll user_type is redirected to the Pay view.
+  A user of agent user_type is redirected to the the sync view in agent application.
   """
   
   user_type = request.user.user_type
@@ -75,7 +66,7 @@ def Panel(request):
 def Manage(request):
   
   """
-  This return the the management panel
+  This return the the trip management panel, a personalize interface for supervisors.
   """
   
   template = "app/manage.html"
@@ -83,6 +74,8 @@ def Manage(request):
   user_type = user.user_type
   
   if user_type == "supervisor":
+    trip_count = user.trips.filter(status="one").count()
+
     due_trips = user.trips.filter(status="one", due_date__lte=timezone.now())
     
     oneDay_trips = user.trips.filter(status="one", due_date__lte=timezone.now() + timezone.timedelta(days=1), due_date__gt=timezone.now())
@@ -106,6 +99,7 @@ def Manage(request):
       'twoWeeks_trips': twoWeeks_trips,
       'oneMonth_trips': oneMonth_trips,
       'months_trips': months_trips,
+      'trip_count': trip_count,
     })
   raise PermissionDenied
   
@@ -120,7 +114,7 @@ def Manage(request):
 def Monitor(request):
   
   """
-  This return the the monitor panel for the supervisor.
+  This return the the trip monitor panel, a personalize interface for the manager.
   """
   template = "app/monitor.html"
   user_type = request.user.user_type
@@ -183,7 +177,7 @@ def Welcome(request):
 class Pay(View):
   
   """
-  This return the payroll page on get request and query a trip summary of a freelancer on post request.
+  This return the payroll page on get request and a summary of closed-trips of a transporter from a specified date on post request.
   """
   
   template = "app/payroll.html"

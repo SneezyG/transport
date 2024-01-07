@@ -28,7 +28,7 @@
      <img id="logo" src="{% static 'app/image/logo.png' %}"/>
    </a>
    
-   <h3> Trips<sub>(6)</sub></h3>
+   <h3> Trips<sub>({{trip_count}})</sub></h3>
    
    <div class="due-links">
      {% if due_trips %}

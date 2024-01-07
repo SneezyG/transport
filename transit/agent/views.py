@@ -11,7 +11,7 @@ import json
 def Sync(request):
  
   """
-  This return the syncTrip page of the agent app
+  This return the syncTrip page of the agent app, which is used for syncing of trips before they can depart.
   """
   
   template = 'agent/synctrip.html'
@@ -26,7 +26,7 @@ def Sync(request):
 def Info(request, sn):
   
   """
-  This return the information page about a particular synced trip.
+  This return the info page containing information about a particular synced trip.
   """ 
   
   template = 'agent/info.html'
@@ -43,7 +43,7 @@ def Info(request, sn):
 class ReportView(View):
   
   """
-  This return the report page on get request and update trip report in the database on post request.
+  This return the report page on get request, which is use for updating trip reports in the database on post request.
   """
   
   template = "agent/report.html"
@@ -69,8 +69,11 @@ class ReportView(View):
       
     if trip.reports.count() == trip.report:
       return JsonResponse({'error': 'trip report exceeded'}, status=400)
+      
+    if trip.status == "two": 
+      return JsonResponse({'error': 'trip already closed'}, status=400)
     
-    Report.objects.create(trip=trip, status=data["status"], progress=data["progress"], remark=["remark"])
+    Report.objects.create(trip=trip, status=data["status"], progress=data["progress"], remark=data["remark"])
     return JsonResponse({'success': 'report submitted successfully'})
 
 

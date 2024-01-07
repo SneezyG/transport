@@ -472,6 +472,7 @@
   .remove > span {
      font-size: 12px;
      color: green;
+     opacity: 0;
      animation: closeAnime;
      animation-play-state: paused;
      animation-duration: 1.2s;

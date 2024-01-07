@@ -27,12 +27,12 @@ def doc2(instance, filename):
 class User(AbstractUser): 
   
   """
-  store a single user data.
-  extend the django abstract-user class.
-  and this model is the new auth_user_model.
+  Store application user information.
+  Extend the django abstract-user class.
+  And this model is the new auth_user_model.
   *** user access ***
-  only manager and supervisor are staff users.
-  only the manager is a superuser.
+  Only manager and supervisor are staff users.
+  Only the manager is a superuser.
   """
   
   userType = (
@@ -52,6 +52,7 @@ class User(AbstractUser):
 class Transporter(models.Model):
   
   """
+  Store transporter personal information.
   Transporters are freelancers which are paid based on the type and amount of trip they go.
   """
   
@@ -104,8 +105,7 @@ class Payroll(models.Model):
   
  """
   This is rather a simple model to persist the amount paid per trip to freelancer transporters.
-  
-  The amount pay per trip depend on the amount & type of trip.
+  The amount pay per trip depend on the type of trip.
  """
   
  short_range = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="pay/short-range trip in $")
@@ -120,9 +120,8 @@ class Payroll(models.Model):
 class Booking(models.Model):
   
   """
-  Stores a single trip-booking data.
-  
-  This model also includes two file fields to store important bookings documents.
+  Stores trip-booking information.
+  This model also includes file fields to store important bookings documents.
   """
   
   sn = models.UUIDField(primary_key=True, default=uuid.uuid4, verbose_name="id")
@@ -152,15 +151,12 @@ class Booking(models.Model):
 class Trip(models.Model):
   
   """
-  Stores a single trip data.
-  
+  Stores trip information.
   There are three category of trip(short, mid and long range trip).
-  
-  It is related to the Booking and Management through a ForeignKey relationship.
-  
-  It is related to transporters(drivers, mechanics and loaders) through a many to many relationship.
-
-  Supervisor also known as superuser can't be assign to a trip as management.
+  Trips have two status, open(active) and close(inactive).
+  It is related to the Booking and User model through a ForeignKey relationship.
+  It is related to transporters through a many to many relationship.
+  Only user of supervisor user_type can be assigned as management to a trip.
   """
   
   catgType = (
@@ -209,8 +205,7 @@ class Trip(models.Model):
 class Report(models.Model):
   
   """
-  Stores a single report data.
-  
+  Stores trips report information.
   A report is related to the trip table through a foreign key relationship.
   """
   

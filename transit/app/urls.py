@@ -1,13 +1,12 @@
 from django.urls import path
 from django.contrib.auth.decorators import login_required
-from app.views import Index, Panel, Manage, Monitor, Welcome, Pay, Tripclose, Tripupdate, Test
+from app.views import Index, Panel, Manage, Monitor, Welcome, Pay, Tripclose, Tripupdate
 
 
 
 urlpatterns = [
 
   path('', Index, name='index'),
-  path('test/', Test, name='test'),
   path('welcome/', login_required(Welcome), name='welcome'),
   path('panel/', login_required(Panel), name='panel'),
   path('manage/', login_required(Manage), name='manage'),

@@ -71,6 +71,7 @@ button {
     right: 10%;
     bottom: 15px;
     font-size: 14px;
+    color: red !important;
   }
   
   header > hr {

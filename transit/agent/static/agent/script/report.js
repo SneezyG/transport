@@ -22,7 +22,7 @@
  const sn = nav.dataset.sn;
  const dueReport = Number(nav.dataset.due);
  let submitedReport = Number(nav.dataset.submit);
- let status = "green";
+ let status = "Green";
  // set create new report button.
  resetReport();
  
@@ -55,12 +55,13 @@
        spiner.open = true;
        let reportData = {
          'sn': sn,
-         'status': status,
+         'status': status[0],
          'progress': progress.value,
          'remark': remark.value,
          'lat': "",
          'long': ""
         };
+        console.log(reportData);
         let response = await fetch(`/agent/report/${sn}/`, {
           method: 'POST',
           headers: {
@@ -78,9 +79,12 @@
           success.showModal();
           }, 1000);
           submitedReport += 1;
+          if (submitedReport == dueReport) {
+             localStorage.clear();
+          }
           formBox.style.display = "none";
           resetReport()
-          showForm("green");
+          showForm("Green");
         } else {
           setTimeout(() => {
           spiner.open = false;
@@ -107,7 +111,7 @@
  cancel.addEventListener('click', () => {
      formBox.style.display = "none";
      create.style.opacity = "1";
-     showForm("green");
+     showForm("Green");
  });
     
   
@@ -137,12 +141,12 @@
       }
     }
     let input = form.children[7].lastElementChild;
-    if (elemID == "green") {
+    if (elemID == "Green") {
        input.value = "An awesome trip";
        input.style.backgroundColor = "#B2BEB5";
        form.style.backgroundColor = "#B2BEB5";
     }
-    else if (elemID == "yellow") {
+    else if (elemID == "Yellow") {
        input.value = "A cool trip";
        input.style.backgroundColor = "#B6B3A8";
        form.style.backgroundColor = "#B6B3A8";
