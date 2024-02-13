@@ -13,6 +13,6 @@ urlpatterns = [
   path('monitorTrip/', login_required(Monitor), name='monitor'),
   path('payroll/', login_required(Pay.as_view()), name='payroll'),
   path('tripclose/<str:sn>/', login_required(Tripclose), name='tripclose'),
-  path('tripupdate/<str:sn>/<str:no>/', login_required(Tripupdate), name='tripupdate'),
+  path('tripupdate/<str:sn>/<str:progress>/', login_required(Tripupdate), name='tripupdate'),
   
 ]

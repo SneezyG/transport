@@ -2,18 +2,18 @@
 A trip management software for a goods transport company. Contain two app namely app and agent.
 
 
-functionality:
+FUNCTIONALITY:
 manage bookings and trips.
 monitor trips state and progress.
 summarize transporter's closed trips and calculate their wages.
 manage trips report.
 
 
-key-features:
+KEY-FEATURES:
 users authentication and authorisation.
 users management.
-web-based barcode scanner. 
-rea time trips update.
+web-based trip barcode scanner. 
+real time trips update.
 logging system.
 customizable admin interface.
 responsive interface across devices.

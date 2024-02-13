@@ -45,6 +45,7 @@ class User(AbstractUser):
   office_line = models.CharField(max_length=15, verbose_name="Office-line", null=True, blank=True)
   personal_line = models.CharField(max_length=15, verbose_name="Personal-line", null=True, blank=True)
   user_type = models.CharField(max_length=12, choices=userType, help_text="This field define the user access level to the transit panel.")
+  session_key = models.TextField(default="")
   
  
  
@@ -215,11 +216,11 @@ class Report(models.Model):
   statusType = (
      ('G', 'Green'),
      ('R', 'Red'),
-     ('Y', 'yellow')
+     ('Y', 'Yellow')
   )
   
   progressType = (
-     ("0", "pending"),
+     ("0", "Pending"),
      ("1", "Departed"),
      ("2", "Pickup"),
      ("3", "Onroad"),
@@ -231,8 +232,8 @@ class Report(models.Model):
   status = models.CharField(max_length=2, choices=statusType)
   progress = models.CharField(max_length=2, choices=progressType, default="0")
   remark = models.CharField(max_length=25)
-  longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True)
-  latitude = models.DecimalField(max_digits=8, decimal_places=6, null=True)
+  longitude = models.DecimalField(max_digits=9, decimal_places=6)
+  latitude = models.DecimalField(max_digits=9, decimal_places=6)
   date = models.DateTimeField(auto_now_add=True)
   
   def __str__(self):

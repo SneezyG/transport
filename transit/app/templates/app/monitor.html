@@ -67,7 +67,7 @@
  {% if due_trips %}
  <h5 id="due-trip" class="due">Already due</h5>
  {% for trip in due_trips %}
- <details>
+ <details id="{{trip.sn}}">
     <summary>
       <span>{{ trip.booking.name }}</span>
       <div id="info">
@@ -116,7 +116,7 @@
   {% if oneDay_trips %}
   <h5 id="one-day" class="due">Due in 24 hours</h5>
   {% for trip in oneDay_trips %}
-  <details>
+  <details id="{{trip.sn}}">
     <summary>
       <span>{{ trip.booking.name }}</span>
       <div id="info">
@@ -165,7 +165,7 @@
   {% if twoDays_trips %}
   <h5 id="two-days" class="due">Due in 2 days</h5>
   {% for trip in twoDays_trips %}
-  <details>
+  <details id="{{trip.sn}}">
     <summary>
       <span>{{ trip.booking.name }}</span>
       <div id="info">
@@ -214,7 +214,7 @@
   {% if oneWeek_trips %}
   <h5 id="one-week" class="due">Due in 1 week</h5>
   {% for trip in oneWeek_trips %}
-  <details>
+  <details id="{{trip.sn}}">
     <summary>
       <span>{{ trip.booking.name }}</span>
       <div id="info">
@@ -263,7 +263,7 @@
   {% if twoWeeks_trips %}
   <h5 id="two-weeks" class="due">Due in 2 week</h5>
   {% for trip in twoWeeks_trips %}
-  <details>
+  <details id="{{trip.sn}}">
     <summary>
       <span>{{ trip.booking.name }}</span>
       <div id="info">
@@ -312,7 +312,7 @@
   {% if oneMonth_trips %}
   <h5 id="one-month" class="due">Due in 1 month</h5>
   {% for trip in oneMonth_trips %}
-  <details>
+  <details id="{{trip.sn}}">
     <summary>
       <span>{{ trip.booking.name }}</span>
       <div id="info">
@@ -361,7 +361,7 @@
   {% if months_trips %}
   <h5 id="months" class="due">Due in months</h5>
   {% for trip in months_trips %}
-  <details>
+  <details id="{{trip.sn}}">
     <summary>
       <span>{{ trip.booking.name }}</span>
       <div id="info">

@@ -41,7 +41,7 @@ for (let cont of articleConts) {
      article.style.display = 'block';
    }
    
-   seemore.addEventListener('click', () =>{
+   seemore.addEventListener('click', () => {
      let articles = cont.querySelectorAll('article');
      for (let elem of articles) {
         setTimeout(() => {
@@ -52,9 +52,19 @@ for (let cont of articleConts) {
      }
    });
    
-   seeless.addEventListener('click', () =>{
+   seeless.addEventListener('click', () => {
+     seelessHandle(cont);
+   });
+  
+}
+
+
+function seelessHandle(cont) {
      let articles = cont.querySelectorAll('article');
      let firstArticle = cont.querySelector('article');
+     let seemore = cont.querySelector('#seeMore');
+     let seeless = cont.querySelector('#seeLess');
+     
      for (let elem of articles) {
         setTimeout(() => {
           elem.style.display = 'none';
@@ -65,13 +75,14 @@ for (let cont of articleConts) {
           seeless.style.display = "none";
         }, 100);
      }
-   });
-  
 }
 
 
 for (let elem of markButtons) {
-   elem.addEventListener('click', mark);
+   let button = elem.querySelector('button');
+   if (button) {
+     button.addEventListener('click', mark);
+   }
  }
 
  for (let elem of summary) {
@@ -100,21 +111,25 @@ for (let elem of markButtons) {
  
  // show map associated with a report.
  for (let button of locationBtn) {
-   button.addEventListener("click", (e) => {
-        let elem = e.target;
-        let lat = Number(elem.dataset.lat);
-        let long = Number(elem.dataset.long);
-        let coord = [long, lat];
-        mapCont.open = true;
-        backdrop.style.visibility = 'visible';
-        mapCont.style.animationPlayState = "running";
-        mapCont.addEventListener("animationend", () => {
-          //alert(coord);
-          mapConstruct(coord);
-          map.style.visibility = "visible";
-        }, {once:true});
-    });
+   button.addEventListener("click", showLocation);
  }
+ 
+ function showLocation(e) {
+    let elem = e.target;
+    let lat = Number(elem.dataset.lat);
+    let long = Number(elem.dataset.long);
+    let coord = [long, lat];
+    mapCont.open = true;
+    backdrop.style.visibility = 'visible';
+    mapCont.style.animationPlayState = "running";
+    mapCont.addEventListener("animationend", () => {
+      //alert(coord);
+      mapConstruct(coord);
+      map.style.visibility = "visible";
+    }, {once:true});
+  }
+ 
+ 
   
   backdrop.addEventListener('click', () => {
       mapCont.open = false;
@@ -410,6 +425,66 @@ function mapConstruct(coord) {
   const marker1 = new mapboxgl.Marker().setLngLat(coord).addTo(map);
   
 }
+
+
+
+// connecting to web-socket.
+const chatSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/chat/'
+        );
+
+chatSocket.onmessage = function(e) {
+    console.log("am working on it");
+    const data = JSON.parse(e.data);
+    //console.log(data)
+    let tripBox = document.querySelector(`#${data.sn}`);
+    tripBox.querySelector('.new').style.display = "inline";
+    tripBox.querySelector('#expect').querySelector('.reportCount').innerHTML = `${data.Expected_report}(${data.report_count})`;
+    let statusElem = tripBox.querySelector('#info').querySelector('span');
+    switch(data.status) {
+      case 'G':
+        statusElem.style.backgroundColor = 'green';
+        break;
+      case 'Y':
+        statusElem.style.backgroundColor = 'yellow';
+        break;
+      case 'R':
+        statusElem.style.backgroundColor = 'red';
+    }
+    let newReport = createReportTemplate(data);
+    let cont = tripBox.querySelector("#article");
+    cont.insertAdjacentHTML("afterbegin", newReport);
+    seelessHandle(cont);
+};
+
+chatSocket.onclose = function(e) {
+    console.error('Chat socket closed unexpectedly');
+};
+
+
+
+
+function createReportTemplate(report) {
+  return `
+    <article>
+      <p class="created">created: <span>${new Date(report.created).toLocaleString('en-GB', { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' }).replace(',', '')}<sub>${new Date(report.created).toLocaleString('en-GB', { hour: '2-digit', minute: '2-digit' })}</sub></span></p>
+      <ul id="report" class="status"> 
+          <li>status: <span>
+              ${report.status === "G" ? "Good" : (report.status === "Y" ? "Not Bad" : "Bad")}
+          </span></li>
+          <br/>
+          <li>progress: <span>
+          ${report.progress === "0" ? "Pending" : (report.progress === "1" ? "Departed" : (report.progress === "2" ? "Pickup" : (report.progress === "3" ? "Onroad" : (report.progress === "4" ? "Delivered" : "Arrived"))))}
+          </span></li>
+          <li><button onclick="showLocation(event)" data-lat="${report.lat}" data-long="${report.long}"> location </button></li>
+      </ul>
+      <p id="remark">remark: <span>${report.remark}</span></p>
+    </article>
+  `;
+}
+
 
 
  

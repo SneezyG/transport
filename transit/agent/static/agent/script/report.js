@@ -43,8 +43,9 @@
     elem.addEventListener('click', setStatus);
  }
  
+ 
  // handle report submition
- submit.addEventListener('click', async () => {
+ submit.addEventListener('click', () => {
      // get user location(Navigator.location);
      body.style.overflow = "hidden";
      if (!progress.value || !remark.value || !status ) {
@@ -53,46 +54,7 @@
        
      } else {
        spiner.open = true;
-       let reportData = {
-         'sn': sn,
-         'status': status[0],
-         'progress': progress.value,
-         'remark': remark.value,
-         'lat': "",
-         'long': ""
-        };
-        console.log(reportData);
-        let response = await fetch(`/agent/report/${sn}/`, {
-          method: 'POST',
-          headers: {
-           'Content-Type': 'application/json;charset=utf-8',
-           'X-CSRFToken': getCSRFToken()
-          },
-          body: JSON.stringify(reportData)
-        });
-      
-        let data = await response.json(); 
-    
-        if (response.ok) {
-          setTimeout(() => {
-          spiner.open = false;
-          success.showModal();
-          }, 1000);
-          submitedReport += 1;
-          if (submitedReport == dueReport) {
-             localStorage.clear();
-          }
-          formBox.style.display = "none";
-          resetReport()
-          showForm("Green");
-        } else {
-          setTimeout(() => {
-          spiner.open = false;
-          document.querySelector("#error").innerHTML = data.error;
-          failure.showModal();
-          }, 1000);
-        }
-        
+       getLocation();
      }
  });
  
@@ -186,5 +148,68 @@
     return null;
  }
  
- 
- 
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(getLatLong);
+  } else {
+    console.log("Geolocation is not supported by this browser.");
+    let reportData = getReportData();
+    console.log(reportData);
+    sendReport(reportData);
+    }
+}
+  
+function getLatLong(position) {
+  lat = position.coords.latitude.toFixed(6);
+  long = position.coords.longitude.toFixed(6);
+  
+  let reportData = getReportData();
+  reportData.lat = lat; reportData.long = long;
+  console.log(reportData);
+  sendReport(reportData);
+}
+
+
+async function sendReport(reportData) {
+  let response = await fetch(`/agent/report/${sn}/`, {
+    method: 'POST',
+    headers: {
+     'Content-Type': 'application/json;charset=utf-8',
+     'X-CSRFToken': getCSRFToken()
+    },
+    body: JSON.stringify(reportData)
+  });
+
+  let data = await response.json(); 
+
+  if (response.ok) {
+    setTimeout(() => {
+    spiner.open = false;
+    success.showModal();
+    }, 1000);
+    submitedReport += 1;
+    if (submitedReport == dueReport) {
+       localStorage.clear();
+    }
+    formBox.style.display = "none";
+    resetReport()
+    showForm("Green");
+  } else {
+    setTimeout(() => {
+    spiner.open = false;
+    document.querySelector("#error").innerHTML = data.error;
+    failure.showModal();
+    }, 1000);
+  }
+}
+
+function getReportData() {
+  return {
+     'sn': sn,
+     'status': status[0],
+     'progress': progress.value,
+     'remark': remark.value,
+     'long': 0,
+     'lat': 0
+    };
+}

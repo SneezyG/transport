@@ -208,6 +208,66 @@ function copy(e) {
        elem.parentElement.style.display = 'none';
      }, 4000);
   }
- 
+  
+  
+  
+// connecting to web-socket.
+const chatSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/chat/'
+        );
+
+chatSocket.onmessage = function(e) {
+    const data = JSON.parse(e.data);
+    //console.log(data)
+    let tripBox = document.querySelector(`#${data.sn}`);
+    if (data.status) {
+       let statusElem = tripBox.querySelector('#info').querySelector('span');
+       switch(data.status) {
+          case 'G':
+            statusElem.style.backgroundColor = 'green';
+            break;
+          case 'Y':
+            statusElem.style.backgroundColor = 'yellow';
+            break;
+          case 'R':
+            statusElem.style.backgroundColor = 'red';
+       }
+    }
+    if (data.progress) {
+       let progressElem = tripBox.querySelector('summary').querySelector('p');
+       let progressInfo = tripBox.querySelector('#progress').querySelector('b');
+       switch(data.progress) {
+          case '0':
+            progressElem.innerHTML = "Pending";
+            progressInfo.innerHTML = "Pending";
+            break;
+          case '1':
+            progressElem.innerHTML = "Departed";
+            progressInfo.innerHTML = "Departed";
+            break;
+          case '2':
+            progressElem.innerHTML = "Pickup";
+            progressInfo.innerHTML = "Pickup";
+            break;
+          case '3':
+            progressElem.innerHTML = "Onroad";
+            progressInfo.innerHTML = "Onroad";
+            break;
+          case '4':
+            progressElem.innerHTML = "Delivered";
+            progressInfo.innerHTML = "Delivered";
+            break;
+          case '5':
+            progressElem.innerHTML = "Arrived";
+            progressInfo.innerHTML = "Arrived";
+       }
+    }
+};
+
+chatSocket.onclose = function(e) {
+    console.error('Chat socket closed unexpectedly');
+};
  
  

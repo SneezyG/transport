@@ -4,13 +4,16 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.core.exceptions import PermissionDenied
 from django.utils import timezone
-from .models import Trip, Transporter, Payroll
+from .models import Trip, Transporter, Payroll, User
+from django.contrib.sessions.models import Session
 from django.http import JsonResponse
 import json
 from datetime import datetime
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
 
 
-
+channel_layer = get_channel_layer()
 
 
 
@@ -72,6 +75,8 @@ def Manage(request):
   template = "app/manage.html"
   user = request.user
   user_type = user.user_type
+  user.session_key = request.session.session_key
+  user.save()
   
   if user_type == "supervisor":
     trip_count = user.trips.filter(status="one").count()
@@ -117,8 +122,11 @@ def Monitor(request):
   This return the the trip monitor panel, a personalize interface for the manager.
   """
   template = "app/monitor.html"
-  user_type = request.user.user_type
-  is_super = request.user.is_superuser
+  user = request.user
+  user_type = user.user_type
+  is_super = user.is_superuser
+  user.session_key = request.session.session_key
+  user.save()
   
   if user_type == "manager" or is_super:
     due_trips = Trip.objects.filter(status="one", due_date__lte=timezone.now())
@@ -243,12 +251,32 @@ def Tripclose(request, sn):
   
   
   
-def Tripupdate(request, sn, no):
+def Tripupdate(request, sn, progress):
   """
    update a trip given a trip sn.
   """
   trip = Trip.objects.get(sn=sn)
-  trip.progress = no
+  
+  if trip.status == "two":
+    return JsonResponse({'error': 'You are trying to update a closed trips'}, status=400)
+    
+  trip.progress = progress
   trip.save()
+  
+  users = User.objects.filter(is_superuser=True)
+  for user in users:
+    key = user.session_key
+    try:
+      session = Session.objects.get(session_key=key)
+      session_data = session.get_decoded()
+      channel_name = session_data.get('channel_name')
+      if channel_name:
+        async_to_sync(channel_layer.send)(channel_name, {
+          "type": "chat.message",
+          "sn": sn,
+          "progress": progress
+        })
+    except Exception as e:
+      print(f"An error has occurred in the web-socket protocol: {e}")
   return JsonResponse({'success': 'trip updated successfully'})
 
