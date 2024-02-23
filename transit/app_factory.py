@@ -8,6 +8,7 @@ import uuid
 
 
 
+
 class TransporterFactory(factory.django.DjangoModelFactory):
 
   class Meta: 
@@ -18,7 +19,7 @@ class TransporterFactory(factory.django.DjangoModelFactory):
   firstName = factory.Faker('first_name')
   lastName = factory.Faker('last_name')
   birthday = factory.Faker('date_between', start_date=datetime(1980, 1, 1), end_date=datetime(1990, 1, 1))
-  sex = fuzzy.FuzzyChoice(choices=['male', 'female', 'private'])
+  sex = fuzzy.FuzzyChoice(choices=['M', 'F', 'P'])
   phone = factory.Faker('phone_number')
   aptNo = factory.Faker('random_int', min=1, max=30)
   laneNo = factory.Faker('random_int', min=1, max=10)
@@ -27,6 +28,7 @@ class TransporterFactory(factory.django.DjangoModelFactory):
   state = factory.Faker('state')
   nationality = factory.Faker('country')
   zipcode = factory.Faker('postcode')
+  
   
   
   
@@ -66,10 +68,10 @@ class TripFactory(factory.django.DjangoModelFactory):
   category = fuzzy.FuzzyChoice(choices=['sh', 'md', 'lg'])
   management = factory.Iterator(User.objects.filter(user_type="supervisor"))
   report = factory.Faker('random_int', min=3, max=7)
-  status = fuzzy.FuzzyChoice(choices=['one', 'two',])
-  progress = fuzzy.FuzzyChoice(choices=['0', '1', '2', '3', '4', '5'])
-  created_date = factory.Faker('date_between', start_date=datetime(2023, 11, 20), end_date=datetime(2023, 12, 20))
-  due_date = factory.Faker('date_between', start_date=datetime(2024, 1, 1), end_date=datetime(2024, 1, 31))
+  status = "one"
+  progress = "0"
+  created_date = factory.Faker('date_between', start_date=datetime(2024, 1, 20), end_date=datetime(2024, 2, 20))
+  due_date = factory.Faker('date_between', start_date=datetime(2024, 3, 20), end_date=datetime(2024, 4, 20))
   
   
   @factory.post_generation
@@ -77,3 +79,6 @@ class TripFactory(factory.django.DjangoModelFactory):
       if not create or not extracted:
           return
       self.transporters.add(*extracted)
+      
+      
+      

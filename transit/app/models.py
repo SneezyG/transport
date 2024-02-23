@@ -42,8 +42,8 @@ class User(AbstractUser):
       ('payroll', 'payroll')
     )
   
-  office_line = models.CharField(max_length=15, verbose_name="Office-line", null=True, blank=True)
-  personal_line = models.CharField(max_length=15, verbose_name="Personal-line", null=True, blank=True)
+  office_line = models.CharField(max_length=20, verbose_name="Office-line", null=True, blank=True)
+  personal_line = models.CharField(max_length=20, verbose_name="Personal-line", null=True, blank=True)
   user_type = models.CharField(max_length=12, choices=userType, help_text="This field define the user access level to the transit panel.")
   session_key = models.TextField(default="")
   
@@ -69,7 +69,7 @@ class Transporter(models.Model):
   lastName = models.CharField(max_length=20, verbose_name='last name')
   birthday = models.DateField()
   sex = models.CharField(max_length=1, choices=sexType)
-  phone = models.CharField(max_length=15, verbose_name="phone number")
+  phone = models.CharField(max_length=20, verbose_name="phone number")
   aptNo = models.IntegerField(verbose_name='apartment number')
   laneNo = models.IntegerField(verbose_name='lane number')
   street = models.CharField(max_length=30)
@@ -126,13 +126,13 @@ class Booking(models.Model):
   """
   
   sn = models.UUIDField(primary_key=True, default=uuid.uuid4, verbose_name="id")
-  name = models.CharField(max_length=40, verbose_name="Company's name", null=True, blank=True)
+  name = models.CharField(max_length=40, verbose_name="Company's name")
   booker = models.CharField(max_length=40, verbose_name="Booker's name")
   name1 = models.CharField(max_length=40, verbose_name="Pick-up name")
   name2 = models.CharField(max_length=40, verbose_name="Delivery name")
-  contact1 = models.CharField(max_length=15, verbose_name="Booker's contact")
-  contact2 = models.CharField(max_length=15, verbose_name="Pick-up contact")
-  contact3 = models.CharField(max_length=15, verbose_name="Delivery contact")
+  contact1 = models.CharField(max_length=20, verbose_name="Booker's contact")
+  contact2 = models.CharField(max_length=20, verbose_name="Pick-up contact")
+  contact3 = models.CharField(max_length=20, verbose_name="Delivery contact")
   charges = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Amount due($)")
   paid = models.BooleanField(default=False)
   goods = models.TextField(verbose_name="Goods description")
@@ -187,12 +187,12 @@ class Trip(models.Model):
   management = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name='trips',
   limit_choices_to={'user_type': "supervisor"})
   report = models.IntegerField(verbose_name='Expected report')
-  latest_report = models.OneToOneField("Report", on_delete=models.SET_NULL, null=True, related_name='related_trip')
+  latest_report = models.OneToOneField("Report", on_delete=models.SET_NULL, null=True, blank=True, related_name='related_trip')
   status = models.CharField(max_length=3, choices=statusType, default="one")
   progress = models.CharField(max_length=2, choices=progressType, default="0")
   created_date = models.DateTimeField()
   due_date = models.DateTimeField()
-  closed_date = models.DateTimeField()
+  closed_date = models.DateTimeField(null=True, blank=True)
   
   
   def __str__(self):

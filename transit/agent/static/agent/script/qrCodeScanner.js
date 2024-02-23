@@ -14,9 +14,10 @@ const button = document.querySelector("#draw > button");
 const backdrop = document.querySelector("#backdrop");
 const scanLine = document.querySelector("#scanning");
 
-
+/*
 // set trip sn in local-storage for testing purpose.
 localStorage.setItem("sn", "fa814af1-6daf-47fb-910e-20b3b50e6678");
+*/
 
   
 button.addEventListener("click", () => {
@@ -92,8 +93,8 @@ function scan() {
 qrCode.callback = (res) => {
   if (res) {
     console.log(res);
-    // save the string in a local-storage.
-    // redirect to the report page.
+    localStorage.setItem("sn", res);
+    location.assign(`/agent/report/${res}/`);
     resetDom();
   }
 }

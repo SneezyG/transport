@@ -134,7 +134,7 @@ EMAIL_USE_SSL = False
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = os.getenv("timezone")
 
 USE_I18N = True
 

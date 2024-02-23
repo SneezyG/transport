@@ -1,12 +1,13 @@
 # transport
-A trip management software for a goods transport company. Contain two app namely app and agent.
+A trip management web application for a goods transport company. This project contain two django app(app and agent).
 
 
 FUNCTIONALITY:
 manage bookings and trips.
-monitor trips state and progress.
+monitor trips.
 summarize transporter's closed trips and calculate their wages.
 manage trips report.
+report trips state and progress.
 
 
 KEY-FEATURES:
@@ -24,11 +25,13 @@ There will be 4 type of user.
 1. agent - submit trips report (admin: no permission).
 2. supervisor - manage trips (admin: view trips and bookings permission).
 3. manager(superuser)- create and monitor trips (admin: superuser permission).
-4. payroll - manage transporters wages (admin: no permission)
+4. payroll - manage transporters wages (admin: no permission).
 
 
-user stories
 
+***
+USER STORIES
+***
 AGENT: submit trips report.
 login into the application synctrip page.
 scan trip barcode to sync trip.
@@ -56,7 +59,7 @@ login into the application monitor page.
 view all open trips.
 monitor trips progress.
 monitor trips latest report.
-close trip
+close trip.
 
 
 PAYROLL: manage transporters wages.
@@ -65,4 +68,18 @@ enter transporter id.
 select a date to calculate their wages from.
 click the process button.
 view transporter trip summary and wages.
+
+
+
+I seeded this application with few user, so u can test it. 
+
+sneezy(manager): hshs627£-;"+#
+
+ogunboy(supervisor): hshsj7373-£+
+
+adeboy(agent): wyeha272#£
+
+basito(payroll): hshhs27&#+#
+
+
 
