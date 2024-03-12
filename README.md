@@ -99,10 +99,10 @@ There are 4 type of user.
 4. payroll - manage transporters wages (admin: no permission).
 
 Seeded the app with 4 users.
-1. sneezy(manager): hshs627£-;"+#
-2. ogunboy(supervisor): hshsj7373-£+
-3. adeboy(agent): wyeha272#£
-4. basito(payroll): hshhs27&#+#
+1. manager » user:sneezy pass:hshs627£-;"+#
+2. supervisor » user:ogunboy pass:hshsj7373-£+
+3. agent » user:adeboy pass:wyeha272#£
+4. payroll » user:basito pass:hshhs27&#+#
 
 
 
